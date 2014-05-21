@@ -1,15 +1,18 @@
 rotraits
 =======
 
-R wrapper to various APIs for species trait data. 
+R wrapper to various APIs for species trait data.
 
-To be included:
+To be included, with the associated function prefix:
 
-* [Polytraits](http://polytraits.lifewatchgreece.eu/download-api)
-* [BETYdb](http://www.betydb.org)
+* [Polytraits](http://polytraits.lifewatchgreece.eu/download-api) - `poly`
+* [BETYdb](http://www.betydb.org) - `betty`
+* [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi`
+* [Phylomatic](http://phylodiversity.net/phylomatic/) - `phylomatic`
+* [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `gisd`
 * ...
 
-Talk to us on the [issues page](https://github.com/ropensci/rotraits/issues) if you know of a source of traits data with an API. 
+Talk to us on the [issues page](https://github.com/ropensci/rotraits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
 ## Meta
 
