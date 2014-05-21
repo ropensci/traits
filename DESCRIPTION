@@ -1,6 +1,8 @@
 Package: rotraits
 Title: Species trait data from around the web.
-Description: Species trait data from around the web.
+Description: Species trait data from around the web, including sequence data
+    from NCBI, plant trait data from BettyDB, Phylomatic, and the Global
+    Invasive Species Database. More traits sources being added.
 Version: 0.0.1
 Date: 2014-05-20
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
@@ -11,3 +13,8 @@ BugReports: http://www.github.com/ropensci/rotraits/issues
 LazyLoad: true
 LazyData: true
 Roxygen: list(wrap = FALSE)
+Imports:
+    XML,
+    httr,
+    stringr,
+    data.table
