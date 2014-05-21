@@ -1,6 +1,7 @@
 #' Retrieve gene sequences from NCBI by accession number.
 #'
 #' @import XML httr stringr data.table
+#' @export
 #' @param ids GenBank ids to search for (character).
 #' @param format Return type, e.g., "fasta"
 #' @param verbose logical; If TRUE (default), informative messages printed.
@@ -10,8 +11,6 @@
 #'   	picking the longest available for the given gene.
 #' @return Data.frame of results.
 #' @seealso \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyname}}
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
-#' @export
 #' @examples \dontrun{
 #' # A single gene
 #' ncbi_getbyid(ids="360040093", format="fasta")
@@ -19,6 +18,7 @@
 #' # Many genes (with different accession numbers)
 #' ncbi_getbyid(ids=c("360040093","347448433"), format="fasta")
 #' }
+
 ncbi_getbyid <- function(ids, format="fasta", verbose=TRUE)
 {
 	mssg(verbose, "Retrieving sequence IDs...")
@@ -45,20 +45,4 @@ ncbi_getbyid <- function(ids, format="fasta", verbose=TRUE)
 	df <- data.frame(rbindlist(lapply(outseq2, foo)))
 	mssg(verbose, "...done")
 	return(df)
-}
-
-#' Retrieve gene sequences from NCBI by accession number.
-#'
-#' Function name changed to ncbi_getbyid.
-#'
-#' @param ids GenBank ids to search for (character).
-#' @param format Return type, e.g., "fasta"
-#' @param verbose logical; If TRUE (default), informative messages printed.
-#' @export
-#' @keywords internal
-#' @rdname get_genes-deprecated
-
-get_genes <- function(ids, format="fasta", verbose=TRUE)
-{
-  .Deprecated("ncbi_getbyid", "taxize", "Function name changed. See ncbi_getbyid", "get_genes")
 }

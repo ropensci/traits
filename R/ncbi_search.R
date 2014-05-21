@@ -1,6 +1,7 @@
 #' Search for gene sequences available for a species from NCBI.
 #'
 #' @import XML httr stringr data.table
+#' @export
 #' @param taxa Scientific name to search for (character).
 #' @param seqrange Sequence range, as e.g., "1:1000" (character).
 #' @param getrelated Logical, if TRUE, gets the longest sequences of a species
@@ -14,7 +15,6 @@
 #' 		"XR_" prefixes.
 #' @return Data.frame of results.
 #' @seealso \code{\link[taxize]{ncbi_getbyid}}, \code{\link[taxize]{ncbi_getbyname}}
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
 #' # A single species
 #' out <- ncbi_search(taxa="Umbra limi", seqrange = "1:2000")
@@ -35,7 +35,7 @@
 #' unique(out2df$gene_desc) # get list of genes available, removing non-unique
 #' out2df[grep("60S ribosomal protein", out2df$gene_desc, ignore.case=TRUE),] # search across all
 #' }
-#' @export
+
 ncbi_search <- function(taxa, seqrange="1:3000", getrelated=FALSE, limit = 500,
                         verbose=TRUE)
 {
@@ -151,24 +151,6 @@ ncbi_search <- function(taxa, seqrange="1:3000", getrelated=FALSE, limit = 500,
     return( df )
   }
 
-  foo_safe <- plyr::failwith(NULL, foo)
+  foo_safe <- failwith(NULL, foo)
   if(length(taxa)==1){ foo_safe(taxa) } else { lapply(taxa, foo_safe) }
-}
-
-#' Retrieve gene sequences from NCBI by accession number.
-#'
-#' Function name changed to ncbi_search.
-#'
-#' @param taxa Scientific name to search for (character).
-#' @param seqrange Sequence range, as e.g., "1:1000" (character).
-#' @param getrelated Logical, if TRUE, gets the longest sequences of a species
-#'   	in the same genus as the one searched for. If FALSE, get's nothing.
-#' @param verbose logical; If TRUE (default), informative messages printed.
-#' @export
-#' @keywords internal
-#' @rdname get_genes_avail-deprecated
-
-get_genes_avail <- function(taxa, seqrange="1:3000", getrelated=FALSE, verbose=TRUE)
-{
-  .Deprecated("ncbi_search", "taxize", "Function name changed. See ncbi_search", "get_genes_avail")
 }

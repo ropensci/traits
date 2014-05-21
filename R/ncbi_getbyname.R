@@ -1,6 +1,7 @@
 #' Retrieve gene sequences from NCBI by taxon name and gene names.
 #'
 #' @import XML httr stringr
+#' @export
 #' @param taxa Scientific name to search for (character).
 #' @param gene Gene (character) or genes (character vector) to search for.
 #' @param seqrange Sequence range, as e.g., "1:1000" (character).
@@ -13,8 +14,6 @@
 #'   	picking the longest available for the given gene.
 #' @return Data.frame of results.
 #' @seealso \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyid}}
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
-#' @export
 #' @examples \dontrun{
 #' # A single species
 #' ncbi_getbyname(taxa="Acipenser brevirostrum")
@@ -23,8 +22,8 @@
 #' species <- c("Colletes similis","Halictus ligatus","Perdita trisignata")
 #' ncbi_getbyname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 #' }
-ncbi_getbyname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
-                           verbose=TRUE)
+
+ncbi_getbyname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, verbose=TRUE)
 {
 	foo <- function(xx){
 	  mssg(verbose, paste("Working on ", xx, "...", sep=""))
@@ -71,7 +70,7 @@ ncbi_getbyname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE
 	        length_ <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Length")]) # gets seq lengths
 	        gis <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Gi")]) # gets GI numbers
 	        spnames <- sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Title")] # gets seq lengths # get spp names
-	        df <- data.frame(gis=gis, length=length_, spnames=laply(spnames, c), predicted=predicted) # makes data frame
+	        df <- data.frame(gis=gis, length=length_, spnames=spnames, predicted=predicted) # makes data frame
 	        df <- df[!df$predicted %in% c("XM","XR"),] # remove predicted sequences
 	        gisuse <- df[which.max(x=df$length),] # picks longest sequnence length
 	        if(nrow(gisuse)>1){gisuse <- gisuse[sample(nrow(gisuse), 1), ]} else
@@ -107,7 +106,7 @@ ncbi_getbyname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE
 	    length_ <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Length")]) # gets seq lengths
 	    gis <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Gi")]) # gets GI numbers
 	    spnames <- sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Title")] # gets seq lengths # get spp names
-	    df <- data.frame(gis=gis, length=length_, spnames=laply(spnames, c), predicted=predicted) # makes data frame
+	    df <- data.frame(gis=gis, length=length_, spnames=spnames, predicted=predicted) # makes data frame
 	    df <- df[!df$predicted %in% c("XM","XR"),] # remove predicted sequences
 	    gisuse <- df[which.max(x=df$length),] # picks longest sequnence length
 	    if(nrow(gisuse)>1){gisuse <- gisuse[sample(nrow(gisuse), 1), ]} else
@@ -132,26 +131,6 @@ ncbi_getbyname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE
 	  return( outoutout )
 	}
 
-  foo_safe <- plyr::failwith(NULL, foo)
+  foo_safe <- failwith(NULL, foo)
   if(length(taxa)==1){ foo_safe(taxa) } else { lapply(taxa, foo_safe) }
-}
-
-
-#' Retrieve gene sequences from NCBI by accession number.
-#'
-#' Function name changed to ncbi_getbyname.
-#'
-#' @param taxa Scientific name to search for (character).
-#' @param gene Gene (character) or genes (character vector) to search for.
-#' @param seqrange Sequence range, as e.g., "1:1000" (character).
-#' @param getrelated Logical, if TRUE, gets the longest sequences of a species
-#'   	in the same genus as the one searched for. If FALSE, get's nothing.
-#' @param verbose logical; If TRUE (default), informative messages printed.
-#' @export
-#' @keywords internal
-#' @rdname get_seqs-deprecated
-
-get_seqs <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, verbose=TRUE)
-{
-  .Deprecated("ncbi_getbyname", "taxize", "Function name changed. See ncbi_getbyname", "get_seqs")
 }

@@ -53,9 +53,6 @@ unique(out2df$gene_desc) # get list of genes available, removing non-unique
 out2df[grep("60S ribosomal protein", out2df$gene_desc, ignore.case=TRUE),] # search across all
 }
 }
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
-}
 \seealso{
 \code{\link[taxize]{ncbi_getbyid}}, \code{\link[taxize]{ncbi_getbyname}}
 }
