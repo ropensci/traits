@@ -6,7 +6,7 @@ R wrapper to various APIs for species trait data.
 To be included, with the associated function prefix:
 
 * [Polytraits](http://polytraits.lifewatchgreece.eu/download-api) - `poly`
-* [BETYdb](http://www.betydb.org) - `betty`
+* [BETYdb](http://www.betydb.org) - `betydb`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi`
 * [Phylomatic](http://phylodiversity.net/phylomatic/) - `phylomatic`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `gisd`
