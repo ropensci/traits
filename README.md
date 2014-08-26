@@ -1,4 +1,4 @@
-rotraits
+traits
 =======
 
 R wrapper to various APIs for species trait data.
@@ -12,11 +12,11 @@ To be included, with the associated function prefix:
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `gisd`
 * ...
 
-Talk to us on the [issues page](https://github.com/ropensci/rotraits/issues) if you know of a source of traits data with an API, and we'll see about including it.
+Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
 ## Meta
 
-Please report any issues or bugs](https://github.com/ropensci/rotraits/issues).
+Please report any issues or bugs](https://github.com/ropensci/traits/issues).
 
 License: MIT
 
