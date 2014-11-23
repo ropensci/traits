@@ -32,3 +32,5 @@ if(!onlyfirst){
 }
 
 traitsc <- function (l) Filter(Negate(is.null), l)
+
+strmatch <- function(x, y) regmatches(x, regexpr(y, x))
