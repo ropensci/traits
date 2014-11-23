@@ -27,55 +27,55 @@
 #' @examples \donttest{
 #' # Input taxonomic names
 #' taxa <- c("Poa annua", "Phlox diffusa", "Helianthus annuus")
-#' tree <- phylomatic_tree(taxa=taxa, get = 'POST')
+#' tree <- phylomatic(taxa=taxa, get = 'POST')
 #' plot(tree, no.margin=TRUE)
 #'
 #' # Genus names
 #' taxa <- c("Poa", "Phlox", "Helianthus")
-#' tree <- phylomatic_tree(taxa=taxa, storedtree='R20120829', get='POST')
+#' tree <- phylomatic(taxa=taxa, storedtree='R20120829', get='POST')
 #' plot(tree, no.margin=TRUE)
 #'
 #' # Lots of names
 #' taxa <- c("Poa annua", "Collomia grandiflora", "Lilium lankongense", "Phlox diffusa",
 #' "Iteadaphne caudata", "Gagea sarmentosa", "Helianthus annuus")
-#' tree <- phylomatic_tree(taxa=taxa, get = 'POST')
+#' tree <- phylomatic(taxa=taxa, get = 'POST')
 #' plot(tree, no.margin=TRUE)
 #'
 #' # Output NeXML format
 #' taxa <- c("Gonocarpus leptothecus", "Gonocarpus leptothecus", "Lilium lankongense")
-#' out <- phylomatic_tree(taxa=taxa, get = 'POST', outformat = "nexml")
+#' out <- phylomatic(taxa=taxa, get = 'POST', outformat = "nexml")
 #' cat(out)
 #'
 #' # Lots of names, note that when you have enough names (number depends on length of individual
 #' # names, so there's no per se rule), you will get an error when using \code{get='GET'},
 #' # when that happens use \code{get='POST'}
 #' spp <- names_list("species", 200)
-#' (out <- phylomatic_tree(taxa = spp, get = "GET"))
-#' (out <- phylomatic_tree(taxa = spp, get = "POST"))
+#' (out <- phylomatic(taxa = spp, get = "GET"))
+#' (out <- phylomatic(taxa = spp, get = "POST"))
 #' plot(out)
 #'
 #' # Pass in a tree from a URL on the web
 #' spp <- c('Abies amabilis','Abies balsamea','Abies bracteata','Abies concolor','Abies fraseri',
 #'    'Abies grandis','Abies lasiocarpa','Abies magnifica','Abies procera','Acacia berlandieri')
 #' url <- "http://datadryad.org/bitstream/handle/10255/dryad.8791/final_tree.tre?sequence=1"
-#' phylomatic_tree(taxa=spp, treeuri=url)
+#' phylomatic(taxa=spp, treeuri=url)
 #' }
 
-phylomatic_tree <- function(taxa, taxnames = TRUE, get = 'GET',
+phylomatic <- function(taxa, taxnames = TRUE, get = 'GET',
   informat = "newick", method = "phylomatic", storedtree = "R20120829", treeuri = NULL,
   taxaformat = "slashpath", outformat = "newick", clean = "true", db="apg", verbose=TRUE)
 {
   url = "http://phylodiversity.net/phylomatic/pmws"
 
   if(taxnames){
-    dat_ <- phylomatic_format(taxa, format='isubmit', db=db)
+    dat_ <- phylomatic_names(taxa, format='isubmit', db=db)
 
     checknas <- sapply(dat_, function(x) strsplit(x, "/")[[1]][1])
     checknas2 <- checknas[match("na", checknas)]
     if(is.numeric(checknas2))
       stop(sprintf("A family was not found for the following taxa:\n %s \n\n try setting taxnames=FALSE, and passing in a vector of strings, like \n%s",
                    paste(sapply(dat_, function(x) strsplit(x, "/")[[1]][3])[match("na", checknas)], collapse=", "),
-                   'phylomatic_tree(taxa = c("asteraceae/taraxacum/taraxacum_officinale", "ericaceae/gaylussacia/gaylussacia_baccata", "ericaceae/vaccinium/vaccinium_pallidum"), taxnames=FALSE, parallel=FALSE)'
+                   'phylomatic(taxa = c("asteraceae/taraxacum/taraxacum_officinale", "ericaceae/gaylussacia/gaylussacia_baccata", "ericaceae/vaccinium/vaccinium_pallidum"), taxnames=FALSE, parallel=FALSE)'
       ))
 
   } else { dat_ <- taxa }

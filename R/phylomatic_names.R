@@ -11,11 +11,11 @@
 #' @return e.g., "pinaceae/pinus/pinus_contorta", in Phylomatic submission format.
 #' @examples \donttest{
 #' mynames <- c("Poa annua", "Salix goodingii", "Helianthus annuus")
-#' phylomatic_format(mynames, format='rsubmit')
-#' phylomatic_format(mynames, format='isubmit', db="apg")
+#' phylomatic_names(mynames, format='rsubmit')
+#' phylomatic_names(mynames, format='isubmit', db="apg")
 #' }
 
-phylomatic_format <- function(taxa = NA, format='isubmit', db="ncbi")
+phylomatic_names <- function(taxa = NA, format='isubmit', db="ncbi")
 {
   foo <- function(nnn){
     # split up strings if a species name
