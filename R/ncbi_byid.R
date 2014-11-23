@@ -14,13 +14,13 @@
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \donttest{
 #' # A single gene
-#' ncbi_getbyid(ids="360040093", format="fasta")
+#' ncbi_byid(ids="360040093", format="fasta")
 #'
 #' # Many genes (with different accession numbers)
-#' ncbi_getbyid(ids=c("360040093","347448433"), format="fasta")
+#' ncbi_byid(ids=c("360040093","347448433"), format="fasta")
 #' }
 
-ncbi_getbyid <- function(ids, format="fasta", verbose=TRUE)
+ncbi_byid <- function(ids, format="fasta", verbose=TRUE)
 {
   mssg(verbose, "Retrieving sequence IDs...")
 

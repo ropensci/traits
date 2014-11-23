@@ -12,13 +12,13 @@
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \donttest{
 #' # A single species
-#' ncbi_getbyname(taxa="Acipenser brevirostrum")
+#' ncbi_byname(taxa="Acipenser brevirostrum")
 #'
 #' # Many species
 #' species <- c("Colletes similis","Halictus ligatus","Perdita trisignata")
-#' ncbi_getbyname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
+#' ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 #' }
-ncbi_getbyname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
+ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
                            verbose=TRUE)
 {
   foo <- function(xx){
