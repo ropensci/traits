@@ -25,7 +25,7 @@ phylomatic_format <- function(taxa = NA, format='isubmit', db="ncbi")
     if(db %in% c("ncbi","itis")){
       family <- tax_name(query=taxa_genus, get="family", db=db)
     } else {
-      tplfamily <- theplantlist[ match(taxa_genus, theplantlist$genus), "family" ]
+      tplfamily <- taxize::theplantlist[ match(taxa_genus, taxize::theplantlist$genus), "family" ]
       dd <- taxize::apg_families[ match(tplfamily, taxize::apg_families$this), ]
       if(nchar(as.character(dd$that))==0){ family <- dd$this } else { family <- dd$that }
     }
