@@ -8,35 +8,39 @@
 \alias{coral_traits}
 \title{Search for coral data on http://coraltraits.org/.}
 \usage{
-coral_taxa(taxon, taxonomy = "off", contextual = "on", global = "off",
+coral_taxa(taxon, taxonomy = FALSE, contextual = TRUE, global = FALSE,
   ...)
 
-coral_traits(trait, taxonomy = "off", contextual = "on", global = "off",
+coral_traits(trait, taxonomy = FALSE, contextual = TRUE, global = FALSE,
   ...)
 
-coral_locations(location, taxonomy = "off", contextual = "on",
-  global = "off", ...)
+coral_locations(location, taxonomy = FALSE, contextual = TRUE,
+  global = FALSE, ...)
 
-coral_methodologies(methodology, taxonomy = "off", contextual = "on",
-  global = "off", ...)
+coral_methodologies(methodology, taxonomy = FALSE, contextual = TRUE,
+  global = FALSE, ...)
 
-coral_resources(resource, taxonomy = "off", contextual = "on",
-  global = "off", ...)
+coral_resources(resource, taxonomy = FALSE, contextual = TRUE,
+  global = FALSE, ...)
 }
 \arguments{
-\item{taxonomy}{xxx}
+\item{taxon}{A taxon id}
 
-\item{contextual}{xxx}
+\item{taxonomy}{logical; Include contextual data. Default: FALSE}
 
-\item{global}{xxx}
+\item{contextual}{logical; Include contextual data. Default: TRUE}
+
+\item{global}{logical; Include contextual data. Default: FALSE}
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}}
 
-\item{trait}{xxx}
+\item{trait}{A trait id}
 
-\item{coral}{xxx}
+\item{location}{A location id}
 
-\item{coral}{xxx}
+\item{methodology}{A methodology id}
+
+\item{resource}{A resource id}
 }
 \description{
 Search for coral data on http://coraltraits.org/.
@@ -62,6 +66,10 @@ head(df)
 # Get data by resource
 df <- coral_resources(10)
 head(df)
+
+# curl options
+library("httr")
+coral_taxa(80, config=verbose())
 }
 }
 \references{

@@ -1,12 +1,14 @@
 #' Search for coral data on http://coraltraits.org/.
 #'
 #' @name coral
-#' @param coral xxx
-#' @param trait xxx
-#' @param taxonomy xxx
-#' @param contextual xxx
-#' @param global xxx
-#' @param coral xxx
+#' @param taxon A taxon id
+#' @param trait A trait id
+#' @param location A location id
+#' @param methodology A methodology id
+#' @param resource A resource id
+#' @param taxonomy logical; Include contextual data. Default: FALSE
+#' @param contextual logical; Include contextual data. Default: TRUE
+#' @param global logical; Include contextual data. Default: FALSE
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @references See info for each data source at \url{http://coraltraits.org/}
 #' @examples \donttest{
@@ -29,45 +31,49 @@
 #' # Get data by resource
 #' df <- coral_resources(10)
 #' head(df)
+#'
+#' # curl options
+#' library("httr")
+#' coral_taxa(80, config=verbose())
 #' }
 
 #' @export
 #' @rdname coral
-coral_taxa <- function(taxon, taxonomy = "off", contextual = "on", global = "off", ...)
+coral_taxa <- function(taxon, taxonomy = FALSE, contextual = TRUE, global = FALSE, ...)
 {
-  args <- list(taxonomy=taxonomy, contextual=contextual, global=global)
+  args <- list(taxonomy=lsw(taxonomy), contextual=lsw(contextual), global=lsw(global))
   coral_GET(coral_url("corals", taxon), args, ...)
 }
 
 #' @export
 #' @rdname coral
-coral_traits <- function(trait, taxonomy = "off", contextual = "on", global = "off", ...)
+coral_traits <- function(trait, taxonomy = FALSE, contextual = TRUE, global = FALSE, ...)
 {
-  args <- list(taxonomy=taxonomy, contextual=contextual, global=global)
+  args <- list(taxonomy=lsw(taxonomy), contextual=lsw(contextual), global=lsw(global))
   coral_GET(coral_url("traits", trait), args, ...)
 }
 
 #' @export
 #' @rdname coral
-coral_locations <- function(location, taxonomy = "off", contextual = "on", global = "off", ...)
+coral_locations <- function(location, taxonomy = FALSE, contextual = TRUE, global = FALSE, ...)
 {
-  args <- list(taxonomy=taxonomy, contextual=contextual, global=global)
+  args <- list(taxonomy=lsw(taxonomy), contextual=lsw(contextual), global=lsw(global))
   coral_GET(coral_url("locations", location), args, ...)
 }
 
 #' @export
 #' @rdname coral
-coral_methodologies <- function(methodology, taxonomy = "off", contextual = "on", global = "off", ...)
+coral_methodologies <- function(methodology, taxonomy = FALSE, contextual = TRUE, global = FALSE, ...)
 {
-  args <- list(taxonomy=taxonomy, contextual=contextual, global=global)
+  args <- list(taxonomy=lsw(taxonomy), contextual=lsw(contextual), global=lsw(global))
   coral_GET(coral_url("methodologies", methodology), args, ...)
 }
 
 #' @export
 #' @rdname coral
-coral_resources <- function(resource, taxonomy = "off", contextual = "on", global = "off", ...)
+coral_resources <- function(resource, taxonomy = FALSE, contextual = TRUE, global = FALSE, ...)
 {
-  args <- list(taxonomy=taxonomy, contextual=contextual, global=global)
+  args <- list(taxonomy=lsw(taxonomy), contextual=lsw(contextual), global=lsw(global))
   coral_GET(coral_url("resources", resource), args, ...)
 }
 
@@ -80,3 +86,4 @@ coral_GET <- function(url, args, ...){
 
 coralbase <- function() 'http://coraltraits.org'
 coral_url <- function(var, id) paste0(file.path(coralbase(), var, id), ".csv")
+lsw <- function(x) if(x) "on" else "off"
