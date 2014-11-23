@@ -4,6 +4,7 @@
 #'
 #' @importFrom jsonlite fromJSON
 #' @importFrom plyr ldply
+#' @importFrom RCurl getForm
 #' @export
 #' @param name A taxonomic name, or a vector of names.
 #' @param dataset One of all, gisd100, gisd, isc, daisie, i3n, or mineps.
@@ -94,9 +95,8 @@ e_invasive <- function(name = NULL, dataset="all", searchby = grep, page=NULL,
            i3n = 55176,
            mineps = 55331)
   url = 'http://eol.org/api/collections/1.0.json'
-  key <- getkey(key, "eolApiKey")
 
-  args <- taxize_compact(list(id=datasetid,page=page,per_page=500,filter='taxa'))
+  args <- traitsc(list(id=datasetid,page=page,per_page=500,filter='taxa'))
   tt <- getForm(url, .params = args, .opts = callopts)
   res <- jsonlite::fromJSON(tt, FALSE)
   data_init <- res$collection_items
@@ -114,12 +114,12 @@ e_invasive <- function(name = NULL, dataset="all", searchby = grep, page=NULL,
   if(!is.null(pages_get)){
     out <- list()
     for(i in seq_along(pages_get)){
-      args <- compact(list(id=datasetid,page=pages_get[i],per_page=500,filter='taxa'))
+      args <- traitsc(list(id=datasetid,page=pages_get[i],per_page=500,filter='taxa'))
       tt <- getForm(url, .params = args, .opts = callopts)
       res <- jsonlite::fromJSON(tt, FALSE)
       out[[i]] <- res$collection_items
     }
-    res2 <- taxize_compact(out)
+    res2 <- traitsc(out)
     dat_all <- do.call(c, list(data_init, do.call(c, res2)))
     dat_all <- lapply(dat_all, "[", c("name","object_id"))
     dat <- do.call(rbind, lapply(dat_all, data.frame, stringsAsFactors=FALSE))
