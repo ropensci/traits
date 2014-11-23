@@ -1,7 +1,7 @@
 #' Search for gene sequences available for taxa from NCBI.
 #'
 #' @template ncbi
-#' @importFrom taxize get_uid
+#' @importFrom taxize get_uid classification
 #' @param id (\code{character}) Taxonomic id to search for. Not compatible with argument \code{taxa}.
 #' @param limit (\code{numeric}) Number of sequences to search for and return. Max of 10,000.
 #'    If you search for 6000 records, and only 5000 are found, you will of course
