@@ -2,7 +2,8 @@
 #'
 #' See Details for important information.
 #'
-#' @import RCurl jsonlite plyr
+#' @importFrom jsonlite fromJSON
+#' @importFrom plyr ldply
 #' @export
 #' @param name A taxonomic name, or a vector of names.
 #' @param dataset One of all, gisd100, gisd, isc, daisie, i3n, or mineps.

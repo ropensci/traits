@@ -1,6 +1,7 @@
 #' Query Phylomatic for a phylogenetic tree.
 #'
-#' @import httr RCurl
+#' @import httr
+#' @importFrom RCurl postForm
 #' @importFrom ape read.tree
 #' @importFrom stringr str_extract str_split str_replace_all str_trim str_detect
 #' @export

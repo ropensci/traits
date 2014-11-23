@@ -30,20 +30,18 @@ ncbi_byid <- function(ids, format="fasta", verbose=TRUE)
   stop_for_status(tt)
   outseq <- content(tt, as="text")
 
-  outseq2 <- str_split(outseq, '>')[[1]][-1]
+  outseq2 <- strsplit(outseq, '>')[[1]][-1]
 
   foo <- function(x){
     temp <- paste(">", x, sep="")
-    seq <- str_replace_all(str_split(str_replace(temp[[1]], "\n", "<<<"), "<<<")[[1]][[2]], "\n", "")
-    idaccess <- str_split(x, "\\|")[[1]][c(2,4)]
-    desc <- str_split(str_split(x, "\\|")[[1]][[5]], "\n")[[1]][[1]]
+    seq <- gsub("\n", "", strsplit(sub("\n", "<<<", temp[[1]]), "<<<")[[1]][[2]])
+    idaccess <- strsplit(x, "\\|")[[1]][c(2,4)]
+    desc <- strsplit(strsplit(x, "\\|")[[1]][[5]], "\n")[[1]][[1]]
     outt <- list(desc, as.character(idaccess[1]), idaccess[2], nchar(seq), seq)
-    spused <- paste(str_split(str_trim(str_split(temp, "\\|")[[1]][[5]], "both"), " ")[[1]][1:2], sep="", collapse=" ")
-    outoutout <- data.frame(spused=spused, outt)
-    names(outoutout) <- c("taxon","gene_desc","gi_no","acc_no","length","sequence")
-    outoutout
+    spused <- paste(strsplit(gsub("^\\s+|\\s+$", "", strsplit(temp, "\\|")[[1]][[5]], "both"), " ")[[1]][1:2], sep="", collapse=" ")
+    setNames(data.frame(spused=spused, outt, stringsAsFactors = FALSE),
+             c("taxon","gene_desc","gi_no","acc_no","length","sequence"))
   }
-  df <- data.frame(rbindlist(lapply(outseq2, foo)))
   mssg(verbose, "...done")
-  return(df)
+  data.frame(rbindlist(lapply(outseq2, foo)))
 }
