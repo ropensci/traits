@@ -5,8 +5,12 @@ Description: Species trait data from around the web, including sequence data
     Invasive Species Database. More traits sources being added.
 Version: 0.0.2.99
 Date: 2014-11-22
-Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
-    email = "myrmecocystus@gmail.com")
+Authors@R: c(person("Scott", "Chamberlain", role = c("aut", "cre"),
+    email = "myrmecocystus@gmail.com"),
+    person("Zachary", "Foster", role = "aut",
+    email = "zacharyfoster1989@gmail.com"),
+    person("Ignasi", "Bartomeus", role = "aut",
+    email = "nacho.bartomeus@gmail.com"))
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/traits
 BugReports: http://www.github.com/ropensci/traits/issues
