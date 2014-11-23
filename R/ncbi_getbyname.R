@@ -1,6 +1,5 @@
 #' Retrieve gene sequences from NCBI by taxon name and gene names.
 #'
-#' @import XML httr stringr
 #' @export
 #' @template ncbi
 #' @param gene (character) Gene or genes (in a vector) to search for. See examples.

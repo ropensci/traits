@@ -1,6 +1,6 @@
 #' Retrieve gene sequences from NCBI by accession number.
 #'
-#' @import XML httr stringr data.table
+#' @importFrom data.table rbindlist
 #' @export
 #' @param ids (character) GenBank ids to search for.
 #' @param format (character) Return type, e.g., \code{"fasta"}
@@ -19,6 +19,7 @@
 #' # Many genes (with different accession numbers)
 #' ncbi_getbyid(ids=c("360040093","347448433"), format="fasta")
 #' }
+
 ncbi_getbyid <- function(ids, format="fasta", verbose=TRUE)
 {
   mssg(verbose, "Retrieving sequence IDs...")

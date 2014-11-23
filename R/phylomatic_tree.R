@@ -2,7 +2,7 @@
 #'
 #' @import httr RCurl
 #' @importFrom ape read.tree
-#' @importFrom stringr str_extract str_split
+#' @importFrom stringr str_extract str_split str_replace_all str_trim str_detect
 #' @export
 #'
 #' @param taxa Phylomatic format input of taxa names.
