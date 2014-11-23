@@ -1,7 +1,7 @@
 traits
 =======
 
-R wrapper to various APIs for species trait data.
+R client for various sources of species trait data.
 
 To be included, with the associated function prefix:
 
@@ -16,10 +16,8 @@ Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if yo
 
 ## Meta
 
-Please report any issues or bugs](https://github.com/ropensci/traits/issues).
-
-License: MIT
-
-This package is part of the [rOpenSci](http://ropensci.org/packages) project.
+* Please report any issues or bugs](https://github.com/ropensci/traits/issues).
+* License: MIT
+* Get citation information for `traits` in R doing `citation(package = 'traits')`
 
 [![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
