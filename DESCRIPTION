@@ -19,7 +19,6 @@ Roxygen: list(wrap = FALSE)
 Depends:
     R (>= 2.10)
 Imports:
-    plyr,
     XML,
     jsonlite,
     httr,

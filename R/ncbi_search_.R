@@ -189,7 +189,7 @@ ncbi_search_ <- function(taxa = NULL, id = NULL, seqrange="1:3000", getrelated=F
   }
 
   # look up sequences for taxa ids -----------------------------------------------------------------
-  foo_safe <- plyr::failwith(NULL, foo)
+  foo_safe <- tryfail(NULL, foo)
   if (length(id) == 1) {
     foo_safe(id)
   } else {

@@ -34,3 +34,20 @@ if(!onlyfirst){
 traitsc <- function (l) Filter(Negate(is.null), l)
 
 strmatch <- function(x, y) regmatches(x, regexpr(y, x))
+
+tryfail <- function (default = NULL, f, quiet = FALSE){
+  f <- match.fun(f)
+  function(...) trydefault(f(...), default, quiet = quiet)
+}
+
+trydefault <- function (expr, default, quiet = FALSE){
+  result <- default
+  if (quiet) {
+    tryCatch(result <- expr, error = function(e) {
+    })
+  }
+  else {
+    try(result <- expr)
+  }
+  result
+}

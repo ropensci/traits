@@ -3,7 +3,6 @@
 #' See Details for important information.
 #'
 #' @importFrom jsonlite fromJSON
-#' @importFrom plyr ldply
 #' @importFrom RCurl getForm
 #' @export
 #' @param name A taxonomic name, or a vector of names.
@@ -141,12 +140,9 @@ e_invasive <- function(name = NULL, dataset="all", searchby = grep, page=NULL,
       dat[matched,]
     }
   }
-  tmp <- lapply(name, getmatches, y=searchby)
-  names(tmp) <- name
-  df <- ldply(tmp)
+  tmp <- setNames(lapply(name, getmatches, y=searchby), name)
+  df <- do.call(rbind, Map(function(x,y) data.frame(id=y, x), tmp, names(tmp)))
   df$db <- dataset
   names(df)[c(1,3)] <- c("searched_name","eol_object_id")
-  df
-
   if(!count) df else length(na.omit(df$eol_object_id))
 }
