@@ -37,12 +37,12 @@
 #' @examples \donttest{
 #' sp <- c("Carpobrotus edulis", "Rosmarinus officinalis")
 #' ## first species is invasive, second one is not.
-#' gisd_isinvasive(sp)
-#' gisd_isinvasive(sp, simplify = TRUE)
+#' g_invasive(sp)
+#' g_invasive(sp, simplify = TRUE)
 #' }
 #'
 
-gisd_isinvasive <- function(x, simplify = FALSE, verbose=TRUE)
+g_invasive <- function(x, simplify = FALSE, verbose=TRUE)
 {
 	species <- gsub(" ", "+", x) # reformat sp list
 	# create urls to parse
