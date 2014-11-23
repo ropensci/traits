@@ -3,7 +3,6 @@
 #' @import httr
 #' @importFrom RCurl postForm
 #' @importFrom ape read.tree
-#' @importFrom stringr str_extract str_split str_replace_all str_trim str_detect
 #' @export
 #'
 #' @param taxa Phylomatic format input of taxa names.
@@ -110,8 +109,8 @@ phylomatic <- function(taxa, taxnames = TRUE, get = 'GET',
   {
     # parse out missing taxa note
     if(grepl("\\[NOTE: ", out)){
-      taxa_na <- str_extract(out, "NOTE:.+")
-      taxa_na2 <- str_extract(taxa_na, ":\\s[A-Za-z].+")
+      taxa_na <- strmatch(out, "NOTE:.+")
+      taxa_na2 <- strmatch(taxa_na, ":\\s[A-Za-z].+")
       taxa_na2 <- strsplit(taxa_na2, ",")[[1]][-length(strsplit(taxa_na2, ",")[[1]])]
       taxa_na2 <- gsub(":|\\s", "", taxa_na2)
       taxa_na2 <- sapply(taxa_na2, function(x) strsplit(x, "/")[[1]][[3]], USE.NAMES=FALSE)
@@ -132,32 +131,31 @@ phylomatic <- function(taxa, taxnames = TRUE, get = 'GET',
     res <- switch(outformat,
            nexml = out,
            newick = getnewick(out))
-    class(res) <- c("phylo","phylomatic")
-    attr(res, "missing") <- taxa_na2
-    return( res )
+    structure(res, class=c("phylo","phylomatic"), missing=taxa_na2)
   }
 }
 
 collapse_double_root <- function(y) {
-  temp <- str_split(y, ")")[[1]]
+  temp <- strsplit(y, ")")[[1]]
   double <- c(length(temp)-1, length(temp))
   tempsplit <- temp[double]
-  tempsplit_1 <- str_split(tempsplit[1], ":")[[1]][2]
-  tempsplit_2 <-str_split(tempsplit[2], ":")[[1]]
+  tempsplit_1 <- strsplit(tempsplit[1], ":")[[1]][2]
+  tempsplit_2 <-strsplit(tempsplit[2], ":")[[1]]
   rootlength <- as.numeric(tempsplit_1) +
-    as.numeric(str_split(tempsplit_2[2], ";")[[1]][1])
+    as.numeric(strsplit(tempsplit_2[2], ";")[[1]][1])
   newx <- paste(")", tempsplit_2[1], ":", rootlength, ";", sep="")
-  newpre <- str_replace(temp[1], "[(]", "")
+  newpre <- gsub("[(]", "", temp[1])
   allelse <- temp[-1]
   allelse <- allelse[setdiff(1:length(allelse), double-1)]
   allelse <- paste(")", allelse, sep="")
-  tempdone <- paste(newpre, paste(allelse, collapse=""), newx, sep="")
-  return(tempdone)
+  paste(newpre, paste(allelse, collapse=""), newx, sep="")
 }
 
 colldouble <- function(z) {
-  if ( class ( try ( read.tree(text = z), silent = T ) ) %in% 'try-error')
-  { treephylo <- collapse_double_root(z) } else
-  { treephylo <- z }
+  if( class ( try ( read.tree(text = z), silent = T ) ) %in% 'try-error' ){
+    treephylo <- collapse_double_root(z)
+  } else {
+    treephylo <- z
+  }
   return(treephylo)
 }

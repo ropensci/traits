@@ -21,9 +21,9 @@ Depends:
 Imports:
     plyr,
     XML,
+    jsonlite,
     httr,
     RCurl,
-    stringr,
     data.table,
     taxize,
     ape
