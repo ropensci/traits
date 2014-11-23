@@ -13,7 +13,10 @@ BugReports: http://www.github.com/ropensci/traits/issues
 LazyData: true
 Roxygen: list(wrap = FALSE)
 Imports:
+    plyr,
     XML,
     httr,
+    RCurl,
     stringr,
-    data.table
+    data.table,
+    taxize
