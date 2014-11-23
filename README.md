@@ -9,7 +9,9 @@ To be included, with the associated function prefix:
 * [BETYdb](http://www.betydb.org) - `betydb`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi`
 * [Phylomatic](http://phylodiversity.net/phylomatic/) - `phylomatic`
-* [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `gisd`
+* [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
+* [Encyclopedia of Life Invasive Species](link) - `e_`
+* [Coral Traits Database](http://coraltraits.org/) - `coral_`
 * ...
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
