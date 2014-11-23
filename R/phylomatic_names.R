@@ -3,7 +3,6 @@
 #'
 #' @export
 #' @importFrom taxize tax_name
-#' @importFrom stringr str_replace
 #' @param taxa quoted tsn number (taxonomic serial number)
 #' @param format output format, isubmit (you can paste in to the Phylomatic
 #'     website), or 'rsubmit' to use in fxn phylomatic_tree
@@ -32,10 +31,10 @@ phylomatic_names <- function(taxa = NA, format='isubmit', db="ncbi")
     stringg <- c(family, strsplit(nnn, " ")[[1]])
     stringg <- tolower(as.character(stringg))
     if (format == 'isubmit') {
-      paste(stringg[[1]], "/", stringg[2], "/", tolower(str_replace(nnn, " ", "_")), sep='')
+      paste(stringg[[1]], "/", stringg[2], "/", tolower(sub(" ", "_", nnn)), sep='')
     } else
       if (format == 'rsubmit') {
-        paste(stringg[[1]], "%2F", stringg[2], "%2F", tolower(str_replace(nnn, " ", "_")), sep='')
+        paste(stringg[[1]], "%2F", stringg[2], "%2F", tolower(sub(" ", "_", nnn)), sep='')
       }
   }
 

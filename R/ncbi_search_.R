@@ -78,17 +78,17 @@ ncbi_search_ <- function(taxa = NULL, id = NULL, seqrange="1:3000", getrelated=F
   parseres <- function(x){
     outsum <- xpathApply(content(x, as="parsed"), "//eSummaryResult")[[1]]
     names <- sapply(getNodeSet(outsum[[1]], "//Item"), xmlGetAttr, name="Name") # gets names of values in summary
-    predicted <- as.character(sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Caption")]) #  get access numbers
+    predicted <- as.character(sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Caption", names)]) #  get access numbers
     has_access_prefix <- grepl("_", predicted)
     access_prefix <- unlist(Map(function(x, y) ifelse(x, strsplit(y, "_")[[1]][[1]], NA),
                                 has_access_prefix, predicted))
     predicted[has_access_prefix] <- vapply(strsplit(predicted[has_access_prefix], "_"), `[[`, character(1), 2)
 
-    length_ <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Length")]) # gets seq lengths
-    gis <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Gi")]) # gets GI numbers
-    spnames <- sapply(getNodeSet(outsum, "//Item"), xmlValue)[str_detect(names, "Title")] # gets seq lengths # get spp names
-    spused <- sapply(spnames, function(x) paste(str_split(x, " ")[[1]][1:2], sep="", collapse=" "), USE.NAMES=FALSE)
-    genesavail <- sapply(spnames, function(x) paste(str_split(x, " ")[[1]][-c(1:2)], sep="", collapse=" "), USE.NAMES=FALSE)
+    length_ <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Length", names)]) # gets seq lengths
+    gis <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Gi", names)]) # gets GI numbers
+    spnames <- sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Title", names)] # gets seq lengths # get spp names
+    spused <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][1:2], sep="", collapse=" "), USE.NAMES=FALSE)
+    genesavail <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][-c(1:2)], sep="", collapse=" "), USE.NAMES=FALSE)
     df <- data.frame(spused=spused, length=length_, genesavail=genesavail, access_num=predicted, ids=gis, stringsAsFactors=FALSE)
     if (!hypothetical) df <- df[!(access_prefix %in% c("XM","XR")),]
     return(df)
