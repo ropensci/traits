@@ -64,23 +64,23 @@
 #' @references See info for each data source at \url{http://eol.org/collections/55367/taxa}
 #'
 #' @examples \donttest{
-#' e_invasive(name='Brassica oleracea', dataset='gisd')
-#' e_invasive(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
+#' eol_invasive_(name='Brassica oleracea', dataset='gisd')
+#' eol_invasive_(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
 #'    dataset='gisd')
-#' e_invasive(name='Sargassum', dataset='gisd')
-#' e_invasive(name='Ciona intestinalis', dataset='mineps')
-#' e_invasive(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
+#' eol_invasive_(name='Sargassum', dataset='gisd')
+#' eol_invasive_(name='Ciona intestinalis', dataset='mineps')
+#' eol_invasive_(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
 #'    dataset='i3n')
-#' e_invasive(name=c('Branta canadensis','Gallus gallus','Myiopsitta monachus'),
+#' eol_invasive_(name=c('Branta canadensis','Gallus gallus','Myiopsitta monachus'),
 #'    dataset='daisie')
-#' e_invasive(name=c('Branta canadensis','Gallus gallus','Myiopsitta monachus'), dataset='isc')
+#' eol_invasive_(name=c('Branta canadensis','Gallus gallus','Myiopsitta monachus'), dataset='isc')
 #'
 #' # Count
-#' e_invasive(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
+#' eol_invasive_(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
 #'    dataset='gisd', count = TRUE)
 #' }
 
-e_invasive <- function(name = NULL, dataset="all", searchby = grep, page=NULL,
+eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL,
   per_page=NULL, key = NULL, callopts=list(), verbose=TRUE, count=FALSE)
 {
   if(is.null(name)) stop("please provide a taxonomic name")
