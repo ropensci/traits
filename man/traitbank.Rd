@@ -17,7 +17,10 @@ Search for traits from EOL's Traitbank.
 }
 \examples{
 \donttest{
-traitbank(trait = 328574)
+res <- traitbank(trait = 328574)
+res$context
+names( res$graph )
+head( res$graph )
 }
 }
 \author{
