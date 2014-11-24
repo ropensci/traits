@@ -10,7 +10,8 @@ To be included, with the associated function prefix:
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi`
 * [Phylomatic](http://phylodiversity.net/phylomatic/) - `phylomatic`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
-* [Encyclopedia of Life Invasive Species](link) - `e_`
+* [Encyclopedia of Life Invasive Species](link) - `eol_`
+* [Encyclopedia of Life Traitbank](link) - `traitbank_`
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
 * ...
 
