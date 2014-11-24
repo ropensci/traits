@@ -10,8 +10,12 @@
 #' @param contextual logical; Include contextual data. Default: TRUE
 #' @param global logical; Include contextual data. Default: FALSE
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
-#' @references See info for each data source at \url{http://coraltraits.org/}
+#' @references \url{http://coraltraits.org/}
+#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \donttest{
+#' # Get the species and their Ids
+#' head( coral_species() )
+#'
 #' # Get data by taxon
 #' df <- coral_taxa(80)
 #' head(df)
@@ -75,6 +79,17 @@ coral_resources <- function(resource, taxonomy = FALSE, contextual = TRUE, globa
 {
   args <- list(taxonomy=lsw(taxonomy), contextual=lsw(contextual), global=lsw(global))
   coral_GET(coral_url("resources", resource), args, ...)
+}
+
+#' @export
+#' @rdname coral
+coral_species <- function(...){
+  res <- GET("http://coraltraits.org/corals?pp=all&search=", ...)
+  stop_for_status(res)
+  html <- content(res)
+  ids <- gsub("\n+|\t+|\\s+", "", xpathSApply(html, '//li[@class="list-group-item"]//div[@style="color: lightgrey;"]', xmlValue))
+  nms <- xpathSApply(html, '//li[@class="list-group-item"]//div[@class="col-md-5"]//a', xmlValue)
+  data.frame(name=nms, id=ids, stringsAsFactors = FALSE)
 }
 
 coral_GET <- function(url, args, ...){

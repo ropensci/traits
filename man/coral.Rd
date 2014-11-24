@@ -4,6 +4,7 @@
 \alias{coral_locations}
 \alias{coral_methodologies}
 \alias{coral_resources}
+\alias{coral_species}
 \alias{coral_taxa}
 \alias{coral_traits}
 \title{Search for coral data on http://coraltraits.org/.}
@@ -22,6 +23,8 @@ coral_methodologies(methodology, taxonomy = FALSE, contextual = TRUE,
 
 coral_resources(resource, taxonomy = FALSE, contextual = TRUE,
   global = FALSE, ...)
+
+coral_species(...)
 }
 \arguments{
 \item{taxon}{A taxon id}
@@ -47,6 +50,9 @@ Search for coral data on http://coraltraits.org/.
 }
 \examples{
 \donttest{
+# Get the species and their Ids
+head( coral_species() )
+
 # Get data by taxon
 df <- coral_taxa(80)
 head(df)
@@ -72,7 +78,10 @@ library("httr")
 coral_taxa(80, config=verbose())
 }
 }
+\author{
+Scott Chamberlain \email{myrmecocystus@gmail.com}
+}
 \references{
-See info for each data source at \url{http://coraltraits.org/}
+\url{http://coraltraits.org/}
 }
 

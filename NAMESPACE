@@ -3,6 +3,7 @@
 export(coral_locations)
 export(coral_methodologies)
 export(coral_resources)
+export(coral_species)
 export(coral_taxa)
 export(coral_traits)
 export(e_invasive)
