@@ -51,17 +51,17 @@ g_invasive <- function(x, simplify = FALSE, verbose=TRUE)
 	# create a data.frame to store the Output
 	out <- data.frame(species = x, status = c(1:length(urls)))
 	#loop through all species
-	for(i in 1:length(urls)){
+	for(i in seq_along(urls)){
 		#Parse url and extract table
 		doc <- htmlTreeParse(urls[i], useInternalNodes = TRUE)
 		if(length(getNodeSet(doc, "//span[@class='SearchTitle']")) > 0){
 			out[i, 2] <- "Not in GISD"
-		}
-		else{
-			if(simplify == FALSE){
-			  one <- getNodeSet(doc, "//span[@class='ListNote']", fun=xmlValue)[[1]]
+		} else{
+			if(!simplify){
+			  one <- tryCatch(getNodeSet(doc, "//span[@class='ListNote']", fun=xmlValue)[[1]],
+                        error = function(e) e)
 			  two <- paste(getNodeSet(doc, "//span[@class='Info']", fun=xmlValue), collapse="; ")
-			  out[i, 2] <- paste(one, two, sep="; ")
+			  out[i, 2] <- paste(if(is(one, "simpleError")) NULL else one, two, sep="; ")
 			} else {
         out[i, 2] <- "Invasive"
 			}
