@@ -92,13 +92,13 @@ __Note:__ No singular format right now.
 
 ### Citations
 
-Get species searching for _Miscanthus_
+Get citatons searching for _Miscanthus_
 
 ```{r}
 bety_citations(genus = 'Miscanthus')
 ```
 
-Single species
+Single citation
 
 ```{r}
 bety_citation(id = 1)

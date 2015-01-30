@@ -7,10 +7,10 @@ R client for various sources of species trait data.
 
 To be included, with the associated function prefix:
 
-* [Polytraits](http://polytraits.lifewatchgreece.eu/download-api) - `poly`
-* [BETYdb](http://www.betydb.org) - `betydb`
-* [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi`
-* [Phylomatic](http://phylodiversity.net/phylomatic/) - `phylomatic`
+* [Polytraits](http://polytraits.lifewatchgreece.eu/download-api) - `poly_` (_not in the package yet_)
+* [BETYdb](http://www.betydb.org) - `bety_`
+* [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
+* [Phylomatic](http://phylodiversity.net/phylomatic/) - `phylomatic_`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
 * [Encyclopedia of Life Invasive Species](link) - `eol_`
 * [Encyclopedia of Life Traitbank](link) - `traitbank_`
@@ -34,11 +34,15 @@ library("traits")
 
 ## BetyDB
 
+Function setup: plural functions like `bety_traits()` accept parameters and always give back a data.frame, while singlur function names accept an ID and give back a list. 
+
+### Traits
+
 Get trait data for _Miscanthus giganteus_
 
 
 ```r
-(out <- bety_traits(genus = 'Miscanthus', species = "giganteus"))
+(out <- bety_traits(genus = "Miscanthus", species = "giganteus"))
 #> Source: local data frame [12,335 x 28]
 #> 
 #>    access_level checked citation_id                created_at cultivar_id
@@ -84,6 +88,213 @@ out %>%
 #> 9       2304 3.555000e+02
 #> 10     12453 3.296458e+02
 #> ..       ...          ...
+```
+
+Single trait
+
+
+```r
+bety_trait(id = 10)
+#> $created_at
+#> NULL
+#> 
+#> $description
+#> [1] "Leaf Percent Nitrogen"
+#> 
+#> $id
+#> [1] 10
+#> 
+#> $label
+#> NULL
+#> 
+#> $max
+#> [1] "10"
+#> 
+#> $min
+#> [1] "0.02"
+#> 
+#> $name
+#> [1] "leafN"
+#> 
+#> $notes
+#> NULL
+#> 
+#> $standard_name
+#> NULL
+#> 
+#> $standard_units
+#> NULL
+#> 
+#> $units
+#> [1] "percent"
+#> 
+#> $updated_at
+#> [1] "2011-06-06T09:40:42-05:00"
+```
+
+### Species
+
+Get species searching for _Miscanthus_
+
+
+```r
+bety_species(genus = 'Miscanthus')
+#> Source: local data frame [10 x 88]
+#> 
+#>    AcceptedSymbol ActiveGrowthPeriod AdaptedCoarseSoils AdaptedFineSoils
+#> 1            MISA                                                       
+#> 2            MISI  Spring and Summer                Yes              Yes
+#> 3              NA                 NA                 NA               NA
+#> 4           MISCA                                                       
+#> 5          MICA16                                                       
+#> 6           MIFL3                                                       
+#> 7           MINE4                                                       
+#> 8            MIOL                                                       
+#> 9           MITR9                                                       
+#> 10                                                                      
+#> Variables not shown: AdaptedMediumSoils (chr), AfterHarvestRegrowthRate
+#>   (chr), AnaerobicTolerance (chr), Bloat (chr), BloomPeriod (chr),
+#>   C2N_Ratio (chr), CaCO3Tolerance (chr), Category (chr), Class (chr),
+#>   ColdStratification (chr), CommercialAvailability (chr), CoppicePotential
+#>   (chr), Division (chr), DroughtTolerance (chr), Duration (chr),
+#>   FallConspicuous (chr), Family (chr), FamilyCommonName (chr),
+#>   FamilySymbol (chr), FertilityRequirement (chr), FireResistance (chr),
+#>   FireTolerance (chr), FoliageTexture (chr), FruitSeedPeriodBegin (chr),
+#>   FruitSeedPeriodEnd (chr), GrowthForm (chr), GrowthHabit (chr),
+#>   GrowthRate (chr), HedgeTolerance (chr), ITIS_TSN (int), Kingdom (chr),
+#>   KnownAllelopath (chr), LeafRetention (chr), Lifespan (chr),
+#>   LowGrowingGrass (chr), MatureHeight (int), MaxHeight20Yrs (int),
+#>   Max_PlantingDensity (int), MinFrostFreeDays (int), Min_PlantingDensity
+#>   (int), MoistureUse (chr), NationalWetlandIndicatorStatus (chr),
+#>   NativeStatus (chr), NitrogenFixation (chr), PLANTS_Floristic_Area (chr),
+#>   Precipitation_Maximum (int), Precipitation_Minimum (int),
+#>   Propogated_by_BareRoot (chr), Propogated_by_Bulbs (chr),
+#>   Propogated_by_Container (chr), Propogated_by_Corms (chr),
+#>   Propogated_by_Cuttings (chr), Propogated_by_Seed (chr),
+#>   Propogated_by_Sod (chr), Propogated_by_Sprigs (chr),
+#>   Propogated_by_Tubers (chr), RegionalWetlandIndicatorStatus (chr),
+#>   ResproutAbility (chr), RootDepthMinimum (int), SalinityTolerance (chr),
+#>   SeedSpreadRate (chr), SeedlingVigor (chr), Seeds_per_Pound (int),
+#>   ShadeTolerance (chr), State (chr), SubClass (chr), SubDivision (chr),
+#>   SubKingdom (chr), SuperDivision (chr), Symbol (chr), SynonymSymbol
+#>   (chr), TemperatureMinimum (int), commonname (chr), created_at (chr),
+#>   genus (chr), id (int), notes (lgl), pH_Maximum (chr), pH_Minimum (chr),
+#>   scientificname (chr), spcd (lgl), species (chr), updated_at (chr),
+#>   xOrder (chr)
+```
+
+Single species
+
+
+```r
+bety_specie(id = 10)
+#> $genus
+#> [1] "Acacia"
+#> 
+#> $scientificname
+#> [1] "Acacia karroo"
+#> 
+#> $species
+#> [1] "karroo"
+```
+
+### Yields
+
+Get yield data for _Miscanthus_
+
+
+```r
+bety_yields(genus = 'Miscanthus')
+#> Source: local data frame [6,035 x 19]
+#> 
+#>    access_level checked citation_id created_at cultivar_id       date
+#> 1             4       1           2         NA          13 2001-11-15
+#> 2             4       1           2         NA          31 1999-11-15
+#> 3             4       1         193         NA          NA 1992-11-04
+#> 4             4       1         193         NA          NA 1993-02-17
+#> 5             4       1         193         NA          NA 1993-11-26
+#> 6             4       1         152         NA          54 1993-04-10
+#> 7             4       1         152         NA          54 1993-05-05
+#> 8             4       1         152         NA          54 1993-05-27
+#> 9             4       1         152         NA          54 1993-06-16
+#> 10            4       1         152         NA          54 1993-07-09
+#> ..          ...     ...         ...        ...         ...        ...
+#> Variables not shown: dateloc (chr), id (int), mean (chr), method_id (lgl),
+#>   n (int), notes (chr), site_id (int), specie_id (int), stat (chr),
+#>   statname (chr), treatment_id (int), updated_at (chr), user_id (int)
+```
+
+__Note:__ No singular format right now.
+
+
+### Citations
+
+Get citatons searching for _Miscanthus_
+
+
+```r
+bety_citations(genus = 'Miscanthus')
+#> Source: local data frame [742 x 13]
+#> 
+#>       author created_at                                      doi id
+#> 1    Balasko         NA 10.2134/agronj1984.00021962007600020009x  3
+#> 2    Berdahl         NA                  10.2134/agronj2005.0549  4
+#> 3        Boe         NA                 10.2135/cropsci2004.0703  5
+#> 4    Boehmel         NA               10.1016/j.agsy.2007.08.004  7
+#> 5        Bow         NA              10.2135/cropsci2007.12.0697  8
+#> 6     Casler         NA                 10.2135/cropsci2003.2226 10
+#> 7     Casler         NA                                       NA 11
+#> 8    Cassida         NA                                       NA 13
+#> 9  Eggemeyer         NA                           10.1086/505797 15
+#> 10      Fike         NA           10.1016/j.biombioe.2005.10.008 16
+#> ..       ...        ...                                      ... ..
+#> Variables not shown: journal (chr), pdf (chr), pg (chr), title (chr),
+#>   updated_at (chr), url (chr), user_id (int), vol (int), year (int)
+```
+
+Single citation
+
+
+```r
+bety_citation(id = 1)
+#> $author
+#> [1] "Adler"
+#> 
+#> $created_at
+#> NULL
+#> 
+#> $doi
+#> [1] "10.2134/agronj2005.0351"
+#> 
+#> $id
+#> [1] 1
+#> 
+#> $journal
+#> [1] "Agronomy Journal"
+#> 
+#> $pdf
+#> [1] "http://naldc.nal.usda.gov/naldc/download.xhtml?id=3966&content=PDF"
+#> 
+#> $pg
+#> [1] "1518-1525"
+#> 
+#> $title
+#> [1] "Biomass yield and biofuel quality of switchgrass harvested in fall or spring"
+#> 
+#> $updated_at
+#> [1] "2014-07-07T16:08:59-05:00"
+#> 
+#> $url
+#> [1] "http://hdl.handle.net/10113/3966"
+#> 
+#> $user_id
+#> NULL
+#> 
+#> $vol
+#> [1] 98
+#> 
+#> $year
+#> [1] 2006
 ```
 
 ## Meta
