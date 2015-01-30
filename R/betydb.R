@@ -7,17 +7,22 @@
 #' @param species (character) A specific epithet. Optional
 #' @param fmt (character) Format to return data in, one of json, xml, csv. Only json
 #' currently supported.
-#' @param key (character) An API key. Use this or user/pwd combo. Optional
+#' @param key (character) An API key. Use this or user/pwd combo. Save in your
+#' \code{.Rprofile} file as \code{betydb_key}. Optional
 #' @param user,pwd (character) A user name and password. Use a user/pwd combo or an API key.
-#' Optional
+#' Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}. Optional
 #' @references API documentation \url{https://www.authorea.com/users/5574/articles/7062}
 #' @details Authentication defers to use API key first since it's simpler, but if you don't have
 #' an API key, you can supply a username and password.
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
-#' out <- bety_traits(genus = 'Miscanthus', species = "giganteus")
-#' head(out)
+#' (out <- bety_traits(genus = 'Miscanthus', species = "giganteus"))
+#' library("dplyr")
+#' out %>%
+#'  group_by(specie_id) %>%
+#'  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%
+#'  arrange(desc(mean_result))
 #' }
 
 #' @export
@@ -37,7 +42,8 @@ betydb_GET <- function(url, args = list(), key, user, pwd, ...){
   }
   stop_for_status(res)
   txt <- content(res, "text")
-  tbl_df(jsonlite::fromJSON(txt, TRUE))
+  lst <- jsonlite::fromJSON(txt, TRUE, flatten = TRUE)
+  setNames(tbl_df(lst), gsub("trait\\.", "", names(lst)))
 }
 
 bety_auth <- function(x,y,z){

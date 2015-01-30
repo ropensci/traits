@@ -16,10 +16,11 @@ bety_traits(genus = NULL, species = NULL, fmt = "json", key = NULL,
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
 
-\item{key}{(character) An API key. Use this or user/pwd combo. Optional}
+\item{key}{(character) An API key. Use this or user/pwd combo. Save in your
+\code{.Rprofile} file as \code{betydb_key}. Optional}
 
 \item{user,pwd}{(character) A user name and password. Use a user/pwd combo or an API key.
-Optional}
+Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional}
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
 }
@@ -32,8 +33,12 @@ an API key, you can supply a username and password.
 }
 \examples{
 \dontrun{
-out <- bety_traits(genus = 'Miscanthus', species = "giganteus")
-head(out)
+(out <- bety_traits(genus = 'Miscanthus', species = "giganteus"))
+library("dplyr")
+out \%>\%
+ group_by(specie_id) \%>\%
+ summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) \%>\%
+ arrange(desc(mean_result))
 }
 }
 \author{
