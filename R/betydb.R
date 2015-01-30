@@ -5,6 +5,8 @@
 #'
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
+#' @param fmt (character) Format to return data in, one of json, xml, csv. Only json
+#' currently supported.
 #' @param key (character) An API key. Use this or user/pwd combo. Optional
 #' @param user,pwd (character) A user name and password. Use a user/pwd combo or an API key.
 #' Optional
@@ -23,10 +25,10 @@
 bety_traits <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   fmt <- match.arg(fmt, c("json","xml","csv"))
-  betydb_GET(url=paste0(betyurl(), "traits.", fmt), args, user, pwd, ...)
+  betydb_GET(url=paste0(betyurl(), "traits.", fmt), args, key, user, pwd, ...)
 }
 
-betydb_GET <- function(url, args = list(), user, pwd, ...){
+betydb_GET <- function(url, args = list(), key, user, pwd, ...){
   auth <- bety_auth(user, pwd, key)
   res <- if(is.null(auth$key)){
     GET(url, query = args, authenticate(auth$user, auth$pwd))

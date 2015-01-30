@@ -13,6 +13,9 @@ bety_traits(genus = NULL, species = NULL, fmt = "json", key = NULL,
 
 \item{species}{(character) A specific epithet. Optional}
 
+\item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
+currently supported.}
+
 \item{key}{(character) An API key. Use this or user/pwd combo. Optional}
 
 \item{user,pwd}{(character) A user name and password. Use a user/pwd combo or an API key.
