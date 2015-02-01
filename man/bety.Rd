@@ -62,6 +62,10 @@ currently supported.}
 Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional}
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
+
+\item{city}{(character) City name. Optional}
+
+\item{id}{(integer) One or more ids for a species, site, variable, etc.}
 }
 \description{
 Search for traits from BettyDB

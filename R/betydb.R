@@ -5,6 +5,8 @@
 #'
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
+#' @param city (character) City name. Optional
+#' @param id (integer) One or more ids for a species, site, variable, etc.
 #' @param fmt (character) Format to return data in, one of json, xml, csv. Only json
 #' currently supported.
 #' @param key (character) An API key. Use this or user/pwd combo. Save in your
