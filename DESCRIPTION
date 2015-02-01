@@ -15,6 +15,7 @@ License: MIT + file LICENSE
 URL: https://github.com/ropensci/traits
 BugReports: http://www.github.com/ropensci/traits/issues
 LazyData: true
+VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE)
 Depends:
     R (>= 2.10)
@@ -27,3 +28,7 @@ Imports:
     data.table,
     taxize,
     ape
+Suggests:
+    roxygen2,
+    knitr,
+    testthat

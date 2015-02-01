@@ -26,6 +26,8 @@ To be included, with the associated function prefix:
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
+For more info on Betydb, see [the vignette](vignettes/betydb.Rmd).
+
 ## Installation
 
 ```{r eval=FALSE}
@@ -63,45 +65,6 @@ Single trait
 
 ```{r}
 bety_trait(id = 10)
-```
-
-### Species
-
-Get species searching for _Miscanthus_
-
-```{r}
-bety_species(genus = 'Miscanthus')
-```
-
-Single species
-
-```{r}
-bety_specie(id = 10)
-```
-
-### Yields
-
-Get yield data for _Miscanthus_
-
-```{r}
-bety_yields(genus = 'Miscanthus')
-```
-
-__Note:__ No singular format right now.
-
-
-### Citations
-
-Get citatons searching for _Miscanthus_
-
-```{r}
-bety_citations(genus = 'Miscanthus')
-```
-
-Single citation
-
-```{r}
-bety_citation(id = 1)
 ```
 
 ## Meta

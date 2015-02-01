@@ -2,6 +2,8 @@
 
 export(bety_citation)
 export(bety_citations)
+export(bety_site)
+export(bety_sites)
 export(bety_specie)
 export(bety_species)
 export(bety_trait)

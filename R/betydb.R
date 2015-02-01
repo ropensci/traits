@@ -44,6 +44,9 @@
 #' ## Citations
 #' bety_citations(genus = 'Miscanthus')
 #'
+#' ## Sites
+#' bety_sites(city = 'Beddington')
+#'
 #' # Get by ID
 #' ## Traits
 #' bety_trait(id = 10)
@@ -51,6 +54,8 @@
 #' bety_specie(id = 1)
 #' ## Citations
 #' bety_citation(id = 1)
+#' ## Citations
+#' bety_site(id = 795)
 #' }
 
 #' @export
@@ -88,6 +93,13 @@ bety_variables <- function(genus = NULL, species = NULL, fmt = "json", key=NULL,
   betydb_GET(url=makeurl("variables", fmt), args, key, user, pwd, "variable", ...)
 }
 
+#' @export
+#' @rdname bety
+bety_sites <- function(city = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+  args <- traitsc(list(city = city))
+  betydb_GET(url=makeurl("sites", fmt), args, key, user, pwd, "site", ...)
+}
+
 #################### by ID
 #' @export
 #' @rdname bety
@@ -116,6 +128,12 @@ bety_yield <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL,
 bety_citation <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET2(makeidurl("citations", id, fmt), args, key, user, pwd, "citation", ...)
+}
+
+#' @export
+#' @rdname bety
+bety_site <- function(id, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+  betydb_GET2(makeidurl("sites", id, fmt), args, key, user, pwd, "site", ...)
 }
 
 betydb_http <- function(url, args = list(), key, user, pwd, ...){

@@ -4,6 +4,8 @@
 \alias{bety}
 \alias{bety_citation}
 \alias{bety_citations}
+\alias{bety_site}
+\alias{bety_sites}
 \alias{bety_specie}
 \alias{bety_species}
 \alias{bety_trait}
@@ -28,6 +30,9 @@ bety_citations(genus = NULL, species = NULL, fmt = "json", key = NULL,
 bety_variables(genus = NULL, species = NULL, fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
 
+bety_sites(city = NULL, fmt = "json", key = NULL, user = NULL,
+  pwd = NULL, ...)
+
 bety_trait(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
 
@@ -39,6 +44,8 @@ bety_yield(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
 
 bety_citation(id, genus = NULL, species = NULL, fmt = "json",
   key = NULL, user = NULL, pwd = NULL, ...)
+
+bety_site(id, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
 }
 \arguments{
 \item{genus}{(character) A genus name. Optional}
@@ -96,6 +103,9 @@ bety_yields(genus = 'Miscanthus')
 ## Citations
 bety_citations(genus = 'Miscanthus')
 
+## Sites
+bety_sites(city = 'Beddington')
+
 # Get by ID
 ## Traits
 bety_trait(id = 10)
@@ -103,6 +113,8 @@ bety_trait(id = 10)
 bety_specie(id = 1)
 ## Citations
 bety_citation(id = 1)
+## Citations
+bety_site(id = 795)
 }
 }
 \author{
