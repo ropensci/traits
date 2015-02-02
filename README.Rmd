@@ -17,7 +17,6 @@ To be included, with the associated function prefix:
 * [Polytraits](http://polytraits.lifewatchgreece.eu/download-api) - `poly_` (_not in the package yet_)
 * [BETYdb](http://www.betydb.org) - `bety_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
-* [Phylomatic](http://phylodiversity.net/phylomatic/) - `phylomatic_`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
 * [Encyclopedia of Life Invasive Species](link) - `eol_`
 * [Encyclopedia of Life Traitbank](link) - `traitbank_`
@@ -73,4 +72,4 @@ bety_trait(id = 10)
 * License: MIT
 * Get citation information for `traits` in R doing `citation(package = 'traits')`
 
-[![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
