@@ -1,5 +1,6 @@
 #' Retrieve gene sequences from NCBI by accession number.
 #'
+#' @import httr
 #' @importFrom data.table rbindlist
 #' @export
 #' @param ids (character) GenBank ids to search for.

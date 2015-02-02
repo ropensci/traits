@@ -26,8 +26,7 @@ Imports:
     RCurl,
     dplyr,
     data.table,
-    taxize,
-    ape
+    taxize
 Suggests:
     roxygen2,
     knitr,
