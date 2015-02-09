@@ -9,6 +9,6 @@ test_that("BETYdb API works", {
 test_that("Genus / Species queries work", {
   mxg <- betydb_traits(genus = 'Miscanthus', species = "giganteus", user = "ropensci-traits", pwd = "ropensci")
   pavi <- betydb_traits(genus = 'Panicum', species = "virgatum", user = "ropensci-traits", pwd = "ropensci")
-  # expect_false(mxg == pavi)
+  # expect_false(mxg == pavi) # requires gh-21
 }
 )
