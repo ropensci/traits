@@ -3,8 +3,6 @@
 %\VignetteIndexEntry{BETYdb Tutorial}
 -->
 
-
-
 [BETYdb](https://www.betydb.org/) is the _Biofuel Ecophysiological Traits and Yields Database_. You can get many different types of data from this database, including trait data. 
 
 Function setup: All functions are prefixed with `betydb_`. Plural function names like `betydb_traits()` accept parameters and always give back a data.frame, while singlur function names like `betydb_trait()` accept an ID and give back a list. 

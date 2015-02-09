@@ -1,7 +1,7 @@
 #' Search for traits from BettyDB
 #'
 #' @importFrom dplyr tbl_df
-#' @name bety
+#' @name betydb
 #'
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
@@ -61,42 +61,42 @@
 #' }
 
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_traits <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("traits", fmt), args, key, user, pwd, "trait", ...)
 }
 
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_species <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("species", fmt), args, key, user, pwd, "specie", ...)
 }
 
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_yields <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("yields", fmt), args, key, user, pwd, "yield", ...)
 }
 
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_citations <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("citations", fmt), args, key, user, pwd, "citation", ...)
 }
 
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_variables <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("variables", fmt), args, key, user, pwd, "variable", ...)
 }
 
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_sites <- function(city = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(city = city))
   betydb_GET(url=makeurl("sites", fmt), args, key, user, pwd, "site", ...)
@@ -104,14 +104,14 @@ betydb_sites <- function(city = NULL, fmt = "json", key=NULL, user=NULL, pwd=NUL
 
 #################### by ID
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_trait <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET2(makeidurl("variables", id, fmt), args, key, user, pwd, "variable", ...)
 }
 
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_specie <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET2(makeidurl("species", id, fmt), args, key, user, pwd, "specie", ...)
@@ -119,21 +119,21 @@ betydb_specie <- function(id, genus = NULL, species = NULL, fmt = "json", key=NU
 
 # by ID
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_yield <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET2(makeidurl("yields", id, fmt), args, key, user, pwd, "yield", ...)
 }
 
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_citation <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET2(makeidurl("citations", id, fmt), args, key, user, pwd, "citation", ...)
 }
 
 #' @export
-#' @rdname bety
+#' @rdname betydb
 betydb_site <- function(id, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   betydb_GET2(makeidurl("sites", id, fmt), args, key, user, pwd, "site", ...)
 }
