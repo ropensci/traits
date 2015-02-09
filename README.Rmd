@@ -15,7 +15,7 @@ R client for various sources of species trait data.
 To be included, with the associated function prefix:
 
 * [Polytraits](http://polytraits.lifewatchgreece.eu/download-api) - `poly_` (_not in the package yet_)
-* [BETYdb](http://www.betydb.org) - `bety_`
+* [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
 * [Encyclopedia of Life Invasive Species](link) - `eol_`
@@ -40,14 +40,14 @@ library("traits")
 
 ## BetyDB
 
-Function setup: plural functions like `bety_traits()` accept parameters and always give back a data.frame, while singlur function names accept an ID and give back a list. 
+Function setup: plural functions like `betydb_traits()` accept parameters and always give back a data.frame, while singlur function names accept an ID and give back a list. 
 
 ### Traits
 
 Get trait data for _Miscanthus giganteus_
 
 ```{r}
-(out <- bety_traits(genus = "Miscanthus", species = "giganteus"))
+(out <- betydb_traits(genus = "Miscanthus", species = "giganteus"))
 ```
 
 Summarise data from the output `data.frame`
@@ -63,7 +63,7 @@ out %>%
 Single trait
 
 ```{r}
-bety_trait(id = 10)
+betydb_trait(id = 10)
 ```
 
 ## Meta
