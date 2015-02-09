@@ -150,12 +150,22 @@ betydb_http <- function(url, args = list(), key, user, pwd, ...){
 }
 
 betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
+  if(is.null(c(key, user, pwd))){ ## could also test connection first; send error about using default
+    # print("no credentials supplied, using defaults")
+    user <- 'ropensci-traits'
+    pwd <- 'ropensci'
+  }
   txt <- betydb_http(url, args, key, user, pwd, ...)
   lst <- jsonlite::fromJSON(txt, TRUE, flatten = TRUE)
   setNames(tbl_df(lst), gsub(sprintf("%s\\.", which), "", names(lst)))
 }
 
+## can betydb_GET2 be merged with betydb_GET?
 betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
+  if(is.null(c(key, user, pwd))){
+    user <- 'ropensci-traits'
+    pwd <- 'ropensci'
+  }
   txt <- betydb_http(url, args, key, user, pwd, ...)
   lst <- jsonlite::fromJSON(txt, FALSE)
   lst[[1]]
