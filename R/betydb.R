@@ -1,7 +1,7 @@
 #' Search for traits from BettyDB
 #'
 #' @importFrom dplyr tbl_df
-#' @name bety
+#' @name betydb
 #'
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
@@ -21,16 +21,16 @@
 #' an API key, you can supply a username and password.
 #'
 #' @section Functions:
-#' Singular functions like \code{bety_trait} accept an id and additional parameters,
+#' Singular functions like \code{betydb_trait} accept an id and additional parameters,
 #' and return a list of variable outputs depending on the inputs.
 #'
-#' However, plural functions like \code{bety_traits} accept query parameters, but not
+#' However, plural functions like \code{betydb_traits} accept query parameters, but not
 #' ids, and always return a single data.frame.
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
 #' # Search with parameters
 #' ## Traits
-#' (out <- bety_traits(genus = 'Miscanthus', species = "giganteus"))
+#' (out <- betydb_traits(genus = 'Miscanthus', species = "giganteus"))
 #' library("dplyr")
 #' out %>%
 #'  group_by(specie_id) %>%
@@ -38,108 +38,108 @@
 #'  arrange(desc(mean_result))
 #'
 #' ## Species
-#' bety_species(genus = 'Miscanthus')
+#' betydb_species(genus = 'Miscanthus')
 #'
 #' ## Yields
-#' bety_yields(genus = 'Miscanthus')
+#' betydb_yields(genus = 'Miscanthus')
 #'
 #' ## Citations
-#' bety_citations(genus = 'Miscanthus')
+#' betydb_citations(genus = 'Miscanthus')
 #'
 #' ## Sites
-#' bety_sites(city = 'Beddington')
+#' betydb_sites(city = 'Beddington')
 #'
 #' # Get by ID
 #' ## Traits
-#' bety_trait(id = 10)
+#' betydb_trait(id = 10)
 #' ## Species
-#' bety_specie(id = 1)
+#' betydb_specie(id = 1)
 #' ## Citations
-#' bety_citation(id = 1)
+#' betydb_citation(id = 1)
 #' ## Citations
-#' bety_site(id = 795)
+#' betydb_site(id = 795)
 #' }
 
 #' @export
-#' @rdname bety
-bety_traits <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_traits <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("traits", fmt), args, key, user, pwd, "trait", ...)
 }
 
 #' @export
-#' @rdname bety
-bety_species <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_species <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("species", fmt), args, key, user, pwd, "specie", ...)
 }
 
 #' @export
-#' @rdname bety
-bety_yields <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_yields <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("yields", fmt), args, key, user, pwd, "yield", ...)
 }
 
 #' @export
-#' @rdname bety
-bety_citations <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_citations <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("citations", fmt), args, key, user, pwd, "citation", ...)
 }
 
 #' @export
-#' @rdname bety
-bety_variables <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_variables <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(url=makeurl("variables", fmt), args, key, user, pwd, "variable", ...)
 }
 
 #' @export
-#' @rdname bety
-bety_sites <- function(city = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_sites <- function(city = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(city = city))
   betydb_GET(url=makeurl("sites", fmt), args, key, user, pwd, "site", ...)
 }
 
 #################### by ID
 #' @export
-#' @rdname bety
-bety_trait <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_trait <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET2(makeidurl("variables", id, fmt), args, key, user, pwd, "variable", ...)
 }
 
 #' @export
-#' @rdname bety
-bety_specie <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_specie <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET2(makeidurl("species", id, fmt), args, key, user, pwd, "specie", ...)
 }
 
 # by ID
 #' @export
-#' @rdname bety
-bety_yield <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_yield <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET2(makeidurl("yields", id, fmt), args, key, user, pwd, "yield", ...)
 }
 
 #' @export
-#' @rdname bety
-bety_citation <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_citation <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET2(makeidurl("citations", id, fmt), args, key, user, pwd, "citation", ...)
 }
 
 #' @export
-#' @rdname bety
-bety_site <- function(id, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#' @rdname betydb
+betydb_site <- function(id, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   betydb_GET2(makeidurl("sites", id, fmt), args, key, user, pwd, "site", ...)
 }
 
 betydb_http <- function(url, args = list(), key, user, pwd, ...){
-  auth <- bety_auth(user, pwd, key)
+  auth <- betydb_auth(user, pwd, key)
   res <- if(is.null(auth$key)){
     GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
   } else {
@@ -161,7 +161,7 @@ betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
   lst[[1]]
 }
 
-bety_auth <- function(x,y,z){
+betydb_auth <- function(x,y,z){
   if(is.null(z) && is.null(x)){
     z <- getOption("betydb_key", NULL)
   }
