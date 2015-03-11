@@ -1,6 +1,6 @@
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Betydb Tutorial}
+%\VignetteIndexEntry{BETYdb Tutorial}
 -->
 
 ```{r echo=FALSE, eval=FALSE}
@@ -12,9 +12,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-[BetyDB](https://www.betydb.org/) is the _Biofuel Ecophysiological Traits and Yields Database_. You can get many different types of data from this database, including trait data. 
+[BETYdb](https://www.betydb.org/) is the _Biofuel Ecophysiological Traits and Yields Database_. You can get many different types of data from this database, including trait data. 
 
-Function setup: All functions are prefixed with `bety_`. Plural function names like `bety_traits()` accept parameters and always give back a data.frame, while singlur function names like `bety_trait()` accept an ID and give back a list. 
+Function setup: All functions are prefixed with `betydb_`. Plural function names like `betydb_traits()` accept parameters and always give back a data.frame, while singlur function names like `betydb_trait()` accept an ID and give back a list. 
 
 The idea with the functions with plural names is to search for either traits, species, etc., and with the singular function names to get data by one or more IDs.
 
@@ -29,7 +29,7 @@ library("traits")
 Get trait data for _Miscanthus giganteus_
 
 ```{r}
-(out <- bety_traits(genus = "Miscanthus", species = "giganteus"))
+(out <- betydb_traits(genus = "Miscanthus", species = "giganteus"))
 ```
 
 Summarise data from the output `data.frame`
@@ -45,7 +45,7 @@ out %>%
 Single trait
 
 ```{r}
-bety_trait(id = 10)
+betydb_trait(id = 10)
 ```
 
 ## Species
@@ -53,13 +53,13 @@ bety_trait(id = 10)
 Get species searching for _Miscanthus_
 
 ```{r}
-bety_species(genus = 'Miscanthus')
+betydb_species(genus = 'Miscanthus')
 ```
 
 Single species
 
 ```{r}
-bety_specie(id = 10)
+betydb_specie(id = 10)
 ```
 
 ## Yields
@@ -67,7 +67,7 @@ bety_specie(id = 10)
 Get yield data for _Miscanthus_
 
 ```{r}
-bety_yields(genus = 'Miscanthus')
+betydb_yields(genus = 'Miscanthus')
 ```
 
 __Note:__ No singular format right now.
@@ -78,13 +78,13 @@ __Note:__ No singular format right now.
 Get citatons searching for _Miscanthus_
 
 ```{r}
-bety_citations(genus = 'Miscanthus')
+betydb_citations(genus = 'Miscanthus')
 ```
 
 Single citation
 
 ```{r}
-bety_citation(id = 1)
+betydb_citation(id = 1)
 ```
 
 ## Sites
@@ -92,11 +92,11 @@ bety_citation(id = 1)
 Get sites searching for the city of _Beddington_
 
 ```{r}
-bety_sites(city = 'Beddington')
+betydb_sites(city = 'Beddington')
 ```
 
 Single site
 
 ```{r}
-bety_site(id = 1)
+betydb_site(id = 1)
 ```
