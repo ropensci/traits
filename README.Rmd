@@ -44,10 +44,11 @@ Function setup: plural functions like `betydb_traits()` accept parameters and al
 
 ### Traits
 
-Get trait data for _Miscanthus giganteus_
+Get trait data for Willow (_Salix_ spp.)
 
 ```{r}
-(out <- betydb_traits(genus = "Miscanthus", species = "giganteus"))
+(out <- betydb_search("Salix"))
+# ~= (out <- betydb_search("willow"))
 ```
 
 Summarise data from the output `data.frame`
@@ -55,9 +56,13 @@ Summarise data from the output `data.frame`
 ```{r}
 library("dplyr")
 out %>%
-  group_by(specie_id) %>%
-  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%
-  arrange(desc(mean_result))
+  group_by(scientificname, trait) %>%
+      mutate(.mean = as.numeric(mean)) %>%
+          summarise(mean = round(mean(.mean, na.rm = TRUE), 2),
+                    min = round(min(.mean, na.rm = TRUE), 2),
+                    max = round(max(.mean, na.rm = TRUE), 2),
+                    n = length(n))
+
 ```
 
 Single trait

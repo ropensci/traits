@@ -28,27 +28,12 @@
 #' ids, and always return a single data.frame.
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
-#' # Search with parameters
-#' ## Traits
-#' (out <- betydb_traits(genus = 'Miscanthus', species = "giganteus"))
-#' library("dplyr")
+#' # General Search
+#' out <- betydb_search(query = "Switchgrass Yield")
 #' out %>%
 #'  group_by(specie_id) %>%
 #'  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%
 #'  arrange(desc(mean_result))
-#'
-#' ## Species
-#' betydb_species(genus = 'Miscanthus')
-#'
-#' ## Yields
-#' betydb_yields(genus = 'Miscanthus')
-#'
-#' ## Citations
-#' betydb_citations(genus = 'Miscanthus')
-#'
-#' ## Sites
-#' betydb_sites(city = 'Beddington')
-#'
 #' # Get by ID
 #' ## Traits
 #' betydb_trait(id = 10)
@@ -62,46 +47,59 @@
 
 #' @export
 #' @rdname betydb
-betydb_traits <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
-  betydb_GET(url=makeurl("traits", fmt), args, key, user, pwd, "trait", ...)
+betydb_search <- function(query = "Maple SLA", key = NULL, user = NULL, pwd = NULL, ...){
+    url.query <- gsub(" ", "+", query)
+    base.url <- makeurl("search", fmt)
+    ## trying to put together https://betydb.org/search.json?search=Maple+SLA
+    result <- betydb_GET(url = base.url, args = list(search = query), key, user, pwd, which = "traits_and_yields_view", ...)
 }
 
-#' @export
-#' @rdname betydb
-betydb_species <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
-  betydb_GET(url=makeurl("species", fmt), args, key, user, pwd, "specie", ...)
+makeurl <- function(x, fmt){
+  fmt <- match.arg(fmt, c("json","xml","csv"))
+  url <- paste0(betyurl(), paste0(x, "."), fmt)
 }
 
-#' @export
-#' @rdname betydb
-betydb_yields <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
-  betydb_GET(url=makeurl("yields", fmt), args, key, user, pwd, "yield", ...)
+
+betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
+  if(is.null(c(key, user, pwd))){
+    user <- 'ropensci-traits'
+    pwd <- 'ropensci'
+  }
+  txt <- betydb_http(url, args, key, user, pwd, ...)
+  if(txt == "[]") {
+      result <- NULL
+  } else {
+      lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+      result <- setNames(tbl_df(lst), gsub(sprintf("%s\\.", which), "", names(lst)))
+  }
+  return(result)
 }
 
-#' @export
-#' @rdname betydb
-betydb_citations <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
-  betydb_GET(url=makeurl("citations", fmt), args, key, user, pwd, "citation", ...)
+  
+## can betydb_GET2 be merged with betydb_GET?
+betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
+  if(is.null(c(key, user, pwd))){
+    user <- 'ropensci-traits'
+    pwd <- 'ropensci'
+  }
+  txt <- betydb_http(url, args, key, user, pwd, ...)
+  lst <- jsonlite::fromJSON(txt, FALSE)
+  lst[[1]]
 }
 
-#' @export
-#' @rdname betydb
-betydb_variables <- function(genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
-  betydb_GET(url=makeurl("variables", fmt), args, key, user, pwd, "variable", ...)
+
+betydb_http <- function(url, args = list(), key, user, pwd, ...){
+  auth <- betydb_auth(user, pwd, key)
+  res <- if(is.null(auth$key)){
+    GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
+  } else {
+    GET(url, query = c(key=auth$key, args), ...)
+  }
+  stop_for_status(res)
+  content(res, "text")
 }
 
-#' @export
-#' @rdname betydb
-betydb_sites <- function(city = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(city = city))
-  betydb_GET(url=makeurl("sites", fmt), args, key, user, pwd, "site", ...)
-}
-
+ 
 #################### by ID
 #' @export
 #' @rdname betydb
@@ -138,38 +136,6 @@ betydb_site <- function(id, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   betydb_GET2(makeidurl("sites", id, fmt), args, key, user, pwd, "site", ...)
 }
 
-betydb_http <- function(url, args = list(), key, user, pwd, ...){
-  auth <- betydb_auth(user, pwd, key)
-  res <- if(is.null(auth$key)){
-    GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
-  } else {
-    GET(url, query = c(key=auth$key, args), ...)
-  }
-  stop_for_status(res)
-  content(res, "text")
-}
-
-betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
-  if(is.null(c(key, user, pwd))){ ## could also test connection first; send error about using default
-    # print("no credentials supplied, using defaults")
-    user <- 'ropensci-traits'
-    pwd <- 'ropensci'
-  }
-  txt <- betydb_http(url, args, key, user, pwd, ...)
-  lst <- jsonlite::fromJSON(txt, TRUE, flatten = TRUE)
-  setNames(tbl_df(lst), gsub(sprintf("%s\\.", which), "", names(lst)))
-}
-
-## can betydb_GET2 be merged with betydb_GET?
-betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
-  if(is.null(c(key, user, pwd))){
-    user <- 'ropensci-traits'
-    pwd <- 'ropensci'
-  }
-  txt <- betydb_http(url, args, key, user, pwd, ...)
-  lst <- jsonlite::fromJSON(txt, FALSE)
-  lst[[1]]
-}
 
 betydb_auth <- function(x,y,z){
   if(is.null(z) && is.null(x)){
@@ -186,10 +152,6 @@ betydb_auth <- function(x,y,z){
   }
 }
 
-makeurl <- function(x, fmt){
-  fmt <- match.arg(fmt, c("json","xml","csv"))
-  paste0(betyurl(), paste0(x, "."), fmt)
-}
 
 makeidurl <- function(x, id, fmt){
   fmt <- match.arg(fmt, c("json","xml","csv"))

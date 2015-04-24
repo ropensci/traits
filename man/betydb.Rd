@@ -3,35 +3,15 @@
 \name{betydb}
 \alias{betydb}
 \alias{betydb_citation}
-\alias{betydb_citations}
+\alias{betydb_search}
 \alias{betydb_site}
-\alias{betydb_sites}
 \alias{betydb_specie}
-\alias{betydb_species}
 \alias{betydb_trait}
-\alias{betydb_traits}
-\alias{betydb_variables}
 \alias{betydb_yield}
-\alias{betydb_yields}
 \title{Search for traits from BettyDB}
 \usage{
-betydb_traits(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_species(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_yields(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_citations(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_variables(genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_sites(city = NULL, fmt = "json", key = NULL, user = NULL,
-  pwd = NULL, ...)
+betydb_search(query = "Maple SLA", key = NULL, user = NULL, pwd = NULL,
+  ...)
 
 betydb_trait(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
@@ -48,13 +28,6 @@ betydb_citation(id, genus = NULL, species = NULL, fmt = "json",
 betydb_site(id, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
 }
 \arguments{
-\item{genus}{(character) A genus name. Optional}
-
-\item{species}{(character) A specific epithet. Optional}
-
-\item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
-currently supported.}
-
 \item{key}{(character) An API key. Use this or user/pwd combo. Save in your
 \code{.Rprofile} file as \code{betydb_key}. Optional}
 
@@ -63,9 +36,16 @@ Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. 
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
 
-\item{city}{(character) City name. Optional}
-
 \item{id}{(integer) One or more ids for a species, site, variable, etc.}
+
+\item{genus}{(character) A genus name. Optional}
+
+\item{species}{(character) A specific epithet. Optional}
+
+\item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
+currently supported.}
+
+\item{city}{(character) City name. Optional}
 }
 \description{
 Search for traits from BettyDB
@@ -89,27 +69,12 @@ ids, and always return a single data.frame.
 }
 \examples{
 \dontrun{
-# Search with parameters
-## Traits
-(out <- betydb_traits(genus = 'Miscanthus', species = "giganteus"))
-library("dplyr")
+# General Search
+out <- betydb_search(query = "Switchgrass Yield")
 out \%>\%
  group_by(specie_id) \%>\%
  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) \%>\%
  arrange(desc(mean_result))
-
-## Species
-betydb_species(genus = 'Miscanthus')
-
-## Yields
-betydb_yields(genus = 'Miscanthus')
-
-## Citations
-betydb_citations(genus = 'Miscanthus')
-
-## Sites
-betydb_sites(city = 'Beddington')
-
 # Get by ID
 ## Traits
 betydb_trait(id = 10)
