@@ -5,7 +5,14 @@ sp = "Abutilon malacum"
 
 usda_native <- function(sp){
   d <- read.table("data/USDA_Plants.txt", header = TRUE, sep = ",")
-  if(length(which(d$Scientific.Name == sp)) = 0){
+  head(d, 20)
+  levels(d$Native.Status) #probably same as ITIS
+  levels(d$State.and.Province) #where present. Need to be combined with native? but not sure about criteria.
+  #http://plants.usda.gov/about_adv_search.html#state_provincedist
+  levels(d$PLANTS.Floristic.Area) #same as ITITS?
+
+  # Example with Native.Status
+  if(length(which(d$Scientific.Name == sp)) == 0){
     print("Species not found")
   } else {
     status <- d[which(d$Scientific.Name == sp), "Native.Status"]
@@ -18,3 +25,9 @@ usda_native <- function(sp){
     Out
   }
 }
+
+sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
+        "Alkanna lutea", "Anchusa arvensis")
+
+sapply(sp, usda_native, simplify = FALSE)
+
