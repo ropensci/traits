@@ -1,4 +1,33 @@
-
+#' Check species status (native, exotic, ...) for one species from Flora Europaea webpage
+#'
+#' @importFrom XML xmlValue getNodeSet htmlTreeParse
+#' @export
+#'
+#' @param sp character; a vector of length one with a single scientific species names in the form of
+#'    c("Genus species").
+#' @return A list of vectors containing the countries where the species is native, exotic, ...
+#'
+#' @description This function check the status (native or exotic) of a species in each of the eu countries.
+#'
+#' For that end, it checks Flora Europaea (http://rbg-web2.rbge.org.uk/FE/fe.html) and scrps the data from there.
+#'
+#' Note that the webpage contains more information.
+#'
+#' As expected, the function is as good as the database is. I think for native species is robust but
+#' new exotic species are not added as to my knowledge the database is not updated anymore.
+#' The database is not able to recognize species
+#' synonyms.
+#'
+#' See http://rbg-web2.rbge.org.uk/FE/data/countries for explanation of the database codes.
+#'
+#' @author Ignasi Bartomeus \email{nacho.bartomeus@@gmail.com}
+#' @examples \donttest{
+#' sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
+#'        "Alkanna lutea", "Anchusa arvensis")
+#' fe_native(sp[1])
+#' sapply(sp, fe_native, simplify = FALSE)
+#' }
+#'
 
 fe_native <- function(sp){
   #add country short-names translation cheat sheet as dataframe
@@ -85,13 +114,3 @@ fe_native <- function(sp){
     Out
   }
 }
-
-sp = "Lavandula stoechas"
-fe_native(sp)
-
-sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
-        "Alkanna lutea", "Anchusa arvensis")
-
-sapply(sp, fe_native, simplify = FALSE)
-
-#explanation here: http://rbg-web2.rbge.org.uk/FE/data/countries

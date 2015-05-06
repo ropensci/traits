@@ -1,4 +1,39 @@
-
+#' Check if a species is native somewhere
+#'
+#' @export
+#'
+#' @param sp character; a vector of length one with a single scientific species names in the form of
+#'    c("Genus species").
+#' @param region character; a vector of length one with a single region. Only "europe" and  "america" implemented
+#'  "europe" checks Flora Europaea and only contain plants. "america" checks ITIS and contain both plant and animals.
+#' @param where character; a vector of length one with a single place. For America has to match one of those:
+#' "Continental US", "Alaska", "Canada", "Caribbean Territories", "Central Pacific Territories",
+#' "Hawaii", "Mexico". For Europe has to match one of those: "Albania", "Austria", "Azores", "Belgium",
+#' "Islas_Baleares", "Britain", "Bulgaria", "Corse", "Kriti", "Czechoslovakia", "Denmark", "Faroer",
+#' "Finland", "France", "Germany", "Greece", "Ireland", "Switzerland", "Netherlands", "Spain",
+#' "Hungary", "Iceland", "Italy", "Jugoslavia", "Portugal", "Norway", "Poland", "Romania",
+#' "USSR", "Sardegna", "Svalbard", "Sicilia", "Sweden", "Turkey", "USSR_Northern_Division",
+#' "USSR_Baltic_Division", "USSR_Central_Division", "USSR_South_western", "USSR_Krym",
+#' "USSRSouth_eastern_Division"
+#' @return A vectors saying if is native, exotic, ...
+#'
+#' @description This function check the status (native or exotic) of a species in a given place
+#'
+#' For that end, calls itis_native{taxize} and fe_native{traits}. See help documentation of those functions
+#' for details
+#'
+#' So many more things can be done, like checking species first with taxize, adding more native lists to check...
+#'
+#' @author Ignasi Bartomeus \email{nacho.bartomeus@@gmail.com}
+#' @examples \donttest{
+#' sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
+#'        "Alkanna lutea", "Anchusa arvensis")
+#' is_native(sp[1], where = "Islas_Baleares", region = "europe")
+#' sapply(sp, is_native, where = "Continental US", region = "america")
+#' sapply(sp, is_native, where = "Islas_Baleares", region = "europe")
+#' }
+#'
+#'
 is_native <- function(sp, where, region = c("america", "europe")){
   require(taxize)
   if(region == "america"){
@@ -46,34 +81,3 @@ is_native <- function(sp, where, region = c("america", "europe")){
   }
   Out
 }
-
-is_native(sp, where = "Islas_Baleares", region = "europe")
-
-sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
-        "Alkanna lutea", "Anchusa arvensis")
-
-sapply(sp, is_native, where = "Islas_Baleares", region = "europe")
-
-sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
-        "Alkanna lutea", "Anchusa arvensis")
-
-sapply(sp, is_native, where = "Continental US", region = "america")
-
-
-#note: so many more things can be done, like checkingspecies first with taxize,
-
-#To resume:
-
-#itis_native give info for Alaska Canada, Caribbean Territories, Central Pacific Territories,
-#Continental US, Hawaii, Mexico. Aparently for most taxa.
-
-#USDA plants has info for US plants at the state level. Data need to be stored somewhere
-
-#col_search can be modified to give info on some plants, but hard to parse the data,
- #plus plants are random subsample, as far as i can tell. Only those from WOrls plants database.
-
-#Kew flora europaea is srapable and contain distribution and "nativity" for plants in EU
-
-#Fauna europaea has no scrapable interface. Links there to Marine, etc... services.
-
-
