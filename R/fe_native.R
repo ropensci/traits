@@ -33,7 +33,7 @@ fe_native <- function(sp){
   print(paste("Checking species", sp))
   #Parse url and extract table
   #readHTMLTable(urls) #Not working, don't know why.
-  doc <- htmlTreeParse(urls[i], useInternalNodes = TRUE)
+  doc <- htmlTreeParse(urls, useInternalNodes = TRUE)
   tables <- getNodeSet(doc, "//table")
   if(length(tables) < 3){
     print("Species not found")
@@ -93,3 +93,5 @@ sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
         "Alkanna lutea", "Anchusa arvensis")
 
 sapply(sp, fe_native, simplify = FALSE)
+
+#explanation here: http://rbg-web2.rbge.org.uk/FE/data/countries
