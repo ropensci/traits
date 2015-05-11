@@ -35,7 +35,6 @@
 #'
 #'
 is_native <- function(sp, where, region = c("america", "europe")){
-  require(taxize)
   if(!region %in% c("america", "europe")){
     stop ("region must be one of america or europe")
   }
