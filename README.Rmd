@@ -10,6 +10,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
+
 R client for various sources of species trait data.
 
 To be included, with the associated function prefix:
@@ -30,7 +32,6 @@ For more info on Betydb, see [the vignette](vignettes/betydb.Rmd).
 ## Installation
 
 ```{r eval=FALSE}
-install.packages("devtools")
 devtools::install_github("ropensci/traits")
 ```
 
@@ -73,8 +74,8 @@ betydb_trait(id = 10)
 
 ## Meta
 
-* Please report any issues or bugs](https://github.com/ropensci/traits/issues).
+* Please [report any issues or bugs](https://github.com/ropensci/traits/issues).
 * License: MIT
 * Get citation information for `traits` in R doing `citation(package = 'traits')`
 
-[![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
