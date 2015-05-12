@@ -47,7 +47,7 @@
 
 #' @export
 #' @rdname betydb
-betydb_search <- function(query = "Maple SLA", key = NULL, user = NULL, pwd = NULL, ...){
+betydb_search <- function(query = "Maple SLA", key = NULL, user = NULL, pwd = NULL, fmt = "json", ...){
     url.query <- gsub(" ", "+", query)
     base.url <- makeurl("search", fmt)
     ## trying to put together https://betydb.org/search.json?search=Maple+SLA
@@ -75,7 +75,7 @@ betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
   return(result)
 }
 
-  
+
 ## can betydb_GET2 be merged with betydb_GET?
 betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
   if(is.null(c(key, user, pwd))){
@@ -99,7 +99,7 @@ betydb_http <- function(url, args = list(), key, user, pwd, ...){
   content(res, "text")
 }
 
- 
+
 #################### by ID
 #' @export
 #' @rdname betydb
