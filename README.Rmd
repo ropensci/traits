@@ -47,15 +47,16 @@ Function setup: plural functions like `betydb_traits()` accept parameters and al
 Get trait data for Willow (_Salix_ spp.)
 
 ```{r}
-(out <- betydb_search("Salix"))
-# ~= (out <- betydb_search("willow"))
+(salix <- betydb_search("Salix Vcmax"))
+# equivalent: 
+# (out <- betydb_search("willow"))
 ```
 
 Summarise data from the output `data.frame`
 
 ```{r}
 library("dplyr")
-out %>%
+salix %>%
   group_by(scientificname, trait) %>%
       mutate(.mean = as.numeric(mean)) %>%
           summarise(mean = round(mean(.mean, na.rm = TRUE), 2),

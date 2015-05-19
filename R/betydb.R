@@ -47,24 +47,33 @@
 
 #' @export
 #' @rdname betydb
-betydb_search <- function(query = "Maple SLA", key = NULL, user = NULL, pwd = NULL, ...){
-    url.query <- gsub(" ", "+", query)
+betydb_search <- function(query = "Maple SLA", fmt = 'json', key = NULL, user = NULL, pwd = NULL, ...){
     base.url <- makeurl("search", fmt)
-    ## trying to put together https://betydb.org/search.json?search=Maple+SLA
     result <- betydb_GET(url = base.url, args = list(search = query), key, user, pwd, which = "traits_and_yields_view", ...)
+    return(result)
 }
 
-makeurl <- function(x, fmt){
+#' @export
+#' @rdname betydb
+betydb_traits <- function(genus = NULL, species = NULL, trait = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+  args <- traitsc(list(species.genus = genus, species.species = species, variables.name = trait))
+  url <- makeurl("traits", fmt)
+  betydb_GET(url = url, args, key, user, pwd, "trait", ...)
+}
+
+makeurl <- function(x, fmt, include = NULL){
   fmt <- match.arg(fmt, c("json","xml","csv"))
   url <- paste0(betyurl(), paste0(x, "."), fmt)
+  return(url)
 }
 
 
 betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
-  if(is.null(c(key, user, pwd))){
+  if(is.null(c(key, user, pwd))) {
     user <- 'ropensci-traits'
     pwd <- 'ropensci'
   }
+
   txt <- betydb_http(url, args, key, user, pwd, ...)
   if(txt == "[]") {
       result <- NULL
@@ -75,10 +84,10 @@ betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
   return(result)
 }
 
-  
+
 ## can betydb_GET2 be merged with betydb_GET?
 betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
-  if(is.null(c(key, user, pwd))){
+  if(is.null(c(key, user, pwd))) {
     user <- 'ropensci-traits'
     pwd <- 'ropensci'
   }
@@ -90,21 +99,26 @@ betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
 
 betydb_http <- function(url, args = list(), key, user, pwd, ...){
   auth <- betydb_auth(user, pwd, key)
-  res <- if(is.null(auth$key)){
-    GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
+
+  includes <- list(`include[]=` = ifelse(any(grepl('species', names(args))), "specie", NULL),
+       `include[]=` = ifelse(any(grepl('variables', names(args))), 'variable'))
+
+
+  res <- if(is.null(auth$key)) {
+    res <- GET(url, query = args, authenticate(auth$user, auth$pwd), verbose(), ...)
   } else {
     GET(url, query = c(key=auth$key, args), ...)
   }
   stop_for_status(res)
-  content(res, "text")
+  ans <- content(res, "text")
+  return(ans)
 }
 
- 
 #################### by ID
 #' @export
 #' @rdname betydb
 betydb_trait <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
+  args <- traitsc(list(species.genus = genus, species.species = species))
   betydb_GET2(makeidurl("variables", id, fmt), args, key, user, pwd, "variable", ...)
 }
 
@@ -138,7 +152,7 @@ betydb_site <- function(id, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
 
 
 betydb_auth <- function(x,y,z){
-  if(is.null(z) && is.null(x)){
+  if(is.null(z) && is.null(x)) {
     z <- getOption("betydb_key", NULL)
   }
   if(!is.null(z)) {
