@@ -21,6 +21,6 @@ Get bird habitat information from BirdLife/IUCN
 \dontrun{birdlife_habitat(22721692)}
 }
 \seealso{
-birdlife_threats
+\code{\link{birdlife_threats}}
 }
 

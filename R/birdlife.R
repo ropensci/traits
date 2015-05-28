@@ -10,7 +10,7 @@
 #' scheme is described at http://www.iucnredlist.org/technical-documents/classification-schemes/habitats-classification-scheme-ver3
 #' @examples
 #' \dontrun{birdlife_habitat(22721692)}
-#' @seealso birdlife_threats
+#' @seealso \code{\link{birdlife_threats}}
 
 birdlife_habitat = function(id){
   url = paste0(
@@ -42,7 +42,7 @@ birdlife_habitat = function(id){
 #' @examples
 #' \dontrun{birdlife_threats(22721692)}
 #' @export
-#' @seealso birdlife_habitat
+#' @seealso \code{\link{birdlife_habitat}}
 birdlife_threats = function(id){
 
   url = paste0(
