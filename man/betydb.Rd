@@ -52,7 +52,7 @@ Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. 
 \item{city}{(character) City name. Optional}
 }
 \description{
-Search for traits from BettyDB
+Search for traits from BETYdb
 }
 \details{
 Details:
