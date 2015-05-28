@@ -26,7 +26,16 @@ birdlife_habitat = function(id){
   out[-nrow(out), ] # Drop last row (altitude)
 }
 
-
+#' Get bird threat information from BirdLife/IUCN
+#'
+#' @importFrom XML readHTMLTable
+#' @export
+#'
+#' @param id IUCN species ID
+#'
+#' @return a \code{data.frame} with the species ID and two levels of threat descriptions,
+#' plus stresses, timing, scope, severity, and impact associated with each stressor.
+#'
 #' @export
 birdlife_threats = function(id){
 
@@ -55,6 +64,7 @@ birdlife_threats = function(id){
     rownums = seq_len(nrow(threats))
 
     out = data.frame(
+      id = id,
       threat1  = threats[rownums %% 5 == 1, 1],
       threat2  = threats[rownums %% 5 == 1, 2],
       stresses = threats[rownums %% 5 == 0, 1],
