@@ -72,6 +72,15 @@ Single trait
 betydb_trait(id = 10)
 ```
 
+All Miscanthus data collected by Becky Arundale 
+
+```{r}
+ans <- betydb_search(query = "Miscanthus Arundale")
+
+ans <- betydb_traits(genus = "Miscanthus", author = "Arundale", trait = "yield")
+```
+
+
 ## Meta
 
 * Please report any issues or bugs](https://github.com/ropensci/traits/issues).

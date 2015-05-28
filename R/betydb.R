@@ -55,7 +55,7 @@ betydb_search <- function(query = "Maple SLA", fmt = 'json', key = NULL, user = 
 
 #' @export
 #' @rdname betydb
-betydb_traits <- function(genus = NULL, species = NULL, trait = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+betydb_traits <- function(genus = NULL, species = NULL, trait = NULL, author = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(species.genus = genus, species.species = species, variables.name = trait))
   url <- makeurl("traits", fmt)
   betydb_GET(url = url, args, key, user, pwd, "trait", ...)
@@ -100,10 +100,12 @@ betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
 betydb_http <- function(url, args = list(), key, user, pwd, ...){
   auth <- betydb_auth(user, pwd, key)
 
-  includes <- list(`include[]=` = ifelse(any(grepl('species', names(args))), "specie", NULL),
-       `include[]=` = ifelse(any(grepl('variables', names(args))), 'variable'))
+  includes <- list(`include[]=` = ifelse(any(grepl('species', names(args))), "specie", ''),
+       `include[]=` = ifelse(any(grepl('variables', names(args))), 'variable', ''),
+       `include[]=` = ifelse(any(grepl('authors', names(args))), 'author', ''))
 
-
+  includes[which(includes == "")] <- NULL
+  a <- append(args, includes)
   res <- if(is.null(auth$key)) {
     res <- GET(url, query = args, authenticate(auth$user, auth$pwd), verbose(), ...)
   } else {
