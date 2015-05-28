@@ -1,0 +1,90 @@
+traits
+=======
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+[![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
+
+R client for various sources of species trait data.
+
+To be included, with the associated function prefix:
+
+* [Polytraits](http://polytraits.lifewatchgreece.eu/download-api) - `poly_` (_not in the package yet_)
+* [BETYdb](http://www.betydb.org) - `betydb_`
+* [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
+* [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
+* [Encyclopedia of Life Invasive Species](link) - `eol_`
+* [Encyclopedia of Life Traitbank](link) - `traitbank_`
+* [Coral Traits Database](http://coraltraits.org/) - `coral_`
+* ...
+
+Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
+
+For more info on Betydb, see [the vignette](vignettes/betydb.Rmd).
+
+## Installation
+
+```{r eval=FALSE}
+devtools::install_github("ropensci/traits")
+```
+
+```{r}
+library("traits")
+```
+
+## BetyDB
+
+Function setup: plural functions like `betydb_traits()` accept parameters and always give back a data.frame, while singlur function names accept an ID and give back a list. 
+
+### Traits
+
+Get trait data for Willow (_Salix_ spp.)
+
+```{r}
+(salix <- betydb_search("Salix Vcmax"))
+# equivalent: 
+# (out <- betydb_search("willow"))
+```
+
+Summarise data from the output `data.frame`
+
+```{r}
+library("dplyr")
+salix %>%
+  group_by(scientificname, trait) %>%
+      mutate(.mean = as.numeric(mean)) %>%
+          summarise(mean = round(mean(.mean, na.rm = TRUE), 2),
+                    min = round(min(.mean, na.rm = TRUE), 2),
+                    max = round(max(.mean, na.rm = TRUE), 2),
+                    n = length(n))
+
+```
+
+Single trait
+
+```{r}
+betydb_trait(id = 10)
+```
+
+All Miscanthus data collected by Becky Arundale 
+
+```{r}
+ans <- betydb_search(query = "Miscanthus Arundale")
+
+```
+
+
+## Meta
+
+* Please [report any issues or bugs](https://github.com/ropensci/traits/issues).
+* License: MIT
+* Get citation information for `traits` in R doing `citation(package = 'traits')`
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

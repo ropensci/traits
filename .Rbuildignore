@@ -6,3 +6,7 @@ vignettes/margins.sty
 Makefile
 inst/stuff/
 ^appveyor\.yml$
+^.*\.Rproj$
+^\.Rproj\.user$
+README.Rmd
+tests/testthat.R
