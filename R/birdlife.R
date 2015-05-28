@@ -15,7 +15,7 @@ birdlife_habitat = function(id){
     "/additional"
   )
 
-  tables = XML::readHTMLTable(url)
+  tables = XML::readHTMLTable(url, stringsAsFactors = FALSE)
 
   # Find the table that has "Habitat" as a column name
   habitat_table_number = which(
