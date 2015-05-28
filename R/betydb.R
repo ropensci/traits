@@ -1,4 +1,4 @@
-#' Search for traits from BettyDB
+#' Search for traits from BETYdb
 #'
 #' @importFrom dplyr tbl_df
 #' @name betydb

@@ -9,13 +9,13 @@
 \alias{betydb_trait}
 \alias{betydb_traits}
 \alias{betydb_yield}
-\title{Search for traits from BettyDB}
+\title{Search for traits from BETYdb}
 \usage{
 betydb_search(query = "Maple SLA", fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
 
-betydb_traits(genus = NULL, species = NULL, trait = NULL, fmt = "json",
-  key = NULL, user = NULL, pwd = NULL, ...)
+betydb_traits(genus = NULL, species = NULL, trait = NULL, author = NULL,
+  fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
 
 betydb_trait(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
