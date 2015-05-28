@@ -16,4 +16,10 @@ plus stresses, timing, scope, severity, and impact associated with each stressor
 \description{
 Get bird threat information from BirdLife/IUCN
 }
+\examples{
+\dontrun{birdlife_threats(22721692)}
+}
+\seealso{
+birdlife_habitat
+}
 

@@ -17,4 +17,10 @@ scheme is described at http://www.iucnredlist.org/technical-documents/classifica
 \description{
 Get bird habitat information from BirdLife/IUCN
 }
+\examples{
+\dontrun{birdlife_habitat(22721692)}
+}
+\seealso{
+birdlife_threats
+}
 
