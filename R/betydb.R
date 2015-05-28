@@ -107,7 +107,7 @@ betydb_http <- function(url, args = list(), key, user, pwd, ...){
   includes[which(includes == "")] <- NULL
   a <- append(args, includes)
   res <- if(is.null(auth$key)) {
-    res <- GET(url, query = args, authenticate(auth$user, auth$pwd), verbose(), ...)
+    res <- GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
   } else {
     GET(url, query = c(key=auth$key, args), ...)
   }
