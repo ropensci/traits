@@ -3,9 +3,11 @@
 #' @importFrom dplyr tbl_df
 #' @name betydb
 #'
+#' @param query Query terms
+#' @param trait Trait name
+#' @param author Author name
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
-#' @param city (character) City name. Optional
 #' @param id (integer) One or more ids for a species, site, variable, etc.
 #' @param fmt (character) Format to return data in, one of json, xml, csv. Only json
 #' currently supported.

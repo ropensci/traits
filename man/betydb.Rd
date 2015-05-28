@@ -32,6 +32,8 @@ betydb_citation(id, genus = NULL, species = NULL, fmt = "json",
 betydb_site(id, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
 }
 \arguments{
+\item{query}{Query terms}
+
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
 
@@ -47,9 +49,11 @@ Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. 
 
 \item{species}{(character) A specific epithet. Optional}
 
-\item{id}{(integer) One or more ids for a species, site, variable, etc.}
+\item{trait}{Trait name}
 
-\item{city}{(character) City name. Optional}
+\item{author}{Author name}
+
+\item{id}{(integer) One or more ids for a species, site, variable, etc.}
 }
 \description{
 Search for traits from BETYdb
