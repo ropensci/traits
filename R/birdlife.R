@@ -27,6 +27,7 @@ birdlife_habitat = function(id){
 }
 
 
+#' @export
 birdlife_threats = function(id){
 
   url = paste0(
