@@ -8,6 +8,8 @@
 #' @return a \code{data.frame} with level 1 and level 2 habitat classes, as well as importance
 #' ratings and occurrence type (e.g. breeding or non-breeding).  The habitat classification
 #' scheme is described at http://www.iucnredlist.org/technical-documents/classification-schemes/habitats-classification-scheme-ver3
+#' @seealso birdlife_threats
+
 birdlife_habitat = function(id){
   url = paste0(
     "http://www.birdlife.org/datazone/species/factsheet/",
@@ -37,6 +39,7 @@ birdlife_habitat = function(id){
 #' plus stresses, timing, scope, severity, and impact associated with each stressor.
 #'
 #' @export
+#' @seealso birdlife_habitat
 birdlife_threats = function(id){
 
   url = paste0(
