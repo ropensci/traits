@@ -13,5 +13,5 @@ get_birdlife_habitat = function(id){
   )
   
   out = cbind(id, tables[[habitat_table_number]])
-  out[-nrow(out)] # Drop last row (altitude)
+  out[-nrow(out), ] # Drop last row (altitude)
 }
