@@ -1,5 +1,8 @@
 context("BETYdb tests")
 
+## Broken Function
+expect_error(betydb_traits(genus = "Miscanthus", author = "Arundale", trait = "yield"))
+
 ## only run if betydb.org is up
 if(status_code(GET("https://www.betydb.org")) == 200){
   test_that("BETYdb API works", {

@@ -78,7 +78,6 @@ All Miscanthus data collected by Becky Arundale
 ```{r}
 ans <- betydb_search(query = "Miscanthus Arundale")
 
-# ans <- betydb_traits(genus = "Miscanthus", author = "Arundale", trait = "yield")
 ```
 
 
