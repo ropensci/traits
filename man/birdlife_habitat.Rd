@@ -7,7 +7,7 @@
 birdlife_habitat(id)
 }
 \arguments{
-\item{id}{IUCN species ID}
+\item{id}{A single IUCN species ID}
 }
 \value{
 a \code{data.frame} with level 1 and level 2 habitat classes, as well as importance
@@ -16,5 +16,14 @@ scheme is described at http://www.iucnredlist.org/technical-documents/classifica
 }
 \description{
 Get bird habitat information from BirdLife/IUCN
+}
+\examples{
+\dontrun{birdlife_habitat(22721692)}
+}
+\author{
+David J. Harris \email{harry491@gmail.com}
+}
+\seealso{
+\code{\link{birdlife_threats}}
 }
 
