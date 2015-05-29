@@ -20,8 +20,8 @@
 leda <- function(trait = "age_first_flowering", ...) {
   tt <- GET(URLencode(paste0(leda_base(), pick_file_name(trait))), ...)
   stop_for_status(tt)
-  out <- content(tt, as="text")
-  str <- sub("^\\r\\n\\r\\n", "", substring(out, regexpr("\r\n\r", outseq)[1], nchar(out)))
+  out <- content(tt, as = "text")
+  str <- sub("^\\r\\n\\r\\n", "", substring(out, regexpr("\r\n\r", out)[1], nchar(out)))
   df <- suppressWarnings(data.table::fread(str, stringsAsFactors = FALSE, data.table = FALSE))
   dplyr::tbl_df(setNames(df, tolower(names(df))))
 }
