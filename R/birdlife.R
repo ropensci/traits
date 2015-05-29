@@ -3,7 +3,7 @@
 #' @importFrom XML readHTMLTable
 #' @export
 #'
-#' @param id IUCN species ID
+#' @param id A single IUCN species ID
 #'
 #' @return a \code{data.frame} with level 1 and level 2 habitat classes, as well as importance
 #' ratings and occurrence type (e.g. breeding or non-breeding).  The habitat classification
@@ -39,7 +39,7 @@ birdlife_habitat = function(id){
 #' @importFrom XML readHTMLTable
 #' @export
 #'
-#' @param id IUCN species ID
+#' @param id A single IUCN species ID
 #'
 #' @return a \code{data.frame} with the species ID and two levels of threat descriptions,
 #' plus stresses, timing, scope, severity, and impact associated with each stressor.

@@ -7,7 +7,7 @@
 birdlife_threats(id)
 }
 \arguments{
-\item{id}{IUCN species ID}
+\item{id}{A single IUCN species ID}
 }
 \value{
 a \code{data.frame} with the species ID and two levels of threat descriptions,
@@ -18,6 +18,9 @@ Get bird threat information from BirdLife/IUCN
 }
 \examples{
 \dontrun{birdlife_threats(22721692)}
+}
+\author{
+David J. Harris \email{harry491@gmail.com}
 }
 \seealso{
 \code{\link{birdlife_habitat}}
