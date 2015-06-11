@@ -22,7 +22,6 @@ Imports:
     XML,
     jsonlite,
     httr,
-    RCurl,
     dplyr,
     data.table,
     taxize
