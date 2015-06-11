@@ -4,8 +4,6 @@
 #' @name betydb
 #'
 #' @param query Query terms
-#' @param trait Trait name
-#' @param author Author name
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
 #' @param id (integer) One or more ids for a species, site, variable, etc.
@@ -54,14 +52,6 @@ betydb_search <- function(query = "Maple SLA", fmt = 'json', key = NULL, user = 
   return(result)
 }
 
-#' @export
-#' @rdname betydb
-betydb_traits <- function(genus = NULL, species = NULL, trait = NULL, author = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(species.genus = genus, species.species = species, variables.name = trait))
-  url <- makeurl("traits", fmt)
-  betydb_GET(url = url, args, key, user, pwd, "trait", ...)
-}
-
 makeurl <- function(x, fmt, include = NULL){
   fmt <- match.arg(fmt, c("json","xml","csv"))
   url <- paste0(betyurl(), paste0(x, "."), fmt)
@@ -106,7 +96,7 @@ betydb_http <- function(url, args = list(), key, user, pwd, ...){
        `include[]=` = ifelse(any(grepl('authors', names(args))), 'author', ''))
 
   includes[which(includes == "")] <- NULL
-  a <- append(args, includes)
+  args <- append(args, includes)
   res <- if (is.null(auth$key)) {
     res <- GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
   } else {
@@ -177,3 +167,12 @@ makeidurl <- function(x, id, fmt){
 
 warn <- "Supply either api key, or user name/password combo"
 betyurl <- function() 'https://www.betydb.org/'
+
+
+# functions that dont work ------------------------------
+## betydb_traits
+# betydb_traits <- function(genus = NULL, species = NULL, trait = NULL, author = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#   args <- traitsc(list(species.genus = genus, species.species = species, variables.name = trait))
+#   url <- makeurl("traits", fmt)
+#   betydb_GET(url = url, args, key, user, pwd, "trait", ...)
+# }

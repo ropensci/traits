@@ -30,7 +30,6 @@ test_that("Basic search works", {
   expect_true(all(acru_vcmax$id %in% acru$id))
 
   expect_equal(unique(acru_vcmax$trait), "Vcmax")
-
 })
 
 test_that("Credentials work", {
@@ -45,4 +44,43 @@ test_that("Credentials work", {
 
   ## Glopnet data are restricted
   expect_null(betydb_search('wright 2004'))
+})
+
+test_that("betydb_trait works", {
+  skip_on_cran()
+  check_betydb()
+
+  aa <- betydb_trait(id = 10)
+  expect_is(aa, "list")
+  expect_is(aa$id, "integer")
+  expect_equal(aa$id, 10)
+})
+
+test_that("betydb_specie works", {
+  skip_on_cran()
+  check_betydb()
+
+  bb <- betydb_specie(id = 1)
+  expect_is(bb, "list")
+  expect_is(bb$id, "integer")
+  expect_equal(bb$id, 1)
+})
+
+test_that("betydb_citation works", {
+  skip_on_cran()
+  check_betydb()
+
+  cc <- betydb_citation(id = 1)
+  expect_is(cc, "list")
+  expect_is(cc$id, "integer")
+  expect_equal(cc$id, 1)
+})
+
+test_that("betydb_trait works", {
+  skip_on_cran()
+  check_betydb()
+
+  dd <- betydb_site(id = 795)
+  expect_is(dd, "list")
+  expect_is(dd$city, "character")
 })

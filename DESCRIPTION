@@ -1,11 +1,11 @@
 Package: traits
 Title: Species Trait Data from Around the Web
 Description: Species trait data from many different sources, including
-    sequence data from NCBI, plant trait data from BETYdb, invasive species
-    data from the Global Invasive Species Database and EOL, Traitbank data
-    from EOL, Coral traits data from http://coraltraits.org, nativity status
-    from (from Flora Europaea or ITIS), and Birdlife International.
-Version: 0.0.8.9100
+    sequence data from 'NCBI', plant trait data from 'BETYdb', invasive species
+    data from the Global Invasive Species Database and 'EOL', 'Traitbank' data
+    from 'EOL', Coral traits data from http://coraltraits.org, 'nativity' status
+    ('Flora Europaea' or 'ITIS'), and 'Birdlife' International.
+Version: 0.0.9.9000
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
     person("Zachary", "Foster", role = "aut", email = "zacharyfoster1989@gmail.com"),

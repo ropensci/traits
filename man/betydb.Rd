@@ -7,15 +7,11 @@
 \alias{betydb_site}
 \alias{betydb_specie}
 \alias{betydb_trait}
-\alias{betydb_traits}
 \alias{betydb_yield}
 \title{Search for traits from BETYdb}
 \usage{
 betydb_search(query = "Maple SLA", fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
-
-betydb_traits(genus = NULL, species = NULL, trait = NULL, author = NULL,
-  fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
 
 betydb_trait(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
@@ -45,15 +41,11 @@ Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. 
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
 
+\item{id}{(integer) One or more ids for a species, site, variable, etc.}
+
 \item{genus}{(character) A genus name. Optional}
 
 \item{species}{(character) A specific epithet. Optional}
-
-\item{trait}{Trait name}
-
-\item{author}{Author name}
-
-\item{id}{(integer) One or more ids for a species, site, variable, etc.}
 }
 \description{
 Search for traits from BETYdb
