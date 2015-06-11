@@ -3,7 +3,7 @@ Title: Species Trait Data from Around the Web
 Description: Species trait data from around the web, including sequence data
     from NCBI, plant trait data from BETYdb, and the Global Invasive Species
     Database. More traits sources being added.
-Version: 0.0.8.9000
+Version: 0.0.8.9100
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
     person("Zachary", "Foster", role = "aut", email = "zacharyfoster1989@gmail.com"),

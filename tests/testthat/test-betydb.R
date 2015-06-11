@@ -1,9 +1,13 @@
 context("BETYdb tests")
 
-## Broken Function
-expect_error(betydb_traits(genus = "Miscanthus", author = "Arundale", trait = "yield"))
+test_that("Broken Function", {
+  skip_on_cran()
+
+  expect_error(betydb_traits(genus = "Miscanthus", author = "Arundale", trait = "yield"))
+})
 
 test_that("BETYdb API works", {
+  skip_on_cran()
   check_betydb()
 
   ## gh-18
@@ -18,6 +22,7 @@ test_that("BETYdb API works", {
 })
 
 test_that("Basic search works", {
+  skip_on_cran()
   check_betydb()
 
   acru <- betydb_search('Acer rubrum')
@@ -29,13 +34,14 @@ test_that("Basic search works", {
 })
 
 test_that("Credentials work", {
+  skip_on_cran()
   check_betydb()
 
   usrpwd <- betydb_search('Acer rubrum', user = "ropensci-traits", pwd = "ropensci")
   key <- betydb_search('Acer rubrum', key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")
   expect_equal(usrpwd$id, key$id)
   salix <- betydb_search('salix yield')
-  expect_true(min(salix$access_level) >=4, info = "please report to betydb@gmail.com")
+  expect_true(min(salix$access_level) >= 4, info = "please report to betydb@gmail.com")
 
   ## Glopnet data are restricted
   expect_null(betydb_search('wright 2004'))
