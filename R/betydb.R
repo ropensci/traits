@@ -29,6 +29,7 @@
 #' @examples \dontrun{
 #' # General Search
 #' out <- betydb_search(query = "Switchgrass Yield")
+#' library("dplyr")
 #' out %>%
 #'  group_by(id) %>%
 #'  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%
