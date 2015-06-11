@@ -1,7 +1,10 @@
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{BETYdb Tutorial}
+%\VignetteEncoding{UTF-8}
 -->
+
+
 
 [BETYdb](https://www.betydb.org/) is the _Biofuel Ecophysiological Traits and Yields Database_. You can get many different types of data from this database, including trait data. 
 
@@ -22,30 +25,7 @@ Get trait data for _Miscanthus giganteus_
 
 
 ```r
-(out <- betydb_traits(genus = "Miscanthus", species = "giganteus"))
-```
-
-```
-## Source: local data frame [12,335 x 28]
-## 
-##    access_level checked citation_id                created_at cultivar_id
-## 1             3       0         227 2010-09-27T14:06:06-05:00          NA
-## 2             3       0         229 2010-09-27T15:07:09-05:00          NA
-## 3             3       0         241 2010-09-30T14:32:08-05:00          NA
-## 4             3       0         241 2010-09-30T14:34:36-05:00          NA
-## 5             3       0         247 2010-10-04T10:40:12-05:00          NA
-## 6             3       0         248 2010-10-04T11:07:28-05:00          NA
-## 7             3       0         256 2010-10-06T11:37:20-05:00          NA
-## 8             3       0         256 2010-10-06T11:37:54-05:00          NA
-## 9             3       0         261 2010-10-07T13:37:31-05:00          NA
-## 10            4       1          42                        NA           3
-## ..          ...     ...         ...                       ...         ...
-## Variables not shown: date (chr), date_day (int), date_month (int),
-##   date_year (int), dateloc (chr), entity_id (int), id (int), mean (chr),
-##   method_id (int), n (int), notes (chr), site_id (int), specie_id (int),
-##   stat (chr), statname (chr), time (chr), time_hour (int), time_minute
-##   (int), timeloc (chr), treatment_id (int), updated_at (chr), user_id
-##   (int), variable_id (int)
+out <- betydb_search(query = "Switchgrass Yield")
 ```
 
 Summarise data from the output `data.frame`
@@ -54,26 +34,26 @@ Summarise data from the output `data.frame`
 ```r
 library("dplyr")
 out %>%
-  group_by(specie_id) %>%
+  group_by(id) %>%
   summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%
   arrange(desc(mean_result))
 ```
 
 ```
-## Source: local data frame [768 x 2]
+## Source: local data frame [509 x 2]
 ## 
-##    specie_id  mean_result
-## 1       2869 2.486526e+09
-## 2        896 9.999990e+05
-## 3        756 8.062186e+03
-## 4       1156 7.465770e+03
-## 5       1150 7.391027e+03
-## 6       2953 2.084548e+03
-## 7      40977 5.070850e+02
-## 8        611 3.786462e+02
-## 9       2304 3.555000e+02
-## 10     12453 3.296458e+02
-## ..       ...          ...
+##       id mean_result
+## 1   1666       27.36
+## 2  16845       27.00
+## 3   1669       26.36
+## 4  16518       26.00
+## 5   1663       25.35
+## 6  16742       25.00
+## 7   1594       24.78
+## 8   1674       22.71
+## 9   1606       22.54
+## 10  1665       22.46
+## ..   ...         ...
 ```
 
 Single trait
@@ -106,7 +86,7 @@ betydb_trait(id = 10)
 ## [1] "leafN"
 ## 
 ## $notes
-## NULL
+## [1] ""
 ## 
 ## $standard_name
 ## NULL
@@ -123,59 +103,7 @@ betydb_trait(id = 10)
 
 ## Species
 
-Get species searching for _Miscanthus_
-
-
-```r
-betydb_species(genus = 'Miscanthus')
-```
-
-```
-## Source: local data frame [10 x 88]
-## 
-##    AcceptedSymbol ActiveGrowthPeriod AdaptedCoarseSoils AdaptedFineSoils
-## 1            MISA                                                       
-## 2            MISI  Spring and Summer                Yes              Yes
-## 3              NA                 NA                 NA               NA
-## 4           MISCA                                                       
-## 5          MICA16                                                       
-## 6           MIFL3                                                       
-## 7           MINE4                                                       
-## 8            MIOL                                                       
-## 9           MITR9                                                       
-## 10                                                                      
-## Variables not shown: AdaptedMediumSoils (chr), AfterHarvestRegrowthRate
-##   (chr), AnaerobicTolerance (chr), Bloat (chr), BloomPeriod (chr),
-##   C2N_Ratio (chr), CaCO3Tolerance (chr), Category (chr), Class (chr),
-##   ColdStratification (chr), CommercialAvailability (chr), CoppicePotential
-##   (chr), Division (chr), DroughtTolerance (chr), Duration (chr),
-##   FallConspicuous (chr), Family (chr), FamilyCommonName (chr),
-##   FamilySymbol (chr), FertilityRequirement (chr), FireResistance (chr),
-##   FireTolerance (chr), FoliageTexture (chr), FruitSeedPeriodBegin (chr),
-##   FruitSeedPeriodEnd (chr), GrowthForm (chr), GrowthHabit (chr),
-##   GrowthRate (chr), HedgeTolerance (chr), ITIS_TSN (int), Kingdom (chr),
-##   KnownAllelopath (chr), LeafRetention (chr), Lifespan (chr),
-##   LowGrowingGrass (chr), MatureHeight (int), MaxHeight20Yrs (int),
-##   Max_PlantingDensity (int), MinFrostFreeDays (int), Min_PlantingDensity
-##   (int), MoistureUse (chr), NationalWetlandIndicatorStatus (chr),
-##   NativeStatus (chr), NitrogenFixation (chr), PLANTS_Floristic_Area (chr),
-##   Precipitation_Maximum (int), Precipitation_Minimum (int),
-##   Propogated_by_BareRoot (chr), Propogated_by_Bulbs (chr),
-##   Propogated_by_Container (chr), Propogated_by_Corms (chr),
-##   Propogated_by_Cuttings (chr), Propogated_by_Seed (chr),
-##   Propogated_by_Sod (chr), Propogated_by_Sprigs (chr),
-##   Propogated_by_Tubers (chr), RegionalWetlandIndicatorStatus (chr),
-##   ResproutAbility (chr), RootDepthMinimum (int), SalinityTolerance (chr),
-##   SeedSpreadRate (chr), SeedlingVigor (chr), Seeds_per_Pound (int),
-##   ShadeTolerance (chr), State (chr), SubClass (chr), SubDivision (chr),
-##   SubKingdom (chr), SuperDivision (chr), Symbol (chr), SynonymSymbol
-##   (chr), TemperatureMinimum (int), commonname (chr), created_at (chr),
-##   genus (chr), id (int), notes (lgl), pH_Maximum (chr), pH_Minimum (chr),
-##   scientificname (chr), spcd (lgl), species (chr), updated_at (chr),
-##   xOrder (chr)
-```
-
-Single species
+Single species, _Acacia karroothorn_
 
 
 ```r
@@ -183,47 +111,36 @@ betydb_specie(id = 10)
 ```
 
 ```
+## $AcceptedSymbol
+## [1] "ACKA2"
+## 
+## $commonname
+## [1] "karroothorn"
+## 
+## $created_at
+## NULL
+## 
 ## $genus
 ## [1] "Acacia"
+## 
+## $id
+## [1] 10
+## 
+## $notes
+## [1] ""
 ## 
 ## $scientificname
 ## [1] "Acacia karroo"
 ## 
+## $spcd
+## NULL
+## 
 ## $species
 ## [1] "karroo"
-```
-
-## Yields
-
-Get yield data for _Miscanthus_
-
-
-```r
-betydb_yields(genus = 'Miscanthus')
-```
-
-```
-## Source: local data frame [6,035 x 19]
 ## 
-##    access_level checked citation_id created_at cultivar_id       date
-## 1             4       1           2         NA          13 2001-11-15
-## 2             4       1           2         NA          31 1999-11-15
-## 3             4       1         193         NA          NA 1992-11-04
-## 4             4       1         193         NA          NA 1993-02-17
-## 5             4       1         193         NA          NA 1993-11-26
-## 6             4       1         152         NA          54 1993-04-10
-## 7             4       1         152         NA          54 1993-05-05
-## 8             4       1         152         NA          54 1993-05-27
-## 9             4       1         152         NA          54 1993-06-16
-## 10            4       1         152         NA          54 1993-07-09
-## ..          ...     ...         ...        ...         ...        ...
-## Variables not shown: dateloc (chr), id (int), mean (chr), method_id (lgl),
-##   n (int), notes (chr), site_id (int), specie_id (int), stat (chr),
-##   statname (chr), treatment_id (int), updated_at (chr), user_id (int)
+## $updated_at
+## [1] "2011-03-01T15:02:25-06:00"
 ```
-
-__Note:__ No singular format right now.
-
 
 ## Citations
 
@@ -231,96 +148,51 @@ Get citatons searching for _Miscanthus_
 
 
 ```r
-betydb_citations(genus = 'Miscanthus')
-```
-
-```
-## Source: local data frame [742 x 13]
-## 
-##       author created_at                                      doi id
-## 1    Balasko         NA 10.2134/agronj1984.00021962007600020009x  3
-## 2    Berdahl         NA                  10.2134/agronj2005.0549  4
-## 3        Boe         NA                 10.2135/cropsci2004.0703  5
-## 4    Boehmel         NA               10.1016/j.agsy.2007.08.004  7
-## 5        Bow         NA              10.2135/cropsci2007.12.0697  8
-## 6     Casler         NA                 10.2135/cropsci2003.2226 10
-## 7     Casler         NA                                       NA 11
-## 8    Cassida         NA                                       NA 13
-## 9  Eggemeyer         NA                           10.1086/505797 15
-## 10      Fike         NA           10.1016/j.biombioe.2005.10.008 16
-## ..       ...        ...                                      ... ..
-## Variables not shown: journal (chr), pdf (chr), pg (chr), title (chr),
-##   updated_at (chr), url (chr), user_id (int), vol (int), year (int)
-```
-
-Single citation
-
-
-```r
-betydb_citation(id = 1)
+betydb_citation(10)
 ```
 
 ```
 ## $author
-## [1] "Adler"
+## [1] "Casler"
 ## 
 ## $created_at
 ## NULL
 ## 
 ## $doi
-## [1] "10.2134/agronj2005.0351"
+## [1] "10.2135/cropsci2003.2226"
 ## 
 ## $id
-## [1] 1
+## [1] 10
 ## 
 ## $journal
-## [1] "Agronomy Journal"
+## [1] "Crop Science"
 ## 
 ## $pdf
-## [1] "http://naldc.nal.usda.gov/naldc/download.xhtml?id=3966&content=PDF"
+## [1] "http://crop.scijournals.org/cgi/reprint/43/6/2226.pdf"
 ## 
 ## $pg
-## [1] "1518-1525"
+## [1] "2226–2233"
 ## 
 ## $title
-## [1] "Biomass yield and biofuel quality of switchgrass harvested in fall or spring"
+## [1] "Cultivar X environment interactions in switchgrass"
 ## 
 ## $updated_at
-## [1] "2014-07-07T16:08:59-05:00"
+## NULL
 ## 
 ## $url
-## [1] "http://hdl.handle.net/10113/3966"
+## [1] "http://crop.scijournals.org/cgi/content/abstract/43/6/2226"
 ## 
 ## $user_id
 ## NULL
 ## 
 ## $vol
-## [1] 98
+## [1] 43
 ## 
 ## $year
-## [1] 2006
+## [1] 2003
 ```
 
 ## Sites
-
-Get sites searching for the city of _Beddington_
-
-
-```r
-betydb_sites(city = 'Beddington')
-```
-
-```
-## Source: local data frame [2 x 19]
-## 
-##         city clay_pct country                created_at
-## 1 Beddington       NA      US 2012-01-17T15:26:33-06:00
-## 2 Beddington       NA      US 2012-01-17T15:26:43-06:00
-## Variables not shown: geometry (chr), greenhouse (lgl), id (int),
-##   local_time (lgl), map (int), mat (chr), notes (chr), sand_pct (lgl),
-##   sitename (chr), soil (chr), soilnotes (chr), som (lgl), state (chr),
-##   updated_at (chr), user_id (int)
-```
 
 Single site
 
@@ -330,8 +202,14 @@ betydb_site(id = 1)
 ```
 
 ```
+## $city
+## [1] "Aliartos"
+## 
 ## $country
-## [1] "Greece"
+## [1] "GR"
+## 
+## $geometry
+## [1] "POINT (23.17 38.37 114.0)"
 ## 
 ## $greenhouse
 ## [1] FALSE
@@ -340,7 +218,7 @@ betydb_site(id = 1)
 ## [1] ""
 ## 
 ## $sitename
-## [1] ""
+## [1] "Aliartos"
 ## 
 ## $state
 ## [1] ""

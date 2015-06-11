@@ -1,3 +1,9 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{traits Intro}
+%\VignetteEncoding{UTF-8}
+-->
+
 ```{r echo=FALSE}
 knitr::opts_chunk$set(
   comment = "#>",
