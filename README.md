@@ -4,12 +4,12 @@ traits
 
 
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
+[![Coverage Status](https://coveralls.io/repos/ropensci/traits/badge.svg)](https://coveralls.io/r/ropensci/traits)
 
 R client for various sources of species trait data.
 
 To be included, with the associated function prefix:
 
-* [Polytraits](http://polytraits.lifewatchgreece.eu/download-api) - `poly_` (_not in the package yet_)
 * [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
