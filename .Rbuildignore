@@ -10,3 +10,4 @@ inst/stuff/
 ^\.Rproj\.user$
 README.Rmd
 tests/testthat.R
+cran-comments.md
