@@ -11,3 +11,5 @@ inst/stuff/
 README.Rmd
 tests/testthat.R
 cran-comments.md
+inst/readmecache
+inst/vign/vigncache

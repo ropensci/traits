@@ -44,18 +44,6 @@ salix %>%
 
 ```
 
-Single trait
-
-```{r}
-betydb_trait(id = 10)
-```
-
-All Miscanthus data collected by Becky Arundale 
-
-```{r}
-betydb_search(query = "Miscanthus Arundale")
-```
-
 ## NCBI sequence data
 
 Get sequences by id
