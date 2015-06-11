@@ -94,9 +94,6 @@ betydb_citation(id = 1)
 betydb_site(id = 795)
 }
 }
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
-}
 \references{
 API documentation \url{https://www.authorea.com/users/5574/articles/7062}
 }

@@ -19,7 +19,7 @@ A list of vectors containing the countries where the species is native, exotic, 
 This function check the status (native or exotic) of a species in each of
 the eu countries.
 
-For that end, it checks Flora Europaea (http://rbg-web2.rbge.org.uk/FE/fe.html) and scrps
+For that end, it checks Flora Europaea (http://rbg-web2.rbge.org.uk/FE/fe.html) and scrapes
 the data from there.
 
 Note that the webpage contains more information.

@@ -28,7 +28,6 @@
 #'
 #' However, plural functions like \code{betydb_traits} accept query parameters, but not
 #' ids, and always return a single data.frame.
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
 #' # General Search
 #' out <- betydb_search(query = "Switchgrass Yield")

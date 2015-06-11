@@ -8,5 +8,14 @@
 \description{
 traits
 }
+\author{
+Ignasi Bartomeus \email{nacho.bartomeus@gmail.com}
+
+Zachary Foster \email{zacharyfoster1989@gmail.com}
+
+David LeBauer \email{dlebauer@gmail.com}
+
+Scott Chamberlain \email{myrmecocystus@gmail.com}
+}
 \keyword{package}
 
