@@ -16,11 +16,13 @@ To be included, with the associated function prefix:
 * [Encyclopedia of Life Invasive Species](link) - `eol_`
 * [Encyclopedia of Life Traitbank](link) - `traitbank_`
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
+* [Flora Europaea](http://rbg-web2.rbge.org.uk/FE/fe.html) - `fe_`
+* [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
 * ...
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
-For more info on Betydb, see [the vignette](vignettes/betydb.Rmd).
+For an introduction to the package, see [the vignette](vignettes/traits_intro.md).
 
 ## Installation
 
@@ -32,40 +34,41 @@ devtools::install_github("ropensci/traits")
 
 ```r
 library("traits")
+library("dplyr")
 ```
 
 ## BetyDB
-
-Function setup: plural functions like `betydb_traits()` accept parameters and always give back a data.frame, while singlur function names accept an ID and give back a list. 
-
-### Traits
 
 Get trait data for Willow (_Salix_ spp.)
 
 
 ```r
-(out <- betydb_search("Salix"))
-#> Source: local data frame [949 x 30]
+(salix <- betydb_search("Salix Vcmax"))
+#> Source: local data frame [14 x 30]
 #> 
-#>    access_level        author citation_id citation_year         city
-#> 1             4 Matthes-Sears         280          1988 Brooks Range
-#> 2             4 Matthes-Sears         280          1988 Brooks Range
-#> 3             4 Matthes-Sears         280          1988 Brooks Range
-#> 4             4 Matthes-Sears         280          1988 Brooks Range
-#> 5             4 Matthes-Sears         280          1988 Brooks Range
-#> 6             4 Matthes-Sears         280          1988 Brooks Range
-#> 7             4 Matthes-Sears         280          1988 Brooks Range
-#> 8             4 Matthes-Sears         280          1988 Brooks Range
-#> 9             4 Matthes-Sears         280          1988 Brooks Range
-#> 10            4 Matthes-Sears         280          1988 Brooks Range
-#> ..          ...           ...         ...           ...          ...
-#> Variables not shown: commonname (chr), cultivar_id (int), date (chr),
-#>   dateloc (chr), genus (chr), id (int), lat (dbl), lon (dbl), mean (chr),
-#>   month (dbl), n (int), notes (chr), result_type (chr), scientificname
-#>   (chr), site_id (int), sitename (chr), species_id (int), stat (chr),
-#>   statname (chr), trait (chr), trait_description (chr), treatment (chr),
-#>   treatment_id (int), units (chr), year (dbl)
-# ~= (out <- betydb_search("willow"))
+#>    access_level       author citation_id citation_year  city    commonname
+#> 1             4       Merilo         430          2005 Saare basket willow
+#> 2             4       Merilo         430          2005 Saare basket willow
+#> 3             4       Merilo         430          2005 Saare basket willow
+#> 4             4       Merilo         430          2005 Saare basket willow
+#> 5             4 Wullschleger          51          1993    NA        willow
+#> 6             4       Merilo         430          2005 Saare basket willow
+#> 7             4       Merilo         430          2005 Saare basket willow
+#> 8             4       Merilo         430          2005 Saare basket willow
+#> 9             4       Merilo         430          2005 Saare basket willow
+#> 10            4       Merilo         430          2005 Saare        willow
+#> 11            4       Merilo         430          2005 Saare        willow
+#> 12            4       Merilo         430          2005 Saare        willow
+#> 13            4       Merilo         430          2005 Saare        willow
+#> 14            4         Wang         381          2010    NA              
+#> Variables not shown: cultivar_id (int), date (chr), dateloc (chr), genus
+#>   (chr), id (int), lat (dbl), lon (dbl), mean (chr), month (dbl), n (int),
+#>   notes (chr), result_type (chr), scientificname (chr), site_id (int),
+#>   sitename (chr), species_id (int), stat (chr), statname (chr), trait
+#>   (chr), trait_description (chr), treatment (chr), treatment_id (int),
+#>   units (chr), year (dbl)
+# equivalent: 
+# (out <- betydb_search("willow"))
 ```
 
 Summarise data from the output `data.frame`
@@ -73,70 +76,168 @@ Summarise data from the output `data.frame`
 
 ```r
 library("dplyr")
-out %>%
+salix %>%
   group_by(scientificname, trait) %>%
-      mutate(.mean = as.numeric(mean)) %>%
-          summarise(mean = round(mean(.mean, na.rm = TRUE), 2),
-                    min = round(min(.mean, na.rm = TRUE), 2),
-                    max = round(max(.mean, na.rm = TRUE), 2),
-                    n = length(n))
-#> Source: local data frame [85 x 6]
+  mutate(.mean = as.numeric(mean)) %>%
+  summarise(mean = round(mean(.mean, na.rm = TRUE), 2),
+            min = round(min(.mean, na.rm = TRUE), 2),
+            max = round(max(.mean, na.rm = TRUE), 2),
+            n = length(n))
+#> Source: local data frame [4 x 6]
 #> Groups: scientificname
 #> 
-#>      scientificname              trait   mean    min    max  n
-#> 1             Salix             Ayield  10.25   0.50  68.94 47
-#> 2             Salix               Jmax 146.00 146.00 146.00  1
-#> 3             Salix                SLA  16.10  10.00  26.40 51
-#> 4             Salix              Vcmax  65.00  65.00  65.00  1
-#> 5             Salix              leafN   2.37   1.15   4.23 37
-#> 6             Salix quantum_efficiency   0.04   0.04   0.05  2
-#> 7      Salix caprea             Ayield  57.73  14.30  83.30  3
-#> 8       Salix clone                SLA  12.90  11.22  14.83 29
-#> 9       Salix clone              leafN   1.89   1.39   2.74 29
-#> 10 Salix dasyclados             Ayield  13.10   1.20  48.17 14
-#> ..              ...                ...    ...    ...    ... ..
+#>                    scientificname trait  mean   min   max n
+#> 1                           Salix Vcmax 65.00 65.00 65.00 1
+#> 2                Salix dasyclados Vcmax 46.08 34.30 56.68 4
+#> 3 Salix sachalinensis × miyabeana Vcmax 79.28 79.28 79.28 1
+#> 4                 Salix viminalis Vcmax 43.04 19.99 61.29 8
 ```
 
-Single trait
+## GISD invasive species data
 
 
 ```r
-betydb_trait(id = 10)
-#> $created_at
-#> NULL
+sp <- c("Carpobrotus edulis", "Rosmarinus officinalis")
+g_invasive(sp)
+#>                  species
+#> 1     Carpobrotus edulis
+#> 2 Rosmarinus officinalis
+#>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               status
+#> 1 Carpobrotus edulis is a mat-forming succulent native to South Africa which is invasive primarily in coastal habitats in many parts of the world. It was often introduced as an ornamental plant or used for planting along roadsides, from which it has spread to become invasive. Its main impacts are smothering, reduced regeneration of native flora and changes to soil pH and nutrient regimes.;  (succulent); Common Names: balsamo, Cape fig, figue marine, freeway iceplant, ghaukum, ghoenavy, highway ice plant, higo del Cabo, higo marino, Hottentosvy, hottentot fig, Hottentottenfeige, iceplant, ikhambi-lamabulawo, Kaapsevy, patata frita, perdevy, pigface, rankvy, sea fig, sour fig, suurvy, umgongozi, vyerank; Synonyms: Mesembryanthemum edule L., Mesembryanthemum edulis
+#> 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Not in GISD
+```
+
+Or as simplified output
+
+
+```r
+g_invasive(sp, simplify = TRUE)
+#>                  species      status
+#> 1     Carpobrotus edulis    Invasive
+#> 2 Rosmarinus officinalis Not in GISD
+```
+
+## EOL invasive species data
+
+
+```r
+eol_invasive_('Brassica oleracea', dataset = 'gisd')
+#>       searched_name              name eol_object_id   db
+#> 1 Brassica oleracea Brassica oleracea           NaN gisd
+```
+
+Another example, with more species, and from 
+
+
+```r
+eol_invasive_(c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
+              dataset = 'i3n')
+#>           searched_name                                name eol_object_id
+#> 1      Lymantria dispar                    Lymantria dispar           NaN
+#> 2           Cygnus olor           Cygnus olor (Gmelin 1789)        913227
+#> 3 Hydrilla verticillata Hydrilla verticillata (L. f.) Royle       1088921
+#> 4        Pinus concolor                      Pinus concolor           NaN
+#>    db
+#> 1 i3n
+#> 2 i3n
+#> 3 i3n
+#> 4 i3n
+```
+
+## EOL's traitbank trait data
+
+Searching for _Mesoplodon bidens_, page id `328566`
+
+
+```r
+res <- traitbank(trait = 328566)
+res$graph %>% 
+  select(dwc.measurementtype..id, dwc.measurementtype.rdfs.label.en, dwc.measurementvalue) %>% 
+  filter(!is.na(dwc.measurementvalue))
+#> Source: local data frame [59 x 3]
 #> 
-#> $description
-#> [1] "Leaf Percent Nitrogen"
+#>                 dwc.measurementtype..id dwc.measurementtype.rdfs.label.en
+#> 1      http://iucn.org/population_trend                  population trend
+#> 2  http://rs.tdwg.org/dwc/terms/habitat                           habitat
+#> 3  http://rs.tdwg.org/dwc/terms/habitat                           habitat
+#> 4  http://rs.tdwg.org/dwc/terms/habitat                           habitat
+#> 5  http://rs.tdwg.org/dwc/terms/habitat                           habitat
+#> 6  http://rs.tdwg.org/dwc/terms/habitat                           habitat
+#> 7  http://rs.tdwg.org/dwc/terms/habitat                           habitat
+#> 8  http://rs.tdwg.org/dwc/terms/habitat                           habitat
+#> 9  http://rs.tdwg.org/dwc/terms/habitat                           habitat
+#> 10 http://rs.tdwg.org/dwc/terms/habitat                           habitat
+#> ..                                  ...                               ...
+#> Variables not shown: dwc.measurementvalue (chr)
+```
+
+## Coral
+
+Get the species list and their ids
+
+
+```r
+coral_species()
+#> Source: local data frame [1,547 x 2]
 #> 
-#> $id
-#> [1] 10
+#>                          name id
+#> 1         Acanthastrea brevis  3
+#> 2       Acanthastrea echinata  4
+#> 3      Acanthastrea hemprichi  6
+#> 4  Acanthastrea ishigakiensis  8
+#> 5      Acanthastrea regularis 12
+#> 6   Acanthastrea rotundoflora 13
+#> 7    Acanthastrea subechinata 14
+#> 8      Acropora abrolhosensis 16
+#> 9       Acropora abrotanoides 17
+#> 10           Acropora aculeus 18
+#> ..                        ... ..
+```
+
+Get data by taxon
+
+
+```r
+coral_taxa(80)
+#> Source: local data frame [3,084 x 25]
 #> 
-#> $label
-#> NULL
-#> 
-#> $max
-#> [1] "10"
-#> 
-#> $min
-#> [1] "0.02"
-#> 
-#> $name
-#> [1] "leafN"
-#> 
-#> $notes
-#> NULL
-#> 
-#> $standard_name
-#> NULL
-#> 
-#> $standard_units
-#> NULL
-#> 
-#> $units
-#> [1] "percent"
-#> 
-#> $updated_at
-#> [1] "2011-06-06T09:40:42-05:00"
+#>    observation_id access user_id specie_id         specie_name location_id
+#> 1          109330      1       2        80 Acropora hyacinthus           1
+#> 2           88793      1      14        80 Acropora hyacinthus           0
+#> 3          115791      1      10        80 Acropora hyacinthus           1
+#> 4          115792      1      10        80 Acropora hyacinthus           1
+#> 5            5694      1       2        80 Acropora hyacinthus           1
+#> 6            5696      1       2        80 Acropora hyacinthus           1
+#> 7            5741      1       1        80 Acropora hyacinthus           1
+#> 8            5751      1       1        80 Acropora hyacinthus           1
+#> 9            5787      1       1        80 Acropora hyacinthus           1
+#> 10           5766      1       1        80 Acropora hyacinthus           1
+#> ..            ...    ...     ...       ...                 ...         ...
+#> Variables not shown: location_name (chr), latitude (dbl), longitude (dbl),
+#>   resource_id (int), resource_secondary_id (int), measurement_id (int),
+#>   trait_id (int), trait_name (chr), standard_id (int), standard_unit
+#>   (chr), methodology_id (int), methodology_name (chr), value (chr),
+#>   value_type (chr), precision (lgl), precision_type (lgl), precision_upper
+#>   (lgl), replicates (lgl), notes (lgl)
+```
+
+## Birdlife International
+
+Habitat data
+
+
+```r
+birdlife_habitat(22721692)
+#>         id Habitat (level 1)                  Habitat (level 2) Importance
+#> 1 22721692            Forest           Subtropical/Tropical Dry   suitable
+#> 2 22721692            Forest Subtropical/Tropical Moist Montane      major
+#> 3 22721692            Forest                          Temperate   suitable
+#> 4 22721692         Shrubland Subtropical/Tropical High Altitude   suitable
+#>     Occurrence
+#> 1     breeding
+#> 2 non-breeding
+#> 3     breeding
+#> 4     breeding
 ```
 
 ## Meta
