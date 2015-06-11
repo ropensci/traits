@@ -7,7 +7,6 @@
 \alias{betydb_site}
 \alias{betydb_specie}
 \alias{betydb_trait}
-\alias{betydb_yield}
 \title{Search for traits from BETYdb}
 \usage{
 betydb_search(query = "Maple SLA", fmt = "json", key = NULL,
@@ -18,9 +17,6 @@ betydb_trait(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
 
 betydb_specie(id, genus = NULL, species = NULL, fmt = "json",
   key = NULL, user = NULL, pwd = NULL, ...)
-
-betydb_yield(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
 
 betydb_citation(id, genus = NULL, species = NULL, fmt = "json",
   key = NULL, user = NULL, pwd = NULL, ...)

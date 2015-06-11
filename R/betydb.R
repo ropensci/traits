@@ -122,14 +122,6 @@ betydb_specie <- function(id, genus = NULL, species = NULL, fmt = "json", key=NU
   betydb_GET2(makeidurl("species", id, fmt), args, key, user, pwd, "specie", ...)
 }
 
-# by ID
-#' @export
-#' @rdname betydb
-betydb_yield <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  args <- traitsc(list(genus = genus, species = species))
-  betydb_GET2(makeidurl("yields", id, fmt), args, key, user, pwd, "yield", ...)
-}
-
 #' @export
 #' @rdname betydb
 betydb_citation <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
@@ -175,4 +167,10 @@ betyurl <- function() 'https://www.betydb.org/'
 #   args <- traitsc(list(species.genus = genus, species.species = species, variables.name = trait))
 #   url <- makeurl("traits", fmt)
 #   betydb_GET(url = url, args, key, user, pwd, "trait", ...)
+# }
+
+## betydb_yield
+# betydb_yield <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+#   args <- traitsc(list(genus = genus, species = species))
+#   betydb_GET2(makeidurl("yields", id, fmt), args, key, user, pwd, "yield", ...)
 # }

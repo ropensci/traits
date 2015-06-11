@@ -76,7 +76,7 @@ test_that("betydb_citation works", {
   expect_equal(cc$id, 1)
 })
 
-test_that("betydb_trait works", {
+test_that("betydb_site works", {
   skip_on_cran()
   check_betydb()
 
