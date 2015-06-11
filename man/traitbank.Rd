@@ -7,7 +7,8 @@
 traitbank(trait, cache_ttl = NULL, ...)
 }
 \arguments{
-\item{trait}{A trait id}
+\item{trait}{A page id. I know, not ideal. Would be better if this was a trait
+id or trait name.}
 
 \item{cache_ttl}{Cache code}
 
@@ -15,6 +16,11 @@ traitbank(trait, cache_ttl = NULL, ...)
 }
 \description{
 Search for traits from EOL's Traitbank.
+}
+\details{
+See \url{http://eol.org/data_glossary} for human readable definitions for
+the attribute terms that EOL uses. Go to \url{http://eol.org/data_search} for the
+web interface to Traitbank.
 }
 \examples{
 \donttest{

@@ -17,7 +17,9 @@ plus stresses, timing, scope, severity, and impact associated with each stressor
 Get bird threat information from BirdLife/IUCN
 }
 \examples{
-\dontrun{birdlife_threats(22721692)}
+\dontrun{
+birdlife_threats(22721692)
+}
 }
 \author{
 David J. Harris \email{harry491@gmail.com}

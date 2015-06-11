@@ -33,7 +33,7 @@
 #' # General Search
 #' out <- betydb_search(query = "Switchgrass Yield")
 #' out %>%
-#'  group_by(specie_id) %>%
+#'  group_by(id) %>%
 #'  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%
 #'  arrange(desc(mean_result))
 #' # Get by ID
@@ -50,9 +50,9 @@
 #' @export
 #' @rdname betydb
 betydb_search <- function(query = "Maple SLA", fmt = 'json', key = NULL, user = NULL, pwd = NULL, ...){
-    base.url <- makeurl("search", fmt)
-    result <- betydb_GET(url = base.url, args = list(search = query), key, user, pwd, which = "traits_and_yields_view", ...)
-    return(result)
+  base.url <- makeurl("search", fmt)
+  result <- betydb_GET(url = base.url, args = list(search = query), key, user, pwd, which = "traits_and_yields_view", ...)
+  return(result)
 }
 
 #' @export
@@ -71,13 +71,13 @@ makeurl <- function(x, fmt, include = NULL){
 
 
 betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
-  if(is.null(c(key, user, pwd))) {
+  if (is.null(c(key, user, pwd))) {
     user <- 'ropensci-traits'
     pwd <- 'ropensci'
   }
 
   txt <- betydb_http(url, args, key, user, pwd, ...)
-  if(txt == "[]") {
+  if (txt == "[]") {
       result <- NULL
   } else {
       lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
@@ -89,7 +89,7 @@ betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
 
 ## can betydb_GET2 be merged with betydb_GET?
 betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
-  if(is.null(c(key, user, pwd))) {
+  if (is.null(c(key, user, pwd))) {
     user <- 'ropensci-traits'
     pwd <- 'ropensci'
   }
@@ -108,10 +108,10 @@ betydb_http <- function(url, args = list(), key, user, pwd, ...){
 
   includes[which(includes == "")] <- NULL
   a <- append(args, includes)
-  res <- if(is.null(auth$key)) {
+  res <- if (is.null(auth$key)) {
     res <- GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
   } else {
-    GET(url, query = c(key=auth$key, args), ...)
+    GET(url, query = c(key = auth$key, args), ...)
   }
   stop_for_status(res)
   ans <- content(res, "text")
@@ -151,22 +151,22 @@ betydb_citation <- function(id, genus = NULL, species = NULL, fmt = "json", key=
 #' @export
 #' @rdname betydb
 betydb_site <- function(id, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  betydb_GET2(makeidurl("sites", id, fmt), args, key, user, pwd, "site", ...)
+  betydb_GET2(makeidurl("sites", id, fmt), args = NULL, key, user, pwd, "site", ...)
 }
 
 
 betydb_auth <- function(x,y,z){
-  if(is.null(z) && is.null(x)) {
+  if (is.null(z) && is.null(x)) {
     z <- getOption("betydb_key", NULL)
   }
-  if(!is.null(z)) {
-    list(key=z)
+  if (!is.null(z)) {
+    list(key = z)
   } else {
-    if(is.null(x)) x <- getOption("betydb_user", "")
-    if(x == "") stop(warn, call. = FALSE)
-    if(is.null(y)) y <- getOption("betydb_pwd", "")
-    if(y == "") stop(warn, call. = FALSE)
-    list(user=x, pwd=y, key=NULL)
+    if (is.null(x)) x <- getOption("betydb_user", "")
+    if (x == "") stop(warn, call. = FALSE)
+    if (is.null(y)) y <- getOption("betydb_pwd", "")
+    if (y == "") stop(warn, call. = FALSE)
+    list(user = x, pwd = y, key = NULL)
   }
 }
 

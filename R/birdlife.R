@@ -7,10 +7,11 @@
 #'
 #' @return a \code{data.frame} with level 1 and level 2 habitat classes, as well as importance
 #' ratings and occurrence type (e.g. breeding or non-breeding).  The habitat classification
-#' scheme is described at http://www.iucnredlist.org/technical-documents/classification-schemes/habitats-classification-scheme-ver3
+#' scheme is described at \url{http://bit.ly/1e6gKBr}
 #' @author David J. Harris \email{harry491@@gmail.com}
-#' @examples
-#' \dontrun{birdlife_habitat(22721692)}
+#' @examples \dontrun{
+#' birdlife_habitat(22721692)
+#' }
 #' @seealso \code{\link{birdlife_threats}}
 
 birdlife_habitat = function(id){
@@ -44,10 +45,11 @@ birdlife_habitat = function(id){
 #' @return a \code{data.frame} with the species ID and two levels of threat descriptions,
 #' plus stresses, timing, scope, severity, and impact associated with each stressor.
 #' @author David J. Harris \email{harry491@@gmail.com}
-#' @examples
-#' \dontrun{birdlife_threats(22721692)}
-#' @export
+#' @examples \dontrun{
+#' birdlife_threats(22721692)
+#' }
 #' @seealso \code{\link{birdlife_habitat}}
+
 birdlife_threats = function(id){
 
   stopifnot(length(id) == 1)

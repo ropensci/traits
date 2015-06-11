@@ -3,7 +3,6 @@
 #' See Details for important information.
 #'
 #' @importFrom jsonlite fromJSON
-#' @importFrom RCurl getForm
 #' @export
 #' @param name A taxonomic name, or a vector of names.
 #' @param dataset One of all, gisd100, gisd, isc, daisie, i3n, or mineps.
@@ -13,11 +12,11 @@
 #'    you to fetch more pages of results if there are more than 30 matches (Default 1)
 #' @param per_page Results to get per page
 #' @param key Your EOL API key; loads from .Rprofile.
-#' @param callopts Further args passed on to GET.
 #' @param verbose (logical) If TRUE the actual taxon queried is printed on the
 #'    console.
 #' @param count (logical) If TRUE, give back a count of number of taxa listed as invasive, if
 #'    FALSE (default), the normal output is given.
+#' @param ... Further args passed on to \code{\link[httr]{GET}}
 #'
 #' @details
 #' IMPORTANT: When you get a returned NaN for a taxon, that means it's not on the invasive list
@@ -81,10 +80,10 @@
 #' }
 
 eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL,
-  per_page=NULL, key = NULL, callopts=list(), verbose=TRUE, count=FALSE)
-{
-  if(is.null(name)) stop("please provide a taxonomic name")
-  if(is.null(dataset)) stop("please provide a dataset name")
+  per_page=NULL, key = NULL, verbose=TRUE, count=FALSE, ...) {
+
+  if (is.null(name)) stop("please provide a taxonomic name")
+  if (is.null(dataset)) stop("please provide a dataset name")
   datasetid <- switch(dataset,
            all = 55367,
            gisd100 = 54500,
@@ -95,54 +94,55 @@ eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL
            mineps = 55331)
   url = 'http://eol.org/api/collections/1.0.json'
 
-  args <- traitsc(list(id=datasetid,page=page,per_page=500,filter='taxa'))
-  tt <- getForm(url, .params = args, .opts = callopts)
-  res <- jsonlite::fromJSON(tt, FALSE)
+  args <- traitsc(list(id = datasetid, page = page, per_page = 500, filter = 'taxa'))
+  tt <- GET(url, query = args, ...)
+  stop_for_status(tt)
+  res <- jsonlite::fromJSON(content(tt, "text"), FALSE)
   data_init <- res$collection_items
   mssg(verbose, sprintf("Getting data for %s names...", res$total_items))
 
   pages_left <- function(){
     tot <- res$total_items
     got <- length(res$collection_items)
-    if(got < tot){
-      seq(1, ceiling((tot-got)/500), 1)+1
+    if (got < tot) {
+      seq(1, ceiling((tot - got)/500), 1) + 1
     }
   }
   pages_get <- pages_left()
 
-  if(!is.null(pages_get)){
+  if (!is.null(pages_get)) {
     out <- list()
-    for(i in seq_along(pages_get)){
-      args <- traitsc(list(id=datasetid,page=pages_get[i],per_page=500,filter='taxa'))
-      tt <- getForm(url, .params = args, .opts = callopts)
-      res <- jsonlite::fromJSON(tt, FALSE)
+    for (i in seq_along(pages_get)) {
+      args <- traitsc(list(id = datasetid, page = pages_get[i], per_page = 500, filter = 'taxa'))
+      tt <- GET(url, query = args, ...)
+      stop_for_status(tt)
+      res <- jsonlite::fromJSON(content(tt, "text"), FALSE)
       out[[i]] <- res$collection_items
     }
     res2 <- traitsc(out)
     dat_all <- do.call(c, list(data_init, do.call(c, res2)))
     dat_all <- lapply(dat_all, "[", c("name","object_id"))
-    dat <- do.call(rbind, lapply(dat_all, data.frame, stringsAsFactors=FALSE))
-  } else
-  {
+    dat <- do.call(rbind, lapply(dat_all, data.frame, stringsAsFactors = FALSE))
+  } else {
     dat_all <- lapply(data_init, "[", c("name","object_id"))
-    dat <- do.call(rbind, lapply(dat_all, data.frame, stringsAsFactors=FALSE))
+    dat <- do.call(rbind, lapply(dat_all, data.frame, stringsAsFactors = FALSE))
   }
 
   # search by name
   getmatches <- function(x, y){
     matched <- eval(y)(x, dat$name)
-    if(identical(matched, integer(0))){
+    if (identical(matched, integer(0))) {
       dff <- data.frame(name = x, object_id = NaN)
       dff$name <- as.character(dff$name)
       dff
-    } else
-    {
+    } else {
       dat[matched,]
     }
   }
-  tmp <- setNames(lapply(name, getmatches, y=searchby), name)
-  df <- do.call(rbind, Map(function(x,y) data.frame(id=y, x), tmp, names(tmp)))
+  tmp <- setNames(lapply(name, getmatches, y = searchby), name)
+  df <- do.call(rbind, Map(function(x,y) data.frame(id = y, x), tmp, names(tmp)))
   df$db <- dataset
   names(df)[c(1,3)] <- c("searched_name","eol_object_id")
-  if(!count) df else length(na.omit(df$eol_object_id))
+  row.names(df) <- NULL
+  if (!count) df else length(na.omit(df$eol_object_id))
 }

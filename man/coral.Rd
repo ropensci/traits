@@ -8,7 +8,7 @@
 \alias{coral_species}
 \alias{coral_taxa}
 \alias{coral_traits}
-\title{Search for coral data on http://coraltraits.org/.}
+\title{Search for coral data on coraltraits.org}
 \usage{
 coral_taxa(taxon, taxonomy = FALSE, contextual = TRUE, global = FALSE,
   ...)
@@ -47,7 +47,7 @@ coral_species(...)
 \item{resource}{A resource id}
 }
 \description{
-Search for coral data on http://coraltraits.org/.
+Search for coral data on coraltraits.org
 }
 \examples{
 \donttest{
@@ -55,24 +55,19 @@ Search for coral data on http://coraltraits.org/.
 head( coral_species() )
 
 # Get data by taxon
-df <- coral_taxa(80)
-head(df)
+coral_taxa(80)
 
 # Get data by trait
-df <- coral_traits(105)
-head(df)
+coral_traits(105)
 
 # Get data by methodology
-df <- coral_methodologies(2)
-head(df)
+coral_methodologies(2)
 
 # Get data by location
-df <- coral_locations(132)
-head(df)
+coral_locations(132)
 
 # Get data by resource
-df <- coral_resources(10)
-head(df)
+coral_resources(10)
 
 # curl options
 library("httr")

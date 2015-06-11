@@ -39,8 +39,6 @@
 #' sapply(sp, is_native, where = "Continental US", region = "america")
 #' sapply(sp, is_native, where = "Islas_Baleares", region = "europe")
 #' }
-#'
-#'
 is_native <- function(sp, where, region = c("america", "europe"), ...) {
   if (!region %in% c("america", "europe")) {
     stop("region must be one of america or europe")
@@ -81,6 +79,7 @@ is_native <- function(sp, where, region = c("america", "europe"), ...) {
     if (length(origin) < 5) {
       Out <- "Species not in flora europaea"
     } else {
+      Out <- "Not found"
       if (where %in% origin$native) {
         Out <- "Native"
       }

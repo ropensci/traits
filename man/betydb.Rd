@@ -80,7 +80,7 @@ ids, and always return a single data.frame.
 # General Search
 out <- betydb_search(query = "Switchgrass Yield")
 out \%>\%
- group_by(specie_id) \%>\%
+ group_by(id) \%>\%
  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) \%>\%
  arrange(desc(mean_result))
 # Get by ID

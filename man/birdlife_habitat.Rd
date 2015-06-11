@@ -12,13 +12,15 @@ birdlife_habitat(id)
 \value{
 a \code{data.frame} with level 1 and level 2 habitat classes, as well as importance
 ratings and occurrence type (e.g. breeding or non-breeding).  The habitat classification
-scheme is described at http://www.iucnredlist.org/technical-documents/classification-schemes/habitats-classification-scheme-ver3
+scheme is described at \url{http://bit.ly/1e6gKBr}
 }
 \description{
 Get bird habitat information from BirdLife/IUCN
 }
 \examples{
-\dontrun{birdlife_habitat(22721692)}
+\dontrun{
+birdlife_habitat(22721692)
+}
 }
 \author{
 David J. Harris \email{harry491@gmail.com}
