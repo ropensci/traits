@@ -5,10 +5,12 @@ traits
 
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
 [![Coverage Status](https://coveralls.io/repos/ropensci/traits/badge.svg)](https://coveralls.io/r/ropensci/traits)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/traits)](https://github.com/metacran/cranlogs.app)
+[![cran version](http://www.r-pkg.org/badges/version/traits)](http://cran.rstudio.com/web/packages/traits)
 
 R client for various sources of species trait data.
 
-To be included, with the associated function prefix:
+Included in `traits` with the associated function prefix:
 
 * [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
@@ -18,13 +20,23 @@ To be included, with the associated function prefix:
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
 * [Flora Europaea](http://rbg-web2.rbge.org.uk/FE/fe.html) - `fe_`
 * [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
-* ...
+* [LEDA Traitbase](http://www.leda-traitbase.org/LEDAportal/index.jsp) - `leda_`
+* More to come ...
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
-For an introduction to the package, see [the vignette](vignettes/traits_intro.md).
+For an introduction to the package, see [the vignette](vignettes/traits_intro.Rmd).
 
 ## Installation
+
+Stable CRAN version
+
+
+```r
+install.packages("traits")
+```
+
+Or development version from GitHub
 
 
 ```r
