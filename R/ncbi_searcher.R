@@ -3,7 +3,7 @@
 #' @export
 #' @template ncbi
 #' @importFrom taxize get_uid classification
-#' @importFrom XML xpathApply xpathSApply xmlGetAttr
+#' @importFrom XML xpathApply xpathSApply xmlGetAttr xmlParse
 #' @param id (\code{character}) Taxonomic id to search for. Not compatible with argument \code{taxa}.
 #' @param limit (\code{numeric}) Number of sequences to search for and return. Max of 10,000.
 #'    If you search for 6000 records, and only 5000 are found, you will of course
@@ -189,10 +189,30 @@ parseres <- function(x, hypothetical){
 
   length_ <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Length", names)]) # gets seq lengths
   gis <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Gi", names)]) # gets GI numbers
-  spnames <- sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Title", names)] # gets seq lengths # get spp names
-  spused <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][1:2], sep = "", collapse = " "), USE.NAMES = FALSE)
-  genesavail <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][-c(1:2)], sep = "", collapse = " "), USE.NAMES = FALSE)
-  df <- data.frame(spused = spused, length = length_, genesavail = genesavail, access_num = predicted, ids = gis, stringsAsFactors = FALSE)
+
+  spused <- taxonomy(zz = outsum)
+
+  desc <- sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Title", names)] # gets seq lengths # get spp names
+#   spused <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][1:2], sep = "", collapse = " "))
+
+  # genesavail <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][-c(1:2)], sep = "", collapse = " "), USE.NAMES = FALSE)
+  df <- data.frame(spused = spused, length = length_, genesavail = desc, access_num = predicted, ids = gis, stringsAsFactors = FALSE)
   if (!hypothetical) df <- df[!(access_prefix %in% c("XM","XR")), ]
   return(df)
+}
+
+taxonomy <- function(zz) {
+  taxids <- xpathSApply(zz, '//Item[@Name="TaxId"]', xmlValue)
+  uids <- unique(taxids)
+  out <- list()
+  for (i in seq_along(uids)) {
+    res <- GET(paste0(url_esummary, "?db=taxonomy&id=", uids[i]))
+    stop_for_status(res)
+    xml <- xmlParse(content(res, "text"))
+    out[[ uids[i] ]] <- xpathSApply(xml, '//Item[@Name="ScientificName"]', xmlValue)
+  }
+  for (i in seq_along(out)) {
+    taxids[grepl(names(out)[i], taxids)] <- out[[i]]
+  }
+  return(taxids)
 }
