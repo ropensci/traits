@@ -5,7 +5,7 @@ Description: Species trait data from many different sources, including
     data from the Global Invasive Species Database and 'EOL', 'Traitbank' data
     from 'EOL', Coral traits data from http://coraltraits.org, 'nativity' status
     ('Flora Europaea' or 'ITIS'), and 'Birdlife' International.
-Version: 0.1.0.9200
+Version: 0.1.0.9800
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
     person("Zachary", "Foster", role = "aut", email = "zacharyfoster1989@gmail.com"),
@@ -21,6 +21,9 @@ Roxygen: list(wrap = FALSE)
 Depends:
     R (>= 2.10)
 Imports:
+    methods,
+    stats,
+    utils,
     XML,
     jsonlite,
     httr,

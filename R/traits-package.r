@@ -1,5 +1,8 @@
 #' traits
 #'
+#' @importFrom methods is
+#' @importFrom stats setNames na.omit
+#' @importFrom utils read.csv URLencode
 #' @name traits-package
 #' @aliases traits
 #' @docType package
