@@ -11,7 +11,7 @@ r_github_packages:
  - jeroenooms/curl
 
 after_success:
-  - Rscript -e 'library(covr); coveralls()'
+  - Rscript -e 'covr::codecov()'
 
 after_failure:
   - ./travis-tool.sh dump_logs
