@@ -4,11 +4,13 @@
 \alias{traitbank}
 \title{Search for traits from EOL's Traitbank.}
 \usage{
-traitbank(trait, cache_ttl = NULL, ...)
+traitbank(pageid, cache_ttl = NULL, ...)
 }
 \arguments{
-\item{trait}{A page id. I know, not ideal. Would be better if this was a trait
-id or trait name.}
+\item{pageid}{A page id. I know, not ideal. Would be better if this was a trait
+id or trait name. This is the page ID for a taxon, not a trait. Apparently, traits
+don't have pages. Note: this parameter used to be \code{trait}, but badly
+mis-represented what the input actually represents.}
 
 \item{cache_ttl}{Cache code}
 
@@ -24,10 +26,14 @@ web interface to Traitbank.
 }
 \examples{
 \donttest{
-res <- traitbank(trait = 328574)
+# Get data for Balaenoptera musculus (http://eol.org/pages/328574/)
+res <- traitbank(328574)
 res$context
 names( res$graph )
 head( res$graph )
+
+# Get data for Closterocerus formosus (http://eol.org/pages/846827/)
+traitbank(846827)
 }
 }
 \author{
