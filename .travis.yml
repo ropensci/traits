@@ -26,9 +26,9 @@ notifications:
    on_failure: change
 
 env:
- global:
-	  - R_BUILD_ARGS="--no-manual"
-	  - R_CHECK_ARGS="--as-cran --no-manual"
+  global:
+    - R_BUILD_ARGS="--no-manual"
+    - R_CHECK_ARGS="--as-cran --no-manual"
   matrix:
     - RVERSION=oldrel
     - RVERSION=release
