@@ -109,10 +109,10 @@ eol_invasive_(c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus 
 Searching for _Mesoplodon bidens_, page id `328566`
 
 ```{r cache=TRUE}
-res <- traitbank(trait = 328566)
+res <- traitbank(846827)
 res$graph %>%
-  select(dwc.measurementtype..id, dwc.measurementtype.rdfs.label.en, dwc.measurementvalue) %>%
-  filter(!is.na(dwc.measurementvalue))
+  select(`dwc:measurementtype.@id`, `dwc:measurementtype.rdfs:label.en`) %>%
+  filter(!is.na(`dwc:measurementtype.rdfs:label.en`))
 ```
 
 ## Coral
