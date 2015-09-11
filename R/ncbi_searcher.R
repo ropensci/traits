@@ -56,6 +56,10 @@
 #' # Using the getrelated and entrez_query options
 #' ncbi_searcher(taxa = "Olpidiopsidales", limit = 5, getrelated = TRUE,
 #'             entrez_query = "18S[title] AND 28S[title]")
+#'
+#' # get refseqs
+#' one <- ncbi_searcher(taxa = "Salmonella enterica", entrez_query="srcdb_refseq[PROP]")
+#' two <- ncbi_searcher(taxa = "Salmonella enterica")
 #' }
 ncbi_searcher <- function(taxa = NULL, id = NULL, seqrange="1:3000", getrelated=FALSE, fuzzy=FALSE,
                           limit = 500, entrez_query = NULL, hypothetical = FALSE, verbose=TRUE) {

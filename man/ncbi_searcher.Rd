@@ -81,6 +81,10 @@ out2df[grep("12S", out2df$gene_desc, ignore.case=TRUE), ]
 # Using the getrelated and entrez_query options
 ncbi_searcher(taxa = "Olpidiopsidales", limit = 5, getrelated = TRUE,
             entrez_query = "18S[title] AND 28S[title]")
+
+# get refseqs
+one <- ncbi_searcher(taxa = "Salmonella enterica", entrez_query="srcdb_refseq[PROP]")
+two <- ncbi_searcher(taxa = "Salmonella enterica")
 }
 }
 \author{
