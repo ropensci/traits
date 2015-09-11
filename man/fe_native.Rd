@@ -32,7 +32,7 @@ See \url{http://rbg-web2.rbge.org.uk/FE/data/countries} for explanation of the
 database codes.
 }
 \examples{
-\donttest{
+\dontrun{
 sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
        "Alkanna lutea", "Anchusa arvensis")
 fe_native(sp[1])

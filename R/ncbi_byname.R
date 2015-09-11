@@ -10,7 +10,7 @@
 #' @return Data.frame of results.
 #' @seealso \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyid}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # A single species
 #' ncbi_byname(taxa="Acipenser brevirostrum")
 #'

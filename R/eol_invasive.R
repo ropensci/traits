@@ -62,7 +62,7 @@
 #' the input elements to the name parameter.
 #' @references See info for each data source at \url{http://eol.org/collections/55367/taxa}
 #'
-#' @examples \donttest{
+#' @examples \dontrun{
 #' eol_invasive_(name='Brassica oleracea', dataset='gisd')
 #' eol_invasive_(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
 #'    dataset='gisd')

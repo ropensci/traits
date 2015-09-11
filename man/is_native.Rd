@@ -42,7 +42,7 @@ So many more things can be done, like checking species first with taxize, adding
 more native lists to check...
 }
 \examples{
-\donttest{
+\dontrun{
 sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
        "Alkanna lutea", "Anchusa arvensis")
 is_native(sp[1], where = "Islas_Baleares", region = "europe")

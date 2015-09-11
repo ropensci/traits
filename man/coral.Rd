@@ -50,7 +50,7 @@ coral_species(...)
 Search for coral data on coraltraits.org
 }
 \examples{
-\donttest{
+\dontrun{
 # Get the species and their Ids
 head( coral_species() )
 

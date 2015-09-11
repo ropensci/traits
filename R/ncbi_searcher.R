@@ -25,7 +25,7 @@
 #' @seealso \code{\link[taxize]{ncbi_getbyid}}, \code{\link[taxize]{ncbi_getbyname}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}, Zachary Foster
 #'   \email{zacharyfoster1989@@gmail.com}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # A single species
 #' out <- ncbi_searcher(taxa="Umbra limi", seqrange = "1:2000")
 #' # Get the same species information using a taxonomy id

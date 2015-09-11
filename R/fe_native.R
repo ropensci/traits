@@ -24,7 +24,7 @@
 #' database codes.
 #'
 #' @author Ignasi Bartomeus \email{nacho.bartomeus@@gmail.com}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
 #'        "Alkanna lutea", "Anchusa arvensis")
 #' fe_native(sp[1])

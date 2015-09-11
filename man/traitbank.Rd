@@ -25,7 +25,7 @@ the attribute terms that EOL uses. Go to \url{http://eol.org/data_search} for th
 web interface to Traitbank.
 }
 \examples{
-\donttest{
+\dontrun{
 # Get data for Balaenoptera musculus (http://eol.org/pages/328574/)
 res <- traitbank(328574)
 res$context

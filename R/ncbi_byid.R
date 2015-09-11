@@ -1,6 +1,5 @@
 #' Retrieve gene sequences from NCBI by accession number.
 #'
-#' @import httr
 #' @importFrom data.table rbindlist
 #' @export
 #' @param ids (character) GenBank ids to search for.
@@ -13,7 +12,7 @@
 #' @return Data.frame of results.
 #' @seealso \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyname}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # A single gene
 #' ncbi_byid(ids="360040093", format="fasta")
 #'

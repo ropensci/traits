@@ -13,7 +13,7 @@
 #' @details See \url{http://eol.org/data_glossary} for human readable definitions for
 #' the attribute terms that EOL uses. Go to \url{http://eol.org/data_search} for the
 #' web interface to Traitbank.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # Get data for Balaenoptera musculus (http://eol.org/pages/328574/)
 #' res <- traitbank(328574)
 #' res$context

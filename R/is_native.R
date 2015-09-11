@@ -32,7 +32,7 @@
 #' more native lists to check...
 #'
 #' @author Ignasi Bartomeus \email{nacho.bartomeus@@gmail.com}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
 #'        "Alkanna lutea", "Anchusa arvensis")
 #' is_native(sp[1], where = "Islas_Baleares", region = "europe")

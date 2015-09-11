@@ -12,7 +12,7 @@
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @references \url{http://coraltraits.org/}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # Get the species and their Ids
 #' head( coral_species() )
 #'

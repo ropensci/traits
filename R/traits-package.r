@@ -12,7 +12,7 @@
 #'  \item Coral Traits Database \url{http://coraltraits.org/} - \code{coral_}
 #'  \item Flora Europaea \url{http://rbg-web2.rbge.org.uk/FE/fe.html} - \code{fe_}
 #'  \item Birdlife International \url{http://rbg-web2.rbge.org.uk/FE/fe.html} - \code{birdlife_}
-#'  \item LEDA Traitbase \url{http://www.leda-traitbase.org/LEDAportal/index.jsp} - \code{leda_}
+#'  \item LEDA Traitbase http://www.leda-traitbase.org/LEDAportal/index.jsp - \code{leda_}
 #'  \item More to come ...
 #' }
 #'
@@ -27,6 +27,8 @@
 #' coral_taxa(80)
 #' }
 #'
+#' @importFrom httr GET POST content stop_for_status warn_for_status authenticate
+#' @importFrom jsonlite fromJSON
 #' @importFrom methods is
 #' @importFrom stats setNames na.omit
 #' @importFrom utils read.csv URLencode

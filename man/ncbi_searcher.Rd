@@ -50,7 +50,7 @@ available, since this filtering is done after searching NCBI.}
 Search for gene sequences available for taxa from NCBI.
 }
 \examples{
-\donttest{
+\dontrun{
 # A single species
 out <- ncbi_searcher(taxa="Umbra limi", seqrange = "1:2000")
 # Get the same species information using a taxonomy id

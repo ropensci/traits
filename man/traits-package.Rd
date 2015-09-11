@@ -18,7 +18,7 @@ Currrently included in \code{traits} with the associated function prefix:
  \item Coral Traits Database \url{http://coraltraits.org/} - \code{coral_}
  \item Flora Europaea \url{http://rbg-web2.rbge.org.uk/FE/fe.html} - \code{fe_}
  \item Birdlife International \url{http://rbg-web2.rbge.org.uk/FE/fe.html} - \code{birdlife_}
- \item LEDA Traitbase \url{http://www.leda-traitbase.org/LEDAportal/index.jsp} - \code{leda_}
+ \item LEDA Traitbase http://www.leda-traitbase.org/LEDAportal/index.jsp - \code{leda_}
  \item More to come ...
 }
 }

@@ -79,7 +79,7 @@ Datasets are not updated that often. Here's last updated dates for some of the d
 }
 }
 \examples{
-\donttest{
+\dontrun{
 eol_invasive_(name='Brassica oleracea', dataset='gisd')
 eol_invasive_(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
    dataset='gisd')
