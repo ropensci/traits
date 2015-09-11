@@ -20,8 +20,8 @@ mis-represented what the input actually represents.}
 Search for traits from EOL's Traitbank.
 }
 \details{
-See \url{http://eol.org/data_glossary} for human readable definitions for
-the attribute terms that EOL uses. Go to \url{http://eol.org/data_search} for the
+See http://eol.org/data_glossary for human readable definitions for
+the attribute terms that EOL uses. Go to http://eol.org/data_search for the
 web interface to Traitbank.
 }
 \examples{
@@ -40,6 +40,6 @@ traitbank(846827)
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
 \references{
-\url{http://eol.org/info/516}
+http://eol.org/info/516
 }
 

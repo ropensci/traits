@@ -20,7 +20,7 @@ Included in `traits` with the associated function prefix:
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
 * [Flora Europaea](http://rbg-web2.rbge.org.uk/FE/fe.html) - `fe_`
 * [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
-* [LEDA Traitbase](http://www.leda-traitbase.org/LEDAportal/index.jsp) - `leda_`
+* LEDA Traitbase (http://www.leda-traitbase.org/LEDAportal/index.jsp) - `leda_`
 * More to come ...
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.

@@ -35,15 +35,15 @@
 #' \itemize{
 #'  \item all - All datasets
 #'  \item gisd100 - 100 of the World's Worst Invasive Alien Species
-#'  (Global Invasive Species Database) \url{http://eol.org/collections/54500}
-#'  \item gisd - Global Invasive Species Database 2013 \url{http://eol.org/collections/54983}
+#'  (Global Invasive Species Database) http://eol.org/collections/54500
+#'  \item gisd - Global Invasive Species Database 2013 http://eol.org/collections/54983
 #'  \item isc - Centre for Agriculture and Biosciences International Invasive Species
-#'  Compendium (ISC) \url{http://eol.org/collections/55180}
+#'  Compendium (ISC) http://eol.org/collections/55180
 #'  \item daisie - Delivering Alien Invasive Species Inventories for Europe (DAISIE) Species
-#'  List \url{http://eol.org/collections/55179}
+#'  List http://eol.org/collections/55179
 #'  \item i3n - IABIN Invasives Information Network (I3N) Species
-#'  \url{http://eol.org/collections/55176}
-#'  \item mineps - Marine Invaders of the NE Pacific Species \url{http://eol.org/collections/55331}
+#'  http://eol.org/collections/55176
+#'  \item mineps - Marine Invaders of the NE Pacific Species http://eol.org/collections/55331
 #' }
 #'
 #' Datasets are not updated that often. Here's last updated dates for some of the datasets as of
