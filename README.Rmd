@@ -6,75 +6,141 @@ knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
   warning = FALSE,
-  message = FALSE
+  message = FALSE,
+  cache.path = "inst/readmecache/"
 )
 ```
 
+[![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
+[![codecov.io](https://codecov.io/github/ropensci/traits/coverage.svg?branch=master)](https://codecov.io/github/ropensci/traits?branch=master)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/traits)](https://github.com/metacran/cranlogs.app)
+[![cran version](http://www.r-pkg.org/badges/version/traits)](http://cran.rstudio.com/web/packages/traits)
+
 R client for various sources of species trait data.
 
-To be included, with the associated function prefix:
+Included in `traits` with the associated function prefix:
 
-* [Polytraits](http://polytraits.lifewatchgreece.eu/download-api) - `poly_` (_not in the package yet_)
 * [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
 * [Encyclopedia of Life Invasive Species](link) - `eol_`
 * [Encyclopedia of Life Traitbank](link) - `traitbank_`
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
-* ...
+* [Flora Europaea](http://rbg-web2.rbge.org.uk/FE/fe.html) - `fe_`
+* [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
+* LEDA Traitbase (http://www.leda-traitbase.org/LEDAportal/index.jsp) - `leda_`
+* More to come ...
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
-For more info on Betydb, see [the vignette](vignettes/betydb.Rmd).
+For an introduction to the package, see [the vignette](vignettes/traits_intro.Rmd).
 
 ## Installation
 
+Stable CRAN version
+
 ```{r eval=FALSE}
-install.packages("devtools")
+install.packages("traits")
+```
+
+Or development version from GitHub
+
+```{r eval=FALSE}
 devtools::install_github("ropensci/traits")
 ```
 
 ```{r}
 library("traits")
+library("dplyr")
 ```
 
 ## BetyDB
 
-Function setup: plural functions like `betydb_traits()` accept parameters and always give back a data.frame, while singlur function names accept an ID and give back a list. 
-
-### Traits
-
 Get trait data for Willow (_Salix_ spp.)
 
 ```{r}
-(out <- betydb_search("Salix"))
-# ~= (out <- betydb_search("willow"))
+(salix <- betydb_search("Salix Vcmax"))
+# equivalent:
+# (out <- betydb_search("willow"))
 ```
 
 Summarise data from the output `data.frame`
 
 ```{r}
 library("dplyr")
-out %>%
+salix %>%
   group_by(scientificname, trait) %>%
-      mutate(.mean = as.numeric(mean)) %>%
-          summarise(mean = round(mean(.mean, na.rm = TRUE), 2),
-                    min = round(min(.mean, na.rm = TRUE), 2),
-                    max = round(max(.mean, na.rm = TRUE), 2),
-                    n = length(n))
+  mutate(.mean = as.numeric(mean)) %>%
+  summarise(mean = round(mean(.mean, na.rm = TRUE), 2),
+            min = round(min(.mean, na.rm = TRUE), 2),
+            max = round(max(.mean, na.rm = TRUE), 2),
+            n = length(n))
 
 ```
 
-Single trait
+## GISD invasive species data
 
 ```{r}
-betydb_trait(id = 10)
+sp <- c("Carpobrotus edulis", "Rosmarinus officinalis")
+g_invasive(sp)
+```
+
+Or as simplified output
+
+```{r}
+g_invasive(sp, simplify = TRUE)
+```
+
+## EOL invasive species data
+
+```{r}
+eol_invasive_('Brassica oleracea', dataset = 'gisd')
+```
+
+Another example, with more species, and from
+
+```{r}
+eol_invasive_(c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
+              dataset = 'i3n')
+```
+
+## EOL's traitbank trait data
+
+Searching for _Mesoplodon bidens_, page id `328566`
+
+```{r cache=TRUE}
+res <- traitbank(846827)
+res$graph %>%
+  select(`dwc:measurementtype.@id`, `dwc:measurementtype.rdfs:label.en`) %>%
+  filter(!is.na(`dwc:measurementtype.rdfs:label.en`))
+```
+
+## Coral
+
+Get the species list and their ids
+
+```{r cache=TRUE}
+coral_species()
+```
+
+Get data by taxon
+
+```{r cache=TRUE}
+coral_taxa(80)
+```
+
+## Birdlife International
+
+Habitat data
+
+```{r}
+birdlife_habitat(22721692)
 ```
 
 ## Meta
 
-* Please report any issues or bugs](https://github.com/ropensci/traits/issues).
+* Please [report any issues or bugs](https://github.com/ropensci/traits/issues).
 * License: MIT
 * Get citation information for `traits` in R doing `citation(package = 'traits')`
 
-[![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

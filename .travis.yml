@@ -1,24 +1,35 @@
 language: c
+sudo: required
 
-script: ./travis-tool.sh run_tests
+before_install:
+  - curl -OL https://raw.githubusercontent.com/metacran/r-builder/master/pkg-build.sh
+  - chmod 755 pkg-build.sh
+  - ./pkg-build.sh bootstrap
 
-before_script:
-- curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-- chmod 755 ./travis-tool.sh
-- sudo apt-get update
-- ./travis-tool.sh bootstrap
-- ./travis-tool.sh install_deps
+install:
+  - ./pkg-build.sh install_deps
+  - ./pkg-build.sh install_github jimhester/covr
 
-env:
-   global:
-     - R_BUILD_ARGS="--no-manual"
-     - R_CHECK_ARGS="--as-cran --no-manual"
+script:
+  - ./pkg-build.sh run_tests
 
 after_failure:
-  - ./travis-tool.sh dump_logs
+  - ./pkg-build.sh dump_logs
+
+after_success:
+  - Rscript -e 'covr::codecov()'
 
 notifications:
  slack: ropensci:wh30e1MP9Am3wXb2wJx1ZRFi:builds
  email:
    on_success: change
    on_failure: change
+
+env:
+  global:
+    - R_BUILD_ARGS="--no-manual"
+    - R_CHECK_ARGS="--as-cran --no-manual"
+  matrix:
+    - RVERSION=oldrel
+    - RVERSION=release
+    - RVERSION=devel

@@ -9,4 +9,7 @@ inst/stuff/
 ^.*\.Rproj$
 ^\.Rproj\.user$
 README.Rmd
-tests/testthat.R
+NEWS.md
+cran-comments.md
+inst/readmecache
+inst/vign/vigncache

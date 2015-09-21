@@ -34,7 +34,7 @@
 #' GISD data occassionally. See notes in \code{eol_invasive}.
 #'
 #' @author Ignasi Bartomeus \email{nacho.bartomeus@@gmail.com}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' sp <- c("Carpobrotus edulis", "Rosmarinus officinalis")
 #' ## first species is invasive, second one is not.
 #' g_invasive(sp)

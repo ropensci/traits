@@ -1,0 +1,159 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{traits Intro}
+%\VignetteEncoding{UTF-8}
+-->
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  cache.path = "vigncache/"
+)
+```
+
+`traits` introduction
+=====================
+
+```{r}
+library("traits")
+```
+
+## BetyDB
+
+Get trait data for Willow (_Salix_ spp.)
+
+```{r}
+(salix <- betydb_search("Salix Vcmax"))
+# equivalent: 
+# (out <- betydb_search("willow"))
+```
+
+Summarise data from the output `data.frame`
+
+```{r}
+library("dplyr")
+salix %>%
+  group_by(scientificname, trait) %>%
+  mutate(.mean = as.numeric(mean)) %>%
+  summarise(mean = round(mean(.mean, na.rm = TRUE), 2),
+            min = round(min(.mean, na.rm = TRUE), 2),
+            max = round(max(.mean, na.rm = TRUE), 2),
+            n = length(n))
+
+```
+
+## NCBI sequence data
+
+Get sequences by id
+
+```{r}
+ncbi_byid(ids = "360040093", format = "fasta")
+```
+
+Get sequences searching by taxonomic name
+
+```{r}
+out <- ncbi_searcher(taxa = "Umbra limi", seqrange = "1:2000")
+head(out)
+```
+
+## GISD invasive species data
+
+```{r}
+sp <- c("Carpobrotus edulis", "Rosmarinus officinalis")
+g_invasive(sp)
+```
+
+Or as simplified output
+
+```{r}
+g_invasive(sp, simplify = TRUE)
+```
+
+## EOL invasive species data
+
+```{r}
+eol_invasive_('Brassica oleracea', dataset = 'gisd')
+```
+
+Another example, with more species, and from 
+
+```{r}
+eol_invasive_(c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
+              dataset = 'i3n')
+```
+
+## EOL's traitbank trait data
+
+Searching for _Mesoplodon bidens_, page id `328566`
+
+```{r cache=TRUE}
+res <- traitbank(trait = 328566)
+res$graph %>% 
+  select(dwc.measurementtype..id, dwc.measurementtype.rdfs.label.en, dwc.measurementvalue) %>% 
+  filter(!is.na(dwc.measurementvalue))
+```
+
+## Coral
+
+Get the species list and their ids
+
+```{r cache=TRUE}
+coral_species()
+```
+
+Get data by taxon
+
+```{r cache=TRUE}
+coral_taxa(80)
+```
+
+Get data by trait
+
+```{r cache=TRUE}
+coral_traits(105)
+```
+
+## Flora Europaea
+
+```{r}
+sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
+        "Alkanna lutea", "Anchusa arvensis")
+sapply(sp, fe_native, simplify = FALSE)
+```
+
+## Birdlife International
+
+Habitat data
+
+```{r}
+birdlife_habitat(22721692)
+```
+
+Threats data
+
+```{r}
+birdlife_threats(22721692)
+```
+
+## Nativity
+
+```{r}
+sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
+      "Alkanna lutea", "Anchusa arvensis")
+```
+
+Native in the continental USA?
+
+```{r}
+sapply(sp, is_native, where = "Continental US", region = "america")
+```
+
+Native on Islas Baleares?
+
+```{r}
+sapply(sp, is_native, where = "Islas_Baleares", region = "europe")
+```
