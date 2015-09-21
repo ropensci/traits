@@ -55,49 +55,53 @@ fe_native <- function(sp, ...) {
     # I am assuming 3 is always right, so far it is.
     ### Scott here: would be better to select the table by name if possible
     text <- xmlValue(tables[[3]], trim = FALSE)
-    m_nat <- regexpr("Distribution: [A-Za-z ()?*%,]*", text, perl = TRUE)
-    distr_nat <- regmatches(text, m_nat)
-    distr_status <- regmatches(distr_nat,
+    if (!grepl("Distribution:", text, perl = TRUE)) {
+      message("Species with no distribution. Probably not native.")
+    } else{
+      m_nat <- regexpr("Distribution: [A-Za-z ()?*%,]*", text, perl = TRUE)
+      distr_nat <- regmatches(text, m_nat)
+      distr_status <- regmatches(distr_nat,
                                gregexpr("[*][A-Z][a-z]", distr_nat, perl = TRUE)) # * Status doubtful; possibly native
-    distr_occ <- regmatches(distr_nat,
+      distr_occ <- regmatches(distr_nat,
                             gregexpr("[?][A-Z][a-z]", distr_nat, perl = TRUE)) # ? Occurrence doubtful
-    distr_ext <- regmatches(distr_nat,
+      distr_ext <- regmatches(distr_nat,
                             gregexpr("[%][A-Z][a-z]", distr_nat, perl = TRUE)) # % Extinct
-    #also deal with Rs(N) extract e.g. Rs(N,B,C,W,K,E)
-    distr_nat <- gsub(",", " ", distr_nat)
-    distr_nat <- gsub("(", " ", distr_nat, fixed = TRUE)
-    distr_nat <- gsub(")", "", distr_nat, fixed = TRUE)
-    distr_nat <- gsub("Distribution: ", "", distr_nat)
+      #also deal with Rs(N) extract e.g. Rs(N,B,C,W,K,E)
+      distr_nat <- gsub(",", " ", distr_nat)
+      distr_nat <- gsub("(", " ", distr_nat, fixed = TRUE)
+      distr_nat <- gsub(")", "", distr_nat, fixed = TRUE)
+      distr_nat <- gsub("Distribution: ", "", distr_nat)
 
-    nat = exo = stat = oc = ex = NA
-    if (distr_nat != "") {
-      native <- strsplit(distr_nat, " ")[[1]]
-      delete <- which(!native %in% country$short)
-      if (length(delete) > 0) native <- native[-delete]
-      nat <- sapply(native, function(x) {country[which(x == country$short), "long"]})
-    }
-    if (length(distr_status[[1]]) > 0) {
-      status <- gsub("*", "", distr_status[[1]], fixed = TRUE)
-      stat <- sapply(status, function(x) {country[which(x == country$short), "long"]})
-    }
-    if (length(distr_occ[[1]]) > 0) {
-      occ <- gsub("?", "", distr_occ[[1]], fixed = TRUE)
-      oc <- sapply(occ, function(x) {country[which(x == country$short), "long"]})
-    }
-    if (length(distr_ext[[1]]) > 0) {
-      ext <- gsub("%", "", distr_ext[[1]], fixed = TRUE)
-      ex <- sapply(ext, function(x) {country[which(x == country$short), "long"]})
-    }
-    #extract exotics
-    m_ex <- regexpr("[[][A-Za-z ()?*%,]*", text, perl = TRUE)
-    distr_exot <- regmatches(text, m_ex)
-    if (length(distr_exot) > 0) {
-      #NEED TO ADD * ? % for exotics? I don't think those cases exist. Maybe ?
-      exotic <- strsplit(gsub("[", "", distr_exot, fixed = TRUE), " ")[[1]]
-      exo <- sapply(exotic, function(x) {country[which(x == country$short), "long"]})
-    }
-    list(native = as.character(nat), exotic = as.character(exo), status_doubtful = as.character(stat),
+      nat = exo = stat = oc = ex = NA
+      if (distr_nat != "") {
+        native <- strsplit(distr_nat, " ")[[1]]
+        delete <- which(!native %in% country$short)
+        if (length(delete) > 0) native <- native[-delete]
+        nat <- sapply(native, function(x) {country[which(x == country$short), "long"]})
+      }
+      if (length(distr_status[[1]]) > 0) {
+        status <- gsub("*", "", distr_status[[1]], fixed = TRUE)
+        stat <- sapply(status, function(x) {country[which(x == country$short), "long"]})
+      }
+      if (length(distr_occ[[1]]) > 0) {
+        occ <- gsub("?", "", distr_occ[[1]], fixed = TRUE)
+        oc <- sapply(occ, function(x) {country[which(x == country$short), "long"]})
+      }
+      if (length(distr_ext[[1]]) > 0) {
+        ext <- gsub("%", "", distr_ext[[1]], fixed = TRUE)
+        ex <- sapply(ext, function(x) {country[which(x == country$short), "long"]})
+      }
+      #extract exotics
+      m_ex <- regexpr("[[][A-Za-z ()?*%,]*", text, perl = TRUE)
+      distr_exot <- regmatches(text, m_ex)
+      if (length(distr_exot) > 0) {
+        #NEED TO ADD * ? % for exotics? I don't think those cases exist. Maybe ?
+        exotic <- strsplit(gsub("[", "", distr_exot, fixed = TRUE), " ")[[1]]
+        exo <- sapply(exotic, function(x) {country[which(x == country$short), "long"]})
+      }
+      list(native = as.character(nat), exotic = as.character(exo), status_doubtful = as.character(stat),
          occurrence_doubtful = as.character(oc), extinct = as.character(ex))
+    }
   }
 }
 

@@ -48,8 +48,8 @@ is_native <- function(sp, where, region = c("america", "europe"), ...) {
   }
   if (region == "america") {
     if (!where %in% c("Continental US", "Alaska", "Canada",
-                     "Caribbean Territories", "Central Pacific Territories",
-                     "Hawaii", "Mexico")) {
+                      "Caribbean Territories", "Central Pacific Territories",
+                      "Hawaii", "Mexico")) {
       stop("where must be one America region, see help for accepted names")
     }
     tsn_ <- get_tsn(searchterm = sp, ...)[1]
@@ -62,24 +62,24 @@ is_native <- function(sp, where, region = c("america", "europe"), ...) {
   }
   if (region == "europe") {
     if (!where %in% c("Albania", "Austria", "Azores", "Belgium", "Islas_Baleares",
-                     "Britain", "Bulgaria", "Corse", "Kriti",
-                     "Czechoslovakia", "Denmark", "Faroer",
-                     "Finland", "France", "Germany", "Greece",
-                     "Ireland", "Switzerland", "Netherlands", "Spain",
-                     "Hungary", "Iceland", "Italy", "Jugoslavia",
-                     "Portugal", "Norway", "Poland", "Romania",
-                     "USSR", "Sardegna", "Svalbard", "Sicilia",
-                     "Sweden", "Turkey", "USSR_Northern_Division",
-                     "USSR_Baltic_Division", "USSR_Central_Division",
-                     "USSR_South_western", "USSR_Krym",
-                     "USSRSouth_eastern_Division")) {
+                      "Britain", "Bulgaria", "Corse", "Kriti",
+                      "Czechoslovakia", "Denmark", "Faroer",
+                      "Finland", "France", "Germany", "Greece",
+                      "Ireland", "Switzerland", "Netherlands", "Spain",
+                      "Hungary", "Iceland", "Italy", "Jugoslavia",
+                      "Portugal", "Norway", "Poland", "Romania",
+                      "USSR", "Sardegna", "Svalbard", "Sicilia",
+                      "Sweden", "Turkey", "USSR_Northern_Division",
+                      "USSR_Baltic_Division", "USSR_Central_Division",
+                      "USSR_South_western", "USSR_Krym",
+                      "USSRSouth_eastern_Division")) {
       stop("where must be one eu country, see help for accepted names")
     }
     origin <- fe_native(sp)
     if (length(origin) < 5) {
       Out <- "Species not in flora europaea"
     } else {
-      Out <- "Not found"
+      Out <- "Species not present in your selected region"
       if (where %in% origin$native) {
         Out <- "Native"
       }
