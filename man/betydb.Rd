@@ -79,7 +79,7 @@ betydb_trait(id = 10)
 betydb_specie(id = 1)
 ## Citations
 betydb_citation(id = 1)
-## Citations
+## Site information
 betydb_site(id = 795)
 }
 }
