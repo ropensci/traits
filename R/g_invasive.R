@@ -1,6 +1,5 @@
 #' Check invasive species status for a set of species from GISD database
 #'
-#' @importFrom XML xmlValue getNodeSet htmlTreeParse
 #' @export
 #'
 #' @param x character; a vector of scientific species names in the form of

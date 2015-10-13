@@ -1,6 +1,5 @@
 #' Check if a species is native somewhere
 #'
-#' @importFrom taxize get_tsn itis_native
 #' @export
 #'
 #' @param sp character; a vector of length one with a single scientific species

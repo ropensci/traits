@@ -2,8 +2,6 @@
 #'
 #' @export
 #' @template ncbi
-#' @importFrom taxize get_uid classification
-#' @importFrom XML xpathApply xpathSApply xmlGetAttr xmlParse
 #' @param id (\code{character}) Taxonomic id to search for. Not compatible with
 #'    argument \code{taxa}.
 #' @param limit (\code{numeric}) Number of sequences to search for and return. Max of 10,000.

@@ -1,6 +1,5 @@
 #' Search for traits from BETYdb
 #'
-#' @importFrom dplyr tbl_df
 #' @name betydb
 #'
 #' @param query Query terms

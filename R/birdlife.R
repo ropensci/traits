@@ -1,6 +1,5 @@
 #' Get bird habitat information from BirdLife/IUCN
 #'
-#' @importFrom XML readHTMLTable
 #' @export
 #'
 #' @param id A single IUCN species ID
@@ -37,7 +36,6 @@ birdlife_habitat = function(id){
 
 #' Get bird threat information from BirdLife/IUCN
 #'
-#' @importFrom XML readHTMLTable
 #' @export
 #'
 #' @param id A single IUCN species ID

@@ -1,6 +1,5 @@
 #' Retrieve gene sequences from NCBI by accession number.
 #'
-#' @importFrom data.table rbindlist
 #' @export
 #' @param ids (character) GenBank ids to search for.
 #' @param format (character) Return type, e.g., \code{"fasta"}

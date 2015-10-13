@@ -1,6 +1,5 @@
 #' Access LEDA trait data
 #'
-#' @importFrom data.table fread
 #' @export
 #' @param trait (character) Trait to get. See Details.
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}

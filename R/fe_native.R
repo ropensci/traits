@@ -1,6 +1,5 @@
 #' Check species status (native, exotic, ...) for one species from Flora Europaea webpage
 #'
-#' @importFrom XML xmlValue getNodeSet htmlTreeParse
 #' @export
 #'
 #' @param sp character; a vector of length one with a single scientific species names in
