@@ -30,6 +30,5 @@ env:
     - R_BUILD_ARGS="--no-manual"
     - R_CHECK_ARGS="--as-cran --no-manual"
   matrix:
-    - RVERSION=oldrel
     - RVERSION=release
     - RVERSION=devel
