@@ -54,7 +54,7 @@ library("traits")
 library("dplyr")
 ```
 
-## BetyDB
+## BETYdb
 
 Get trait data for Willow (_Salix_ spp.)
 
