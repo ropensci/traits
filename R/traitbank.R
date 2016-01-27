@@ -1,5 +1,8 @@
 #' Search for traits from EOL's Traitbank.
 #'
+#' EOL Traitbank is down for now - thus the function simply throws a stop message
+#' for now. The function will be operational again once Traitbank is back online.
+#'
 #' @export
 #'
 #' @param pageid A page id. I know, not ideal. Would be better if this was a trait

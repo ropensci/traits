@@ -17,7 +17,8 @@ mis-represented what the input actually represents.}
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}}
 }
 \description{
-Search for traits from EOL's Traitbank.
+EOL Traitbank is down for now - thus the function simply throws a stop message
+for now. The function will be operational again once Traitbank is back online.
 }
 \details{
 See http://eol.org/data_glossary for human readable definitions for
