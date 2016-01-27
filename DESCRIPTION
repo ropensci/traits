@@ -29,6 +29,7 @@ Imports:
     httr,
     dplyr,
     data.table,
+    readr,
     taxize
 Suggests:
     roxygen2,
