@@ -24,6 +24,7 @@
 #' traitbank(846827)
 #' }
 traitbank <- function(pageid, cache_ttl = NULL, ...) {
+  stop("EOL's TraitBank product is down for now - we'll keep an eye on it's return", call. = FALSE)
   args <- traitsc(list(cache_ttl = cache_ttl))
   if (length(args) == 0) args <- NULL
   res <- traitbank_GET(paste0(tburl(), pageid), args, ...)

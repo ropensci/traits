@@ -35,3 +35,4 @@ Suggests:
     knitr,
     testthat,
     plyr
+RoxygenNote: 5.0.1
