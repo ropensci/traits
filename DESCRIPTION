@@ -30,7 +30,8 @@ Imports:
     dplyr,
     data.table,
     readr,
-    taxize
+    taxize,
+    xml2
 Suggests:
     roxygen2,
     knitr,
