@@ -32,8 +32,8 @@
 #' @importFrom methods is
 #' @importFrom stats setNames na.omit
 #' @importFrom utils read.csv URLencode
-#' @importFrom XML readHTMLTable xpathApply xpathSApply xmlGetAttr xmlParse
-#' xmlValue getNodeSet htmlTreeParse
+#' @importFrom xml2 read_xml xml_find_all xml_text
+#' @importFrom rvest html_table
 #' @importFrom taxize get_uid classification get_tsn itis_native
 #' @importFrom data.table rbindlist fread
 #' @importFrom dplyr tbl_df

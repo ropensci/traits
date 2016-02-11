@@ -41,19 +41,18 @@ fe_native <- function(sp, ...) {
                SPECIES_XREF = species, TAXON_NAME_XREF = "", RANK = "")
   message(paste("Checking species", sp))
   #Parse url and extract table
-  #readHTMLTable(urls) #Not working, don't know why.
   url_check <- GET(url, query = args, ...)
   warn_for_status(url_check)
-  doc <- htmlTreeParse(content(url_check, "text", encoding = "UTF-8"), useInternalNodes = TRUE, encoding = "UTF-8")
-  tables <- getNodeSet(doc, "//table")
+  doc <- xml2::read_html(content(url_check, "text", encoding = "UTF-8"), encoding = "UTF-8")
+  tables <- xml2::xml_find_all(doc, "//table")
+
   if (length(tables) < 3) {
     message("Species not found")
   } else {
-    #t <- readHTMLTable(tables[[3]]) #Not working either
     #try alternative
     # I am assuming 3 is always right, so far it is.
     ### Scott here: would be better to select the table by name if possible
-    text <- xmlValue(tables[[3]], trim = FALSE)
+    text <- xml_text(tables[[3]], trim = FALSE)
     if (!grepl("Distribution:", text, perl = TRUE)) {
       message("Species with no distribution. Probably not native.")
     } else{
