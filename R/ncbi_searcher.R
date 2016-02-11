@@ -140,11 +140,12 @@ search_for_sequences <- function(id, seqrange, entrez_query, fuzzy, limit, ...) 
   query_init <- GET(url_esearch, query = query, ...)
   stop_for_status(query_init)
   # Parse result - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  esearch_result <- xpathApply(content(query_init, as = "parsed"), "//eSearchResult")[[1]]
-  if (as.numeric(xmlValue(xpathApply(esearch_result, "//Count")[[1]])) == 0) {
+  query_content <- content(query_init, as = "parsed")
+  esearch_result <- xml2::xml_find_all(query_content, "//eSearchResult")[[1]]
+  if (as.numeric(xml2::xml_text(xml2::xml_find_all(esearch_result, "//Count")[[1]])) == 0) {
     return(NULL)
   } else {
-    return(xpathSApply(esearch_result, "//IdList//Id", xmlValue)) # a list of sequence ids
+    return(xml2::xml_text(xml2::xml_find_all(esearch_result, "//IdList//Id"))) # a list of sequence ids
   }
 }
 
@@ -191,21 +192,20 @@ get_parent <- function(id, verbose) {
 
 # Function to parse results from http query ------------------------------------------------------
 parseres <- function(x, hypothetical){
-  outsum <- xpathApply(content(x, as = "parsed"), "//eSummaryResult")[[1]]
-  names <- sapply(getNodeSet(outsum[[1]], "//Item"), xmlGetAttr, name = "Name") # gets names of values in summary
-  predicted <- as.character(sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Caption", names)]) #  get access numbers
+  outsum <- xml2::xml_find_all(content(x, as = "parsed"), "//eSummaryResult")[[1]]
+  names <- xml2::xml_attr(xml2::xml_find_all(outsum, "//Item"), attr = "Name") # gets names of values in summary
+  predicted <- as.character(xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Caption", names)]) #  get access numbers
   has_access_prefix <- grepl("_", predicted)
   access_prefix <- unlist(Map(function(x, y) ifelse(x, strsplit(y, "_")[[1]][[1]], NA),
                               has_access_prefix, predicted))
   predicted[has_access_prefix] <- vapply(strsplit(predicted[has_access_prefix], "_"), `[[`, character(1), 2)
 
-  length_ <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Length", names)]) # gets seq lengths
-  gis <- as.numeric(sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Gi", names)]) # gets GI numbers
+  length_ <- as.numeric(xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Length", names)]) # gets seq lengths
+  gis <- as.numeric(xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Gi", names)]) # gets GI numbers
 
   spused <- taxonomy(zz = outsum)
-
-  desc <- sapply(getNodeSet(outsum, "//Item"), xmlValue)[grepl("Title", names)] # gets seq lengths # get spp names
-#   spused <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][1:2], sep = "", collapse = " "))
+  desc <- xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Title", names)] # gets seq lengths # get spp names
+  #   spused <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][1:2], sep = "", collapse = " "))
 
   # genesavail <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][-c(1:2)], sep = "", collapse = " "), USE.NAMES = FALSE)
   df <- data.frame(spused = spused, length = length_, genesavail = desc, access_num = predicted, ids = gis, stringsAsFactors = FALSE)
@@ -214,14 +214,14 @@ parseres <- function(x, hypothetical){
 }
 
 taxonomy <- function(zz) {
-  taxids <- xpathSApply(zz, '//Item[@Name="TaxId"]', xmlValue)
+  taxids <- xml2::xml_text(xml2::xml_find_all(zz, '//Item[@Name="TaxId"]'))
   uids <- unique(taxids)
   out <- list()
   for (i in seq_along(uids)) {
     res <- GET(paste0(url_esummary, "?db=taxonomy&id=", uids[i]))
     stop_for_status(res)
-    xml <- xmlParse(content(res, "text"))
-    out[[ uids[i] ]] <- xpathSApply(xml, '//Item[@Name="ScientificName"]', xmlValue)
+    xml <- content(res, as = "parsed")
+    out[[ uids[i] ]] <- xml2::xml_text(xml2::xml_find_all(xml, '//Item[@Name="ScientificName"]'))
   }
   for (i in seq_along(out)) {
     taxids[grepl(names(out)[i], taxids)] <- out[[i]]
