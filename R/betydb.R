@@ -90,7 +90,7 @@ betydb_http <- function(url, args = list(), key, user, pwd, ...){
     GET(url, query = c(key = auth$key, args), ...)
   }
   stop_for_status(res)
-  ans <- content(res, "text")
+  ans <- content(res, "text", encoding = "UTF-8")
   return(ans)
 }
 

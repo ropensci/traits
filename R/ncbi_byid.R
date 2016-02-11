@@ -27,7 +27,7 @@ ncbi_byid <- function(ids, format="fasta", verbose=TRUE)
   queryseq <- list(db = "sequences", id = ids, rettype = format, retmode = "text")
   tt <- GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi", query = queryseq)
   stop_for_status(tt)
-  outseq <- content(tt, as="text")
+  outseq <- content(tt, "text", encoding = "UTF-8")
 
   outseq2 <- strsplit(outseq, '>')[[1]][-1]
 

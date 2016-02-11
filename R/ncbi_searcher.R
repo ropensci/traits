@@ -140,7 +140,7 @@ search_for_sequences <- function(id, seqrange, entrez_query, fuzzy, limit, ...) 
   query_init <- GET(url_esearch, query = query, ...)
   stop_for_status(query_init)
   # Parse result - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  query_content <- content(query_init, as = "parsed")
+  query_content <- xml2::read_xml(content(query_init, "text", encoding = "UTF-8"))
   esearch_result <- xml2::xml_find_all(query_content, "//eSearchResult")[[1]]
   if (as.numeric(xml2::xml_text(xml2::xml_find_all(esearch_result, "//Count")[[1]])) == 0) {
     return(NULL)
@@ -192,7 +192,7 @@ get_parent <- function(id, verbose) {
 
 # Function to parse results from http query ------------------------------------------------------
 parseres <- function(x, hypothetical){
-  outsum <- xml2::xml_find_all(content(x, as = "parsed"), "//eSummaryResult")[[1]]
+  outsum <- xml2::xml_find_all(xml2::read_xml(content(x, "text", encoding = "UTF-8")), "//eSummaryResult")[[1]]
   names <- xml2::xml_attr(xml2::xml_find_all(outsum, "//Item"), attr = "Name") # gets names of values in summary
   predicted <- as.character(xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Caption", names)]) #  get access numbers
   has_access_prefix <- grepl("_", predicted)
@@ -220,7 +220,7 @@ taxonomy <- function(zz) {
   for (i in seq_along(uids)) {
     res <- GET(paste0(url_esummary, "?db=taxonomy&id=", uids[i]))
     stop_for_status(res)
-    xml <- content(res, as = "parsed")
+    xml <- content(res, "text", encoding = "UTF-8")
     out[[ uids[i] ]] <- xml2::xml_text(xml2::xml_find_all(xml, '//Item[@Name="ScientificName"]'))
   }
   for (i in seq_along(out)) {

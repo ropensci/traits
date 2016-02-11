@@ -43,7 +43,7 @@
 leda <- function(trait = "age_first_flowering", ...) {
   tt <- GET(URLencode(paste0(leda_base(), pick_file_name(trait))), ...)
   stop_for_status(tt)
-  out <- content(tt, as = "text")
+  out <- content(tt, "text", encoding = "UTF-8")
   str <- sub("^\\r\\n\\r\\n", "", substring(out, regexpr("\r\n\r", out)[1], nchar(out)))
   df <- suppressWarnings(readr::read_delim(str, delim = ";"))
   setNames(df, gsub("\\s", "_", tolower(names(df))))

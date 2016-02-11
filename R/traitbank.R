@@ -53,7 +53,7 @@ traitbank <- function(pageid, cache_ttl = NULL, ...) {
 traitbank_GET <- function(url, args = list(), ...){
   res <- GET(url, query = args, ...)
   stop_for_status(res)
-  txt <- content(res, "text")
+  txt <- content(res, "text", encoding = "UTF-8")
   jsonlite::fromJSON(txt, TRUE, flatten = TRUE)
 }
 

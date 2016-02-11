@@ -96,7 +96,7 @@ eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL
   args <- traitsc(list(id = datasetid, page = page, per_page = 500, filter = 'taxa'))
   tt <- GET(url, query = args, ...)
   stop_for_status(tt)
-  res <- jsonlite::fromJSON(content(tt, "text"), FALSE)
+  res <- jsonlite::fromJSON(content(tt, "text", encoding = "UTF-8"), FALSE)
   data_init <- res$collection_items
   mssg(verbose, sprintf("Getting data for %s names...", res$total_items))
 
@@ -115,7 +115,7 @@ eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL
       args <- traitsc(list(id = datasetid, page = pages_get[i], per_page = 500, filter = 'taxa'))
       tt <- GET(url, query = args, ...)
       stop_for_status(tt)
-      res <- jsonlite::fromJSON(content(tt, "text"), FALSE)
+      res <- jsonlite::fromJSON(content(tt, "text", encoding = "UTF-8"), FALSE)
       out[[i]] <- res$collection_items
     }
     res2 <- traitsc(out)

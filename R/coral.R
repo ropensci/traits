@@ -76,7 +76,7 @@ coral_resources <- function(resource, taxonomy = FALSE, contextual = TRUE, globa
 coral_species <- function(...) {
   res <- GET("https://coraltraits.org/species?all=true", ...)
   stop_for_status(res)
-  html <- content(res)
+  html <- xmlParse(content(res, "text", encoding = "UTF-8"))
   ids <- gsub("\n+|\t+|\\s+", "", xpathSApply(html, '//li[@class="list-group-item"]//div[@style="color: lightgrey;"]', xmlValue))
   nms <- xpathSApply(html, '//li[@class="list-group-item"]//div[@class="col-sm-5"]//a', xmlValue)
   dplyr::tbl_df(data.frame(name = nms, id = ids, stringsAsFactors = FALSE))
@@ -85,7 +85,7 @@ coral_species <- function(...) {
 coral_GET <- function(url, args, ...) {
   res <- GET(url, query = args, ...)
   stop_for_status(res)
-  txt <- content(res, "text")
+  txt <- content(res, "text", encoding = "UTF-8")
   dplyr::tbl_df(read.csv(text = txt, header = TRUE, stringsAsFactors = FALSE))
 }
 

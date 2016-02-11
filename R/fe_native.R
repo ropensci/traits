@@ -44,7 +44,7 @@ fe_native <- function(sp, ...) {
   #readHTMLTable(urls) #Not working, don't know why.
   url_check <- GET(url, query = args, ...)
   warn_for_status(url_check)
-  doc <- htmlTreeParse(content(url_check, "text"), useInternalNodes = TRUE, encoding = "UTF-8")
+  doc <- htmlTreeParse(content(url_check, "text", encoding = "UTF-8"), useInternalNodes = TRUE, encoding = "UTF-8")
   tables <- getNodeSet(doc, "//table")
   if (length(tables) < 3) {
     message("Species not found")

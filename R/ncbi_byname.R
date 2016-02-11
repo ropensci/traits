@@ -35,8 +35,8 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, v
                                                seqrange, "[SLEN]", collapse = " "), RetMax = 500)
 
     out <-
-      xpathApply(content(GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
-                             query = query), "parsed"), "//eSearchResult")[[1]]
+      xpathApply(xmlParse(content(GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+                             query = query), "text", encoding = "UTF-8")), "//eSearchResult")[[1]]
     if (as.numeric(xmlValue(xpathApply(out, "//Count")[[1]])) == 0) {
       message(paste("no sequences of ", gene, " for ", xx, " - getting other sp.", sep = ""))
       if (getrelated == FALSE) {
@@ -48,7 +48,7 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, v
         newname <- strsplit(xx, " ")[[1]][[1]]
         query <- list(db = "nuccore", term = paste(newname, "[Organism] AND", genes_, "AND", seqrange, "[SLEN]", collapse=" "), RetMax=500)
         out <-
-          xpathApply(content(GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi", query=query), "parsed"), "//eSearchResult")[[1]]
+          xpathApply(xmlParse(content(GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi", query=query), "text", encoding = "UTF-8")), "//eSearchResult")[[1]]
         if( as.numeric(xmlValue(xpathApply(out, "//Count")[[1]]))==0 ){
           mssg(verbose, paste("no sequences of ", gene, " for ", xx, " or ", newname, sep=""))
           res <- data.frame(list(xx, "NA", "NA", "NA", "NA", "NA", "NA"))
@@ -59,17 +59,17 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, v
           mssg(verbose, "...retrieving sequence ID with longest sequence length...")
           querysum <- list(db = "nucleotide", id = paste(make_ids(out), collapse=" ")) # construct query for species
           res <- parse_ncbi(xx,
-            xpathApply(content(GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
-                                   query=querysum), "parsed"), "//eSummaryResult")[[1]], verbose)
+            xpathApply(xmlParse(content(GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
+                                   query=querysum), "text", encoding = "UTF-8")), "//eSummaryResult")[[1]], verbose)
         }
       }
     } else {
       ## For each species = get GI number with longest sequence
       mssg(verbose, "...retrieving sequence ID with longest sequence length...")
       querysum <- list(db = "nucleotide", id = paste(make_ids(out), collapse = " ")) # construct query for species
-      res <- parse_ncbi(xx, xpathApply(content( # API call
+      res <- parse_ncbi(xx, xpathApply(xmlParse(content( # API call
         GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
-            query = querysum), "parsed"), "//eSummaryResult")[[1]], verbose)
+            query = querysum), "text", encoding = "UTF-8")), "//eSummaryResult")[[1]], verbose)
     }
 
     mssg(verbose, "...done.")
@@ -95,7 +95,7 @@ parse_ncbi <- function(xx, z, verbose){
   ## Get sequence from previous
   mssg(verbose, "...retrieving sequence...")
   queryseq <- list(db = "sequences", id = gisuse[,1], rettype = "fasta", retmode = "text")
-  outseq <- content(GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi", query = queryseq), as="text")
+  outseq <- content(GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi", query = queryseq), "text", encoding = "UTF-8")
   seq <- gsub("\n", "", strsplit(sub("\n", "<<<", outseq), "<<<")[[1]][[2]])
   accessnum <- strsplit(outseq, "\\|")[[1]][4]
   outt <- list(xx, as.character(gisuse[,3]), gisuse[,1], accessnum, gisuse[,2], seq)
