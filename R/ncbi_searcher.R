@@ -220,7 +220,7 @@ taxonomy <- function(zz) {
   for (i in seq_along(uids)) {
     res <- GET(paste0(url_esummary, "?db=taxonomy&id=", uids[i]))
     stop_for_status(res)
-    xml <- content(res, "text", encoding = "UTF-8")
+    xml <- xml2::read_xml(content(res, "text", encoding = "UTF-8"))
     out[[ uids[i] ]] <- xml2::xml_text(xml2::xml_find_all(xml, '//Item[@Name="ScientificName"]'))
   }
   for (i in seq_along(out)) {
