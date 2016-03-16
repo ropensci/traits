@@ -198,8 +198,8 @@ parseres <- function(x, hypothetical){
   has_access_prefix <- grepl("_", predicted)
   access_prefix <- unlist(Map(function(x, y) ifelse(x, strsplit(y, "_")[[1]][[1]], NA),
                               has_access_prefix, predicted))
-  predicted[has_access_prefix] <- vapply(strsplit(predicted[has_access_prefix], "_"), `[[`, character(1), 2)
-
+#   predicted[has_access_prefix] <- vapply(strsplit(predicted[has_access_prefix], "_"), `[[`, character(1), 2)
+#
   length_ <- as.numeric(xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Length", names)]) # gets seq lengths
   gis <- as.numeric(xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Gi", names)]) # gets GI numbers
 
