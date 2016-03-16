@@ -4,34 +4,36 @@
 \alias{ncbi_byid}
 \title{Retrieve gene sequences from NCBI by accession number.}
 \usage{
-ncbi_byid(ids, format = "fasta", verbose = TRUE)
+ncbi_byid(ids, format = NULL, verbose = TRUE)
 }
 \arguments{
-\item{ids}{(character) GenBank ids to search for.}
+\item{ids}{(character) GenBank ids to search for. One or more. Required.}
 
-\item{format}{(character) Return type, e.g., \code{"fasta"}}
+\item{format}{(character) Return type, e.g., \code{"fasta"}. NOW IGNORED.}
 
 \item{verbose}{(logical) If \code{TRUE} (default), informative messages printed.}
 }
 \value{
-Data.frame of results.
+Data.frame of the form:
+\itemize{
+ \item taxon - taxonomic name (may include some junk, but hard to parse off)
+ \item gene_desc - gene description
+ \item gi_no - GI number
+ \item acc_no - accession number
+ \item length - sequence length
+ \item sequence - sequence character string
+}
 }
 \description{
 Retrieve gene sequences from NCBI by accession number.
 }
-\details{
-Removes predicted sequences so you don't have to remove them.
-    Predicted sequences are those with accession numbers that have "XM_" or
-		"XR_" prefixes. This function retrieves one sequences for each species,
-  	picking the longest available for the given gene.
-}
 \examples{
 \dontrun{
 # A single gene
-ncbi_byid(ids="360040093", format="fasta")
+ncbi_byid(ids="360040093")
 
 # Many genes (with different accession numbers)
-ncbi_byid(ids=c("360040093","347448433"), format="fasta")
+ncbi_byid(ids=c("360040093","347448433"))
 }
 }
 \author{
