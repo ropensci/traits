@@ -27,6 +27,10 @@ Data.frame of the form:
 \description{
 Retrieve gene sequences from NCBI by accession number.
 }
+\details{
+If bad ids are included with good ones, the bad ones are silently dropped.
+If all ids are bad you'll get a stop with error message.
+}
 \examples{
 \dontrun{
 # A single gene

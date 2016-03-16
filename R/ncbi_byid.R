@@ -13,6 +13,8 @@
 #'  \item length - sequence length
 #'  \item sequence - sequence character string
 #' }
+#' @details If bad ids are included with good ones, the bad ones are silently dropped.
+#' If all ids are bad you'll get a stop with error message.
 #' @seealso \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyname}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
