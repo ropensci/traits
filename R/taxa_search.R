@@ -15,7 +15,15 @@ taxa_search <- function(x, db, ...) {
 }
 
 #' @export
+taxa_search.default <- function(x, db, ...) {
+  stop("taxa_search has no method for ", class(x), call. = FALSE)
+}
+
+#' @export
 taxa_search.character <- function(x, db, ...) {
+  if (!db %in% c('traitbank', 'ncbi')) {
+    stop("'db' must be one of 'traitbank' or 'ncbi'", call. = FALSE)
+  }
   switch(db,
     traitbank = {
       id <- get_tb(x)
@@ -41,6 +49,8 @@ get_tb <- function(x, ...) {
   tmp <- taxize::eol_search(terms = x)
   if (NROW(tmp) > 1) {
     selector(tmp, x, get_from = "pageid")
+  } else {
+    tmp$pageid
   }
 }
 
