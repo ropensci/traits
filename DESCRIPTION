@@ -33,8 +33,9 @@ Imports:
     xml2,
     rvest
 Suggests:
-    roxygen2,
+    roxygen2 (>= 5.0.1),
     knitr,
     testthat,
-    plyr
+    plyr,
+    covr
 RoxygenNote: 5.0.1
