@@ -32,6 +32,8 @@
 #'
 
 fe_native <- function(sp, ...) {
+  .Deprecated(msg = "fe_native is deprecated - see flora_europaea() function in originr")
+
   #reformat sp list
   genus <- strsplit(sp, " ")[[1]][1]
   species <- strsplit(sp, " ")[[1]][2]

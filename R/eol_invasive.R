@@ -81,6 +81,8 @@
 eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL,
   per_page=NULL, key = NULL, verbose=TRUE, count=FALSE, ...) {
 
+  .Deprecated(msg = "eol_invasive_ is deprecated - see eol() function in originr")
+
   if (is.null(name)) stop("please provide a taxonomic name")
   if (is.null(dataset)) stop("please provide a dataset name")
   datasetid <- switch(dataset,

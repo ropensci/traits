@@ -43,6 +43,8 @@
 #' rbind_all(res)
 #' }
 is_native <- function(sp, where, region = c("america", "europe"), ...) {
+  .Deprecated(msg = "is_native is deprecated - see is_native() function in originr")
+
   if (!region %in% c("america", "europe")) {
     stop("region must be one of america or europe", call. = FALSE)
   }

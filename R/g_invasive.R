@@ -42,6 +42,8 @@
 #'
 
 g_invasive <- function(x, simplify = FALSE, verbose=TRUE) {
+  .Deprecated(msg = "g_invasive is deprecated - see gisd() function in originr")
+
 	species <- gsub(" ", "+", x) # reformat sp list
 	# create urls to parse
 	urls <- paste("http://www.issg.org/database/species/search.asp?sts=sss&st=sss&fr=1&x=13&y=9&sn=",

@@ -1,3 +1,15 @@
+traits 0.2.0
+===============
+
+## MINOR IMPROVEMENTS
+
+* Standardized outputs of all data - all data.frame column names should 
+be lowercase now (#47)
+* With all `httr::content()` calls now explicitly setting encoding to 
+`UTF-8`, and parsing to `text`, then manually parsing either JSON
+or XML later (#65)
+* Replaced `XML` with `xml2` for XML parsing (#67)
+
 traits 0.1.2
 ===============
 
