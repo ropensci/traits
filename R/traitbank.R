@@ -1,8 +1,5 @@
 #' Search for traits from EOL's Traitbank.
 #'
-#' EOL Traitbank is down for now - thus the function simply throws a stop message
-#' for now. The function will be operational again once Traitbank is back online.
-#'
 #' @export
 #'
 #' @param pageid A page id. I know, not ideal. Would be better if this was a trait
@@ -27,7 +24,6 @@
 #' traitbank(846827)
 #' }
 traitbank <- function(pageid, cache_ttl = NULL, ...) {
-  stop("EOL's TraitBank product is down for now - we'll keep an eye on it's return", call. = FALSE)
   args <- traitsc(list(cache_ttl = cache_ttl))
   if (length(args) == 0) args <- NULL
   res <- traitbank_GET(paste0(tburl(), pageid), args, ...)
