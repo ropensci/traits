@@ -1,6 +1,13 @@
 traits 0.2.0
 ===============
 
+## DEPRECATED
+
+* Marked four functions as deprecated - those involving getting data
+on whether a species if native/invasive in a particular region. 
+See `?traits-deprecated` for more information. Deprecated functions:
+`eol_invasive_()`, `fe_native()`, `g_invasive()`, `is_native()` (#63)
+
 ## MINOR IMPROVEMENTS
 
 * Standardized outputs of all data - all data.frame column names should 
