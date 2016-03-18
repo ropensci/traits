@@ -9,5 +9,8 @@ I had to submit with dev R since current stable wasn't working with
 devtools::release() - was giving me the error: "No suitable 
 spell-checker program found"
 
+This is a re-submission of a previous submission that changes a 
+CRAN package URL in the README to it's canonical form.
+
 Thanks! 
 Scott Chamberlain
