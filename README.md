@@ -6,7 +6,7 @@ traits
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
 [![codecov.io](https://codecov.io/github/ropensci/traits/coverage.svg?branch=master)](https://codecov.io/github/ropensci/traits?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/traits)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/traits)](https://cran.rstudio.com/package=traits)
+[![cran version](http://www.r-pkg.org/badges/version/traits)](https://CRAN.R-project.org/package=traits)
 
 R client for various sources of species trait data.
 
