@@ -6,7 +6,7 @@ traits
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
 [![codecov.io](https://codecov.io/github/ropensci/traits/coverage.svg?branch=master)](https://codecov.io/github/ropensci/traits?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/traits)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/traits)](http://cran.rstudio.com/web/packages/traits)
+[![cran version](http://www.r-pkg.org/badges/version/traits)](https://cran.rstudio.com/package=traits)
 
 R client for various sources of species trait data.
 
@@ -15,12 +15,12 @@ Included in `traits` with the associated function prefix:
 * [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
-* [Encyclopedia of Life Invasive Species](link) - `eol_`
-* [Encyclopedia of Life Traitbank](link) - `traitbank_`
+* [Encyclopedia of Life Invasive Species](http://eol.org/collections/38204) - `eol_`
+* [Encyclopedia of Life Traitbank](http://eol.org/info/516) - `traitbank_`
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
 * [Flora Europaea](http://rbg-web2.rbge.org.uk/FE/fe.html) - `fe_`
 * [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
-* LEDA Traitbase (http://www.leda-traitbase.org/LEDAportal/index.jsp) - `leda_`
+* LEDA Traitbase - `leda_`
 * More to come ...
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
@@ -49,37 +49,37 @@ library("traits")
 library("dplyr")
 ```
 
-## BetyDB
+## BETYdb
 
 Get trait data for Willow (_Salix_ spp.)
 
 
 ```r
 (salix <- betydb_search("Salix Vcmax"))
-#> Source: local data frame [14 x 30]
+#> Source: local data frame [14 x 31]
 #> 
-#>    access_level       author citation_id citation_year  city    commonname
-#>           (int)        (chr)       (int)         (int) (chr)         (chr)
-#> 1             4       Merilo         430          2005 Saare basket willow
-#> 2             4       Merilo         430          2005 Saare basket willow
-#> 3             4       Merilo         430          2005 Saare basket willow
-#> 4             4       Merilo         430          2005 Saare basket willow
-#> 5             4 Wullschleger          51          1993    NA        willow
-#> 6             4       Merilo         430          2005 Saare basket willow
-#> 7             4       Merilo         430          2005 Saare basket willow
-#> 8             4       Merilo         430          2005 Saare basket willow
-#> 9             4       Merilo         430          2005 Saare basket willow
-#> 10            4       Merilo         430          2005 Saare        willow
-#> 11            4       Merilo         430          2005 Saare        willow
-#> 12            4       Merilo         430          2005 Saare        willow
-#> 13            4       Merilo         430          2005 Saare        willow
-#> 14            4         Wang         381          2010    NA              
-#> Variables not shown: cultivar_id (int), date (chr), dateloc (chr), genus
-#>   (chr), id (int), lat (dbl), lon (dbl), mean (chr), month (dbl), n (int),
-#>   notes (chr), result_type (chr), scientificname (chr), site_id (int),
-#>   sitename (chr), species_id (int), stat (chr), statname (chr), trait
-#>   (chr), trait_description (chr), treatment (chr), treatment_id (int),
-#>   units (chr), year (dbl)
+#>    access_level       author checked citation_id citation_year  city
+#>           (int)        (chr)   (int)       (int)         (int) (chr)
+#> 1             4       Merilo       1         430          2005 Saare
+#> 2             4       Merilo       1         430          2005 Saare
+#> 3             4       Merilo       1         430          2005 Saare
+#> 4             4       Merilo       1         430          2005 Saare
+#> 5             4 Wullschleger       1          51          1993    NA
+#> 6             4       Merilo       1         430          2005 Saare
+#> 7             4       Merilo       1         430          2005 Saare
+#> 8             4       Merilo       1         430          2005 Saare
+#> 9             4       Merilo       1         430          2005 Saare
+#> 10            4       Merilo       1         430          2005 Saare
+#> 11            4       Merilo       1         430          2005 Saare
+#> 12            4       Merilo       1         430          2005 Saare
+#> 13            4       Merilo       1         430          2005 Saare
+#> 14            4         Wang       1         381          2010    NA
+#> Variables not shown: commonname (chr), cultivar_id (int), date (chr),
+#>   dateloc (chr), genus (chr), id (int), lat (dbl), lon (dbl), mean (chr),
+#>   month (dbl), n (int), notes (chr), result_type (chr), scientificname
+#>   (chr), site_id (int), sitename (chr), species_id (int), stat (chr),
+#>   statname (chr), trait (chr), trait_description (chr), treatment (chr),
+#>   treatment_id (int), units (chr), year (dbl)
 # equivalent:
 # (out <- betydb_search("willow"))
 ```
