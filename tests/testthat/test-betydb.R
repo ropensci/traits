@@ -51,7 +51,7 @@ test_that("betydb_trait works", {
   check_betydb()
 
   aa <- betydb_trait(id = 10)
-  expect_is(aa, "list")
+  expect_is(aa, "data.frame")
   expect_is(aa$id, "integer")
   expect_equal(aa$id, 10)
 })
@@ -61,7 +61,7 @@ test_that("betydb_specie works", {
   check_betydb()
 
   bb <- betydb_specie(id = 1)
-  expect_is(bb, "list")
+  expect_is(bb, "data.frame")
   expect_is(bb$id, "integer")
   expect_equal(bb$id, 1)
 })
@@ -71,7 +71,7 @@ test_that("betydb_citation works", {
   check_betydb()
 
   cc <- betydb_citation(id = 1)
-  expect_is(cc, "list")
+  expect_is(cc, "data.frame")
   expect_is(cc$id, "integer")
   expect_equal(cc$id, 1)
 })
@@ -81,6 +81,6 @@ test_that("betydb_site works", {
   check_betydb()
 
   dd <- betydb_site(id = 795)
-  expect_is(dd, "list")
+  expect_is(dd, "data.frame")
   expect_is(dd$city, "character")
 })

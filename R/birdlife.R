@@ -1,6 +1,5 @@
 #' Get bird habitat information from BirdLife/IUCN
 #'
-#' @importFrom XML readHTMLTable
 #' @export
 #'
 #' @param id A single IUCN species ID
@@ -24,20 +23,19 @@ birdlife_habitat = function(id){
     "/additional"
   )
 
-  tables = XML::readHTMLTable(url, stringsAsFactors = FALSE)
+  tables <- make_tables(url)
 
   # Find the table that has "Habitat" as a column name
-  habitat_table_number = which(
-    sapply(tables, function(table){any(grepl("Habitat", colnames(table)))})
+  habitat_table_number <- which(
+    vapply(tables, function(table) any(grepl("Habitat", colnames(table))), logical(1))
   )
 
-  out = cbind(id, tables[[habitat_table_number]])
-  out[-nrow(out), ] # Drop last row (altitude)
+  out <- cbind(id, tables[[habitat_table_number]])
+  out[-NROW(out), ] # Drop last row (altitude)
 }
 
 #' Get bird threat information from BirdLife/IUCN
 #'
-#' @importFrom XML readHTMLTable
 #' @export
 #'
 #' @param id A single IUCN species ID
@@ -60,9 +58,9 @@ birdlife_threats = function(id){
     "/additional"
   )
 
-  tables = XML::readHTMLTable(url, stringsAsFactors = FALSE)
+  tables <- make_tables(url)
 
-  is_threats = sapply(
+  is_threats <- sapply(
     tables,
     function(x){
       all(c("Scope", "Severity", "Impact", "Timing") %in% unlist(x))
@@ -93,4 +91,10 @@ birdlife_threats = function(id){
   }
 
   out
+}
+
+make_tables <- function(x) {
+  html <- xml2::read_html(x)
+  tables <- xml2::xml_find_all(html, "//table")
+  rvest::html_table(tables, fill = TRUE)
 }

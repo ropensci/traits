@@ -6,7 +6,7 @@ traits
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
 [![codecov.io](https://codecov.io/github/ropensci/traits/coverage.svg?branch=master)](https://codecov.io/github/ropensci/traits?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/traits)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/traits)](http://cran.rstudio.com/web/packages/traits)
+[![cran version](http://www.r-pkg.org/badges/version/traits)](https://CRAN.R-project.org/package=traits)
 
 R client for various sources of species trait data.
 
@@ -15,12 +15,12 @@ Included in `traits` with the associated function prefix:
 * [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
-* [Encyclopedia of Life Invasive Species](link) - `eol_`
-* [Encyclopedia of Life Traitbank](link) - `traitbank_`
+* [Encyclopedia of Life Invasive Species](http://eol.org/collections/38204) - `eol_`
+* [Encyclopedia of Life Traitbank](http://eol.org/info/516) - `traitbank_`
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
 * [Flora Europaea](http://rbg-web2.rbge.org.uk/FE/fe.html) - `fe_`
 * [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
-* [LEDA Traitbase](http://www.leda-traitbase.org/LEDAportal/index.jsp) - `leda_`
+* LEDA Traitbase - `leda_`
 * More to come ...
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
@@ -49,37 +49,38 @@ library("traits")
 library("dplyr")
 ```
 
-## BetyDB
+## BETYdb
 
 Get trait data for Willow (_Salix_ spp.)
 
 
 ```r
 (salix <- betydb_search("Salix Vcmax"))
-#> Source: local data frame [14 x 30]
+#> Source: local data frame [14 x 31]
 #> 
-#>    access_level       author citation_id citation_year  city    commonname
-#> 1             4       Merilo         430          2005 Saare basket willow
-#> 2             4       Merilo         430          2005 Saare basket willow
-#> 3             4       Merilo         430          2005 Saare basket willow
-#> 4             4       Merilo         430          2005 Saare basket willow
-#> 5             4 Wullschleger          51          1993    NA        willow
-#> 6             4       Merilo         430          2005 Saare basket willow
-#> 7             4       Merilo         430          2005 Saare basket willow
-#> 8             4       Merilo         430          2005 Saare basket willow
-#> 9             4       Merilo         430          2005 Saare basket willow
-#> 10            4       Merilo         430          2005 Saare        willow
-#> 11            4       Merilo         430          2005 Saare        willow
-#> 12            4       Merilo         430          2005 Saare        willow
-#> 13            4       Merilo         430          2005 Saare        willow
-#> 14            4         Wang         381          2010    NA              
-#> Variables not shown: cultivar_id (int), date (chr), dateloc (chr), genus
-#>   (chr), id (int), lat (dbl), lon (dbl), mean (chr), month (dbl), n (int),
-#>   notes (chr), result_type (chr), scientificname (chr), site_id (int),
-#>   sitename (chr), species_id (int), stat (chr), statname (chr), trait
-#>   (chr), trait_description (chr), treatment (chr), treatment_id (int),
-#>   units (chr), year (dbl)
-# equivalent: 
+#>    access_level       author checked citation_id citation_year  city
+#>           (int)        (chr)   (int)       (int)         (int) (chr)
+#> 1             4       Merilo       1         430          2005 Saare
+#> 2             4       Merilo       1         430          2005 Saare
+#> 3             4       Merilo       1         430          2005 Saare
+#> 4             4       Merilo       1         430          2005 Saare
+#> 5             4 Wullschleger       1          51          1993    NA
+#> 6             4       Merilo       1         430          2005 Saare
+#> 7             4       Merilo       1         430          2005 Saare
+#> 8             4       Merilo       1         430          2005 Saare
+#> 9             4       Merilo       1         430          2005 Saare
+#> 10            4       Merilo       1         430          2005 Saare
+#> 11            4       Merilo       1         430          2005 Saare
+#> 12            4       Merilo       1         430          2005 Saare
+#> 13            4       Merilo       1         430          2005 Saare
+#> 14            4         Wang       1         381          2010    NA
+#> Variables not shown: commonname (chr), cultivar_id (int), date (chr),
+#>   dateloc (chr), genus (chr), id (int), lat (dbl), lon (dbl), mean (chr),
+#>   month (dbl), n (int), notes (chr), result_type (chr), scientificname
+#>   (chr), site_id (int), sitename (chr), species_id (int), stat (chr),
+#>   statname (chr), trait (chr), trait_description (chr), treatment (chr),
+#>   treatment_id (int), units (chr), year (dbl)
+# equivalent:
 # (out <- betydb_search("willow"))
 ```
 
@@ -96,13 +97,14 @@ salix %>%
             max = round(max(.mean, na.rm = TRUE), 2),
             n = length(n))
 #> Source: local data frame [4 x 6]
-#> Groups: scientificname
+#> Groups: scientificname [?]
 #> 
-#>                    scientificname trait  mean   min   max n
-#> 1                           Salix Vcmax 65.00 65.00 65.00 1
-#> 2                Salix dasyclados Vcmax 46.08 34.30 56.68 4
-#> 3 Salix sachalinensis × miyabeana Vcmax 79.28 79.28 79.28 1
-#> 4                 Salix viminalis Vcmax 43.04 19.99 61.29 8
+#>                    scientificname trait  mean   min   max     n
+#>                             (chr) (chr) (dbl) (dbl) (dbl) (int)
+#> 1                           Salix Vcmax 65.00 65.00 65.00     1
+#> 2                Salix dasyclados Vcmax 46.08 34.30 56.68     4
+#> 3 Salix sachalinensis × miyabeana Vcmax 79.28 79.28 79.28     1
+#> 4                 Salix viminalis Vcmax 43.04 19.99 61.29     8
 ```
 
 ## GISD invasive species data
@@ -138,7 +140,7 @@ eol_invasive_('Brassica oleracea', dataset = 'gisd')
 #> 1 Brassica oleracea Brassica oleracea           NaN gisd
 ```
 
-Another example, with more species, and from 
+Another example, with more species, and from
 
 
 ```r
@@ -162,25 +164,21 @@ Searching for _Mesoplodon bidens_, page id `328566`
 
 
 ```r
-res <- traitbank(trait = 328566)
-res$graph %>% 
-  select(dwc.measurementtype..id, dwc.measurementtype.rdfs.label.en, dwc.measurementvalue) %>% 
-  filter(!is.na(dwc.measurementvalue))
-#> Source: local data frame [59 x 3]
+res <- traitbank(846827)
+res$graph %>%
+  select(`dwc:measurementtype.@id`, `dwc:measurementtype.rdfs:label.en`) %>%
+  filter(!is.na(`dwc:measurementtype.rdfs:label.en`))
+#> Source: local data frame [6 x 2]
 #> 
-#>                 dwc.measurementtype..id dwc.measurementtype.rdfs.label.en
-#> 1      http://iucn.org/population_trend                  population trend
-#> 2  http://rs.tdwg.org/dwc/terms/habitat                           habitat
-#> 3  http://rs.tdwg.org/dwc/terms/habitat                           habitat
-#> 4  http://rs.tdwg.org/dwc/terms/habitat                           habitat
-#> 5  http://rs.tdwg.org/dwc/terms/habitat                           habitat
-#> 6  http://rs.tdwg.org/dwc/terms/habitat                           habitat
-#> 7  http://rs.tdwg.org/dwc/terms/habitat                           habitat
-#> 8  http://rs.tdwg.org/dwc/terms/habitat                           habitat
-#> 9  http://rs.tdwg.org/dwc/terms/habitat                           habitat
-#> 10 http://rs.tdwg.org/dwc/terms/habitat                           habitat
-#> ..                                  ...                               ...
-#> Variables not shown: dwc.measurementvalue (chr)
+#>                              dwc:measurementtype.@id
+#>                                                (chr)
+#> 1 http://eol.org/schema/terms/TypeSpecimenRepository
+#> 2 http://eol.org/schema/terms/TypeSpecimenRepository
+#> 3                http://eol.org/schema/terms/Habitat
+#> 4                http://eol.org/schema/terms/Habitat
+#> 5       http://eol.org/schema/terms/ExtinctionStatus
+#> 6       http://eol.org/schema/terms/ExtinctionStatus
+#> Variables not shown: dwc:measurementtype.rdfs:label.en (chr)
 ```
 
 ## Coral
@@ -192,18 +190,19 @@ Get the species list and their ids
 coral_species()
 #> Source: local data frame [1,547 x 2]
 #> 
-#>                          name id
-#> 1         Acanthastrea brevis  3
-#> 2       Acanthastrea echinata  4
-#> 3      Acanthastrea hemprichi  6
-#> 4  Acanthastrea ishigakiensis  8
-#> 5      Acanthastrea regularis 12
-#> 6   Acanthastrea rotundoflora 13
-#> 7    Acanthastrea subechinata 14
-#> 8      Acropora abrolhosensis 16
-#> 9       Acropora abrotanoides 17
-#> 10           Acropora aculeus 18
-#> ..                        ... ..
+#>                          name    id
+#>                         (chr) (chr)
+#> 1         Acanthastrea brevis     3
+#> 2       Acanthastrea echinata     4
+#> 3      Acanthastrea hemprichi     6
+#> 4  Acanthastrea ishigakiensis     8
+#> 5      Acanthastrea regularis    12
+#> 6   Acanthastrea rotundoflora    13
+#> 7    Acanthastrea subechinata    14
+#> 8      Acropora abrolhosensis    16
+#> 9       Acropora abrotanoides    17
+#> 10           Acropora aculeus    18
+#> ..                        ...   ...
 ```
 
 Get data by taxon
@@ -211,26 +210,27 @@ Get data by taxon
 
 ```r
 coral_taxa(80)
-#> Source: local data frame [3,084 x 25]
+#> Source: local data frame [3,121 x 25]
 #> 
 #>    observation_id access user_id specie_id         specie_name location_id
-#> 1          109330      1       2        80 Acropora hyacinthus           1
-#> 2           88793      1      14        80 Acropora hyacinthus           0
-#> 3          115791      1      10        80 Acropora hyacinthus           1
-#> 4          115792      1      10        80 Acropora hyacinthus           1
-#> 5            5694      1       2        80 Acropora hyacinthus           1
+#>             (int)  (int)   (int)     (int)               (chr)       (int)
+#> 1          119211      1      49        80 Acropora hyacinthus           1
+#> 2          109330      1       2        80 Acropora hyacinthus           1
+#> 3           88793      1      14        80 Acropora hyacinthus           0
+#> 4          115791      1      10        80 Acropora hyacinthus           1
+#> 5          115792      1      10        80 Acropora hyacinthus           1
 #> 6            5696      1       2        80 Acropora hyacinthus           1
 #> 7            5741      1       1        80 Acropora hyacinthus           1
 #> 8            5751      1       1        80 Acropora hyacinthus           1
-#> 9            5787      1       1        80 Acropora hyacinthus           1
+#> 9            5773      1       5        80 Acropora hyacinthus           1
 #> 10           5766      1       1        80 Acropora hyacinthus           1
 #> ..            ...    ...     ...       ...                 ...         ...
 #> Variables not shown: location_name (chr), latitude (dbl), longitude (dbl),
 #>   resource_id (int), resource_secondary_id (int), measurement_id (int),
 #>   trait_id (int), trait_name (chr), standard_id (int), standard_unit
 #>   (chr), methodology_id (int), methodology_name (chr), value (chr),
-#>   value_type (chr), precision (lgl), precision_type (lgl), precision_upper
-#>   (lgl), replicates (lgl), notes (lgl)
+#>   value_type (chr), precision (dbl), precision_type (chr), precision_upper
+#>   (dbl), replicates (int), notes (chr)
 ```
 
 ## Birdlife International

@@ -5,33 +5,37 @@ Description: Species trait data from many different sources, including
     data from the Global Invasive Species Database and 'EOL', 'Traitbank' data
     from 'EOL', Coral traits data from http://coraltraits.org, 'nativity' status
     ('Flora Europaea' or 'ITIS'), and 'Birdlife' International.
-Version: 0.1.1.9000
+Version: 0.2.0
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
     person("Zachary", "Foster", role = "aut", email = "zacharyfoster1989@gmail.com"),
     person("Ignasi", "Bartomeus", role = "aut", email = "nacho.bartomeus@gmail.com"),
-    person("David", "LeBauer", role = "aut", email = "dlebauer@gmail.com")
+    person("David", "LeBauer", role = "aut", email = "dlebauer@gmail.com"),
+    person("David", "Harris", role = "aut", email = "davharris@ucdavis.edu")
   )
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/traits
 BugReports: http://www.github.com/ropensci/traits/issues
 LazyData: true
 VignetteBuilder: knitr
-Roxygen: list(wrap = FALSE)
 Depends:
     R (>= 2.10)
 Imports:
     methods,
     stats,
     utils,
-    XML,
-    jsonlite,
-    httr,
-    dplyr,
-    data.table,
-    taxize
+    jsonlite (>= 0.9.19),
+    httr (>= 1.1.0),
+    dplyr (>= 0.4.3),
+    data.table (>= 1.9.6),
+    readr (>= 0.2.2),
+    taxize (>= 0.7.4),
+    xml2 (>= 0.1.2),
+    rvest  (>= 0.3.1)
 Suggests:
-    roxygen2,
+    roxygen2 (>= 5.0.1),
     knitr,
     testthat,
-    plyr
+    plyr,
+    covr
+RoxygenNote: 5.0.1

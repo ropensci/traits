@@ -51,3 +51,18 @@ trydefault <- function (expr, default, quiet = FALSE){
   }
   result
 }
+
+low_names <- function(x) {
+  if (is(x, "data.frame")) {
+    setNames(x, tolower(names(x)))
+  } else {
+    x
+  }
+}
+
+df_null <- function(x) {
+  data.frame(
+    Filter(function(z) !is.null(z), x),
+    stringsAsFactors = FALSE
+  )
+}

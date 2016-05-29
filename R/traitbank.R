@@ -8,12 +8,12 @@
 #' mis-represented what the input actually represents.
 #' @param cache_ttl Cache code
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
-#' @references \url{http://eol.org/info/516}
+#' @references http://eol.org/info/516
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
-#' @details See \url{http://eol.org/data_glossary} for human readable definitions for
-#' the attribute terms that EOL uses. Go to \url{http://eol.org/data_search} for the
+#' @details See http://eol.org/data_glossary for human readable definitions for
+#' the attribute terms that EOL uses. Go to http://eol.org/data_search for the
 #' web interface to Traitbank.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # Get data for Balaenoptera musculus (http://eol.org/pages/328574/)
 #' res <- traitbank(328574)
 #' res$context
@@ -49,7 +49,7 @@ traitbank <- function(pageid, cache_ttl = NULL, ...) {
 traitbank_GET <- function(url, args = list(), ...){
   res <- GET(url, query = args, ...)
   stop_for_status(res)
-  txt <- content(res, "text")
+  txt <- content(res, "text", encoding = "UTF-8")
   jsonlite::fromJSON(txt, TRUE, flatten = TRUE)
 }
 

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
 [![codecov.io](https://codecov.io/github/ropensci/traits/coverage.svg?branch=master)](https://codecov.io/github/ropensci/traits?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/traits)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/traits)](http://cran.rstudio.com/web/packages/traits)
+[![cran version](http://www.r-pkg.org/badges/version/traits)](https://CRAN.R-project.org/package=traits)
 
 R client for various sources of species trait data.
 
@@ -23,12 +23,12 @@ Included in `traits` with the associated function prefix:
 * [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
 * [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
-* [Encyclopedia of Life Invasive Species](link) - `eol_`
-* [Encyclopedia of Life Traitbank](link) - `traitbank_`
+* [Encyclopedia of Life Invasive Species](http://eol.org/collections/38204) - `eol_`
+* [Encyclopedia of Life Traitbank](http://eol.org/info/516) - `traitbank_`
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
 * [Flora Europaea](http://rbg-web2.rbge.org.uk/FE/fe.html) - `fe_`
 * [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
-* [LEDA Traitbase](http://www.leda-traitbase.org/LEDAportal/index.jsp) - `leda_`
+* LEDA Traitbase - `leda_`
 * More to come ...
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
@@ -54,7 +54,7 @@ library("traits")
 library("dplyr")
 ```
 
-## BetyDB
+## BETYdb
 
 Get trait data for Willow (_Salix_ spp.)
 
@@ -109,10 +109,10 @@ eol_invasive_(c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus 
 Searching for _Mesoplodon bidens_, page id `328566`
 
 ```{r cache=TRUE}
-res <- traitbank(trait = 328566)
+res <- traitbank(846827)
 res$graph %>%
-  select(dwc.measurementtype..id, dwc.measurementtype.rdfs.label.en, dwc.measurementvalue) %>%
-  filter(!is.na(dwc.measurementvalue))
+  select(`dwc:measurementtype.@id`, `dwc:measurementtype.rdfs:label.en`) %>%
+  filter(!is.na(`dwc:measurementtype.rdfs:label.en`))
 ```
 
 ## Coral

@@ -1,6 +1,5 @@
 #' Search for traits from BETYdb
 #'
-#' @importFrom dplyr tbl_df
 #' @name betydb
 #'
 #' @param query Query terms
@@ -41,7 +40,7 @@
 #' betydb_specie(id = 1)
 #' ## Citations
 #' betydb_citation(id = 1)
-#' ## Citations
+#' ## Site information
 #' betydb_site(id = 795)
 #' }
 
@@ -71,23 +70,10 @@ betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
       result <- NULL
   } else {
       lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
-      result <- setNames(tbl_df(lst), gsub(sprintf("%s\\.", which), "", names(lst)))
+      result <- setNames(tbl_df(lst), gsub(sprintf("%s\\.", which), "", tolower(names(lst))))
   }
   return(result)
 }
-
-
-## can betydb_GET2 be merged with betydb_GET?
-betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
-  if (is.null(c(key, user, pwd))) {
-    user <- 'ropensci-traits'
-    pwd <- 'ropensci'
-  }
-  txt <- betydb_http(url, args, key, user, pwd, ...)
-  lst <- jsonlite::fromJSON(txt, FALSE)
-  lst[[1]]
-}
-
 
 betydb_http <- function(url, args = list(), key, user, pwd, ...){
   auth <- betydb_auth(user, pwd, key)
@@ -104,7 +90,7 @@ betydb_http <- function(url, args = list(), key, user, pwd, ...){
     GET(url, query = c(key = auth$key, args), ...)
   }
   stop_for_status(res)
-  ans <- content(res, "text")
+  ans <- content(res, "text", encoding = "UTF-8")
   return(ans)
 }
 
@@ -136,6 +122,17 @@ betydb_site <- function(id, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   betydb_GET2(makeidurl("sites", id, fmt), args = NULL, key, user, pwd, "site", ...)
 }
 
+## can betydb_GET2 be merged with betydb_GET?
+betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
+  if (is.null(c(key, user, pwd))) {
+    user <- 'ropensci-traits'
+    pwd <- 'ropensci'
+  }
+  txt <- betydb_http(url, args, key, user, pwd, ...)
+  lst <- jsonlite::fromJSON(txt, FALSE)
+  x <- lst[[1]]
+  low_names(df_null(x))
+}
 
 betydb_auth <- function(x,y,z){
   if (is.null(z) && is.null(x)) {

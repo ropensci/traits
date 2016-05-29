@@ -2,7 +2,6 @@
 #'
 #' See Details for important information.
 #'
-#' @importFrom jsonlite fromJSON
 #' @export
 #' @param name A taxonomic name, or a vector of names.
 #' @param dataset One of all, gisd100, gisd, isc, daisie, i3n, or mineps.
@@ -35,15 +34,15 @@
 #' \itemize{
 #'  \item all - All datasets
 #'  \item gisd100 - 100 of the World's Worst Invasive Alien Species
-#'  (Global Invasive Species Database) \url{http://eol.org/collections/54500}
-#'  \item gisd - Global Invasive Species Database 2013 \url{http://eol.org/collections/54983}
+#'  (Global Invasive Species Database) http://eol.org/collections/54500
+#'  \item gisd - Global Invasive Species Database 2013 http://eol.org/collections/54983
 #'  \item isc - Centre for Agriculture and Biosciences International Invasive Species
-#'  Compendium (ISC) \url{http://eol.org/collections/55180}
+#'  Compendium (ISC) http://eol.org/collections/55180
 #'  \item daisie - Delivering Alien Invasive Species Inventories for Europe (DAISIE) Species
-#'  List \url{http://eol.org/collections/55179}
+#'  List http://eol.org/collections/55179
 #'  \item i3n - IABIN Invasives Information Network (I3N) Species
-#'  \url{http://eol.org/collections/55176}
-#'  \item mineps - Marine Invaders of the NE Pacific Species \url{http://eol.org/collections/55331}
+#'  http://eol.org/collections/55176
+#'  \item mineps - Marine Invaders of the NE Pacific Species http://eol.org/collections/55331
 #' }
 #'
 #' Datasets are not updated that often. Here's last updated dates for some of the datasets as of
@@ -62,7 +61,7 @@
 #' the input elements to the name parameter.
 #' @references See info for each data source at \url{http://eol.org/collections/55367/taxa}
 #'
-#' @examples \donttest{
+#' @examples \dontrun{
 #' eol_invasive_(name='Brassica oleracea', dataset='gisd')
 #' eol_invasive_(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
 #'    dataset='gisd')
@@ -82,6 +81,8 @@
 eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL,
   per_page=NULL, key = NULL, verbose=TRUE, count=FALSE, ...) {
 
+  .Deprecated(msg = "eol_invasive_ is deprecated - see eol() function in originr")
+
   if (is.null(name)) stop("please provide a taxonomic name")
   if (is.null(dataset)) stop("please provide a dataset name")
   datasetid <- switch(dataset,
@@ -97,7 +98,7 @@ eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL
   args <- traitsc(list(id = datasetid, page = page, per_page = 500, filter = 'taxa'))
   tt <- GET(url, query = args, ...)
   stop_for_status(tt)
-  res <- jsonlite::fromJSON(content(tt, "text"), FALSE)
+  res <- jsonlite::fromJSON(content(tt, "text", encoding = "UTF-8"), FALSE)
   data_init <- res$collection_items
   mssg(verbose, sprintf("Getting data for %s names...", res$total_items))
 
@@ -116,7 +117,7 @@ eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL
       args <- traitsc(list(id = datasetid, page = pages_get[i], per_page = 500, filter = 'taxa'))
       tt <- GET(url, query = args, ...)
       stop_for_status(tt)
-      res <- jsonlite::fromJSON(content(tt, "text"), FALSE)
+      res <- jsonlite::fromJSON(content(tt, "text", encoding = "UTF-8"), FALSE)
       out[[i]] <- res$collection_items
     }
     res2 <- traitsc(out)
