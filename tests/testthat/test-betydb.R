@@ -11,14 +11,15 @@ test_that("BETYdb API works", {
   check_betydb()
 
   ## gh-18
-  priors_url <- makeurl("priors", fmt = "json")
-  expect_equal(priors_url, paste0(betyurl(), "priors.json"))
+  betyurl <- "https://www.betydb.org/"
+  priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl)
+  expect_equal(priors_url, paste0(betyurl, "priors.json"))
 
   get.out <- GET(priors_url) # Priors is a small table
   expect_is(get.out, "response")
   ## FIXME - this fails for me, gives `401 Unauthorized` (scott here)
   # expect_true(grepl("OK", get.out[["headers"]]$status))
-  expect_true(grepl(betyurl(), get.out[["url"]]))
+  expect_true(grepl(betyurl, get.out[["url"]]))
 })
 
 test_that("Basic search works", {
