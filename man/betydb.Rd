@@ -9,22 +9,28 @@
 \alias{betydb_trait}
 \title{Search for traits from BETYdb}
 \usage{
-betydb_search(query = "Maple SLA", fmt = "json", key = NULL,
+betydb_search(query = "Maple SLA", betyurl = "https://www.betydb.org/",
+  fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
+
+betydb_trait(id, genus = NULL, species = NULL,
+  betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
 
-betydb_trait(id, genus = NULL, species = NULL, fmt = "json", key = NULL,
+betydb_specie(id, genus = NULL, species = NULL,
+  betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
 
-betydb_specie(id, genus = NULL, species = NULL, fmt = "json",
-  key = NULL, user = NULL, pwd = NULL, ...)
+betydb_citation(id, genus = NULL, species = NULL,
+  betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
+  user = NULL, pwd = NULL, ...)
 
-betydb_citation(id, genus = NULL, species = NULL, fmt = "json",
+betydb_site(id, betyurl = "https://www.betydb.org/", fmt = "json",
   key = NULL, user = NULL, pwd = NULL, ...)
-
-betydb_site(id, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
 }
 \arguments{
 \item{query}{Query terms}
+
+\item{betyurl}{(string) url to target instance of betydb. Default is betydb.org}
 
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
@@ -48,6 +54,14 @@ Search for traits from BETYdb
 }
 \details{
 Details:
+BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
+databases that support and share data among more focused research programs.
+
+For a list of publicly accessible instances of BETYdb and the urls that can be queried,
+see \url{https://pecan.gitbooks.io/betydb-documentation/content/distributed_betydb.html}
+
+This package queries plant traits, phenotypes, biomass yields, and ecosystem functions.
+It does not currently interface with the workflow and provenance data that support PEcAn Project (pecanproject.org) and TERRA REF (terraref.org) software.
 }
 \section{Authentication}{
 
@@ -84,6 +98,6 @@ betydb_site(id = 795)
 }
 }
 \references{
-API documentation \url{https://www.authorea.com/users/5574/articles/7062}
+API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
 }
 

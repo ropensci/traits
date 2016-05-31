@@ -6,6 +6,7 @@
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
 #' @param id (integer) One or more ids for a species, site, variable, etc.
+#' @param betyurl (string) url to target instance of betydb. Default is betydb.org
 #' @param fmt (character) Format to return data in, one of json, xml, csv. Only json
 #' currently supported.
 #' @param key (character) An API key. Use this or user/pwd combo. Save in your
@@ -13,8 +14,21 @@
 #' @param user,pwd (character) A user name and password. Use a user/pwd combo or an API key.
 #' Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}. Optional
-#' @references API documentation \url{https://www.authorea.com/users/5574/articles/7062}
+#' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
 #' @details Details:
+#' BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
+#' databases that support and share data among more focused research programs.
+#'
+#' For a list of publicly accessible instances of BETYdb and the urls that can be queried,
+#' see \url{https://pecan.gitbooks.io/betydb-documentation/content/distributed_betydb.html}
+#'
+#' This package queries plant traits, phenotypes, biomass yields, and ecosystem functions.
+#' It does not currently interface with the workflow and provenance data that support PEcAn Project (pecanproject.org) and TERRA REF (terraref.org) software.
+#'
+#' API documentation: \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
+#' This package currently uses the 'original' API, which is stable.
+#' Newer versions of the API will support database inserts.
+#'
 #' @section Authentication:
 #' Defers to use API key first since it's simpler, but if you don't have
 #' an API key, you can supply a username and password.
@@ -46,15 +60,15 @@
 
 #' @export
 #' @rdname betydb
-betydb_search <- function(query = "Maple SLA", fmt = 'json', key = NULL, user = NULL, pwd = NULL, ...){
-  base.url <- makeurl("search", fmt)
+betydb_search <- function(query = "Maple SLA", betyurl = "https://www.betydb.org/", fmt = 'json', key = NULL, user = NULL, pwd = NULL, ...){
+  base.url <- makeurl("search", fmt, betyurl = betyurl)
   result <- betydb_GET(url = base.url, args = list(search = query), key, user, pwd, which = "traits_and_yields_view", ...)
   return(result)
 }
 
-makeurl <- function(x, fmt, include = NULL){
+makeurl <- function(x, fmt, include = NULL, betyurl){
   fmt <- match.arg(fmt, c("json","xml","csv"))
-  url <- paste0(betyurl(), paste0(x, "."), fmt)
+  url <- paste0(betyurl, paste0(x, "."), fmt)
   return(url)
 }
 
@@ -75,6 +89,17 @@ betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
   return(result)
 }
 
+# merge betydb_GET2 with betydb_GET when updating to new API (beta / v1)
+betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
+  if (is.null(c(key, user, pwd))) {
+    user <- 'ropensci-traits'
+    pwd <- 'ropensci'
+  }
+  txt <- betydb_http(url, args, key, user, pwd, ...)
+  lst <- jsonlite::fromJSON(txt, FALSE)
+  x <- lst[[1]]
+  return(low_names(df_null(x)))
+}
 betydb_http <- function(url, args = list(), key, user, pwd, ...){
   auth <- betydb_auth(user, pwd, key)
 
@@ -97,42 +122,31 @@ betydb_http <- function(url, args = list(), key, user, pwd, ...){
 #################### by ID
 #' @export
 #' @rdname betydb
-betydb_trait <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+betydb_trait <- function(id, genus = NULL, species = NULL, betyurl = "https://www.betydb.org/", fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(species.genus = genus, species.species = species))
-  betydb_GET2(makeidurl("variables", id, fmt), args, key, user, pwd, "variable", ...)
+  betydb_GET2(makeidurl("variables", id, fmt, betyurl), args, key, user, pwd, "variable", ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_specie <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+betydb_specie <- function(id, genus = NULL, species = NULL, betyurl = "https://www.betydb.org/", fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
-  betydb_GET2(makeidurl("species", id, fmt), args, key, user, pwd, "specie", ...)
+  betydb_GET2(makeidurl("species", id, fmt, betyurl), args, key, user, pwd, "specie", ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_citation <- function(id, genus = NULL, species = NULL, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+betydb_citation <- function(id, genus = NULL, species = NULL, betyurl = "https://www.betydb.org/", fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
-  betydb_GET2(makeidurl("citations", id, fmt), args, key, user, pwd, "citation", ...)
+  betydb_GET2(makeidurl("citations", id, fmt, betyurl), args, key, user, pwd, "citation", ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_site <- function(id, fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
-  betydb_GET2(makeidurl("sites", id, fmt), args = NULL, key, user, pwd, "site", ...)
+betydb_site <- function(id, betyurl = "https://www.betydb.org/", fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+  betydb_GET2(makeidurl("sites", id, fmt, betyurl), args = NULL, key, user, pwd, "site", ...)
 }
 
-## can betydb_GET2 be merged with betydb_GET?
-betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
-  if (is.null(c(key, user, pwd))) {
-    user <- 'ropensci-traits'
-    pwd <- 'ropensci'
-  }
-  txt <- betydb_http(url, args, key, user, pwd, ...)
-  lst <- jsonlite::fromJSON(txt, FALSE)
-  x <- lst[[1]]
-  low_names(df_null(x))
-}
 
 betydb_auth <- function(x,y,z){
   if (is.null(z) && is.null(x)) {
@@ -150,13 +164,12 @@ betydb_auth <- function(x,y,z){
 }
 
 
-makeidurl <- function(x, id, fmt){
+makeidurl <- function(x, id, fmt, betyurl = 'https://www.betydb.org/'){
   fmt <- match.arg(fmt, c("json","xml","csv"))
-  sprintf("%s%s/%s.%s", betyurl(), x, id, fmt)
+  sprintf("%s%s/%s.%s", betyurl, x, id, fmt)
 }
 
 warn <- "Supply either api key, or user name/password combo"
-betyurl <- function() 'https://www.betydb.org/'
 
 
 # functions that dont work ------------------------------
