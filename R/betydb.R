@@ -14,7 +14,8 @@
 #' @param user,pwd (character) A user name and password. Use a user/pwd combo or an API key.
 #' Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}. Optional
-#' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
+#' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and 
+#' https://www.betydb.org/api/docs
 #' @details Details:
 #' BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
 #' databases that support and share data among more focused research programs.
@@ -26,6 +27,7 @@
 #' It does not currently interface with the workflow and provenance data that support PEcAn Project (pecanproject.org) and TERRA REF (terraref.org) software.
 #'
 #' API documentation: \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
+#' API endpoints are here: \url{https://www.betydb.org/api/docs}
 #' This package currently uses the 'original' API, which is stable.
 #' Newer versions of the API will support database inserts.
 #'
