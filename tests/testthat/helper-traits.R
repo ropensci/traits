@@ -4,3 +4,10 @@ check_betydb <- function(url){
     skip("Betydb is offline.")
   }
 }
+
+## only run if eol.org is up
+check_traitbank <- function(url){
+  if (httr::status_code(httr::GET("http://eol.org/api")) != 200) {
+    skip("eol's traitbank is offline.")
+  }
+}
