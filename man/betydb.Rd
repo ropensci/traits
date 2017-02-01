@@ -12,20 +12,20 @@
 betydb_search(query = "Maple SLA", betyurl = "https://www.betydb.org/",
   fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
 
-betydb_trait(id, genus = NULL, species = NULL,
+betydb_trait(id, genus = NULL, species = NULL, api_version = "v0",
   betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
 
-betydb_specie(id, genus = NULL, species = NULL,
+betydb_specie(id, genus = NULL, species = NULL, api_version = "v0",
   betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
 
-betydb_citation(id, genus = NULL, species = NULL,
+betydb_citation(id, genus = NULL, species = NULL, api_version = "v0",
   betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
   user = NULL, pwd = NULL, ...)
 
-betydb_site(id, betyurl = "https://www.betydb.org/", fmt = "json",
-  key = NULL, user = NULL, pwd = NULL, ...)
+betydb_site(id, api_version = "v0", betyurl = "https://www.betydb.org/",
+  fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
 }
 \arguments{
 \item{query}{Query terms}
@@ -48,6 +48,8 @@ Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. 
 \item{genus}{(character) A genus name. Optional}
 
 \item{species}{(character) A specific epithet. Optional}
+
+\item{api_version}{(character) Which version of the BETY API should we query? One of "v0" or "beta". Currently defaults to "v0".}
 }
 \description{
 Search for traits from BETYdb
