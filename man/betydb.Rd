@@ -30,7 +30,7 @@ betydb_site(id, betyurl = "https://www.betydb.org/", fmt = "json",
 \arguments{
 \item{query}{Query terms}
 
-\item{betyurl}{(string) url to target instance of betydb. Default is betydb.org}
+\item{betyurl}{(string) url to target instance of betydb. Default is https:/www.betydb.org/}
 
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
@@ -53,7 +53,6 @@ Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. 
 Search for traits from BETYdb
 }
 \details{
-Details:
 BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
 databases that support and share data among more focused research programs.
 
@@ -62,6 +61,12 @@ see \url{https://pecan.gitbooks.io/betydb-documentation/content/distributed_bety
 
 This package queries plant traits, phenotypes, biomass yields, and ecosystem functions.
 It does not currently interface with the workflow and provenance data that support PEcAn Project (pecanproject.org) and TERRA REF (terraref.org) software.
+
+API documentation: \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
+API endpoints are here: \url{https://www.betydb.org/api/docs}
+This package currently uses the original 'v0' API by default.
+To use a newer version, set `api_version`.
+Newer versions of the API will support database inserts.
 }
 \section{Authentication}{
 
@@ -98,6 +103,7 @@ betydb_site(id = 795)
 }
 }
 \references{
-API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
+API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
+https://www.betydb.org/api/docs
 }
 

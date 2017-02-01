@@ -6,7 +6,7 @@
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
 #' @param id (integer) One or more ids for a species, site, variable, etc.
-#' @param betyurl (string) url to target instance of betydb. Default is betydb.org
+#' @param betyurl (string) url to target instance of betydb. Default is https:/www.betydb.org/
 #' @param fmt (character) Format to return data in, one of json, xml, csv. Only json
 #' currently supported.
 #' @param key (character) An API key. Use this or user/pwd combo. Save in your
@@ -14,9 +14,9 @@
 #' @param user,pwd (character) A user name and password. Use a user/pwd combo or an API key.
 #' Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}. Optional
-#' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and 
+#' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
 #' https://www.betydb.org/api/docs
-#' @details Details:
+#' @details
 #' BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
 #' databases that support and share data among more focused research programs.
 #'
@@ -28,7 +28,8 @@
 #'
 #' API documentation: \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
 #' API endpoints are here: \url{https://www.betydb.org/api/docs}
-#' This package currently uses the 'original' API, which is stable.
+#' This package currently uses the original 'v0' API by default.
+#' To use a newer version, set `api_version`.
 #' Newer versions of the API will support database inserts.
 #'
 #' @section Authentication:

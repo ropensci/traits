@@ -8,7 +8,7 @@
 
 [BETYdb](https://www.betydb.org/) is the _Biofuel Ecophysiological Traits and Yields Database_. You can get many different types of data from this database, including trait data. 
 
-Function setup: All functions are prefixed with `betydb_`. Plural function names like `betydb_traits()` accept parameters and always give back a data.frame, while singlur function names like `betydb_trait()` accept an ID and give back a list. 
+Function setup: All functions are prefixed with `betydb_`. Plural function names like `betydb_traits()` accept parameters and always give back a data.frame, while singular function names like `betydb_trait()` accept an ID and give back a list.
 
 The idea with the functions with plural names is to search for either traits, species, etc., and with the singular function names to get data by one or more IDs.
 
@@ -222,4 +222,172 @@ betydb_site(id = 1)
 ## 
 ## $state
 ## [1] ""
+```
+
+For more detailed control over your search, use `betydb_query` to specify columns from any table of the database. If you don't specify a table, the yields and tables view (AKA the `/search` endpoint) is used by default.
+
+```r
+betydb_query(genus="Miscanthus")
+```
+
+```
+## # A tibble: 6 × 36
+##   access_level        author checked citation_id citation_year
+##          <int>         <chr>   <int>       <int>         <int>
+## 1            4 Clifton-Brown       1         189          2002
+## 2            4 Clifton-Brown       1         189          2002
+## 3            4 Clifton-Brown       1         189          2002
+## 4            4 Clifton-Brown       1         189          2002
+## 5            4 Clifton-Brown       1         189          2002
+## 6            4 Clifton-Brown       1         189          2002
+## # ... with 31 more variables: city <chr>, commonname <chr>,
+## #   cultivar <chr>, cultivar_id <int>, date <chr>, dateloc <chr>,
+## #   entity <lgl>, genus <chr>, id <int>, lat <dbl>, lon <dbl>,
+## #   mean <dbl>, method_name <chr>, month <int>, n <int>,
+## #   notes <chr>, raw_date <chr>, result_type <chr>,
+## #   scientificname <chr>, site_id <int>, sitename <chr>,
+## #   species_id <int>, stat <dbl>, statname <chr>, time <chr>,
+## #   trait <chr>, trait_description <chr>, treatment <chr>,
+## #   treatment_id <int>, units <chr>, year <int>
+```
+
+```r
+betydb_query(genus="Miscanthus", table="species")
+```
+
+```
+## # A tibble: 6 × 10
+##   acceptedsymbol                 commonname
+##            <chr>                      <chr>
+## 1                                          
+## 2           MISA           Amur silvergrass
+## 3           MISI        Chinese silvergrass
+## 4          MISCA                silvergrass
+## 5         MICA16                silvergrass
+## 6          MIFL3 Pacific Island silvergrass
+## # ... with 8 more variables: created_at <chr>, genus <chr>,
+## #   id <int>, notes <chr>, scientificname <chr>, spcd <lgl>,
+## #   species <chr>, updated_at <chr>
+```
+
+```r
+betydb_query(table = 'variables', name = 'Vcmax', betyurl = 'https://www.betydb.org//')
+```
+
+```
+## # A tibble: 1 × 13
+##   created_at                            description    id label
+## *      <lgl>                                  <chr> <int> <lgl>
+## 1         NA maximum rubisco carboxylation capacity     4    NA
+## # ... with 9 more variables: max <chr>, min <chr>, name <chr>,
+## #   notes <chr>, standard_name <lgl>, standard_units <lgl>,
+## #   type <lgl>, units <chr>, updated_at <chr>
+```
+
+Each query term you provide restricts the one before it. This includes zero: passing no query terms will retrieve the whole table.
+
+```r
+betydb_query(table = 'citations')
+```
+
+```
+## # A tibble: 814 × 13
+##            author                created_at
+## *           <chr>                     <chr>
+## 1         Balasko                      <NA>
+## 2           Price                      <NA>
+## 3        Townsend 2016-04-11T17:24:35-05:00
+## 4         Berdahl                      <NA>
+## 5     Shiklomanov 2015-07-13T10:21:23-05:00
+## 6       Baldocchi 2016-07-12T12:36:53-05:00
+## 7  Liu, Changming 2016-07-12T12:44:22-05:00
+## 8      Clegg, Max 2016-07-12T12:49:42-05:00
+## 9          Wertin 2016-07-12T17:18:39-05:00
+## 10       Missaoui                      <NA>
+## # ... with 804 more rows, and 11 more variables: doi <chr>,
+## #   id <dbl>, journal <chr>, pdf <chr>, pg <chr>, title <chr>,
+## #   updated_at <chr>, url <chr>, user_id <dbl>, vol <int>,
+## #   year <int>
+```
+
+```r
+betydb_query(table = 'citations', author = 'Aasamaa')
+```
+```
+## # A tibble: 2 × 13
+##    author                created_at
+## *   <chr>                     <chr>
+## 1 Aasamaa 2011-07-13T14:46:00-05:00
+## 2 Aasamaa 2010-09-02T13:44:07-05:00
+## # ... with 11 more variables: doi <chr>, id <int>, journal <chr>,
+## #   pdf <chr>, pg <chr>, title <chr>, updated_at <chr>,
+## #   url <chr>, user_id <int>, vol <int>, year <int>
+```
+
+```r
+betydb_query(table = 'citations', author = 'Aasamaa', year="2010")
+```
+
+```
+## # A tibble: 1 × 13
+##    author                created_at
+## *   <chr>                     <chr>
+## 1 Aasamaa 2011-07-13T14:46:00-05:00
+## # ... with 11 more variables: doi <chr>, id <int>, journal <chr>,
+## #   pdf <chr>, pg <chr>, title <chr>, updated_at <chr>,
+## #   url <chr>, user_id <int>, vol <int>, year <int>
+```
+
+Passing an ID should only ever match one result. Note that this is similar, but not identical, to the single-item view from the matching singular bety_<tablename> function. For example, compare `bety_citation(id=1)` and `betydb_query(id = 1, table = 'citations')`. 
+
+If using the new API, regular expression search works...
+
+```r
+betydb_query(distn= "~norm", table = 'priors', api_version="beta")
+```
+
+```
+## # A tibble: 116 × 15
+##       id citation_id variable_id  phylogeny distn parama paramb
+## *  <int>       <int>       <int>      <chr> <chr>  <dbl>  <dbl>
+## 1     40          51           4            lnorm  4.510  0.640
+## 2    287         838         568      grass lnorm  0.180  0.430
+## 3    288         840         492 Miscanthus lnorm -2.300  0.550
+## 4     10         203          22   C3 grass lnorm  1.240  0.900
+## 5     48         195          39   C4 crops  norm  0.057  0.006
+## 6     69          NA          26            lnorm  1.760  0.380
+## 7     49         195          39        CAM  norm  0.033  0.020
+## 8     75          NA          21            lnorm  0.210  0.600
+## 9     90         276          37   C4 grass  norm 10.000  5.000
+## 10    20         277          26            lnorm  2.300  1.000
+## # ... with 106 more rows, and 8 more variables: paramc <dbl>,
+## #   n <int>, notes <chr>, created_at <chr>, updated_at <chr>,
+## #   `number of associated pfts` <int>, view_url <chr>,
+## #   edit_url <chr>
+```
+
+...including, perversely but sometimes usefully, regular expressions treating numeric values as if they were strings!
+
+```r
+betydb_query(parama = "~0.0", table = 'priors', api_version="beta")
+```
+
+```
+## # A tibble: 34 × 15
+##       id citation_id variable_id        phylogeny distn parama
+## *  <int>       <int>       <int>            <chr> <chr>  <dbl>
+## 1     48         195          39         C4 crops  norm 0.0570
+## 2     49         195          39              CAM  norm 0.0330
+## 3    171         223         198             tree  unif 0.0010
+## 4    238         561          46            trees  unif 0.0200
+## 5    240         561         500            trees  unif 0.0100
+## 6    241         561         501            trees  unif 0.0100
+## 7    242         561         502            trees  unif 0.0100
+## 8    243         561         503            trees  unif 0.0100
+## 9    131         223          40        evergreen  unif 0.0400
+## 10   146         439         195 tundra evergreen  norm 0.0004
+## # ... with 24 more rows, and 9 more variables: paramb <dbl>,
+## #   paramc <lgl>, n <int>, notes <chr>, created_at <chr>,
+## #   updated_at <chr>, `number of associated pfts` <int>,
+## #   view_url <chr>, edit_url <chr>
 ```
