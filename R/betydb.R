@@ -89,6 +89,52 @@ makepropname <- function(name, api_version){
   )
 }
 
+#' Query a BETY table
+#'
+#' @export
+#' @param ... (named character) Columns to query, as key="value" pairs. Note that betydb_query passes these along to BETY with no check whether the requested keys exist in the specified table.
+#' @param table (character) The name of the database table to query, or "search" (the default) for the traits and yields view
+#' @param key (character) An API key. Use this or user/pwd combo. Save in your
+#' \code{.Rprofile} file as \code{betydb_key}. Optional
+#' @param api_version (character) Which version of the betydb api to use? Optional, defaults to 'v0'
+#' @param betyurl (string) url to target instance of betydb. Default is https:/www.betydb.org/
+#'
+#' @return A data.frame with attributes containing request metadata, or NULL if the query produced no results
+#'
+#' @details
+#' Use betydb_query to retrieve records from a table that match on all the column filters specified in '...'.
+#' If no filters are specified, retrieves the whole table. In API versions that support it (i.e. not in v0), filter strings beginning with "~" are treated as regular expressions.
+#'
+#' @examples \dontrun{
+#' # literal vs regular expression vs anchored regular expression:
+#' betydb_query(units="Mg", table="variables")
+#' # NULL
+#' betydb_query(units="Mg/ha", table="variables") %>% select(name) %>% c()
+#' # $name
+#' # [1] "a_biomass"                  "root_live_biomass"
+#' # [3] "leaf_dead_biomass_in_Mg_ha" "SDM"
+#'
+#' betydb_query(genus="Miscanthus", table="species") %>% nrow()
+#' # [1] 10
+#' (betydb_query(genus="~misc", table="species", api_version="beta")
+#'  %>% select(genus)
+#'  %>% unique() %>% c())
+#' # $genus
+#' # [1] "Platymiscium" "Miscanthus"   "Dermiscellum"
+#'
+#' (betydb_query(genus="~^misc", table="species", api_version="beta")
+#'  %>% select(genus)
+#'  %>% unique() %>% c())
+#' # $genus
+#' # [1] "Miscanthus"
+#' }
+#'
+betydb_query <- function(..., table = "search", key=NULL, api_version = "v0", betyurl = "https://www.betydb.org/"){
+  url <- makeurl(x=table, fmt="json", api_version=api_version, betyurl=betyurl)
+  propname <- makepropname(table, api_version)
+  betydb_GET(url, args=list(...), key=key, user=NULL, pwd=NULL, which=propname)
+}
+
 betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
   txt <- betydb_http(url, args, key, user, pwd, ...)
   lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)

@@ -80,6 +80,20 @@ test_that("Credentials work", {
   expect_null(betydb_search('wright 2004'))
 })
 
+test_that("betydb_query works", {
+  skip_on_cran()
+  check_betydb()
+
+  np <- betydb_query(distn="norm", table="priors")
+  expect_is(np, "data.frame")
+  expect_is(np$distn, "character")
+  expect_equal(length(unique(np$distn)), 1)
+  expect_equal(unique(np$distn), "norm")
+
+  np_grass <- betydb_query(distn="norm", phylogeny="grass", table="priors")
+  expect_true(all(np_grass$id %in% np$id))
+})
+
 test_that("betydb_trait works", {
   skip_on_cran()
   check_betydb()
