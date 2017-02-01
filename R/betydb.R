@@ -94,7 +94,7 @@ betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
   x <- lst[[1]]
   return(low_names(df_null(x)))
 }
-betydb_http <- function(url, args = list(), key, user, pwd, ...){
+betydb_http <- function(url, args = list(), key=NULL, user=NULL, pwd=NULL, ...){
   auth <- betydb_auth(user, pwd, key)
 
   includes <- list(`include[]=` = ifelse(any(grepl('species', names(args))), "specie", ''),
