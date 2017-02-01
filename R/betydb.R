@@ -76,10 +76,6 @@ makeurl <- function(x, fmt, include = NULL, betyurl){
 
 
 betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
-  if (is.null(c(key, user, pwd))) {
-    user <- 'ropensci-traits'
-    pwd <- 'ropensci'
-  }
 
   txt <- betydb_http(url, args, key, user, pwd, ...)
   if (txt == "[]") {
@@ -93,10 +89,6 @@ betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
 
 # merge betydb_GET2 with betydb_GET when updating to new API (beta / v1)
 betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
-  if (is.null(c(key, user, pwd))) {
-    user <- 'ropensci-traits'
-    pwd <- 'ropensci'
-  }
   txt <- betydb_http(url, args, key, user, pwd, ...)
   lst <- jsonlite::fromJSON(txt, FALSE)
   x <- lst[[1]]
@@ -150,19 +142,26 @@ betydb_site <- function(id, betyurl = "https://www.betydb.org/", fmt = "json", k
 }
 
 
-betydb_auth <- function(x,y,z){
-  if (is.null(z) && is.null(x)) {
-    z <- getOption("betydb_key", NULL)
+betydb_auth <- function(user,pwd,key){
+  if (is.null(key) && is.null(user)) {
+    key <- getOption("betydb_key", NULL)
   }
-  if (!is.null(z)) {
-    list(key = z)
+  if (!is.null(key)) {
+    auth <- list(key = key)
   } else {
-    if (is.null(x)) x <- getOption("betydb_user", "")
-    if (x == "") stop(warn, call. = FALSE)
-    if (is.null(y)) y <- getOption("betydb_pwd", "")
-    if (y == "") stop(warn, call. = FALSE)
-    list(user = x, pwd = y, key = NULL)
+    if (is.null(user)) user <- getOption("betydb_user", NULL)
+    if (is.null(pwd)) pwd <- getOption("betydb_pwd", NULL)
+    if (xor(is.null(user), is.null(pwd))) stop(warn, call. = FALSE)
+    auth <- list(user = user, pwd = pwd, key = NULL)
   }
+
+  if (is.null(c(auth$key, auth$user, auth$pwd))) {
+    # If no auth of any kind provided, use the ropensci-traits API key.
+    # TODO: Are there implementations that accept password but not key? If so:
+    # auth <- list(user <- 'ropensci-traits', pwd <- 'ropensci', key=NULL)
+    auth$key="eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv"
+  }
+  auth
 }
 
 
