@@ -68,10 +68,25 @@ betydb_search <- function(query = "Maple SLA", betyurl = "https://www.betydb.org
   return(result)
 }
 
-makeurl <- function(x, fmt, include = NULL, betyurl){
+makeurl <- function(x, fmt, api_version="v0", include = NULL, betyurl){
+  api_string <- if (api_version == "v0") { "" } else { paste0("api/", api_version, "/")}
   fmt <- match.arg(fmt, c("json","xml","csv"))
-  url <- paste0(betyurl, paste0(x, "."), fmt)
+  url <- paste0(betyurl, api_string, paste0(x, "."), fmt)
   return(url)
+}
+
+# Look up property name (usually singular)
+# from a table name (usually plural)
+# FIXME: not a very future-proof approach.
+# Would be nice if we could query the API itself for these.
+makepropname <- function(name, api_version){
+  switch(
+    name,
+    search = "traits_and_yields_view",
+    species = if(api_version=="v0"){ "specie" }else{ "species" },
+    entities = "entity",
+    sub("s$", "", name)
+  )
 }
 
 betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
