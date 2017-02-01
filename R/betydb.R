@@ -97,14 +97,17 @@ betydb_GET2 <- function(url, args = list(), key, user, pwd, which, ...){
 betydb_http <- function(url, args = list(), key=NULL, user=NULL, pwd=NULL, ...){
   auth <- betydb_auth(user, pwd, key)
 
-  includes <- list(`include[]=` = ifelse(any(grepl('species', names(args))), "specie", ''),
-       `include[]=` = ifelse(any(grepl('variables', names(args))), 'variable', ''),
-       `include[]=` = ifelse(any(grepl('authors', names(args))), 'author', ''))
-
-  includes[which(includes == "")] <- NULL
-  args <- append(args, includes)
+  if (!grepl("/api/", url, fixed=TRUE)) {
+    # no API string means we're using the v0 API and must insert cross-table joins to allow searching.
+    # TODO: Remove this block when expiring v0 support.
+    includes <- list(`include[]=` = ifelse(any(grepl('species', names(args))), "specie", ''),
+         `include[]=` = ifelse(any(grepl('variables', names(args))), 'variable', ''),
+         `include[]=` = ifelse(any(grepl('authors', names(args))), 'author', ''))
+    includes[which(includes == "")] <- NULL
+    args <- append(args, includes)
+  }
   res <- if (is.null(auth$key)) {
-    res <- GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
+    GET(url, query = args, authenticate(auth$user, auth$pwd), ...)
   } else {
     GET(url, query = c(key = auth$key, args), ...)
   }
