@@ -74,17 +74,28 @@ makeurl <- function(x, fmt, include = NULL, betyurl){
   return(url)
 }
 
-
 betydb_GET <- function(url, args = list(), key, user, pwd, which, ...){
-
   txt <- betydb_http(url, args, key, user, pwd, ...)
-  if (txt == "[]") {
-      result <- NULL
-  } else {
-      lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
-      result <- setNames(tbl_df(lst), gsub(sprintf("%s\\.", which), "", tolower(names(lst))))
+  lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+
+  if ("warnings" %in% names(lst)) {
+    warning(lst$warnings)
   }
-  return(result)
+  if ("errors" %in% names(lst)) {
+    # TODO: Can we ever get here?
+    # if lst$error always comes with a 4xx status, will be caught inside betydb_http().
+    stop(lst$errors)
+  }
+  if ("metadata" %in% names(lst)) { # true iff API > v0
+    md <- lst$metadata
+    lst <- lst$data
+  }
+  if (length(lst) == 0) { # no results
+      return(NULL)
+  }
+  res <- setNames(tbl_df(lst), gsub(sprintf("%s\\.", which), "", tolower(names(lst))))
+  if (exists("md") && !is.null(md)) { attr(res, "metadata") <- md }
+  res
 }
 
 # merge betydb_GET2 with betydb_GET when updating to new API (beta / v1)
