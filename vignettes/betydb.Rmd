@@ -224,6 +224,8 @@ betydb_site(id = 1)
 ## [1] ""
 ```
 
+## Queries
+
 For more detailed control over your search, use `betydb_query` to specify columns from any table of the database. If you don't specify a table, the yields and tables view (AKA the `/search` endpoint) is used by default.
 
 ```r
