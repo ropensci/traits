@@ -65,6 +65,7 @@ It does not currently interface with the workflow and provenance data that suppo
 
 API documentation: \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
 API endpoints are here: \url{https://www.betydb.org/api/docs}
+
 This package currently uses the original 'v0' API by default.
 To use a newer version, set `api_version`.
 Newer versions of the API will support database inserts.
@@ -106,6 +107,7 @@ betydb_site(id = 795)
 }
 }
 \references{
+
 API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
 https://www.betydb.org/api/docs
 }

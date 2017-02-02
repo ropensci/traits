@@ -18,7 +18,8 @@
 #' species <- c("Colletes similis","Halictus ligatus","Perdita trisignata")
 #' ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 #' }
-ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, verbose=TRUE) {
+ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
+                        verbose=TRUE, ...) {
   foo <- function(xx) {
     mssg(verbose, paste("Working on ", xx, "...", sep = ""))
     mssg(verbose, "...retrieving sequence IDs...")
@@ -30,8 +31,11 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, v
     }
     genes_ <- paste("(", genes_, ")")
 
-    query <- list(db = "nuccore", term = paste(xx, "[Organism] AND", genes_, "AND",
-                                               seqrange, "[SLEN]", collapse = " "), RetMax = 500)
+    query <- list(
+      db = "nuccore",
+      term = paste(xx, "[Organism] AND", genes_, "AND",
+                   seqrange, "[SLEN]", collapse = " "),
+      RetMax = 500)
 
     out <-
       xml2::xml_find_all(xml2::read_xml(content(GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
@@ -40,7 +44,9 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, v
       message(paste("no sequences of ", gene, " for ", xx, " - getting other sp.", sep = ""))
       if (getrelated == FALSE) {
         mssg(verbose, paste("no sequences of ", gene, " for ", xx, sep = ""))
-        res <- data.frame(list(xx, "NA", "NA", "NA", "NA", "NA", "NA"))
+        res <- data.frame(
+          list(xx, "NA", NaN, "NA", NaN, "NA", "NA"),
+          stringsAsFactors = FALSE)
         names(res) <- NULL
       } else {
         mssg(verbose, "...retrieving sequence IDs for related species...")
@@ -51,7 +57,9 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, v
                                                     "text", encoding = "UTF-8")), "//eSearchResult")[[1]]
         if (as.numeric(xml2::xml_text(xml2::xml_find_all(out, "//Count")[[1]])) == 0) {
           mssg(verbose, paste("no sequences of ", gene, " for ", xx, " or ", newname, sep = ""))
-          res <- data.frame(list(xx, "NA", "NA", "NA", "NA", "NA", "NA"))
+          res <- data.frame(
+            list(xx, "NA", NaN, "NA", NaN, "NA", "NA"),
+            stringsAsFactors = FALSE)
           names(res) <- NULL
         } else {
           ## For each species = get GI number with longest sequence
@@ -73,7 +81,7 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, v
     }
 
     mssg(verbose, "...done.")
-    setNames(res, c("taxon", "gene_desc", "gi_no", "acc_no", "length", "sequence", "spused"))
+    stats::setNames(res, c("taxon", "gene_desc", "gi_no", "acc_no", "length", "sequence", "spused"))
   }
 
   foo_safe <- tryfail(NULL, foo)

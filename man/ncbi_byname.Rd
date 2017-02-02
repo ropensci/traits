@@ -5,7 +5,7 @@
 \title{Retrieve gene sequences from NCBI by taxon name and gene names.}
 \usage{
 ncbi_byname(taxa, gene = "COI", seqrange = "1:3000", getrelated = FALSE,
-  verbose = TRUE)
+  verbose = TRUE, ...)
 }
 \arguments{
 \item{taxa}{(character) Scientific name to search for.}
