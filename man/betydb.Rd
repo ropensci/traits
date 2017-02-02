@@ -9,8 +9,7 @@
 \alias{betydb_trait}
 \title{Search for traits from BETYdb}
 \usage{
-betydb_search(query = "Maple SLA", betyurl = "https://www.betydb.org/",
-  fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
+betydb_search(query = "Maple SLA", ...)
 
 betydb_trait(id, genus = NULL, species = NULL, api_version = "v0",
   betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
@@ -30,6 +29,16 @@ betydb_site(id, api_version = "v0", betyurl = "https://www.betydb.org/",
 \arguments{
 \item{query}{Query terms}
 
+\item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
+
+\item{id}{(integer) One or more ids for a species, site, variable, etc.}
+
+\item{genus}{(character) A genus name. Optional}
+
+\item{species}{(character) A specific epithet. Optional}
+
+\item{api_version}{(character) Which version of the BETY API should we query? One of "v0" or "beta". Currently defaults to "v0".}
+
 \item{betyurl}{(string) url to target instance of betydb. Default is https:/www.betydb.org/}
 
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
@@ -40,16 +49,6 @@ currently supported.}
 
 \item{user, pwd}{(character) A user name and password. Use a user/pwd combo or an API key.
 Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional}
-
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
-
-\item{id}{(integer) One or more ids for a species, site, variable, etc.}
-
-\item{genus}{(character) A genus name. Optional}
-
-\item{species}{(character) A specific epithet. Optional}
-
-\item{api_version}{(character) Which version of the BETY API should we query? One of "v0" or "beta". Currently defaults to "v0".}
 }
 \description{
 Search for traits from BETYdb
@@ -83,6 +82,8 @@ and return a list of variable outputs depending on the inputs.
 
 However, plural functions like \code{betydb_traits} accept query parameters, but not
 ids, and always return a single data.frame.
+
+\code{betydb_search("Search terms", ...)} is a convenience wrapper that passes all further arguments to \code{\link{betydb_query}(table="search", search="Search terms", ...)}. See there for details on possible arguments.
 }
 \examples{
 \dontrun{

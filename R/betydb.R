@@ -43,6 +43,9 @@
 #'
 #' However, plural functions like \code{betydb_traits} accept query parameters, but not
 #' ids, and always return a single data.frame.
+#'
+#' \code{betydb_search("Search terms", ...)} is a convenience wrapper that passes all further arguments to \code{\link{betydb_query}(table="search", search="Search terms", ...)}. See there for details on possible arguments.
+#'
 #' @examples \dontrun{
 #' # General Search
 #' out <- betydb_search(query = "Switchgrass Yield")
@@ -64,10 +67,8 @@
 
 #' @export
 #' @rdname betydb
-betydb_search <- function(query = "Maple SLA", betyurl = "https://www.betydb.org/", fmt = 'json', key = NULL, user = NULL, pwd = NULL, ...){
-  base.url <- makeurl("search", fmt, betyurl = betyurl)
-  result <- betydb_GET(url = base.url, args = list(search = query), key, user, pwd, which = "traits_and_yields_view", ...)
-  return(result)
+betydb_search <- function(query = "Maple SLA", ...){
+  betydb_query(search = query, table = "search", ...)
 }
 
 makeurl <- function(x, fmt, api_version="v0", include = NULL, betyurl){
