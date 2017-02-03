@@ -3,6 +3,7 @@
 \name{betydb}
 \alias{betydb}
 \alias{betydb_citation}
+\alias{betydb_item}
 \alias{betydb_search}
 \alias{betydb_site}
 \alias{betydb_specie}
@@ -10,6 +11,9 @@
 \title{Search for traits from BETYdb}
 \usage{
 betydb_search(query = "Maple SLA", ...)
+
+betydb_item(id, table, api_version = "v0",
+  betyurl = "https://www.betydb.org/", fmt = "json", ...)
 
 betydb_trait(id, genus = NULL, species = NULL, api_version = "v0",
   betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
@@ -33,9 +37,7 @@ betydb_site(id, api_version = "v0", betyurl = "https://www.betydb.org/",
 
 \item{id}{(integer) One or more ids for a species, site, variable, etc.}
 
-\item{genus}{(character) A genus name. Optional}
-
-\item{species}{(character) A specific epithet. Optional}
+\item{table}{(character) Name of the database table with which this ID is associated.}
 
 \item{api_version}{(character) Which version of the BETY API should we query? One of "v0" or "beta". Currently defaults to "v0".}
 
@@ -43,6 +45,10 @@ betydb_site(id, api_version = "v0", betyurl = "https://www.betydb.org/",
 
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
+
+\item{genus}{(character) A genus name. Optional}
+
+\item{species}{(character) A specific epithet. Optional}
 
 \item{key}{(character) An API key. Use this or user/pwd combo. Save in your
 \code{.Rprofile} file as \code{betydb_key}. Optional}
@@ -52,6 +58,8 @@ Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. 
 }
 \description{
 Search for traits from BETYdb
+
+Get details about a single item from a table
 }
 \details{
 BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
@@ -65,7 +73,6 @@ It does not currently interface with the workflow and provenance data that suppo
 
 API documentation: \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
 API endpoints are here: \url{https://www.betydb.org/api/docs}
-
 This package currently uses the original 'v0' API by default.
 To use a newer version, set `api_version`.
 Newer versions of the API will support database inserts.
@@ -107,7 +114,6 @@ betydb_site(id = 795)
 }
 }
 \references{
-
 API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
 https://www.betydb.org/api/docs
 }

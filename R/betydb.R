@@ -190,6 +190,16 @@ betydb_http <- function(url, args = list(), key=NULL, user=NULL, pwd=NULL, ...){
 }
 
 #################### by ID
+
+#' Get details about a single item from a table
+#' @export
+#' @rdname betydb
+#' @param table (character) Name of the database table with which this ID is associated.
+betydb_item <- function(id, table, api_version="v0", betyurl = "https://www.betydb.org/", fmt="json", ...){
+  args = list(...)
+  betydb_GET(makeidurl(table, id, fmt, api_version, betyurl), args, which=makepropname(table, api_version))
+}
+
 #' @export
 #' @rdname betydb
 betydb_trait <- function(id, genus = NULL, species = NULL, api_version="v0", betyurl = "https://www.betydb.org/", fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
