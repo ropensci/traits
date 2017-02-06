@@ -2,7 +2,11 @@
 #'
 #' @export
 #' @template ncbi
+#' @param taxa (character) vector of species scientific names
 #' @param gene (character) Gene or genes (in a vector) to search for. See examples.
+#' @param seqrange (integer) vector representing range of records to return 
+#' @param getrelated (boolean) Return related records? 
+#' @param verbose (boolean) provide verbose output?
 #' @details Removes predicted sequences so you don't have to remove them.
 #'   	Predicted sequences are those with accession numbers that have "XM_" or
 #' 		"XR_" prefixes. This function retrieves one sequences for each species,
