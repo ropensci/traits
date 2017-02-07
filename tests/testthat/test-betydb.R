@@ -94,14 +94,14 @@ test_that("betydb_query works", {
   expect_true(all(np_grass$id %in% np$id))
 })
 
-test_that("betydb_item works", {
+test_that("betydb_record works", {
   skip_on_cran()
   check_betydb()
 
-  item <- betydb_item(id = 10, table="traits")
-  expect_is(item, "list")
-  expect_is(item$id, "integer")
-  expect_equal(item$id, 10)
+  rec <- betydb_record(id = 10, table="traits")
+  expect_is(rec, "list")
+  expect_is(rec$id, "integer")
+  expect_equal(rec$id, 10)
 })
 
 test_that("betydb_trait works", {

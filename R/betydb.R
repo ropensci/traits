@@ -195,7 +195,7 @@ betydb_http <- function(url, args = list(), key=NULL, user=NULL, pwd=NULL, ...){
 #' @export
 #' @rdname betydb
 #' @param table (character) Name of the database table with which this ID is associated.
-betydb_item <- function(id, table, api_version="v0", betyurl = "https://www.betydb.org/", fmt="json", ...){
+betydb_record <- function(id, table, api_version="v0", betyurl = "https://www.betydb.org/", fmt="json", ...){
   args = list(...)
   betydb_GET(makeidurl(table, id, fmt, api_version, betyurl), args, which=makepropname(table, api_version))
 }

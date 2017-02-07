@@ -3,7 +3,7 @@
 \name{betydb}
 \alias{betydb}
 \alias{betydb_citation}
-\alias{betydb_item}
+\alias{betydb_record}
 \alias{betydb_search}
 \alias{betydb_site}
 \alias{betydb_specie}
@@ -12,7 +12,7 @@
 \usage{
 betydb_search(query = "Maple SLA", ...)
 
-betydb_item(id, table, api_version = "v0",
+betydb_record(id, table, api_version = "v0",
   betyurl = "https://www.betydb.org/", fmt = "json", ...)
 
 betydb_trait(id, genus = NULL, species = NULL, api_version = "v0",
