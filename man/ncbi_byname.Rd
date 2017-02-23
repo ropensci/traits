@@ -21,6 +21,8 @@ in the same genus as the one searched for. If \code{FALSE}, returns nothing if n
 found.}
 
 \item{verbose}{(logical) If \code{TRUE} (default), informative messages printed.}
+
+\item{...}{Curl options passed on to \code{\link[httr]{GET}}}
 }
 \value{
 Data.frame of results.
