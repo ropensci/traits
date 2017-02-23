@@ -27,7 +27,7 @@ test_that("BETYdb beta API works", {
   check_betydb()
 
   betyurl <- "https://www.betydb.org/"
-  priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl, api_version="beta")
+  priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl, api_version = "beta")
   expect_equal(priors_url, paste0(betyurl, "api/beta/priors.json"))
 
   get.out <- GET(priors_url) # Priors is a small table
@@ -42,14 +42,14 @@ test_that("table to property name matching works", {
   getprop <- function(name){
     txt <- betydb_http(
       makeurl(name, fmt = "json", betyurl = "https://www.betydb.org/", api_version = "beta"),
-      args = list(limit=1),
+      args = list(limit = 1),
       key = NULL,
       user = NULL,
       pwd = NULL)
     names(jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = FALSE)$data)[[1]]
   }
   tablenames <- c("search", "species", "entities", "citations", "pfts")
-  expected_propnames <- sapply(tablenames, makepropname, api_version="beta")
+  expected_propnames <- sapply(tablenames, makepropname, api_version = "beta")
   got_propnames <- sapply(tablenames, getprop)
 
   expect_equal(got_propnames, expected_propnames)
@@ -103,11 +103,11 @@ test_that("URL & version options work", {
 
   options(betydb_url = "http://example.com/", betydb_api_version = "beta")
   expect_error(betydb_query(author = "Arundale", table = "citations"), "Not Found")
-  opt2 <- betydb_query(author = "Arundale", table = "citations", 
+  opt2 <- betydb_query(author = "Arundale", table = "citations",
     betyurl = "https://www.betydb.org/")
   opt3 <- betydb_query(author = "Arundale", table = "citations",
     betyurl = "https://www.betydb.org/", api_version = "v0")
-  
+
   expect_gt(ncol(opt2), ncol(opt3)) # new API returns more params
   expect_equal(opt2$id, opt3$id) # but both should find same IDs
   expect_equal(opt1, opt3)
@@ -117,13 +117,13 @@ test_that("betydb_query works", {
   skip_on_cran()
   check_betydb()
 
-  np <- betydb_query(distn="norm", table="priors")
+  np <- betydb_query(distn = "norm", table = "priors")
   expect_is(np, "data.frame")
   expect_is(np$distn, "character")
   expect_equal(length(unique(np$distn)), 1)
   expect_equal(unique(np$distn), "norm")
 
-  np_grass <- betydb_query(distn="norm", phylogeny="grass", table="priors")
+  np_grass <- betydb_query(distn = "norm", phylogeny = "grass", table = "priors")
   expect_true(all(np_grass$id %in% np$id))
 })
 
@@ -131,7 +131,7 @@ test_that("betydb_record works", {
   skip_on_cran()
   check_betydb()
 
-  rec <- betydb_record(id = 10, table="traits")
+  rec <- betydb_record(id = 10, table = "traits")
   expect_is(rec, "list")
   expect_is(rec$id, "integer")
   expect_equal(rec$id, 10)

@@ -91,7 +91,7 @@ and return a list of variable outputs depending on the inputs.
 However, plural functions like \code{betydb_traits} accept query parameters, but not
 ids, and always return a single data.frame.
 
-\code{betydb_search("Search terms", ...)} is a convenience wrapper that passes all further arguments to \code{\link{betydb_query}(table="search", search="Search terms", ...)}. See there for details on possible arguments.
+\code{betydb_search("Search terms", ...)} is a convenience wrapper that passes all further arguments to \code{\link{betydb_query}(table = "search", search = "Search terms", ...)}. See there for details on possible arguments.
 }
 \examples{
 \dontrun{
