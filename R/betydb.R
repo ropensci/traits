@@ -2,7 +2,6 @@
 #'
 #' @name betydb
 #'
-#' @param query Query terms
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
 #' @param id (integer) One or more ids for a species, site, variable, etc.
@@ -64,12 +63,7 @@
 #' ## Site information
 #' betydb_site(id = 795)
 #' }
-
-#' @export
-#' @rdname betydb
-betydb_search <- function(query = "Maple SLA", ...){
-  betydb_query(search = query, table = "search", ...)
-}
+NULL
 
 makeurl <- function(table, id = NULL, fmt = "json", api_version = NULL, betyurl = NULL){
   if (is.null(betyurl)) {
@@ -109,6 +103,7 @@ makepropname <- function(name, api_version){
 #' @export
 #' @param ... (named character) Columns to query, as key="value" pairs. Note that betydb_query passes these along to BETY with no check whether the requested keys exist in the specified table.
 #' @param table (character) The name of the database table to query, or "search" (the default) for the traits and yields view
+#' @param query (character) A string containing one or more words to be queried across all columns of the "search" table.
 #' @param key (character) An API key. Use this or user/pwd combo.
 #' Save in your \code{.Rprofile} file as \code{options(betydb_key = "your40digitkey")}. Optional
 #' @param api_version (character) Which version of the BETY API should we query? One of "v0" or "beta".
@@ -150,6 +145,12 @@ betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, 
   url <- makeurl(table = table, fmt = "json", api_version = api_version, betyurl = betyurl)
   propname <- makepropname(table, api_version)
   betydb_GET(url, args = list(...), key = key, user = NULL, pwd = NULL, which = propname)
+}
+
+#' @export
+#' @rdname betydb_query
+betydb_search <- function(query = "Maple SLA", ...){
+  betydb_query(search = query, table = "search", ...)
 }
 
 betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, which, ...){

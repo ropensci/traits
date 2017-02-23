@@ -4,14 +4,11 @@
 \alias{betydb}
 \alias{betydb_citation}
 \alias{betydb_record}
-\alias{betydb_search}
 \alias{betydb_site}
 \alias{betydb_specie}
 \alias{betydb_trait}
 \title{Search for traits from BETYdb}
 \usage{
-betydb_search(query = "Maple SLA", ...)
-
 betydb_record(id, table, api_version = NULL, betyurl = NULL, fmt = "json",
   ...)
 
@@ -31,10 +28,6 @@ betydb_site(id, api_version = NULL, betyurl = NULL, fmt = "json",
   key = NULL, user = NULL, pwd = NULL, ...)
 }
 \arguments{
-\item{query}{Query terms}
-
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
-
 \item{id}{(integer) One or more ids for a species, site, variable, etc.}
 
 \item{table}{(character) Name of the database table with which this ID is associated.}
@@ -45,6 +38,8 @@ betydb_site(id, api_version = NULL, betyurl = NULL, fmt = "json",
 
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
+
+\item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
 
 \item{genus}{(character) A genus name. Optional}
 
