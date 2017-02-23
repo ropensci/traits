@@ -92,6 +92,9 @@ makeurl <- function(table, id = NULL, fmt = "json", api_version = NULL, betyurl 
 # FIXME: not a very future-proof approach.
 # Would be nice if we could query the API itself for these.
 makepropname <- function(name, api_version){
+  if (is.null(api_version)) {
+    api_version <- getOption("betydb_api_version", default = "v0")
+  }
   switch(
     name,
     search = "traits_and_yields_view",
