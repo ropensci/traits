@@ -104,6 +104,7 @@ makepropname <- function(name, api_version){
 #' @param ... (named character) Columns to query, as key="value" pairs. Note that betydb_query passes these along to BETY with no check whether the requested keys exist in the specified table.
 #' @param table (character) The name of the database table to query, or "search" (the default) for the traits and yields view
 #' @param query (character) A string containing one or more words to be queried across all columns of the "search" table.
+#' @param include_unchecked (logical) Include results that have not been quality checked? Applies only to tables with a "checked" column: "search", "traits", "yields". Default is to exclude unchecked values.
 #' @param key (character) An API key. Use this or user/pwd combo.
 #' Save in your \code{.Rprofile} file as \code{options(betydb_key = "your40digitkey")}. Optional
 #' @param api_version (character) Which version of the BETY API should we query? One of "v0" or "beta".
@@ -149,8 +150,8 @@ betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, 
 
 #' @export
 #' @rdname betydb_query
-betydb_search <- function(query = "Maple SLA", ...){
-  betydb_query(search = query, table = "search", ...)
+betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL){
+  betydb_query(search = query, table = "search", include_unchecked = include_unchecked, ...)
 }
 
 betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, which, ...){

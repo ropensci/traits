@@ -175,3 +175,14 @@ test_that("betydb_site works", {
   expect_is(dd, "list")
   expect_is(dd$city, "character")
 })
+
+test_that("include_unchecked works", {
+  skip_on_cran()
+  check_betydb()
+
+  q1 <- betydb_search(query = "maple SLA")
+  q2 <- betydb_search(query = "maple SLA", include_unchecked = TRUE)
+
+  expect_gt(nrow(q2), nrow(q1))
+  expect_true(all(q1$id %in% q2$id))
+})

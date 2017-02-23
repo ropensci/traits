@@ -8,7 +8,7 @@
 betydb_query(..., table = "search", key = NULL, api_version = NULL,
   betyurl = NULL)
 
-betydb_search(query = "Maple SLA", ...)
+betydb_search(query = "Maple SLA", ..., include_unchecked = NULL)
 }
 \arguments{
 \item{...}{(named character) Columns to query, as key="value" pairs. Note that betydb_query passes these along to BETY with no check whether the requested keys exist in the specified table.}
@@ -25,6 +25,8 @@ Default is \code{options("betydb_api_version")} if set, otherwise  "v0".}
 Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"}
 
 \item{query}{(character) A string containing one or more words to be queried across all columns of the "search" table.}
+
+\item{include_unchecked}{(logical) Include results that have not been quality checked? Applies only to tables with a "checked" column: "search", "traits", "yields". Default is to exclude unchecked values.}
 }
 \value{
 A data.frame with attributes containing request metadata, or NULL if the query produced no results
