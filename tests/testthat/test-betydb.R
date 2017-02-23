@@ -73,11 +73,44 @@ test_that("Credentials work", {
   usrpwd <- betydb_search('Acer rubrum', user = "ropensci-traits", pwd = "ropensci")
   key <- betydb_search('Acer rubrum', key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")
   expect_equal(usrpwd$id, key$id)
+
+  prevkey <- options(betydb_key = "NOTVALID")
+  on.exit(options(prevkey))
+  # FIXME - should use v0 API for symmetry w/ other calls,
+  # but v0 skips auth for search table
+  expect_error(betydb_search("Acer rubrum", api_version = "beta"), "Unauthorized")
+  options(betydb_key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")
+  optkey <- betydb_search('Acer rubrum')
+  expect_equal(optkey$id, key$id)
+
   salix <- betydb_search('salix yield')
   expect_true(min(salix$access_level) >= 4, info = "please report to betydb@gmail.com")
 
   ## Glopnet data are restricted
   expect_null(betydb_search('wright 2004'))
+})
+
+test_that("URL & version options work", {
+  skip_on_cran()
+  check_betydb()
+
+  opts <- options()
+  on.exit(reset_opts(opts))
+  options(
+    betydb_url = "https://www.betydb.org/",
+    betydb_api_version = "v0")
+  opt1 <- betydb_query(author = "Arundale", table = "citations")
+
+  options(betydb_url = "http://example.com/", betydb_api_version = "beta")
+  expect_error(betydb_query(author = "Arundale", table = "citations"), "Not Found")
+  opt2 <- betydb_query(author = "Arundale", table = "citations", 
+    betyurl = "https://www.betydb.org/")
+  opt3 <- betydb_query(author = "Arundale", table = "citations",
+    betyurl = "https://www.betydb.org/", api_version = "v0")
+  
+  expect_gt(ncol(opt2), ncol(opt3)) # new API returns more params
+  expect_equal(opt2$id, opt3$id) # but both should find same IDs
+  expect_equal(opt1, opt3)
 })
 
 test_that("betydb_query works", {

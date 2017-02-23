@@ -6,14 +6,14 @@
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
 #' @param id (integer) One or more ids for a species, site, variable, etc.
-#' @param betyurl (string) url to target instance of betydb. Default is https:/www.betydb.org/
+#' @param betyurl (string) url to target instance of betydb. Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"
 #' @param fmt (character) Format to return data in, one of json, xml, csv. Only json
 #' currently supported.
-#' @param api_version (character) Which version of the BETY API should we query? One of "v0" or "beta". Currently defaults to "v0".
+#' @param api_version (character) Which version of the BETY API should we query? One of "v0" or "beta". Default is \code{options("betydb_api_version")} if set, otherwise  "v0".
 #' @param key (character) An API key. Use this or user/pwd combo. Save in your
-#' \code{.Rprofile} file as \code{betydb_key}. Optional
+#' \code{.Rprofile} file as \code{options(betydb_key = "your40digitkey")}. Optional
 #' @param user,pwd (character) A user name and password. Use a user/pwd combo or an API key.
-#' Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional
+#' Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}. Optional
 #' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
 #' https://www.betydb.org/api/docs
@@ -71,7 +71,13 @@ betydb_search <- function(query = "Maple SLA", ...){
   betydb_query(search = query, table = "search", ...)
 }
 
-makeurl <- function(x, fmt, api_version="v0", include = NULL, betyurl){
+makeurl <- function(x, fmt, api_version = NULL, include = NULL, betyurl = NULL){
+  if (is.null(betyurl)) {
+    betyurl <- getOption("betydb_url", default = "https://www.betydb.org/")
+  }
+  if (is.null(api_version)) {
+    api_version <- getOption("betydb_api_version", default = "v0")
+  }
   api_string <- if (api_version == "v0") { "" } else { paste0("api/", api_version, "/")}
   fmt <- match.arg(fmt, c("json","xml","csv"))
   url <- paste0(betyurl, api_string, paste0(x, "."), fmt)
@@ -97,10 +103,12 @@ makepropname <- function(name, api_version){
 #' @export
 #' @param ... (named character) Columns to query, as key="value" pairs. Note that betydb_query passes these along to BETY with no check whether the requested keys exist in the specified table.
 #' @param table (character) The name of the database table to query, or "search" (the default) for the traits and yields view
-#' @param key (character) An API key. Use this or user/pwd combo. Save in your
-#' \code{.Rprofile} file as \code{betydb_key}. Optional
-#' @param api_version (character) Which version of the betydb api to use? Optional, defaults to 'v0'
-#' @param betyurl (string) url to target instance of betydb. Default is https:/www.betydb.org/
+#' @param key (character) An API key. Use this or user/pwd combo.
+#' Save in your \code{.Rprofile} file as \code{options(betydb_key = "your40digitkey")}. Optional
+#' @param api_version (character) Which version of the BETY API should we query? One of "v0" or "beta".
+#' Default is \code{options("betydb_api_version")} if set, otherwise  "v0".
+#' @param betyurl (string) url to target instance of betydb.
+#' Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"
 #'
 #' @return A data.frame with attributes containing request metadata, or NULL if the query produced no results
 #'
@@ -132,7 +140,7 @@ makepropname <- function(name, api_version){
 #' # [1] "Miscanthus"
 #' }
 #'
-betydb_query <- function(..., table = "search", key=NULL, api_version = "v0", betyurl = "https://www.betydb.org/"){
+betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, betyurl = NULL){
   url <- makeurl(x=table, fmt="json", api_version=api_version, betyurl=betyurl)
   propname <- makepropname(table, api_version)
   betydb_GET(url, args=list(...), key=key, user=NULL, pwd=NULL, which=propname)
@@ -195,35 +203,35 @@ betydb_http <- function(url, args = list(), key=NULL, user=NULL, pwd=NULL, ...){
 #' @export
 #' @rdname betydb
 #' @param table (character) Name of the database table with which this ID is associated.
-betydb_record <- function(id, table, api_version="v0", betyurl = "https://www.betydb.org/", fmt="json", ...){
+betydb_record <- function(id, table, api_version = NULL, betyurl = NULL, fmt = "json", ...){
   args = list(...)
   betydb_GET(makeidurl(table, id, fmt, api_version, betyurl), args, which=makepropname(table, api_version))
 }
 
 #' @export
 #' @rdname betydb
-betydb_trait <- function(id, genus = NULL, species = NULL, api_version="v0", betyurl = "https://www.betydb.org/", fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+betydb_trait <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
   args <- traitsc(list(species.genus = genus, species.species = species))
   betydb_GET(makeidurl("variables", id, fmt, api_version, betyurl), args, key, user, pwd, "variable", ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_specie <- function(id, genus = NULL, species = NULL, api_version="v0", betyurl = "https://www.betydb.org/", fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+betydb_specie <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(makeidurl("species", id, fmt, api_version, betyurl), args, key, user, pwd, "specie", ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_citation <- function(id, genus = NULL, species = NULL, api_version="v0", betyurl = "https://www.betydb.org/", fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+betydb_citation <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(makeidurl("citations", id, fmt, api_version, betyurl), args, key, user, pwd, "citation", ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_site <- function(id, api_version="v0", betyurl = "https://www.betydb.org/", fmt = "json", key=NULL, user=NULL, pwd=NULL, ...){
+betydb_site <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
   betydb_GET(makeidurl("sites", id, fmt, api_version, betyurl), args = NULL, key, user, pwd, "site", ...)
 }
 
@@ -250,7 +258,13 @@ betydb_auth <- function(user,pwd,key){
   auth
 }
 
-makeidurl <- function(x, id, fmt, api_version, betyurl = 'https://www.betydb.org/'){
+makeidurl <- function(x, id, fmt, api_version = NULL, betyurl = NULL){
+  if (is.null(betyurl)) {
+    betyurl <- getOption("betydb_url", default = "https://www.betydb.org/")
+  }
+  if (is.null(api_version)) {
+    api_version <- getOption("betydb_api_version", default = "v0")
+  }
   fmt <- match.arg(fmt, c("json","xml","csv"))
   api = if (api_version == "v0") { "" } else { paste0("api/", api_version, "/") }
   sprintf("%s%s%s/%s.%s", betyurl, api, x, id, fmt)

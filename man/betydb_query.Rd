@@ -4,20 +4,22 @@
 \alias{betydb_query}
 \title{Query a BETY table}
 \usage{
-betydb_query(..., table = "search", key = NULL, api_version = "v0",
-  betyurl = "https://www.betydb.org/")
+betydb_query(..., table = "search", key = NULL, api_version = NULL,
+  betyurl = NULL)
 }
 \arguments{
 \item{...}{(named character) Columns to query, as key="value" pairs. Note that betydb_query passes these along to BETY with no check whether the requested keys exist in the specified table.}
 
 \item{table}{(character) The name of the database table to query, or "search" (the default) for the traits and yields view}
 
-\item{key}{(character) An API key. Use this or user/pwd combo. Save in your
-\code{.Rprofile} file as \code{betydb_key}. Optional}
+\item{key}{(character) An API key. Use this or user/pwd combo.
+Save in your \code{.Rprofile} file as \code{options(betydb_key = "your40digitkey")}. Optional}
 
-\item{api_version}{(character) Which version of the betydb api to use? Optional, defaults to 'v0'}
+\item{api_version}{(character) Which version of the BETY API should we query? One of "v0" or "beta".
+Default is \code{options("betydb_api_version")} if set, otherwise  "v0".}
 
-\item{betyurl}{(string) url to target instance of betydb. Default is https:/www.betydb.org/}
+\item{betyurl}{(string) url to target instance of betydb.
+Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"}
 }
 \value{
 A data.frame with attributes containing request metadata, or NULL if the query produced no results
