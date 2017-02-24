@@ -9,8 +9,8 @@
 \alias{betydb_trait}
 \title{Search for traits from BETYdb}
 \usage{
-betydb_record(id, table, api_version = NULL, betyurl = NULL, fmt = "json",
-  ...)
+betydb_record(id, table, api_version = NULL, betyurl = NULL, fmt = NULL,
+  key = NULL, user = NULL, pwd = NULL, ...)
 
 betydb_trait(id, genus = NULL, species = NULL, api_version = NULL,
   betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
@@ -39,17 +39,17 @@ betydb_site(id, api_version = NULL, betyurl = NULL, fmt = "json",
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
 
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
-
-\item{genus}{(character) A genus name. Optional}
-
-\item{species}{(character) A specific epithet. Optional}
-
 \item{key}{(character) An API key. Use this or user/pwd combo. Save in your
 \code{.Rprofile} file as \code{options(betydb_key = "your40digitkey")}. Optional}
 
 \item{user, pwd}{(character) A user name and password. Use a user/pwd combo or an API key.
 Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional}
+
+\item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
+
+\item{genus}{(character) A genus name. Optional}
+
+\item{species}{(character) A specific epithet. Optional}
 }
 \description{
 Search for traits from BETYdb

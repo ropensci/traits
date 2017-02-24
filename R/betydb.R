@@ -111,6 +111,8 @@ makepropname <- function(name, api_version){
 #' Default is \code{options("betydb_api_version")} if set, otherwise  "v0".
 #' @param betyurl (string) url to target instance of betydb.
 #' Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"
+#' @param user,pwd (character) A user name and password. Use a user/pwd combo or an API key.
+#' Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional
 #'
 #' @return A data.frame with attributes containing request metadata, or NULL if the query produced no results
 #'
@@ -142,7 +144,7 @@ makepropname <- function(name, api_version){
 #' # [1] "Miscanthus"
 #' }
 #'
-betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, betyurl = NULL){
+betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, betyurl = NULL, user = NULL, pwd = NULL){
   url <- makeurl(table = table, fmt = "json", api_version = api_version, betyurl = betyurl)
   propname <- makepropname(table, api_version)
   betydb_GET(url, args = list(...), key = key, user = NULL, pwd = NULL, which = propname)
@@ -211,7 +213,7 @@ betydb_http <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
 #' @export
 #' @rdname betydb
 #' @param table (character) Name of the database table with which this ID is associated.
-betydb_record <- function(id, table, api_version = NULL, betyurl = NULL, fmt = "json", ...){
+betydb_record <- function(id, table, api_version = NULL, betyurl = NULL, fmt = NULL, key = NULL, user = NULL, pwd = NULL, ...){
   args = list(...)
   betydb_GET(makeurl(table, id, fmt, api_version, betyurl), args, which = makepropname(table, api_version))
 }
