@@ -45,6 +45,8 @@
 #'
 #' \code{betydb_search("Search terms", ...)} is a convenience wrapper that passes all further arguments to \code{\link{betydb_query}(table = "search", search = "Search terms", ...)}. See there for details on possible arguments.
 #'
+#' @seealso \code{\link{betydb_query}}
+#'
 #' @examples \dontrun{
 #' # General Search
 #' out <- betydb_search(query = "Switchgrass Yield")
