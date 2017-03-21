@@ -2,11 +2,11 @@
 % Please edit documentation in R/betydb.R
 \name{betydb}
 \alias{betydb}
-\alias{betydb_citation}
 \alias{betydb_record}
-\alias{betydb_site}
-\alias{betydb_specie}
 \alias{betydb_trait}
+\alias{betydb_specie}
+\alias{betydb_citation}
+\alias{betydb_site}
 \title{Search for traits from BETYdb}
 \usage{
 betydb_record(id, table, api_version = NULL, betyurl = NULL, fmt = NULL,
@@ -88,6 +88,7 @@ ids, and always return a single data.frame.
 
 \code{betydb_search("Search terms", ...)} is a convenience wrapper that passes all further arguments to \code{\link{betydb_query}(table = "search", search = "Search terms", ...)}. See there for details on possible arguments.
 }
+
 \examples{
 \dontrun{
 # General Search
@@ -115,4 +116,3 @@ https://www.betydb.org/api/docs
 \seealso{
 \code{\link{betydb_query}}
 }
-

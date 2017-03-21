@@ -8,4 +8,3 @@
 PLANTATT plant traits dataset
 }
 \keyword{data}
-

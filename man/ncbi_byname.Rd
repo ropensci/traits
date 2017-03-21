@@ -46,10 +46,9 @@ species <- c("Colletes similis","Halictus ligatus","Perdita trisignata")
 ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 }
 }
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
-}
 \seealso{
 \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyid}}
 }
-
+\author{
+Scott Chamberlain \email{myrmecocystus@gmail.com}
+}

@@ -67,4 +67,3 @@ betydb_query(genus = "Miscanthus", table = "species") \%>\% nrow()
 }
 
 }
-

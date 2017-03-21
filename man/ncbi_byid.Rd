@@ -40,10 +40,9 @@ ncbi_byid(ids="360040093")
 ncbi_byid(ids=c("360040093","347448433"))
 }
 }
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
-}
 \seealso{
 \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyname}}
 }
-
+\author{
+Scott Chamberlain \email{myrmecocystus@gmail.com}
+}
