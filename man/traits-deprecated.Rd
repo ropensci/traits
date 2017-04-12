@@ -18,4 +18,3 @@ These functions still work but will be removed (defunct) in the next version.
  be on CRAN soon. It will be \code{is_native} in \code{originr} package
 }
 }
-

@@ -2,48 +2,50 @@
 % Please edit documentation in R/betydb.R
 \name{betydb}
 \alias{betydb}
-\alias{betydb_citation}
-\alias{betydb_search}
-\alias{betydb_site}
-\alias{betydb_specie}
+\alias{betydb_record}
 \alias{betydb_trait}
+\alias{betydb_specie}
+\alias{betydb_citation}
+\alias{betydb_site}
 \title{Search for traits from BETYdb}
 \usage{
-betydb_search(query = "Maple SLA", betyurl = "https://www.betydb.org/",
-  fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
+betydb_record(id, table, api_version = NULL, betyurl = NULL, fmt = NULL,
+  key = NULL, user = NULL, pwd = NULL, ...)
 
-betydb_trait(id, genus = NULL, species = NULL,
-  betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
+betydb_trait(id, genus = NULL, species = NULL, api_version = NULL,
+  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
+  ...)
 
-betydb_specie(id, genus = NULL, species = NULL,
-  betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
+betydb_specie(id, genus = NULL, species = NULL, api_version = NULL,
+  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
+  ...)
 
-betydb_citation(id, genus = NULL, species = NULL,
-  betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
+betydb_citation(id, genus = NULL, species = NULL, api_version = NULL,
+  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
+  ...)
 
-betydb_site(id, betyurl = "https://www.betydb.org/", fmt = "json",
+betydb_site(id, api_version = NULL, betyurl = NULL, fmt = "json",
   key = NULL, user = NULL, pwd = NULL, ...)
 }
 \arguments{
-\item{query}{Query terms}
+\item{id}{(integer) One or more ids for a species, site, variable, etc.}
 
-\item{betyurl}{(string) url to target instance of betydb. Default is betydb.org}
+\item{table}{(character) Name of the database table with which this ID is associated.}
+
+\item{api_version}{(character) Which version of the BETY API should we query? One of "v0" or "beta". Default is \code{options("betydb_api_version")} if set, otherwise  "v0".}
+
+\item{betyurl}{(string) url to target instance of betydb. Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"}
 
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
 
 \item{key}{(character) An API key. Use this or user/pwd combo. Save in your
-\code{.Rprofile} file as \code{betydb_key}. Optional}
+\code{.Rprofile} file as \code{options(betydb_key = "your40digitkey")}. Optional}
 
 \item{user, pwd}{(character) A user name and password. Use a user/pwd combo or an API key.
-Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional}
+Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional}
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
-
-\item{id}{(integer) One or more ids for a species, site, variable, etc.}
 
 \item{genus}{(character) A genus name. Optional}
 
@@ -51,9 +53,10 @@ Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. 
 }
 \description{
 Search for traits from BETYdb
+
+Get details about a single item from a table
 }
 \details{
-Details:
 BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
 databases that support and share data among more focused research programs.
 
@@ -62,6 +65,12 @@ see \url{https://pecan.gitbooks.io/betydb-documentation/content/distributed_bety
 
 This package queries plant traits, phenotypes, biomass yields, and ecosystem functions.
 It does not currently interface with the workflow and provenance data that support PEcAn Project (pecanproject.org) and TERRA REF (terraref.org) software.
+
+API documentation: \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
+API endpoints are here: \url{https://www.betydb.org/api/docs}
+This package currently uses the original 'v0' API by default.
+To use a newer version, set `api_version`.
+Newer versions of the API will support database inserts.
 }
 \section{Authentication}{
 
@@ -76,7 +85,10 @@ and return a list of variable outputs depending on the inputs.
 
 However, plural functions like \code{betydb_traits} accept query parameters, but not
 ids, and always return a single data.frame.
+
+\code{betydb_search("Search terms", ...)} is a convenience wrapper that passes all further arguments to \code{\link{betydb_query}(table = "search", search = "Search terms", ...)}. See there for details on possible arguments.
 }
+
 \examples{
 \dontrun{
 # General Search
@@ -98,6 +110,9 @@ betydb_site(id = 795)
 }
 }
 \references{
-API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
+API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
+https://www.betydb.org/api/docs
 }
-
+\seealso{
+\code{\link{betydb_query}}
+}

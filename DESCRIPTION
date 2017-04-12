@@ -5,7 +5,7 @@ Description: Species trait data from many different sources, including
     data from the Global Invasive Species Database and 'EOL', 'Traitbank' data
     from 'EOL', Coral traits data from http://coraltraits.org, 'nativity' status
     ('Flora Europaea' or 'ITIS'), and 'Birdlife' International.
-Version: 0.2.0
+Version: 0.2.0.9411
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
     person("Zachary", "Foster", role = "aut", email = "zacharyfoster1989@gmail.com"),
@@ -33,9 +33,9 @@ Imports:
     xml2 (>= 0.1.2),
     rvest  (>= 0.3.1)
 Suggests:
-    roxygen2 (>= 5.0.1),
+    roxygen2 (>= 6.0.1),
     knitr,
     testthat,
     plyr,
     covr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

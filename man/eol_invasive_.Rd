@@ -99,4 +99,3 @@ eol_invasive_(name=c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','P
 \references{
 See info for each data source at \url{http://eol.org/collections/55367/taxa}
 }
-

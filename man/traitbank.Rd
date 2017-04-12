@@ -36,10 +36,9 @@ head( res$graph )
 traitbank(846827)
 }
 }
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
-}
 \references{
 http://eol.org/info/516
 }
-
+\author{
+Scott Chamberlain \email{myrmecocystus@gmail.com}
+}

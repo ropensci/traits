@@ -2,8 +2,8 @@
 % Please edit documentation in R/traits-package.r
 \docType{package}
 \name{traits-package}
-\alias{traits}
 \alias{traits-package}
+\alias{traits}
 \title{traits - Species trait data from around the web}
 \description{
 Currrently included in \code{traits} with the associated function prefix:
@@ -47,4 +47,3 @@ David Harris \email{davharris@ucdavis.edu}
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
 \keyword{package}
-

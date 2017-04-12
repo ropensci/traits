@@ -2,12 +2,12 @@
 % Please edit documentation in R/coral.R
 \name{coral}
 \alias{coral}
+\alias{coral_taxa}
+\alias{coral_traits}
 \alias{coral_locations}
 \alias{coral_methodologies}
 \alias{coral_resources}
 \alias{coral_species}
-\alias{coral_taxa}
-\alias{coral_traits}
 \title{Search for coral data on coraltraits.org}
 \usage{
 coral_taxa(taxon, taxonomy = FALSE, contextual = TRUE, global = FALSE,
@@ -74,10 +74,9 @@ library("httr")
 coral_taxa(8, config=verbose())
 }
 }
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
-}
 \references{
 \url{http://coraltraits.org/}
 }
-
+\author{
+Scott Chamberlain \email{myrmecocystus@gmail.com}
+}

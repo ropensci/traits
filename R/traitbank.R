@@ -27,23 +27,20 @@ traitbank <- function(pageid, cache_ttl = NULL, ...) {
   args <- traitsc(list(cache_ttl = cache_ttl))
   if (length(args) == 0) args <- NULL
   res <- traitbank_GET(paste0(tburl(), pageid), args, ...)
-  df <- res$`@graph`
-  meas <- unlist(sapply(df$`dwc:measurementValue`, function(x) {
-    if (length(x) == 0) {
-      NA
-    } else {
-      if (length(x) > 1) x[[1]][[1]] else x
-    }
-  }))
-  meas_id <- sapply(df$`dwc:measurementValue`, function(x) if (length(x) > 1) x$`@id` else NA)
-  df$`dwc:measurementValue` <- NULL
-  df$`dwc:measurementValue.id` <- NULL
-  if (!is.null(meas) && !is.null(meas_id)) {
-    df <- data.frame(df, `dwc:measurementValue` = meas,
-                     `dwc:measurementValue.id` = meas_id, stringsAsFactors = FALSE)
+  if (all(c("item", "@context") %in% names(res)) && "traits" %in% names(res$item)) {
+    df <- res$item$traits
+    df <- setNames(df, tolower(names(df)))
+    ct <- res$`@context`
+  } else {
+    temp <- lapply(res, names)
+    temp <- paste(shQuote(paste(rep(names(temp), times = lengths(temp)), unlist(temp),
+      sep = ":")), collapse = ", ")
+    message("API of eol's traitbank appears to have changed. Object structure\n",
+      "\t* expected (among other elements): 'item$traits' and '@context'",
+      "\t* received:", temp)
+    df <- ct <- NULL
   }
-  df <- setNames(df, tolower(names(df)))
-  structure(list(context = res$`@context`, graph = dplyr::tbl_df(df)), class = "traitbank")
+  structure(list(context = ct, graph = dplyr::tbl_df(df)), class = "traitbank")
 }
 
 traitbank_GET <- function(url, args = list(), ...){

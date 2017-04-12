@@ -21,10 +21,9 @@ Get bird threat information from BirdLife/IUCN
 birdlife_threats(22721692)
 }
 }
-\author{
-David J. Harris \email{harry491@gmail.com}
-}
 \seealso{
 \code{\link{birdlife_habitat}}
 }
-
+\author{
+David J. Harris \email{harry491@gmail.com}
+}
