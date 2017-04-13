@@ -146,7 +146,7 @@ makepropname <- function(name, api_version){
 #' # [1] "Miscanthus"
 #' }
 #'
-betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, betyurl = NULL, user = NULL, pwd = NULL){
+betydb_query <- function(..., table = "search", key = NULL, api_version = 'NULL', betyurl = NULL, user = NULL, pwd = NULL){
   url <- makeurl(table = table, fmt = "json", api_version = api_version, betyurl = betyurl)
   propname <- makepropname(table, api_version)
   betydb_GET(url, args = list(...), key = key, user = NULL, pwd = NULL, which = propname)
@@ -159,8 +159,40 @@ betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL){
 }
 
 betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, which, ...){
-  txt <- betydb_http(url, args, key, user, pwd, ...)
-  lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+
+  if(!is.null(args$limit)){
+    if(args$limit == 'none' | (is.numeric(args$limit) & args$limit > 5000)){
+      args$limit <- NULL
+      txt <- betydb_http(url, args, key, user, pwd, ...)
+      lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+      nrecords <- as.numeric(gsub("The ", "", strsplit(lst$warnings[[1]], '-')[[1]][1]))
+
+      lst$warnings <- NULL ## IS THIS SAFE?
+      newlimit = ifelse(limit == 'none', nrecords, min(limit, nrecords))
+
+      per_call_limit <- 5000
+      remainder <- newlimit %% per_call_limit
+      iterations <- (newlimit - remainder) / per_call_limit
+
+      lst_list <- list()
+      args$limit <- per_call_limit
+      for(i in 1:(iterations + 1)){
+        if(i > 1){
+          args$offset <- (i - 1) * per_call_limit
+        }
+
+        txt <- betydb_http(url, args, key, user, pwd, ...)
+        lst_list[[i]] <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+      }
+      txt <- betydb_http(url, args, key, user, pwd, ...)
+      lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+
+    }
+  } else {
+    txt <- betydb_http(url, args, key, user, pwd, ...)
+    lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+
+  }
 
   if ("warnings" %in% names(lst)) {
     warning(lst$warnings)
