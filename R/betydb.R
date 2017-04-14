@@ -195,7 +195,8 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, 
 
       lst_notdata <- lst[-which(names(lst) == "data")]
 
-      per_call_limit <- 5000
+      if(!exists('per_call_limit')) per_call_limit <- 5000
+      ## tests set per_call_limit globally to save time
       remainder <- newlimit %% per_call_limit
       iterations <- (newlimit - remainder) / per_call_limit
       args$limit <- per_call_limit

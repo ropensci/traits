@@ -135,6 +135,7 @@ test_that("paging works with betydb query and search functions",{
     betydb_url = "https://www.betydb.org/",
     betydb_api_version = "beta")
 
+  per_call_limit <<- 200
   # return 200 records by default
   sla200 <- betydb_search('SLA')
   expect_equal(nrow(sla200), 200)
