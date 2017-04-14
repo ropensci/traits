@@ -135,29 +135,25 @@ test_that("paging works with betydb query and search functions",{
     betydb_url = "https://www.betydb.org/",
     betydb_api_version = "beta")
 
-  # check paging much faster than default hardcoded limit of 5000
-  per_call_limit <<- 200
   # return 200 records by default
   sla200 <- betydb_search('SLA')
   expect_equal(nrow(sla200), 200)
+
+  # check paging much faster than default hardcoded limit of 5000
+  per_call_limit <<- 20
 
   # check that paging returns correct # below and above default
   sla3 <- betydb_search('SLA', limit = '3')
   expect_equal(nrow(sla3), 3)
   expect_equal(nrow(sla3), attributes(sla3)$metadata$count)
 
-  sla300 <- betydb_search('SLA', limit = '300')
-  expect_equal(nrow(sla300), 300)
-  expect_equal(nrow(sla300), attributes(sla300)$metadata$count)
+  sla30 <- betydb_search('SLA', limit = '30')
+  expect_equal(nrow(sla30), 30)
+  expect_equal(nrow(sla30), attributes(sla30)$metadata$count)
 
-  sla1010 <- betydb_search('SLA', limit = '1010')
-  expect_equal(nrow(sla1010), 1010)
-  expect_equal(nrow(sla1010), attributes(sla1010)$metadata$count)
-
-
-  v <- betydb_query(table = 'variables', limit = 'none')
-  ## betydb_search doesn't pass api_version?? debugonce(betydb_GET)
-  ## betydb_search('SLA', api_version = 'beta', limit = 'invalid')
+  sla101 <- betydb_search('SLA', limit = '101')
+  expect_equal(nrow(sla101), 101)
+  expect_equal(nrow(sla101), attributes(sla101)$metadata$count)
 
   betydb_query(search = 'SLA', table = 'search', api_version = 'beta', limit = 'invalid')
 })
