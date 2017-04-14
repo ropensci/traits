@@ -127,6 +127,39 @@ test_that("betydb_query works", {
   expect_true(all(np_grass$id %in% np$id))
 })
 
+test_that("paging works with betydb query and search functions",{
+  skip_on_cran()
+  check_betydb()
+
+  options(
+    betydb_url = "https://www.betydb.org/",
+    betydb_api_version = "beta")
+
+  # return 200 records by default
+  sla200 <- betydb_search('SLA')
+  expect_equal(nrow(sla200), 200)
+
+  # check that paging returns correct # below and above default
+  sla3 <- betydb_search('SLA', limit = '3')
+  expect_equal(nrow(sla3), 3)
+  expect_equal(nrow(sla3), attributes(sla3)$metadata$count)
+
+  sla300 <- betydb_search('SLA', limit = '300')
+  expect_equal(nrow(sla300), 300)
+  expect_equal(nrow(sla300), attributes(sla300)$metadata$count)
+
+  sla1010 <- betydb_search('SLA', limit = '1010')
+  expect_equal(nrow(sla1010), 1010)
+  expect_equal(nrow(sla1010), attributes(sla1010)$metadata$count)
+
+
+  v <- betydb_query(table = 'variables', limit = 'none')
+  ## betydb_search doesn't pass api_version?? debugonce(betydb_GET)
+  ## betydb_search('SLA', api_version = 'beta', limit = 'invalid')
+
+  betydb_query(search = 'SLA', table = 'search', api_version = 'beta', limit = 'invalid')
+})
+
 test_that("betydb_record works", {
   skip_on_cran()
   check_betydb()

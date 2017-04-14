@@ -146,7 +146,7 @@ makepropname <- function(name, api_version){
 #' # [1] "Miscanthus"
 #' }
 #'
-betydb_query <- function(..., table = "search", key = NULL, api_version = 'NULL', betyurl = NULL, user = NULL, pwd = NULL){
+betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, betyurl = NULL, user = NULL, pwd = NULL){
   url <- makeurl(table = table, fmt = "json", api_version = api_version, betyurl = betyurl)
   propname <- makepropname(table, api_version)
   betydb_GET(url, args = list(...), key = key, user = NULL, pwd = NULL, which = propname)
@@ -160,38 +160,72 @@ betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL){
 
 betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, which, ...){
 
-  if(!is.null(args$limit)){
-    if(args$limit == 'none' | (is.numeric(args$limit) & args$limit > 5000)){
+  if(is.null(args$api_version)) args$api_version <- options()$betydb_api_version
+  if(any(is.null(args$api_version), args$api_version == 'v0')){
+    txt <- betydb_http(url, args, key, user, pwd, ...)
+    lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+  } else if (args$api_version == 'beta'){
+
+    if(is.null(args$limit)) args$limit <- 200
+    if(!is.na(as.numeric(args$limit))) args$limit <- as.numeric(args$limit)
+
+    if(args$limit <= 200){
+      txt <- betydb_http(url, args, key, user, pwd, ...)
+      lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+    } else if(args$limit =='none' | (is.numeric(args$limit) & args$limit > 200)){
+      # Catch non default limits so that we can divide into multiple requests
+
+      # clear limit arg and return total records
+      oldlimit <- args$limit
       args$limit <- NULL
       txt <- betydb_http(url, args, key, user, pwd, ...)
       lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
       nrecords <- as.numeric(gsub("The ", "", strsplit(lst$warnings[[1]], '-')[[1]][1]))
 
-      lst$warnings <- NULL ## IS THIS SAFE?
-      newlimit = ifelse(limit == 'none', nrecords, min(limit, nrecords))
+      lst$warnings <- gsub("The [1-9][0-9]*-row result set exceeds the default 200 row limit.  Showing the first 200 results only.  Set an explicit limit to show more results.",
+                           "", lst$warnings)
+
+      # configure paging args
+      newlimit = ifelse(oldlimit == 'none', nrecords, min(oldlimit, nrecords))
+      if(nrecords > oldlimit){
+        lst$warnings <- append(
+          lst$warnings,
+          paste("returning ", oldlimit, "records out of", nrecords, "total"))
+      }
+
+      lst_notdata <- lst[-which(names(lst) == "data")]
 
       per_call_limit <- 5000
       remainder <- newlimit %% per_call_limit
       iterations <- (newlimit - remainder) / per_call_limit
-
-      lst_list <- list()
       args$limit <- per_call_limit
-      for(i in 1:(iterations + 1)){
+      lst_data <- list()
+
+      # paging loop
+      for(i in 1:iterations){
         if(i > 1){
           args$offset <- (i - 1) * per_call_limit
         }
 
         txt <- betydb_http(url, args, key, user, pwd, ...)
-        lst_list[[i]] <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+        lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+        lst_data[[i]] <- lst$data
+
       }
-      txt <- betydb_http(url, args, key, user, pwd, ...)
-      lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+      if(remainder > 0){
+        args$offset <- iterations * per_call_limit
+        args$limit <- remainder ## limit currently isn't working
+        txt <- betydb_http(url, args, key, user, pwd, ...)
+        lst_data[[iterations + 1]] <-  jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)$data
+      }
 
-    }
-  } else {
-    txt <- betydb_http(url, args, key, user, pwd, ...)
-    lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
+      lst <- append(list(data = dplyr::bind_rows(lst_data)),
+                    lst_notdata)
 
+
+    } else {
+      lst <- list(warnings = paste('\n limit argument', args$limit, "not recognized; please use integer value to specify maximum number of records to return, 'none' to specify no limit and return all records, or NULL (default) to return the first 200 records"), metadata = list(url = url, args = args))
+    } # end api beta paging conditionals
   }
 
   if ("warnings" %in% names(lst)) {
