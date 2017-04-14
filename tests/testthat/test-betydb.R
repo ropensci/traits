@@ -133,7 +133,9 @@ test_that("paging works with betydb query and search functions",{
 
   options(
     betydb_url = "https://www.betydb.org/",
-    betydb_api_version = "beta")
+    betydb_api_version = "beta",
+    warn=-1 ## suppress warnings that we did not get all data
+  )
 
   # return 200 records by default
   sla200 <- betydb_search('SLA')
@@ -143,20 +145,24 @@ test_that("paging works with betydb query and search functions",{
   per_call_limit <<- 20
 
   # check that paging returns correct # below and above default
-  sla3 <- betydb_search('SLA', limit = '3')
+  sla3 <- betydb_search('SLA', limit = 3)
   expect_equal(nrow(sla3), 3)
   expect_equal(nrow(sla3), attributes(sla3)$metadata$count)
 
-  sla30 <- betydb_search('SLA', limit = '30')
+  sla30 <- betydb_search('SLA', limit = 30)
   expect_equal(nrow(sla30), 30)
   expect_equal(nrow(sla30), attributes(sla30)$metadata$count)
 
-  sla101 <- betydb_search('SLA', limit = '101')
+  sla101 <- betydb_search('SLA', limit = 101)
   expect_equal(nrow(sla101), 101)
   expect_equal(nrow(sla101), attributes(sla101)$metadata$count)
 
-  betydb_query(search = 'SLA', table = 'search', api_version = 'beta', limit = 'invalid')
 })
+
+options(
+  betydb_url = "https://www.betydb.org/",
+  betydb_api_version = "v0",
+  warnings = 0)
 
 test_that("betydb_record works", {
   skip_on_cran()
