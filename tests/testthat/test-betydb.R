@@ -135,6 +135,8 @@ test_that("paging works with betydb query and search functions",{
     betydb_url = "https://www.betydb.org/",
     betydb_api_version = "beta")
 
+  # check paging much faster than default hardcoded limit of 5000
+  per_call_limit <<- 200
   # return 200 records by default
   sla200 <- betydb_search('SLA')
   expect_equal(nrow(sla200), 200)
