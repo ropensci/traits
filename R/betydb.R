@@ -161,17 +161,18 @@ betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL){
 
 betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, which, ...){
 
+  api_version <- ifelse(grepl('/beta/api', url), 'beta', 'v0')
   if(!exists('per_call_limit')) {
     per_call_limit <- 5000
   }
 
-  if(is.null(args$api_version)){
-    args$api_version <- options()$betydb_api_version
+  if(is.null(api_version)){
+    api_version <- options()$betydb_api_version
   }
-  if(args$api_version == 'v0'){
+  if(api_version == 'v0'){
     txt <- betydb_http(url, args, key, user, pwd, ...)
     lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
-  } else if (args$api_version == 'beta'){
+  } else if (api_version == 'beta'){
 
     if(is.null(args$limit)) {
       args$limit <- 200
@@ -198,9 +199,14 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, 
                              lst$metadata$URI))
         nrecords <- 0
       } else if (lst$metadata$count > 0){
-        nrecords <- as.numeric(gsub("The ", "", strsplit(lst$warnings, '\\-')[[1]][1]))
-        lst$warnings <- gsub("The [1-9][0-9]*-row result set exceeds the default 200 row limit.  Showing the first 200 results only.  Set an explicit limit to show more results.",
-                             "", lst$warnings)
+        if(is.null(lst$warnings)){
+          lst$warnings <- ''
+          nrecords <- lst$metadata$count
+        } else {
+          nrecords <- as.numeric(gsub("The ", "", strsplit(lst$warnings, '-')[[1]][1]))
+          lst$warnings <- gsub("The [1-9][0-9]*-row result set exceeds the default 200 row limit.  Showing the first 200 results only.  Set an explicit limit to show more results.",
+                               "", lst$warnings)
+        }
 
       }
 
@@ -260,7 +266,7 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, 
   }
 
   if ("warnings" %in% names(lst)) {
-    warning(lst$warnings)
+    message(lst$warnings)
   }
   if ("errors" %in% names(lst)) {
     # TODO: Can we ever get here?

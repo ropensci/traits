@@ -15,10 +15,10 @@ test_that("BETYdb v0 API works", {
   priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl)
   expect_equal(priors_url, paste0(betyurl, "priors.json"))
 
-  get.out <- GET(priors_url) # Priors is a small table
+  # Priors is a small table
+  get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv"))
   expect_is(get.out, "response")
-  ## FIXME - this fails for me, gives `401 Unauthorized` (scott here)
-  # expect_true(grepl("OK", get.out[["headers"]]$status))
+  expect_true(grepl("OK", get.out[["headers"]]$status))
   expect_true(grepl(betyurl, get.out[["url"]]))
 })
 
@@ -30,8 +30,9 @@ test_that("BETYdb beta API works", {
   priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl, api_version = "beta")
   expect_equal(priors_url, paste0(betyurl, "api/beta/priors.json"))
 
-  get.out <- GET(priors_url) # Priors is a small table
+  get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")) # Priors is a small table
   expect_is(get.out, "response")
+  expect_true(grepl("OK", get.out[["headers"]]$status))
   expect_true(grepl(betyurl, get.out[["url"]]))
 })
 
@@ -78,13 +79,14 @@ test_that("Credentials work", {
   on.exit(options(prevkey))
   # FIXME - should use v0 API for symmetry w/ other calls,
   # but v0 skips auth for search table
+  options(betydb_key = 'NOT A KEY')
   expect_error(betydb_search("Acer rubrum", api_version = "beta"), "Unauthorized")
   options(betydb_key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")
   optkey <- betydb_search('Acer rubrum')
   expect_equal(optkey$id, key$id)
 
   salix <- betydb_search('salix yield')
-  expect_true(min(salix$access_level) >= 4, info = "please report to betydb@gmail.com")
+  expect_gte(min(salix$access_level), 4)
 
   ## Glopnet data are restricted
   expect_null(betydb_search('wright 2004'))
@@ -106,7 +108,7 @@ test_that("URL & version options work", {
   opt2 <- betydb_query(author = "Arundale", table = "citations",
     betyurl = "https://www.betydb.org/")
   opt3 <- betydb_query(author = "Arundale", table = "citations",
-    betyurl = "https://www.betydb.org/", api_version = "v0")
+                       betyurl = "https://www.betydb.org/", api_version = "v0")
 
   expect_gt(ncol(opt2), ncol(opt3)) # new API returns more params
   expect_equal(opt2$id, opt3$id) # but both should find same IDs
@@ -224,3 +226,4 @@ test_that("include_unchecked works", {
   expect_gt(nrow(q2), nrow(q1))
   expect_true(all(q1$id %in% q2$id))
 })
+
