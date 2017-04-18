@@ -161,7 +161,8 @@ betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL){
 
 betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, which, ...){
 
-  api_version <- ifelse(grepl('/beta/api', url), 'beta', 'v0')
+  api_version <- options()$betydb_api_version
+  # api_version <- ifelse(grepl('/beta/api', url), 'beta', 'v0')
   if(!exists('per_call_limit')) {
     per_call_limit <- 5000
   }
