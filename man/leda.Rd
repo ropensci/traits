@@ -57,4 +57,3 @@ sapply(out, NROW)
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
-

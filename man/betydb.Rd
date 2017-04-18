@@ -2,59 +2,54 @@
 % Please edit documentation in R/betydb.R
 \name{betydb}
 \alias{betydb}
-\alias{betydb_citation}
 \alias{betydb_record}
-\alias{betydb_search}
-\alias{betydb_site}
-\alias{betydb_specie}
 \alias{betydb_trait}
+\alias{betydb_specie}
+\alias{betydb_citation}
+\alias{betydb_site}
 \title{Search for traits from BETYdb}
 \usage{
-betydb_search(query = "Maple SLA", ...)
+betydb_record(id, table, api_version = NULL, betyurl = NULL, fmt = NULL,
+  key = NULL, user = NULL, pwd = NULL, ...)
 
-betydb_record(id, table, api_version = "v0",
-  betyurl = "https://www.betydb.org/", fmt = "json", ...)
+betydb_trait(id, genus = NULL, species = NULL, api_version = NULL,
+  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
+  ...)
 
-betydb_trait(id, genus = NULL, species = NULL, api_version = "v0",
-  betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
+betydb_specie(id, genus = NULL, species = NULL, api_version = NULL,
+  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
+  ...)
 
-betydb_specie(id, genus = NULL, species = NULL, api_version = "v0",
-  betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
+betydb_citation(id, genus = NULL, species = NULL, api_version = NULL,
+  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
+  ...)
 
-betydb_citation(id, genus = NULL, species = NULL, api_version = "v0",
-  betyurl = "https://www.betydb.org/", fmt = "json", key = NULL,
-  user = NULL, pwd = NULL, ...)
-
-betydb_site(id, api_version = "v0", betyurl = "https://www.betydb.org/",
-  fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
+betydb_site(id, api_version = NULL, betyurl = NULL, fmt = "json",
+  key = NULL, user = NULL, pwd = NULL, ...)
 }
 \arguments{
-\item{query}{Query terms}
-
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
-
 \item{id}{(integer) One or more ids for a species, site, variable, etc.}
 
 \item{table}{(character) Name of the database table with which this ID is associated.}
 
-\item{api_version}{(character) Which version of the BETY API should we query? One of "v0" or "beta". Currently defaults to "v0".}
+\item{api_version}{(character) Which version of the BETY API should we query? One of "v0" or "beta". Default is \code{options("betydb_api_version")} if set, otherwise  "v0".}
 
-\item{betyurl}{(string) url to target instance of betydb. Default is https:/www.betydb.org/}
+\item{betyurl}{(string) url to target instance of betydb. Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"}
 
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
 
+\item{key}{(character) An API key. Use this or user/pwd combo. Save in your
+\code{.Rprofile} file as \code{options(betydb_key = "your40digitkey")}. Optional}
+
+\item{user, pwd}{(character) A user name and password. Use a user/pwd combo or an API key.
+Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional}
+
+\item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
+
 \item{genus}{(character) A genus name. Optional}
 
 \item{species}{(character) A specific epithet. Optional}
-
-\item{key}{(character) An API key. Use this or user/pwd combo. Save in your
-\code{.Rprofile} file as \code{betydb_key}. Optional}
-
-\item{user, pwd}{(character) A user name and password. Use a user/pwd combo or an API key.
-Save in your \code{.Rprofile} file as \code{betydb_user} and \code{betydb_pwd}. Optional}
 }
 \description{
 Search for traits from BETYdb
@@ -91,8 +86,9 @@ and return a list of variable outputs depending on the inputs.
 However, plural functions like \code{betydb_traits} accept query parameters, but not
 ids, and always return a single data.frame.
 
-\code{betydb_search("Search terms", ...)} is a convenience wrapper that passes all further arguments to \code{\link{betydb_query}(table="search", search="Search terms", ...)}. See there for details on possible arguments.
+\code{betydb_search("Search terms", ...)} is a convenience wrapper that passes all further arguments to \code{\link{betydb_query}(table = "search", search = "Search terms", ...)}. See there for details on possible arguments.
 }
+
 \examples{
 \dontrun{
 # General Search
@@ -117,4 +113,6 @@ betydb_site(id = 795)
 API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
 https://www.betydb.org/api/docs
 }
-
+\seealso{
+\code{\link{betydb_query}}
+}

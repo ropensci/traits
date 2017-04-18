@@ -57,4 +57,3 @@ rbind_all(res)
 \author{
 Ignasi Bartomeus \email{nacho.bartomeus@gmail.com}
 }
-

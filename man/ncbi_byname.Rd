@@ -21,6 +21,8 @@ in the same genus as the one searched for. If \code{FALSE}, returns nothing if n
 found.}
 
 \item{verbose}{(logical) If \code{TRUE} (default), informative messages printed.}
+
+\item{...}{Curl options passed on to \code{\link[httr]{GET}}}
 }
 \value{
 Data.frame of results.
@@ -44,10 +46,9 @@ species <- c("Colletes similis","Halictus ligatus","Perdita trisignata")
 ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 }
 }
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
-}
 \seealso{
 \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyid}}
 }
-
+\author{
+Scott Chamberlain \email{myrmecocystus@gmail.com}
+}

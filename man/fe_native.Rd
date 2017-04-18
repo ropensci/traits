@@ -43,4 +43,3 @@ sapply(sp, fe_native, simplify = FALSE)
 \author{
 Ignasi Bartomeus \email{nacho.bartomeus@gmail.com}
 }
-

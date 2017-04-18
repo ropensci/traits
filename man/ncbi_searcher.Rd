@@ -87,11 +87,10 @@ one <- ncbi_searcher(taxa = "Salmonella enterica", entrez_query="srcdb_refseq[PR
 two <- ncbi_searcher(taxa = "Salmonella enterica")
 }
 }
+\seealso{
+\code{\link[taxize]{ncbi_getbyid}}, \code{\link[taxize]{ncbi_getbyname}}
+}
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}, Zachary Foster
   \email{zacharyfoster1989@gmail.com}
 }
-\seealso{
-\code{\link[taxize]{ncbi_getbyid}}, \code{\link[taxize]{ncbi_getbyname}}
-}
-
