@@ -18,8 +18,8 @@ test_that("BETYdb v0 API works", {
   # Priors is a small table
   get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv"))
   expect_is(get.out, "response")
-  expect_true(grepl("OK", get.out[["headers"]]$status))
-  expect_true(grepl(betyurl, get.out[["url"]]))
+  expect_match(headers(get.out)$status, "OK")
+  expect_match(get.out$url, betyurl)
 })
 
 test_that("BETYdb beta API works", {
@@ -32,8 +32,8 @@ test_that("BETYdb beta API works", {
 
   get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")) # Priors is a small table
   expect_is(get.out, "response")
-  expect_true(grepl("OK", get.out[["headers"]]$status))
-  expect_true(grepl(betyurl, get.out[["url"]]))
+  expect_match(httr::headers(get.out)$status, "OK" )
+  expect_match(get.out$url, betyurl)
 })
 
 test_that("table to property name matching works", {
@@ -132,7 +132,8 @@ test_that("betydb_query works", {
 test_that("paging works with betydb query and search functions",{
   skip_on_cran()
   check_betydb()
-
+  opts <- options()
+  on.exit(reset_opts(opts))
   options(
     betydb_url = "https://www.betydb.org/",
     betydb_api_version = "beta",
@@ -161,11 +162,6 @@ test_that("paging works with betydb query and search functions",{
   expect_equal(nrow(limit401), attributes(limit401)$metadata$count)
 
 })
-
-options(
-  betydb_url = "https://www.betydb.org/",
-  betydb_api_version = "v0",
-  warnings = 0)
 
 test_that("betydb_record works", {
   skip_on_cran()
