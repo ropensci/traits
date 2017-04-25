@@ -38,7 +38,7 @@ ncbi_byid <- function(ids, format=NULL, verbose=TRUE) {
 
   x <- paste(ids, collapse = ",")
   mssg(verbose, "Retrieving sequence IDs...")
-  tt <- GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+  tt <- GET("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
             query = list(db = "sequences", id = x, retmode = "xml"))
   stop_for_status(tt)
   mssg(verbose, "Parsing...")
@@ -58,36 +58,3 @@ ncbi_byid <- function(ids, format=NULL, verbose=TRUE) {
   mssg(verbose, "...done")
   data.frame(rbindlist(tmp))
 }
-
-# not_spp <- c("mitochondrial", "voucher", "^ATCC$", "^DNA$", "sequence",
-#              "^satellite$", "^mRNA$", "^unnamed protein product$", "^gene$")
-
-# ids <- paste(ids, collapse = ",")
-# queryseq <- list(db = "sequences", id = ids, rettype = format, retmode = "text")
-# tt <- GET("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi", query = queryseq)
-# stop_for_status(tt)
-# outseq <- content(tt, "text", encoding = "UTF-8")
-#
-# outseq2 <- strsplit(outseq, '>')[[1]][-1]
-
-# foo <- function(x){
-#   temp <- paste(">", x, sep = "")
-#   seq <- gsub("\n", "", strsplit(sub("\n", "<<<", temp[[1]]), "<<<")[[1]][[2]])
-#   idaccess <- strsplit(x, "\\|")[[1]][c(2,4)]
-#   desc <- strsplit(strsplit(x, "\\|")[[1]][[5]], "\n")[[1]][[1]]
-#   outt <- list(desc, as.character(idaccess[1]), idaccess[2], nchar(seq), seq)
-#
-#   fifth <- strsplit(temp, "\\|")[[1]][[5]]
-#   if (grepl("\\[.+\\]", fifth)) {
-#     spused <- gsub("\\[|\\]", "", strextract(fifth, "\\[.+\\]"))
-#   } else {
-#     spused <-
-#       strsplit(gsub("^\\s+|\\s+$", "", fifth, "both"), " ")[[1]][1:3]
-#     spused <-
-#       grep(paste0(not_spp, collapse = "|"), spused, invert = TRUE, value = TRUE)
-#     spused <- paste(spused, sep = "", collapse = " ")
-#   }
-#
-#   setNames(data.frame(spused = spused, outt, stringsAsFactors = FALSE),
-#            c("taxon","gene_desc","gi_no","acc_no","length","sequence"))
-# }

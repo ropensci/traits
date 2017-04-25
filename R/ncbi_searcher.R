@@ -10,7 +10,7 @@
 #' @param entrez_query (\code{character}; length 1) An Entrez-format query to filter results with.
 #'   This is useful to search for sequences with specific characteristics. The format is the same
 #'   as the one used to seach genbank.
-#'   (\url{http://www.ncbi.nlm.nih.gov/books/NBK3837/#EntrezHelp.Entrez_Searching_Options})
+#'   (\url{https://www.ncbi.nlm.nih.gov/books/NBK3837/#EntrezHelp.Entrez_Searching_Options})
 #' @param fuzzy (logical) Whether to do fuzzy taxonomic ID search or exact search. If \code{TRUE},
 #'    we use \code{xXarbitraryXx[porgn:__txid<ID>]}, but if \code{FALSE}, we use \code{txid<ID>}.
 #'    Default: \code{FALSE}
@@ -91,8 +91,8 @@ ncbi_searcher <- function(taxa = NULL, id = NULL, seqrange="1:3000", getrelated=
 }
 
 # Constants --------------------------------------------------------------------------------------
-url_esearch <- "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
-url_esummary <- "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
+url_esearch <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
+url_esummary <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
 
 # Function to process queries one at a time ------------------------------------------------------
 ncbi_searcher_foo <- function(xx, getrelated, verbose, seqrange, entrez_query, fuzzy, limit, hypothetical, ...) {
