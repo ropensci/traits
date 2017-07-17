@@ -3,6 +3,7 @@
 S3method(taxa_search,character)
 S3method(taxa_search,default)
 export(betydb_citation)
+export(betydb_experiment)
 export(betydb_query)
 export(betydb_record)
 export(betydb_search)
