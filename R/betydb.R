@@ -354,7 +354,7 @@ betydb_site <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", ke
 #' @export
 #' @rdname betydb
 betydb_experiment <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
-  betydb_GET(makeurl("experiments", id, fmt, api_version, betyurl), args = NULL, key, user, pwd, "site", ...)
+  betydb_GET(makeurl("experiments", id, fmt, api_version, betyurl), args = NULL, key, user, pwd, "experiment", ...)
 }
 
 betydb_auth <- function(user,pwd,key){
