@@ -29,9 +29,6 @@
 #'
 #' @importFrom httr GET POST content stop_for_status warn_for_status authenticate
 #' @importFrom jsonlite fromJSON
-#' @importFrom methods is
-#' @importFrom stats setNames na.omit
-#' @importFrom utils read.csv URLencode
 #' @importFrom xml2 read_xml xml_find_all xml_text
 #' @importFrom rvest html_table
 #' @importFrom taxize get_uid classification get_tsn itis_native iucn_id

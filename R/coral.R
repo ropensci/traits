@@ -86,7 +86,7 @@ coral_GET <- function(url, args, ...) {
   res <- GET(url, query = args, ...)
   stop_for_status(res)
   txt <- content(res, "text", encoding = "UTF-8")
-  dplyr::tbl_df(read.csv(text = txt, header = TRUE, stringsAsFactors = FALSE))
+  dplyr::tbl_df(utils::read.csv(text = txt, header = TRUE, stringsAsFactors = FALSE))
 }
 
 coralbase <- function() 'http://coraltraits.org'

@@ -61,7 +61,7 @@ g_invasive <- function(x, simplify = FALSE, verbose=TRUE) {
 			  one <- tryCatch(xml2::xml_text(xml2::xml_find_all(doc, "//span[@class='ListNote']"))[[1]],
                         error = function(e) e)
 			  two <- paste(xml2::xml_text(xml2::xml_find_all(doc, "//span[@class='Info']")), collapse = "; ")
-			  out[i, 2] <- paste(if (is(one, "simpleError")) NULL else one, two, sep = "; ")
+			  out[i, 2] <- paste(if (inherits(one, "simpleError")) NULL else one, two, sep = "; ")
 			} else {
         out[i, 2] <- "Invasive"
 			}

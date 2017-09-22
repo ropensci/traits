@@ -41,7 +41,7 @@
 #' sapply(out, NROW)
 #' }
 leda <- function(trait = "age_first_flowering", ...) {
-  tt <- GET(URLencode(paste0(leda_base(), pick_file_name(trait))), ...)
+  tt <- GET(utils::URLencode(paste0(leda_base(), pick_file_name(trait))), ...)
   out <- rawToChar(content(tt, "raw", encoding = "UTF-8"))
   stop_for_status(tt)
   out <- iconv(out, "latin1", "UTF-8")

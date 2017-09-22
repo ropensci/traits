@@ -145,5 +145,5 @@ eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL
   df$db <- dataset
   names(df)[c(1,3)] <- c("searched_name","eol_object_id")
   row.names(df) <- NULL
-  if (!count) df else length(na.omit(df$eol_object_id))
+  if (!count) df else length(stats::na.omit(df$eol_object_id))
 }
