@@ -15,3 +15,5 @@ inst/vign/vigncache
 .github
 ^CONDUCT\.md$
 ^cran-comments\.md$
+revdep
+
