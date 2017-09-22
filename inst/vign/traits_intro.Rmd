@@ -27,7 +27,7 @@ Get trait data for Willow (_Salix_ spp.)
 
 ```{r}
 (salix <- betydb_search("Salix Vcmax"))
-# equivalent: 
+# equivalent:
 # (out <- betydb_search("willow"))
 ```
 
@@ -50,7 +50,7 @@ salix %>%
 Get sequences by id
 
 ```{r}
-ncbi_byid(ids = "360040093", format = "fasta")
+ncbi_byid(ids = "360040093")
 ```
 
 Get sequences searching by taxonomic name
@@ -60,69 +60,35 @@ out <- ncbi_searcher(taxa = "Umbra limi", seqrange = "1:2000")
 head(out)
 ```
 
-## GISD invasive species data
-
-```{r}
-sp <- c("Carpobrotus edulis", "Rosmarinus officinalis")
-g_invasive(sp)
-```
-
-Or as simplified output
-
-```{r}
-g_invasive(sp, simplify = TRUE)
-```
-
-## EOL invasive species data
-
-```{r}
-eol_invasive_('Brassica oleracea', dataset = 'gisd')
-```
-
-Another example, with more species, and from 
-
-```{r}
-eol_invasive_(c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
-              dataset = 'i3n')
-```
-
 ## EOL's traitbank trait data
 
-Searching for _Mesoplodon bidens_, page id `328566`
+Searching for _Balaenoptera musculus_ (blue whale), page id `328574`
 
-```{r cache=TRUE}
-res <- traitbank(trait = 328566)
-res$graph %>% 
-  select(dwc.measurementtype..id, dwc.measurementtype.rdfs.label.en, dwc.measurementvalue) %>% 
-  filter(!is.na(dwc.measurementvalue))
+```{r}
+res <- traitbank(328574)
+res$graph %>%
+  select(`dwc:measurementtype`) %>%
+  filter(!is.na(`dwc:measurementtype`))
 ```
 
 ## Coral
 
 Get the species list and their ids
 
-```{r cache=TRUE}
+```{r}
 coral_species()
 ```
 
 Get data by taxon
 
-```{r cache=TRUE}
+```{r}
 coral_taxa(80)
 ```
 
 Get data by trait
 
-```{r cache=TRUE}
-coral_traits(105)
-```
-
-## Flora Europaea
-
 ```{r}
-sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
-        "Alkanna lutea", "Anchusa arvensis")
-sapply(sp, fe_native, simplify = FALSE)
+coral_traits(105)
 ```
 
 ## Birdlife International
@@ -137,23 +103,4 @@ Threats data
 
 ```{r}
 birdlife_threats(22721692)
-```
-
-## Nativity
-
-```{r}
-sp <- c("Lavandula stoechas", "Carpobrotus edulis", "Rhododendron ponticum",
-      "Alkanna lutea", "Anchusa arvensis")
-```
-
-Native in the continental USA?
-
-```{r}
-sapply(sp, is_native, where = "Continental US", region = "america")
-```
-
-Native on Islas Baleares?
-
-```{r}
-sapply(sp, is_native, where = "Islas_Baleares", region = "europe")
 ```
