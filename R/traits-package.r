@@ -29,6 +29,7 @@
 #'
 #' @importFrom httr GET POST content stop_for_status warn_for_status
 #' authenticate
+#' @importFrom crul HttpClient
 #' @importFrom jsonlite fromJSON
 #' @importFrom xml2 read_xml xml_find_all xml_text
 #' @importFrom rvest html_table
