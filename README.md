@@ -10,17 +10,17 @@ traits
 
 R client for various sources of species trait data.
 
-Included in `traits` with the associated function prefix:
+Included in `traits` with the associated function prefix or function name:
 
 * [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
-* [Global Invasive Species Database - GISD](http://www.issg.org/database/welcome/) - `g_`
-* [Encyclopedia of Life Invasive Species](http://eol.org/collections/38204) - `eol_`
 * [Encyclopedia of Life Traitbank](http://eol.org/info/516) - `traitbank_`
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
-* [Flora Europaea](http://rbg-web2.rbge.org.uk/FE/fe.html) - `fe_`
 * [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
 * LEDA Traitbase - `leda_`
+* USDA Plants Database - `tr_usda`
+* Zanne et al. plant dataset - `tr_zanne`
+* Amniote life history dataset - `tr_ernest`
 * More to come ...
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
@@ -56,30 +56,31 @@ Get trait data for Willow (_Salix_ spp.)
 
 ```r
 (salix <- betydb_search("Salix Vcmax"))
-#> Source: local data frame [14 x 31]
-#> 
+#> # A tibble: 14 x 36
 #>    access_level       author checked citation_id citation_year  city
-#>           (int)        (chr)   (int)       (int)         (int) (chr)
-#> 1             4       Merilo       1         430          2005 Saare
-#> 2             4       Merilo       1         430          2005 Saare
-#> 3             4       Merilo       1         430          2005 Saare
-#> 4             4       Merilo       1         430          2005 Saare
-#> 5             4 Wullschleger       1          51          1993    NA
-#> 6             4       Merilo       1         430          2005 Saare
-#> 7             4       Merilo       1         430          2005 Saare
-#> 8             4       Merilo       1         430          2005 Saare
-#> 9             4       Merilo       1         430          2005 Saare
+#>  *        <int>        <chr>   <int>       <int>         <int> <chr>
+#>  1            4 Wullschleger       1          51          1993  <NA>
+#>  2            4         Wang       1         381          2010  <NA>
+#>  3            4       Merilo       1         430          2005 Saare
+#>  4            4       Merilo       1         430          2005 Saare
+#>  5            4       Merilo       1         430          2005 Saare
+#>  6            4       Merilo       1         430          2005 Saare
+#>  7            4       Merilo       1         430          2005 Saare
+#>  8            4       Merilo       1         430          2005 Saare
+#>  9            4       Merilo       1         430          2005 Saare
 #> 10            4       Merilo       1         430          2005 Saare
 #> 11            4       Merilo       1         430          2005 Saare
 #> 12            4       Merilo       1         430          2005 Saare
 #> 13            4       Merilo       1         430          2005 Saare
-#> 14            4         Wang       1         381          2010    NA
-#> Variables not shown: commonname (chr), cultivar_id (int), date (chr),
-#>   dateloc (chr), genus (chr), id (int), lat (dbl), lon (dbl), mean (chr),
-#>   month (dbl), n (int), notes (chr), result_type (chr), scientificname
-#>   (chr), site_id (int), sitename (chr), species_id (int), stat (chr),
-#>   statname (chr), trait (chr), trait_description (chr), treatment (chr),
-#>   treatment_id (int), units (chr), year (dbl)
+#> 14            4       Merilo       1         430          2005 Saare
+#> # ... with 30 more variables: commonname <chr>, cultivar <chr>,
+#> #   cultivar_id <int>, date <chr>, dateloc <chr>, entity <lgl>,
+#> #   genus <chr>, id <int>, lat <dbl>, lon <dbl>, mean <dbl>,
+#> #   method_name <lgl>, month <int>, n <int>, notes <chr>, raw_date <chr>,
+#> #   result_type <chr>, scientificname <chr>, site_id <int>,
+#> #   sitename <chr>, species_id <int>, stat <dbl>, statname <chr>,
+#> #   time <chr>, trait <chr>, trait_description <chr>, treatment <chr>,
+#> #   treatment_id <int>, units <chr>, year <int>
 # equivalent:
 # (out <- betydb_search("willow"))
 ```
@@ -96,89 +97,40 @@ salix %>%
             min = round(min(.mean, na.rm = TRUE), 2),
             max = round(max(.mean, na.rm = TRUE), 2),
             n = length(n))
-#> Source: local data frame [4 x 6]
-#> Groups: scientificname [?]
-#> 
+#> # A tibble: 4 x 6
+#> # Groups:   scientificname [?]
 #>                    scientificname trait  mean   min   max     n
-#>                             (chr) (chr) (dbl) (dbl) (dbl) (int)
+#>                             <chr> <chr> <dbl> <dbl> <dbl> <int>
 #> 1                           Salix Vcmax 65.00 65.00 65.00     1
 #> 2                Salix dasyclados Vcmax 46.08 34.30 56.68     4
 #> 3 Salix sachalinensis × miyabeana Vcmax 79.28 79.28 79.28     1
 #> 4                 Salix viminalis Vcmax 43.04 19.99 61.29     8
 ```
 
-## GISD invasive species data
-
-
-```r
-sp <- c("Carpobrotus edulis", "Rosmarinus officinalis")
-g_invasive(sp)
-#>                  species
-#> 1     Carpobrotus edulis
-#> 2 Rosmarinus officinalis
-#>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               status
-#> 1 Carpobrotus edulis is a mat-forming succulent native to South Africa which is invasive primarily in coastal habitats in many parts of the world. It was often introduced as an ornamental plant or used for planting along roadsides, from which it has spread to become invasive. Its main impacts are smothering, reduced regeneration of native flora and changes to soil pH and nutrient regimes.;  (succulent); Common Names: balsamo, Cape fig, figue marine, freeway iceplant, ghaukum, ghoenavy, highway ice plant, higo del Cabo, higo marino, Hottentosvy, hottentot fig, Hottentottenfeige, iceplant, ikhambi-lamabulawo, Kaapsevy, patata frita, perdevy, pigface, rankvy, sea fig, sour fig, suurvy, umgongozi, vyerank; Synonyms: Mesembryanthemum edule L., Mesembryanthemum edulis
-#> 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Not in GISD
-```
-
-Or as simplified output
-
-
-```r
-g_invasive(sp, simplify = TRUE)
-#>                  species      status
-#> 1     Carpobrotus edulis    Invasive
-#> 2 Rosmarinus officinalis Not in GISD
-```
-
-## EOL invasive species data
-
-
-```r
-eol_invasive_('Brassica oleracea', dataset = 'gisd')
-#>       searched_name              name eol_object_id   db
-#> 1 Brassica oleracea Brassica oleracea           NaN gisd
-```
-
-Another example, with more species, and from
-
-
-```r
-eol_invasive_(c('Lymantria dispar','Cygnus olor','Hydrilla verticillata','Pinus concolor'),
-              dataset = 'i3n')
-#>           searched_name                                name eol_object_id
-#> 1      Lymantria dispar                    Lymantria dispar           NaN
-#> 2           Cygnus olor           Cygnus olor (Gmelin 1789)        913227
-#> 3 Hydrilla verticillata Hydrilla verticillata (L. f.) Royle       1088921
-#> 4        Pinus concolor                      Pinus concolor           NaN
-#>    db
-#> 1 i3n
-#> 2 i3n
-#> 3 i3n
-#> 4 i3n
-```
-
 ## EOL's traitbank trait data
 
-Searching for _Mesoplodon bidens_, page id `328566`
+Searching for _Balaenoptera musculus_ (blue whale), page id `328574`
 
 
 ```r
-res <- traitbank(846827)
+res <- traitbank(328574)
 res$graph %>%
-  select(`dwc:measurementtype.@id`, `dwc:measurementtype.rdfs:label.en`) %>%
-  filter(!is.na(`dwc:measurementtype.rdfs:label.en`))
-#> Source: local data frame [6 x 2]
-#> 
-#>                              dwc:measurementtype.@id
-#>                                                (chr)
-#> 1 http://eol.org/schema/terms/TypeSpecimenRepository
-#> 2 http://eol.org/schema/terms/TypeSpecimenRepository
-#> 3                http://eol.org/schema/terms/Habitat
-#> 4                http://eol.org/schema/terms/Habitat
-#> 5       http://eol.org/schema/terms/ExtinctionStatus
-#> 6       http://eol.org/schema/terms/ExtinctionStatus
-#> Variables not shown: dwc:measurementtype.rdfs:label.en (chr)
+  select(`dwc:measurementtype`) %>%
+  filter(!is.na(`dwc:measurementtype`))
+#> # A tibble: 181 x 1
+#>                                   `dwc:measurementtype`
+#>                                                   <chr>
+#>  1 http://eol.org/schema/terms/MineralCompositionOfMilk
+#>  2 http://eol.org/schema/terms/MineralCompositionOfMilk
+#>  3 http://eol.org/schema/terms/MineralCompositionOfMilk
+#>  4 http://eol.org/schema/terms/MineralCompositionOfMilk
+#>  5 http://eol.org/schema/terms/MineralCompositionOfMilk
+#>  6 http://eol.org/schema/terms/MineralCompositionOfMilk
+#>  7 http://eol.org/schema/terms/MineralCompositionOfMilk
+#>  8 http://eol.org/schema/terms/MineralCompositionOfMilk
+#>  9 http://eol.org/schema/terms/MineralCompositionOfMilk
+#> 10 http://eol.org/schema/terms/MineralCompositionOfMilk
+#> # ... with 171 more rows
 ```
 
 ## Coral
@@ -188,21 +140,20 @@ Get the species list and their ids
 
 ```r
 coral_species()
-#> Source: local data frame [1,547 x 2]
-#> 
+#> # A tibble: 1,548 x 2
 #>                          name    id
-#>                         (chr) (chr)
-#> 1         Acanthastrea brevis     3
-#> 2       Acanthastrea echinata     4
-#> 3      Acanthastrea hemprichi     6
-#> 4  Acanthastrea ishigakiensis     8
-#> 5      Acanthastrea regularis    12
-#> 6   Acanthastrea rotundoflora    13
-#> 7    Acanthastrea subechinata    14
-#> 8      Acropora abrolhosensis    16
-#> 9       Acropora abrotanoides    17
+#>                         <chr> <chr>
+#>  1        Acanthastrea brevis     3
+#>  2      Acanthastrea echinata     4
+#>  3     Acanthastrea hemprichi     6
+#>  4 Acanthastrea ishigakiensis     8
+#>  5     Acanthastrea regularis    12
+#>  6  Acanthastrea rotundoflora    13
+#>  7   Acanthastrea subechinata    14
+#>  8     Acropora abrolhosensis    16
+#>  9      Acropora abrotanoides    17
 #> 10           Acropora aculeus    18
-#> ..                        ...   ...
+#> # ... with 1,538 more rows
 ```
 
 Get data by taxon
@@ -210,27 +161,26 @@ Get data by taxon
 
 ```r
 coral_taxa(80)
-#> Source: local data frame [3,121 x 25]
-#> 
+#> # A tibble: 3,540 x 25
 #>    observation_id access user_id specie_id         specie_name location_id
-#>             (int)  (int)   (int)     (int)               (chr)       (int)
-#> 1          119211      1      49        80 Acropora hyacinthus           1
-#> 2          109330      1       2        80 Acropora hyacinthus           1
-#> 3           88793      1      14        80 Acropora hyacinthus           0
-#> 4          115791      1      10        80 Acropora hyacinthus           1
-#> 5          115792      1      10        80 Acropora hyacinthus           1
-#> 6            5696      1       2        80 Acropora hyacinthus           1
-#> 7            5741      1       1        80 Acropora hyacinthus           1
-#> 8            5751      1       1        80 Acropora hyacinthus           1
-#> 9            5773      1       5        80 Acropora hyacinthus           1
-#> 10           5766      1       1        80 Acropora hyacinthus           1
-#> ..            ...    ...     ...       ...                 ...         ...
-#> Variables not shown: location_name (chr), latitude (dbl), longitude (dbl),
-#>   resource_id (int), resource_secondary_id (int), measurement_id (int),
-#>   trait_id (int), trait_name (chr), standard_id (int), standard_unit
-#>   (chr), methodology_id (int), methodology_name (chr), value (chr),
-#>   value_type (chr), precision (dbl), precision_type (chr), precision_upper
-#>   (dbl), replicates (int), notes (chr)
+#>             <int>  <int>   <int>     <int>               <chr>       <int>
+#>  1         157133      1      10        80 Acropora hyacinthus           1
+#>  2         156961      1      14        80 Acropora hyacinthus         409
+#>  3           5781      1       1        80 Acropora hyacinthus           1
+#>  4         156610      1       2        80 Acropora hyacinthus         500
+#>  5         158118      1      10        80 Acropora hyacinthus         409
+#>  6         119211      1      49        80 Acropora hyacinthus           1
+#>  7         158211      1      10        80 Acropora hyacinthus         413
+#>  8          90294      1      15        80 Acropora hyacinthus         341
+#>  9          90294      1      15        80 Acropora hyacinthus         341
+#> 10          90294      1      15        80 Acropora hyacinthus         341
+#> # ... with 3,530 more rows, and 19 more variables: location_name <chr>,
+#> #   latitude <dbl>, longitude <dbl>, resource_id <int>,
+#> #   resource_secondary_id <int>, measurement_id <int>, trait_id <int>,
+#> #   trait_name <chr>, standard_id <int>, standard_unit <chr>,
+#> #   methodology_id <int>, methodology_name <chr>, value <chr>,
+#> #   value_type <chr>, precision <dbl>, precision_type <chr>,
+#> #   precision_upper <dbl>, replicates <int>, notes <chr>
 ```
 
 ## Birdlife International
@@ -257,5 +207,7 @@ birdlife_habitat(22721692)
 * Please [report any issues or bugs](https://github.com/ropensci/traits/issues).
 * License: MIT
 * Get citation information for `traits` in R doing `citation(package = 'traits')`
+* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). 
+By participating in this project you agree to abide by its terms.
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

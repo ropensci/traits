@@ -1,6 +1,7 @@
 #' traits - Species trait data from around the web
 #'
-#' Currently included in \code{traits} with the associated function prefix:
+#' Currently included in \code{traits} with the associated function name or
+#' function prefix:
 #' \itemize{
 #'  \item BETYdb \url{http://www.betydb.org} - \code{betydb_}
 #'  \item National Center for Biotechnology Information - NCBI
@@ -11,6 +12,9 @@
 #'  \code{birdlife_}
 #'  \item LEDA Traitbase http://www.leda-traitbase.org/LEDAportal/index.jsp -
 #'  \code{leda_}
+#'  \item USDA Plants Database - \code{\link{tr_usda}}
+#'  \item Zanne et al. plant dataset - \code{\link{tr_zanne}}
+#'  \item Amniote life history dataset - \code{\link{tr_ernest}}
 #'  \item More to come ...
 #' }
 #'

@@ -10,20 +10,24 @@ birdlife_habitat(id)
 \item{id}{A single IUCN species ID}
 }
 \value{
-a \code{data.frame} with level 1 and level 2 habitat classes, as well as importance
-ratings and occurrence type (e.g. breeding or non-breeding).  The habitat classification
-scheme is described at \url{http://bit.ly/1e6gKBr}
+a \code{data.frame} with level 1 and level 2 habitat classes, as
+well as importance ratings and occurrence type (e.g. breeding or
+non-breeding). The habitat classification scheme is described
+at \url{http://bit.ly/1e6gKBr}
 }
 \description{
 Get bird habitat information from BirdLife/IUCN
 }
 \examples{
 \dontrun{
+# Setophaga chrysoparia
 birdlife_habitat(22721692)
+# Passer domesticus
+birdlife_habitat(103818789)
 }
 }
 \seealso{
-\code{\link{birdlife_threats}}
+Other birdlife: \code{\link{birdlife_threats}}
 }
 \author{
 David J. Harris \email{harry491@gmail.com}
