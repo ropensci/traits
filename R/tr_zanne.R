@@ -13,7 +13,7 @@
 #' Westoby M, Wright IJ, Aarssen L, Bertin RI, Calaminus A, Govaerts R,
 #' Hemmings F, Leishman MR, Oleksyn J, Soltis PS, Swenson NG, Warman L,
 #' Beaulieu JM, Ordonez A (2014) Three keys to the radiation of angiosperms
-#' into freezing environments. Nature 506(7486): 89–92.
+#' into freezing environments. Nature 506(7486): 89-92.
 #' http://dx.doi.org/10.1038/nature12872
 #'
 #' As well as the Dryad data package:
@@ -25,6 +25,7 @@
 #' Beaulieu JM, Ordonez A (2013) Data from: Three keys to the radiation of
 #' angiosperms into freezing environments. Dryad Digital Repository.
 #' http://dx.doi.org/10.5061/dryad.63q27.2
+#'
 #' @references http://datadryad.org/resource/doi:10.5061/dryad.63q27
 #' @examples \dontrun{
 #' res <- tr_zanne()
@@ -54,7 +55,7 @@ tr_zanne <- function(read = TRUE, ...) {
       woodiness = readr::read_csv(paths[2]),
       freezing = {
         pp <- file.path(dirname(paths[4]), "freezing")
-        unzip(paths[4], exdir = pp, junkpaths = TRUE)
+        utils::unzip(paths[4], exdir = pp, junkpaths = TRUE)
         readr::read_csv(file.path(pp, 'MinimumFreezingExposure.csv'))
       },
       leaf_phenology = readr::read_csv(paths[5])
