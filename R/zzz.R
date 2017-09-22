@@ -66,3 +66,9 @@ df_null <- function(x) {
     stringsAsFactors = FALSE
   )
 }
+
+dtread <- function(x) {
+  tibble::as_tibble(
+    data.table::fread(x, stringsAsFactors = FALSE, data.table = FALSE)
+  )
+}
