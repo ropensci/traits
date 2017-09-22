@@ -28,7 +28,7 @@ Imports:
     httr (>= 1.1.0),
     dplyr (>= 0.4.3),
     data.table (>= 1.9.6),
-    readr (>= 0.2.2),
+    readr (>= 1.1.1),
     taxize (>= 0.7.4),
     xml2 (>= 0.1.2),
     rvest  (>= 0.3.1)
