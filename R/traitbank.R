@@ -40,7 +40,8 @@ traitbank <- function(pageid, cache_ttl = NULL, ...) {
       "\t* received:", temp)
     df <- ct <- NULL
   }
-  structure(list(context = ct, graph = dplyr::tbl_df(df)), class = "traitbank")
+  structure(list(context = ct, graph = tibble::as_tibble(df)),
+            class = "traitbank")
 }
 
 traitbank_GET <- function(url, args = list(), ...){
