@@ -35,6 +35,7 @@
 #' @importFrom taxize get_uid classification get_tsn itis_native iucn_id
 #' @importFrom data.table rbindlist fread
 #' @importFrom readr read_delim
+#' @importFrom tibble as_tibble
 #' @name traits-package
 #' @aliases traits
 #' @docType package
