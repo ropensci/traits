@@ -121,7 +121,7 @@ ncbi_searcher_foo <- function(xx, getrelated, verbose, seqrange, entrez_query, f
     mssg(verbose, "...done.")
   }
   # Format output  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  setNames(df, c("taxon", "length", "gene_desc", "acc_no", "gi_no"))
+  stats::setNames(df, c("taxon", "length", "gene_desc", "acc_no", "gi_no"))
 }
 
 # Function to search for sequences with esearch --------------------------------------------------

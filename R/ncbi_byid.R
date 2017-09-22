@@ -56,5 +56,5 @@ ncbi_byid <- function(ids, format=NULL, verbose=TRUE) {
   })
 
   mssg(verbose, "...done")
-  data.frame(rbindlist(tmp))
+  data.frame(rbindlist(tmp), stringsAsFactors = FALSE)
 }

@@ -54,7 +54,7 @@ trydefault <- function (expr, default, quiet = FALSE){
 
 low_names <- function(x) {
   if (is(x, "data.frame")) {
-    setNames(x, tolower(names(x)))
+    stats::setNames(x, tolower(names(x)))
   } else {
     x
   }

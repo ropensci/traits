@@ -5,7 +5,7 @@ Description: Species trait data from many different sources, including
     data from the Global Invasive Species Database and 'EOL', 'Traitbank' data
     from 'EOL', Coral traits data from http://coraltraits.org, 'nativity' status
     ('Flora Europaea' or 'ITIS'), and 'Birdlife' International.
-Version: 0.2.0.9415
+Version: 0.2.0.9418
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
     person("Zachary", "Foster", role = "aut", email = "zacharyfoster1989@gmail.com"),
@@ -15,7 +15,7 @@ Authors@R: c(
   )
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/traits
-BugReports: http://www.github.com/ropensci/traits/issues
+BugReports: https://github.com/ropensci/traits/issues
 LazyData: true
 VignetteBuilder: knitr
 Depends:

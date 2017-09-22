@@ -42,7 +42,7 @@ Removes predicted sequences so you don't have to remove them.
 ncbi_byname(taxa="Acipenser brevirostrum")
 
 # Many species
-species <- c("Colletes similis","Halictus ligatus","Perdita trisignata")
+species <- c("Colletes similis","Halictus ligatus","Perdita californica")
 ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 }
 }

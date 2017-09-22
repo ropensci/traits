@@ -47,7 +47,7 @@ leda <- function(trait = "age_first_flowering", ...) {
   out <- iconv(out, "latin1", "UTF-8")
   str <- sub("^\\r\\n\\r\\n", "", substring(out, regexpr("\r\n\r", out)[1], nchar(out)))
   df <- suppressWarnings(readr::read_delim(str, delim = ";"))
-  setNames(df, gsub("\\s", "_", tolower(names(df))))
+  stats::setNames(df, gsub("\\s", "_", tolower(names(df))))
 }
 
 pick_file_name <- function(x) {

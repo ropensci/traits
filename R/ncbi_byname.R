@@ -16,7 +16,7 @@
 #' ncbi_byname(taxa="Acipenser brevirostrum")
 #'
 #' # Many species
-#' species <- c("Colletes similis","Halictus ligatus","Perdita trisignata")
+#' species <- c("Colletes similis","Halictus ligatus","Perdita californica")
 #' ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 #' }
 ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
@@ -46,7 +46,7 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
       if (getrelated == FALSE) {
         mssg(verbose, paste("no sequences of ", gene, " for ", xx, sep = ""))
         res <- data.frame(
-          list(xx, "NA", NaN, "NA", NaN, "NA", "NA"),
+          xx, NA_character_, NA_real_, NA_character_, NA_real_, NA_character_, NA_character_,
           stringsAsFactors = FALSE)
         names(res) <- NULL
       } else {
@@ -59,7 +59,7 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
         if (as.numeric(xml2::xml_text(xml2::xml_find_all(out, "//Count")[[1]])) == 0) {
           mssg(verbose, paste("no sequences of ", gene, " for ", xx, " or ", newname, sep = ""))
           res <- data.frame(
-            list(xx, "NA", NaN, "NA", NaN, "NA", "NA"),
+            xx, NA_character_, NA_real_, NA_character_, NA_real_, NA_character_, NA_character_,
             stringsAsFactors = FALSE)
           names(res) <- NULL
         } else {

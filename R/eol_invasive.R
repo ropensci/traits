@@ -140,7 +140,7 @@ eol_invasive_ <- function(name = NULL, dataset="all", searchby = grep, page=NULL
       dat[matched,]
     }
   }
-  tmp <- setNames(lapply(name, getmatches, y = searchby), name)
+  tmp <- stats::setNames(lapply(name, getmatches, y = searchby), name)
   df <- do.call(rbind, Map(function(x,y) data.frame(id = y, x), tmp, names(tmp)))
   df$db <- dataset
   names(df)[c(1,3)] <- c("searched_name","eol_object_id")

@@ -29,7 +29,7 @@ traitbank <- function(pageid, cache_ttl = NULL, ...) {
   res <- traitbank_GET(paste0(tburl(), pageid), args, ...)
   if (all(c("item", "@context") %in% names(res)) && "traits" %in% names(res$item)) {
     df <- res$item$traits
-    df <- setNames(df, tolower(names(df)))
+    df <- stats::setNames(df, tolower(names(df)))
     ct <- res$`@context`
   } else {
     temp <- lapply(res, names)
