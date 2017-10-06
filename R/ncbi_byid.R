@@ -7,9 +7,19 @@
 #' @return Data.frame of the form:
 #' \itemize{
 #'  \item taxon - taxonomic name (may include some junk, but hard to parse off)
+#'  \item taxonomy - organism lineage
 #'  \item gene_desc - gene description
+#'  \item organelle - if mitochondrial or chloroplast
 #'  \item gi_no - GI number
 #'  \item acc_no - accession number
+#'  \item keyword - if official DNA barcode
+#'  \item specimen_voucher - museum/lab accession number of vouchered material
+#'  \item lat_lon - longitude/latitude of specimen collection event
+#'  \item country - country/location of specimen collection event
+#'  \item paper_title - title of study
+#'  \item journal - journal study published in (if published)
+#'  \item first_author - first author of study
+#'  \item uploaded_date - date sequence was uploaded to GenBank
 #'  \item length - sequence length
 #'  \item sequence - sequence character string
 #' }
@@ -51,8 +61,20 @@ ncbi_byid <- function(ids, format=NULL, verbose=TRUE) {
     seq <- xml_helper(z, './GBSeq_sequence')
     seqlen <- xml_helper(z, './GBSeq_length')
     tax <- xml_helper(z, "./GBSeq_organism")
-    data.frame(taxon = tax, gene_desc = def, gi_no = gi, acc_no = acc,
-               length = seqlen, sequence = seq, stringsAsFactors = FALSE)
+    taxonomy <- xml_helper(z, "./GBSeq_taxonomy")
+    date <- xml_helper(z, "./GBSeq_create-date")
+    keyword <- xml_helper(z, './/GBSeq_keywords/GBKeyword')
+    voucher <- xml_helper(z, './/GBQualifier[GBQualifier_name = "specimen_voucher"]/GBQualifier_value')
+    organelle <- xml_helper(z, './/GBQualifier[GBQualifier_name = "organelle"]/GBQualifier_value')
+    lat.long <- xml_helper(z, './/GBQualifier[GBQualifier_name = "lat_lon"]/GBQualifier_value')
+    country <- xml_helper(z, './/GBQualifier[GBQualifier_name = "country"]/GBQualifier_value')
+    first.author <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_authors/GBAuthor')
+    paper.title <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_title')
+    journal <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_journal')
+    data.frame(taxon = tax, taxonomy = taxonomy, gene_desc = def, organelle = organelle, gi_no = gi, 
+    acc_no = acc, keyword = keyword, specimen_voucher = voucher, lat_lon = lat.long, country = country, 
+    paper_title = paper.title, journal = journal, first_author = first.author, uploaded_date = date, 
+    length = seqlen, sequence = seq, stringsAsFactors = FALSE)
   })
 
   mssg(verbose, "...done")
