@@ -2,14 +2,16 @@
 #'
 #' @export
 #' @template ncbi
-#' @param gene (character) Gene or genes (in a vector) to search for. See examples.
+#' @param gene (character) Gene or genes (in a vector) to search for.
+#' See examples.
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @details Removes predicted sequences so you don't have to remove them.
 #'   	Predicted sequences are those with accession numbers that have "XM_" or
 #' 		"XR_" prefixes. This function retrieves one sequences for each species,
 #'   	picking the longest available for the given gene.
 #' @return Data.frame of results.
-#' @seealso \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyid}}
+#' @seealso \code{\link[taxize]{ncbi_searcher}},
+#' \code{\link[taxize]{ncbi_byid}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
 #' # A single species

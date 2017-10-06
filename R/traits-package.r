@@ -44,11 +44,12 @@
 #' @name traits-package
 #' @aliases traits
 #' @docType package
-#' @author Ignasi Bartomeus \email{nacho.bartomeus@@gmail.com}
-#' @author Zachary Foster \email{zacharyfoster1989@@gmail.com}
-#' @author David LeBauer \email{dlebauer@@gmail.com}
-#' @author David Harris \email{davharris@@ucdavis.edu}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
+#' @author Ignasi Bartomeus
+#' @author Zachary Foster
+#' @author David LeBauer
+#' @author David Harris
+#' @author Rupert Collins
 #' @keywords package
 NULL
 

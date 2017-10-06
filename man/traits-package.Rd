@@ -41,14 +41,16 @@ coral_taxa(80)
 
 }
 \author{
-Ignasi Bartomeus \email{nacho.bartomeus@gmail.com}
-
-Zachary Foster \email{zacharyfoster1989@gmail.com}
-
-David LeBauer \email{dlebauer@gmail.com}
-
-David Harris \email{davharris@ucdavis.edu}
-
 Scott Chamberlain \email{myrmecocystus@gmail.com}
+
+Ignasi Bartomeus
+
+Zachary Foster
+
+David LeBauer
+
+David Harris
+
+Rupert Collins
 }
 \keyword{package}

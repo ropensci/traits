@@ -3,7 +3,8 @@
 #' @export
 #' @param ids (character) GenBank ids to search for. One or more. Required.
 #' @param format (character) Return type, e.g., \code{"fasta"}. NOW IGNORED.
-#' @param verbose (logical) If \code{TRUE} (default), informative messages printed.
+#' @param verbose (logical) If \code{TRUE} (default), informative messages
+#' printed.
 #' @return Data.frame of the form:
 #' \itemize{
 #'  \item taxon - taxonomic name (may include some junk, but hard to parse off)
@@ -23,10 +24,11 @@
 #'  \item length - sequence length
 #'  \item sequence - sequence character string
 #' }
-#' @details If bad ids are included with good ones, the bad ones are silently dropped.
-#' If all ids are bad you'll get a stop with error message.
-#' @seealso \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyname}}
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
+#' @details If bad ids are included with good ones, the bad ones are
+#' silently dropped. If all ids are bad you'll get a stop with error message.
+#' @seealso \code{\link[taxize]{ncbi_searcher}},
+#' \code{\link[taxize]{ncbi_byname}}
+#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}, Rupert Collins
 #' @examples \dontrun{
 #' # A single gene
 #' ncbi_byid(ids="360040093")
@@ -71,9 +73,9 @@ ncbi_byid <- function(ids, format=NULL, verbose=TRUE) {
     first.author <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_authors/GBAuthor')
     paper.title <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_title')
     journal <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_journal')
-    data.frame(taxon = tax, taxonomy = taxonomy, gene_desc = def, organelle = organelle, gi_no = gi, 
-    acc_no = acc, keyword = keyword, specimen_voucher = voucher, lat_lon = lat.long, country = country, 
-    paper_title = paper.title, journal = journal, first_author = first.author, uploaded_date = date, 
+    data.frame(taxon = tax, taxonomy = taxonomy, gene_desc = def, organelle = organelle, gi_no = gi,
+    acc_no = acc, keyword = keyword, specimen_voucher = voucher, lat_lon = lat.long, country = country,
+    paper_title = paper.title, journal = journal, first_author = first.author, uploaded_date = date,
     length = seqlen, sequence = seq, stringsAsFactors = FALSE)
   })
 

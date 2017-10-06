@@ -5,13 +5,14 @@ Description: Species trait data from many different sources, including
     from the USDA plants database, data from 'EOL' 'Traitbank', 
     Coral traits data (<https://coraltraits.org>), 'Birdlife' International, 
     and more.
-Version: 0.3.0
+Version: 0.3.0.9310
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
-    person("Zachary", "Foster", role = "aut", email = "zacharyfoster1989@gmail.com"),
-    person("Ignasi", "Bartomeus", role = "aut", email = "nacho.bartomeus@gmail.com"),
-    person("David", "LeBauer", role = "aut", email = "dlebauer@gmail.com"),
-    person("David", "Harris", role = "aut", email = "davharris@ucdavis.edu")
+    person("Zachary", "Foster", role = "aut"),
+    person("Ignasi", "Bartomeus", role = "aut"),
+    person("David", "LeBauer", role = "aut"),
+    person("David", "Harris", role = "aut"),
+    person("Rupert", "Collins", role = "ctb")
   )
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/traits
