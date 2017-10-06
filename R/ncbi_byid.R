@@ -51,8 +51,20 @@ ncbi_byid <- function(ids, format=NULL, verbose=TRUE) {
     seq <- xml_helper(z, './GBSeq_sequence')
     seqlen <- xml_helper(z, './GBSeq_length')
     tax <- xml_helper(z, "./GBSeq_organism")
-    data.frame(taxon = tax, gene_desc = def, gi_no = gi, acc_no = acc,
-               length = seqlen, sequence = seq, stringsAsFactors = FALSE)
+    taxonomy <- xml_helper(z, "./GBSeq_taxonomy")
+    date <- xml_helper(z, "./GBSeq_create-date")
+    keyword <- xml_helper(z, './/GBSeq_keywords/GBKeyword')
+    voucher <- xml_helper(z, './/GBQualifier[GBQualifier_name = "specimen_voucher"]/GBQualifier_value')
+    organelle <- xml_helper(z, './/GBQualifier[GBQualifier_name = "organelle"]/GBQualifier_value')
+    lat.long <- xml_helper(z, './/GBQualifier[GBQualifier_name = "lat_lon"]/GBQualifier_value')
+    country <- xml_helper(z, './/GBQualifier[GBQualifier_name = "country"]/GBQualifier_value')
+    first.author <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_authors/GBAuthor')
+    paper.title <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_title')
+    journal <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_journal')
+    data.frame(taxon = tax, taxonomy = taxonomy, gene_desc = def, organelle = organelle, gi_no = gi, 
+    acc_no = acc, keyword = keyword, specimen_voucher = voucher, lat_lon = lat.long, country = country, 
+    paper_title = paper.title, journal = journal, first_author = first.author, uploaded_date = date, 
+    length = seqlen, sequence = seq, stringsAsFactors = FALSE)
   })
 
   mssg(verbose, "...done")
