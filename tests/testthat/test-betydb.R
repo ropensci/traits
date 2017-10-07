@@ -18,7 +18,7 @@ test_that("BETYdb v0 API works", {
   # Priors is a small table
   get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv"))
   expect_is(get.out, "response")
-  expect_match(headers(get.out)$status, "OK")
+  expect_match(httr::headers(get.out)$status, "OK")
   expect_match(get.out$url, betyurl)
 })
 
