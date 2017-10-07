@@ -52,8 +52,7 @@ ncbi_byid(ids=c("360040093","347448433"))
 }
 }
 \seealso{
-\code{\link[taxize]{ncbi_searcher}},
-\code{\link[taxize]{ncbi_byname}}
+\code{\link{ncbi_searcher}}, \code{\link{ncbi_byname}}
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}, Rupert Collins

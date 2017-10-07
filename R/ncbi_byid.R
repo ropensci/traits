@@ -26,8 +26,7 @@
 #' }
 #' @details If bad ids are included with good ones, the bad ones are
 #' silently dropped. If all ids are bad you'll get a stop with error message.
-#' @seealso \code{\link[taxize]{ncbi_searcher}},
-#' \code{\link[taxize]{ncbi_byname}}
+#' @seealso \code{\link{ncbi_searcher}}, \code{\link{ncbi_byname}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}, Rupert Collins
 #' @examples \dontrun{
 #' # A single gene

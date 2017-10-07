@@ -10,8 +10,7 @@
 #' 		"XR_" prefixes. This function retrieves one sequences for each species,
 #'   	picking the longest available for the given gene.
 #' @return Data.frame of results.
-#' @seealso \code{\link[taxize]{ncbi_searcher}},
-#' \code{\link[taxize]{ncbi_byid}}
+#' @seealso \code{\link{ncbi_searcher}}, \code{\link{ncbi_byid}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
 #' # A single species

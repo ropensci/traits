@@ -21,7 +21,7 @@
 #' since this filtering is done after searching NCBI.
 #' @return \code{data.frame} of results if a single input is given. A list of
 #'  \code{data.frame}s if multiple inputs are given.
-#' @seealso \code{\link[taxize]{ncbi_byid}}, \code{\link[taxize]{ncbi_byname}}
+#' @seealso \code{\link{ncbi_byid}}, \code{\link{ncbi_byname}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}, Zachary Foster
 #'   \email{zacharyfoster1989@@gmail.com}
 #' @examples \dontrun{

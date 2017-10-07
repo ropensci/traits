@@ -92,7 +92,7 @@ two <- ncbi_searcher(taxa = "Salmonella enterica")
 }
 }
 \seealso{
-\code{\link[taxize]{ncbi_byid}}, \code{\link[taxize]{ncbi_byname}}
+\code{\link{ncbi_byid}}, \code{\link{ncbi_byname}}
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}, Zachary Foster
