@@ -1,16 +1,23 @@
-R CMD CHECK passed on my local OS X install with R 3.2.4 and
-R development version, Ubuntu running on Travis-CI, and Windows
-R 3.2.4 and devel on a virtualbox Windows install.
+## Test environments
 
-This submission fixes some bugs and adds some new features as
-outlined in the NEWS file.
+* local OS X install, R 3.4.1 patched
+* ubuntu 12.04 (on travis-ci), R 3.4.1 
+* win-builder (devel and release)
 
-I had to submit with dev R since current stable wasn't working with 
-devtools::release() - was giving me the error: "No suitable 
-spell-checker program found"
+## R CMD check results
 
-This is a re-submission of a previous submission that changes a 
-CRAN package URL in the README to it's canonical form.
+0 errors | 0 warnings | 1 note
 
-Thanks! 
+## Reverse dependencies
+
+* I have run R CMD check on the 1 downstream dependencies
+(<https://github.com/ropensci/traits/blob/master/revdep/README.md>).
+The one revdep maintainer was notified of the release.
+
+------
+
+This version fixes a number of bugs and makes a number of changes
+to how some functions behave.
+
+Thanks!
 Scott Chamberlain

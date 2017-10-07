@@ -53,8 +53,8 @@ trydefault <- function (expr, default, quiet = FALSE){
 }
 
 low_names <- function(x) {
-  if (is(x, "data.frame")) {
-    setNames(x, tolower(names(x)))
+  if (inherits(x, "data.frame")) {
+    stats::setNames(x, tolower(names(x)))
   } else {
     x
   }
@@ -64,5 +64,11 @@ df_null <- function(x) {
   data.frame(
     Filter(function(z) !is.null(z), x),
     stringsAsFactors = FALSE
+  )
+}
+
+dtread <- function(x) {
+  tibble::as_tibble(
+    data.table::fread(x, stringsAsFactors = FALSE, data.table = FALSE)
   )
 }
