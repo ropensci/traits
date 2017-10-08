@@ -14,6 +14,7 @@ See `?traits-defunct` for more information. Deprecated functions:
 data (#60)
 * Gains new function `tr_usda` for the USDA plants database (#61)
 * Gains new function `tr_zanne` for a dataset of plant growth data (#73)
+* BetyDB functions gain automatic paging of large requests where API supports it, i.e. not in v0 (#94)
 
 ### MINOR IMPROVEMENTS
 
