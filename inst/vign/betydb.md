@@ -40,20 +40,20 @@ out %>%
 ```
 
 ```
-## Source: local data frame [509 x 2]
-## 
+## # A tibble: 449 x 2
 ##       id mean_result
-## 1   1666       27.36
-## 2  16845       27.00
-## 3   1669       26.36
-## 4  16518       26.00
-## 5   1663       25.35
-## 6  16742       25.00
-## 7   1594       24.78
-## 8   1674       22.71
-## 9   1606       22.54
+##    <int>       <dbl>
+##  1  1666       27.36
+##  2 16845       27.00
+##  3  1669       26.36
+##  4 16518       26.00
+##  5  1663       25.35
+##  6 16742       25.00
+##  7  1594       24.78
+##  8  1674       22.71
+##  9  1606       22.54
 ## 10  1665       22.46
-## ..   ...         ...
+## # ... with 439 more rows
 ```
 
 Single trait
@@ -64,17 +64,11 @@ betydb_trait(id = 10)
 ```
 
 ```
-## $created_at
-## NULL
-## 
 ## $description
 ## [1] "Leaf Percent Nitrogen"
 ## 
 ## $id
 ## [1] 10
-## 
-## $label
-## NULL
 ## 
 ## $max
 ## [1] "10"
@@ -87,12 +81,6 @@ betydb_trait(id = 10)
 ## 
 ## $notes
 ## [1] ""
-## 
-## $standard_name
-## NULL
-## 
-## $standard_units
-## NULL
 ## 
 ## $units
 ## [1] "percent"
@@ -111,14 +99,11 @@ betydb_specie(id = 10)
 ```
 
 ```
-## $AcceptedSymbol
+## $acceptedsymbol
 ## [1] "ACKA2"
 ## 
 ## $commonname
 ## [1] "karroothorn"
-## 
-## $created_at
-## NULL
 ## 
 ## $genus
 ## [1] "Acacia"
@@ -131,9 +116,6 @@ betydb_specie(id = 10)
 ## 
 ## $scientificname
 ## [1] "Acacia karroo"
-## 
-## $spcd
-## NULL
 ## 
 ## $species
 ## [1] "karroo"
@@ -155,9 +137,6 @@ betydb_citation(10)
 ## $author
 ## [1] "Casler"
 ## 
-## $created_at
-## NULL
-## 
 ## $doi
 ## [1] "10.2135/cropsci2003.2226"
 ## 
@@ -176,14 +155,8 @@ betydb_citation(10)
 ## $title
 ## [1] "Cultivar X environment interactions in switchgrass"
 ## 
-## $updated_at
-## NULL
-## 
 ## $url
 ## [1] "http://crop.scijournals.org/cgi/content/abstract/43/6/2226"
-## 
-## $user_id
-## NULL
 ## 
 ## $vol
 ## [1] 43
@@ -222,4 +195,7 @@ betydb_site(id = 1)
 ## 
 ## $state
 ## [1] ""
+## 
+## $time_zone
+## [1] "Europe/Athens"
 ```

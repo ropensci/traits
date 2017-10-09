@@ -79,16 +79,16 @@ coral_species <- function(...) {
   html <- xml2::read_html(content(res, "text", encoding = "UTF-8"))
   ids <- gsub("\n+|\t+|\\s+", "", xml2::xml_text(xml2::xml_find_all(html, '//li[@class="list-group-item"]//div[@style="color: lightgrey;"]')))
   nms <- xml2::xml_text(xml2::xml_find_all(html, '//li[@class="list-group-item"]//div[@class="col-sm-5"]//a'))
-  dplyr::tbl_df(data.frame(name = nms, id = ids, stringsAsFactors = FALSE))
+  tibble::as_tibble(data.frame(name = nms, id = ids, stringsAsFactors = FALSE))
 }
 
 coral_GET <- function(url, args, ...) {
   res <- GET(url, query = args, ...)
   stop_for_status(res)
   txt <- content(res, "text", encoding = "UTF-8")
-  dplyr::tbl_df(read.csv(text = txt, header = TRUE, stringsAsFactors = FALSE))
+  tibble::as_tibble(utils::read.csv(text = txt, header = TRUE, stringsAsFactors = FALSE))
 }
 
-coralbase <- function() 'http://coraltraits.org'
+coralbase <- function() 'https://coraltraits.org'
 coral_url <- function(var, id) paste0(file.path(coralbase(), var, id), ".csv")
 lsw <- function(x) if (x) "on" else "off"
