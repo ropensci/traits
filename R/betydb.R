@@ -161,15 +161,12 @@ betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL){
 
 betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, which, ...){
 
-  api_version <- options()$betydb_api_version
-  # api_version <- ifelse(grepl('/beta/api', url), 'beta', 'v0')
-  if(!exists('per_call_limit')) {
-    per_call_limit <- 5000
-  }
+  api_version <- getOption('betydb_api_version', default = 'v0')
 
-  if(is.null(api_version)){
-    api_version <- options()$betydb_api_version
-  }
+  # Mostly for testing, will probably have default value in ~all normal use
+  per_call_limit <- getOption('per_call_limit', default = 5000)
+
+
   if(api_version == 'v0'){
     txt <- betydb_http(url, args, key, user, pwd, ...)
     lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
