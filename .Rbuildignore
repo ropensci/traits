@@ -13,3 +13,7 @@ cran-comments.md
 inst/readmecache
 inst/vign/vigncache
 .github
+^CONDUCT\.md$
+^cran-comments\.md$
+revdep
+

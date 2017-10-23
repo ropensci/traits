@@ -4,3 +4,15 @@ sacbox
 scimapClient
 dplyr
 traits
+xml2
+rvest
+httr
+tibble
+data.table
+taxize
+jsonlite
+readr
+hoardr
+crul
+testthat
+bindrcpp

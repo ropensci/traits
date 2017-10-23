@@ -18,7 +18,7 @@ test_that("BETYdb v0 API works", {
   # Priors is a small table
   get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv"))
   expect_is(get.out, "response")
-  expect_match(headers(get.out)$status, "OK")
+  expect_match(httr::headers(get.out)$status, "OK")
   expect_match(get.out$url, betyurl)
 })
 
@@ -138,11 +138,9 @@ test_that("paging works with betydb query and search functions",{
     betydb_url = "https://www.betydb.org/",
     betydb_api_version = "beta",
     betydb_key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv",
+    per_call_limit = 10, # check paging without a 5000-item request
     warn=-1 ## suppress warnings that we did not get all data
   )
-
-  # check paging much faster than default hardcoded limit of 5000
-  per_call_limit <<- 10
 
   # return 200 records by default
   limit_default <- betydb_query(table = "traits")

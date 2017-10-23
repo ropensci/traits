@@ -29,7 +29,7 @@ traitbank <- function(pageid, cache_ttl = NULL, ...) {
   res <- traitbank_GET(paste0(tburl(), pageid), args, ...)
   if (all(c("item", "@context") %in% names(res)) && "traits" %in% names(res$item)) {
     df <- res$item$traits
-    df <- setNames(df, tolower(names(df)))
+    df <- stats::setNames(df, tolower(names(df)))
     ct <- res$`@context`
   } else {
     temp <- lapply(res, names)
@@ -40,7 +40,8 @@ traitbank <- function(pageid, cache_ttl = NULL, ...) {
       "\t* received:", temp)
     df <- ct <- NULL
   }
-  structure(list(context = ct, graph = dplyr::tbl_df(df)), class = "traitbank")
+  structure(list(context = ct, graph = tibble::as_tibble(df)),
+            class = "traitbank")
 }
 
 traitbank_GET <- function(url, args = list(), ...){

@@ -2,21 +2,22 @@
 #'
 #' @export
 #' @template ncbi
-#' @param gene (character) Gene or genes (in a vector) to search for. See examples.
+#' @param gene (character) Gene or genes (in a vector) to search for.
+#' See examples.
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @details Removes predicted sequences so you don't have to remove them.
 #'   	Predicted sequences are those with accession numbers that have "XM_" or
 #' 		"XR_" prefixes. This function retrieves one sequences for each species,
 #'   	picking the longest available for the given gene.
 #' @return Data.frame of results.
-#' @seealso \code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyid}}
+#' @seealso \code{\link{ncbi_searcher}}, \code{\link{ncbi_byid}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
 #' # A single species
 #' ncbi_byname(taxa="Acipenser brevirostrum")
 #'
 #' # Many species
-#' species <- c("Colletes similis","Halictus ligatus","Perdita trisignata")
+#' species <- c("Colletes similis","Halictus ligatus","Perdita californica")
 #' ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 #' }
 ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
@@ -46,7 +47,7 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
       if (getrelated == FALSE) {
         mssg(verbose, paste("no sequences of ", gene, " for ", xx, sep = ""))
         res <- data.frame(
-          list(xx, "NA", NaN, "NA", NaN, "NA", "NA"),
+          xx, NA_character_, NA_real_, NA_character_, NA_real_, NA_character_, NA_character_,
           stringsAsFactors = FALSE)
         names(res) <- NULL
       } else {
@@ -59,7 +60,7 @@ ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE,
         if (as.numeric(xml2::xml_text(xml2::xml_find_all(out, "//Count")[[1]])) == 0) {
           mssg(verbose, paste("no sequences of ", gene, " for ", xx, " or ", newname, sep = ""))
           res <- data.frame(
-            list(xx, "NA", NaN, "NA", NaN, "NA", "NA"),
+            xx, NA_character_, NA_real_, NA_character_, NA_real_, NA_character_, NA_character_,
             stringsAsFactors = FALSE)
           names(res) <- NULL
         } else {

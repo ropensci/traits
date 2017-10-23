@@ -11,15 +11,26 @@ ncbi_byid(ids, format = NULL, verbose = TRUE)
 
 \item{format}{(character) Return type, e.g., \code{"fasta"}. NOW IGNORED.}
 
-\item{verbose}{(logical) If \code{TRUE} (default), informative messages printed.}
+\item{verbose}{(logical) If \code{TRUE} (default), informative messages
+printed.}
 }
 \value{
 Data.frame of the form:
 \itemize{
  \item taxon - taxonomic name (may include some junk, but hard to parse off)
+ \item taxonomy - organism lineage
  \item gene_desc - gene description
+ \item organelle - if mitochondrial or chloroplast
  \item gi_no - GI number
  \item acc_no - accession number
+ \item keyword - if official DNA barcode
+ \item specimen_voucher - museum/lab accession number of vouchered material
+ \item lat_lon - longitude/latitude of specimen collection event
+ \item country - country/location of specimen collection event
+ \item paper_title - title of study
+ \item journal - journal study published in (if published)
+ \item first_author - first author of study
+ \item uploaded_date - date sequence was uploaded to GenBank
  \item length - sequence length
  \item sequence - sequence character string
 }
@@ -28,8 +39,8 @@ Data.frame of the form:
 Retrieve gene sequences from NCBI by accession number.
 }
 \details{
-If bad ids are included with good ones, the bad ones are silently dropped.
-If all ids are bad you'll get a stop with error message.
+If bad ids are included with good ones, the bad ones are
+silently dropped. If all ids are bad you'll get a stop with error message.
 }
 \examples{
 \dontrun{
@@ -41,8 +52,8 @@ ncbi_byid(ids=c("360040093","347448433"))
 }
 }
 \seealso{
-\code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyname}}
+\code{\link{ncbi_searcher}}, \code{\link{ncbi_byname}}
 }
 \author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
+Scott Chamberlain \email{myrmecocystus@gmail.com}, Rupert Collins
 }

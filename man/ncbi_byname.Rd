@@ -10,7 +10,8 @@ ncbi_byname(taxa, gene = "COI", seqrange = "1:3000", getrelated = FALSE,
 \arguments{
 \item{taxa}{(character) Scientific name to search for.}
 
-\item{gene}{(character) Gene or genes (in a vector) to search for. See examples.}
+\item{gene}{(character) Gene or genes (in a vector) to search for.
+See examples.}
 
 \item{seqrange}{(character) Sequence range, as e.g., \code{"1:1000"}. This is the range of 
 sequence lengths to search for. So \code{"1:1000"} means search for sequences from 1 to 1000
@@ -42,12 +43,12 @@ Removes predicted sequences so you don't have to remove them.
 ncbi_byname(taxa="Acipenser brevirostrum")
 
 # Many species
-species <- c("Colletes similis","Halictus ligatus","Perdita trisignata")
+species <- c("Colletes similis","Halictus ligatus","Perdita californica")
 ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 }
 }
 \seealso{
-\code{\link[taxize]{ncbi_search}}, \code{\link[taxize]{ncbi_getbyid}}
+\code{\link{ncbi_searcher}}, \code{\link{ncbi_byid}}
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
