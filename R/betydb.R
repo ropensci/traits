@@ -392,3 +392,4 @@ warn <- "Supply either api key, or user name/password combo"
 #   args <- traitsc(list(genus = genus, species = species))
 #   betydb_GET2(makeurl("yields", id, fmt), args, key, user, pwd, "yield", ...)
 # }
+ 
