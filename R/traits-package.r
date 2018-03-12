@@ -35,6 +35,7 @@
 #' authenticate
 #' @importFrom crul HttpClient
 #' @importFrom jsonlite fromJSON
+#' @importFrom utils read.csv URLencode setTxtProgressBar txtProgressBar
 #' @importFrom xml2 read_xml xml_find_all xml_text
 #' @importFrom rvest html_table
 #' @importFrom taxize get_uid classification get_tsn itis_native iucn_id

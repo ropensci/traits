@@ -15,11 +15,11 @@ test_that("BETYdb v0 API works", {
   priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl)
   expect_equal(priors_url, paste0(betyurl, "priors.json"))
 
-  get.out <- GET(priors_url) # Priors is a small table
+  # Priors is a small table
+  get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv"))
   expect_is(get.out, "response")
-  ## FIXME - this fails for me, gives `401 Unauthorized` (scott here)
-  # expect_true(grepl("OK", get.out[["headers"]]$status))
-  expect_true(grepl(betyurl, get.out[["url"]]))
+  expect_match(httr::headers(get.out)$status, "OK")
+  expect_match(get.out$url, betyurl)
 })
 
 test_that("BETYdb beta API works", {
@@ -30,9 +30,10 @@ test_that("BETYdb beta API works", {
   priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl, api_version = "beta")
   expect_equal(priors_url, paste0(betyurl, "api/beta/priors.json"))
 
-  get.out <- GET(priors_url) # Priors is a small table
+  get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")) # Priors is a small table
   expect_is(get.out, "response")
-  expect_true(grepl(betyurl, get.out[["url"]]))
+  expect_match(httr::headers(get.out)$status, "OK" )
+  expect_match(get.out$url, betyurl)
 })
 
 test_that("table to property name matching works", {
@@ -78,13 +79,14 @@ test_that("Credentials work", {
   on.exit(options(prevkey))
   # FIXME - should use v0 API for symmetry w/ other calls,
   # but v0 skips auth for search table
+  options(betydb_key = 'NOT A KEY')
   expect_error(betydb_search("Acer rubrum", api_version = "beta"), "Unauthorized")
   options(betydb_key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")
   optkey <- betydb_search('Acer rubrum')
   expect_equal(optkey$id, key$id)
 
   salix <- betydb_search('salix yield')
-  expect_true(min(salix$access_level) >= 4, info = "please report to betydb@gmail.com")
+  expect_gte(min(salix$access_level), 4)
 
   ## Glopnet data are restricted
   expect_null(betydb_search('wright 2004'))
@@ -106,7 +108,7 @@ test_that("URL & version options work", {
   opt2 <- betydb_query(author = "Arundale", table = "citations",
     betyurl = "https://www.betydb.org/")
   opt3 <- betydb_query(author = "Arundale", table = "citations",
-    betyurl = "https://www.betydb.org/", api_version = "v0")
+                       betyurl = "https://www.betydb.org/", api_version = "v0")
 
   expect_gt(ncol(opt2), ncol(opt3)) # new API returns more params
   expect_equal(opt2$id, opt3$id) # but both should find same IDs
@@ -125,6 +127,38 @@ test_that("betydb_query works", {
 
   np_grass <- betydb_query(distn = "norm", phylogeny = "grass", table = "priors")
   expect_true(all(np_grass$id %in% np$id))
+})
+
+test_that("paging works with betydb query and search functions",{
+  skip_on_cran()
+  check_betydb()
+  opts <- options()
+  on.exit(reset_opts(opts))
+  options(
+    betydb_url = "https://www.betydb.org/",
+    betydb_api_version = "beta",
+    betydb_key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv",
+    per_call_limit = 10, # check paging without a 5000-item request
+    warn=-1 ## suppress warnings that we did not get all data
+  )
+
+  # return 200 records by default
+  limit_default <- betydb_query(table = "traits")
+  expect_equal(nrow(limit_default), 200)
+
+  # check that paging returns correct # below and above default
+  limit3 <- betydb_query(table = 'traits', limit = 3)
+  expect_equal(nrow(limit3), 3)
+  expect_equal(nrow(limit3), attributes(limit3)$metadata$count)
+
+  limit30 <- betydb_query(table = "traits", limit = 30)
+  expect_equal(nrow(limit30), 30)
+  expect_equal(nrow(limit30), attributes(limit30)$metadata$count)
+
+  limit401 <- betydb_query(table = 'traits', limit = 401)
+  expect_equal(nrow(limit401), 401)
+  expect_equal(nrow(limit401), attributes(limit401)$metadata$count)
+
 })
 
 test_that("betydb_record works", {
@@ -186,3 +220,4 @@ test_that("include_unchecked works", {
   expect_gt(nrow(q2), nrow(q1))
   expect_true(all(q1$id %in% q2$id))
 })
+
