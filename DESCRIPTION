@@ -11,6 +11,7 @@ Authors@R: c(
     person("Zachary", "Foster", role = "aut"),
     person("Ignasi", "Bartomeus", role = "aut"),
     person("David", "LeBauer", role = "aut"),
+    person("Chris", "Black", role = "aut"),
     person("David", "Harris", role = "aut"),
     person("Rupert", "Collins", role = "ctb")
   )
