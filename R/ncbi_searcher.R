@@ -229,7 +229,11 @@ taxonomy <- function(zz) {
     out[[ uids[i] ]] <- xml2::xml_text(xml2::xml_find_all(xml, '//Item[@Name="ScientificName"]'))
   }
   for (i in seq_along(out)) {
-    taxids[grepl(names(out)[i], taxids)] <- out[[i]]
+    if (length(out[[i]]) == 0) {
+      taxids[grepl(names(out)[i], taxids)] <- NA_character_
+    } else {
+      taxids[grepl(names(out)[i], taxids)] <- out[[i]]
+    }
   }
   return(taxids)
 }
