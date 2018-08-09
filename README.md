@@ -10,6 +10,8 @@ traits
 
 R client for various sources of species trait data.
 
+What is a trait? A "trait" for the purposes of this package is broadly defined as an aspect of a species that can be described or measured, such as physical traits (size, length, height, color), behavioral traits (running speed, etc.), and even variables that make up the niche of the species (e.g., habitat).
+
 Included in `traits` with the associated function prefix or function name:
 
 * [BETYdb](http://www.betydb.org) - `betydb_`
