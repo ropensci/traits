@@ -5,8 +5,8 @@
 \title{Search for gene sequences available for taxa from NCBI.}
 \usage{
 ncbi_searcher(taxa = NULL, id = NULL, seqrange = "1:3000",
-  getrelated = FALSE, fuzzy = FALSE, limit = 500, entrez_query = NULL,
-  hypothetical = FALSE, verbose = TRUE)
+  getrelated = FALSE, fuzzy = FALSE, limit = 500,
+  entrez_query = NULL, hypothetical = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{taxa}{(character) Scientific name to search for.}

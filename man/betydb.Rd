@@ -10,26 +10,26 @@
 \alias{betydb_experiment}
 \title{Search for traits from BETYdb}
 \usage{
-betydb_record(id, table, api_version = NULL, betyurl = NULL, fmt = NULL,
-  key = NULL, user = NULL, pwd = NULL, ...)
+betydb_record(id, table, api_version = NULL, betyurl = NULL,
+  fmt = NULL, key = NULL, user = NULL, pwd = NULL, ...)
 
 betydb_trait(id, genus = NULL, species = NULL, api_version = NULL,
-  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
-  ...)
+  betyurl = NULL, fmt = "json", key = NULL, user = NULL,
+  pwd = NULL, ...)
 
 betydb_specie(id, genus = NULL, species = NULL, api_version = NULL,
-  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
-  ...)
+  betyurl = NULL, fmt = "json", key = NULL, user = NULL,
+  pwd = NULL, ...)
 
 betydb_citation(id, genus = NULL, species = NULL, api_version = NULL,
-  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
-  ...)
+  betyurl = NULL, fmt = "json", key = NULL, user = NULL,
+  pwd = NULL, ...)
 
 betydb_site(id, api_version = NULL, betyurl = NULL, fmt = "json",
   key = NULL, user = NULL, pwd = NULL, ...)
 
-betydb_experiment(id, api_version = NULL, betyurl = NULL, fmt = "json",
-  key = NULL, user = NULL, pwd = NULL, ...)
+betydb_experiment(id, api_version = NULL, betyurl = NULL,
+  fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
 }
 \arguments{
 \item{id}{(integer) One or more ids for a species, site, variable, etc.}

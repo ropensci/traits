@@ -72,3 +72,18 @@ dtread <- function(x) {
     data.table::fread(x, stringsAsFactors = FALSE, data.table = FALSE)
   )
 }
+
+asdt <- function(x) {
+  tibble::as_tibble(
+    data.table::rbindlist(x, fill = TRUE, use.names = TRUE)
+  )
+}
+
+assert <- function (x, y) {
+  if (!is.null(x)) {
+    if (!inherits(x, y)) {
+      stop(deparse(substitute(x)), " must be of class ",
+          paste0(y, collapse = ", "), call. = FALSE)
+    }
+  }
+}

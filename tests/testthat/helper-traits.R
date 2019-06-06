@@ -6,11 +6,11 @@ check_betydb <- function(url){
 }
 
 ## only run if eol.org is up
-check_traitbank <- function(url){
-  if (httr::status_code(httr::GET("http://eol.org/api")) != 200) {
-    skip("eol's traitbank is offline.")
-  }
-}
+# check_traitbank <- function(url){
+#   if (httr::status_code(httr::GET("http://eol.org/api")) != 200) {
+#     skip("eol's traitbank is offline.")
+#   }
+# }
 
 #' Clean up any option changes to exactly match a previous state,
 #' *unsetting* any options not present in the old list. 
