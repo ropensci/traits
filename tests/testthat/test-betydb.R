@@ -80,7 +80,8 @@ test_that("Credentials work", {
   # FIXME - should use v0 API for symmetry w/ other calls,
   # but v0 skips auth for search table
   options(betydb_key = 'NOT A KEY')
-  expect_error(betydb_search("Acer rubrum", api_version = "beta"), "Unauthorized")
+  expect_error(betydb_search("Acer rubrum", api_version = "beta"), "Unauthorized",
+    class = "error")
   options(betydb_key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")
   optkey <- betydb_search('Acer rubrum')
   expect_equal(optkey$id, key$id)
@@ -104,7 +105,8 @@ test_that("URL & version options work", {
   opt1 <- betydb_query(author = "Arundale", table = "citations")
 
   options(betydb_url = "http://example.com/", betydb_api_version = "beta")
-  expect_error(betydb_query(author = "Arundale", table = "citations"), "Not Found")
+  expect_error(betydb_query(author = "Arundale", table = "citations"),
+    "Not Found", class = "error")
   opt2 <- betydb_query(author = "Arundale", table = "citations",
     betyurl = "https://www.betydb.org/")
   opt3 <- betydb_query(author = "Arundale", table = "citations",
@@ -143,7 +145,7 @@ test_that("paging works with betydb query and search functions",{
   )
 
   # return 200 records by default
-  limit_default <- betydb_query(table = "traits")
+  limit_default <- betydb_query(table = "traits", progress = FALSE)
   expect_equal(nrow(limit_default), 200)
 
   # check that paging returns correct # below and above default
@@ -151,11 +153,11 @@ test_that("paging works with betydb query and search functions",{
   expect_equal(nrow(limit3), 3)
   expect_equal(nrow(limit3), attributes(limit3)$metadata$count)
 
-  limit30 <- betydb_query(table = "traits", limit = 30)
+  limit30 <- betydb_query(table = "traits", limit = 30, progress = FALSE)
   expect_equal(nrow(limit30), 30)
   expect_equal(nrow(limit30), attributes(limit30)$metadata$count)
 
-  limit401 <- betydb_query(table = 'traits', limit = 401)
+  limit401 <- betydb_query(table = 'traits', limit = 401, progress = FALSE)
   expect_equal(nrow(limit401), 401)
   expect_equal(nrow(limit401), attributes(limit401)$metadata$count)
 
@@ -166,7 +168,7 @@ test_that("betydb_record works", {
   check_betydb()
 
   rec <- betydb_record(id = 10, table = "traits")
-  expect_is(rec, "list")
+  expect_is(rec, "tbl_df")
   expect_is(rec$id, "integer")
   expect_equal(rec$id, 10)
 })
@@ -176,7 +178,7 @@ test_that("betydb_trait works", {
   check_betydb()
 
   aa <- betydb_trait(id = 10)
-  expect_is(aa, "list")
+  expect_is(aa, "tbl_df")
   expect_is(aa$id, "integer")
   expect_equal(aa$id, 10)
 })
@@ -186,7 +188,7 @@ test_that("betydb_specie works", {
   check_betydb()
 
   bb <- betydb_specie(id = 1)
-  expect_is(bb, "list")
+  expect_is(bb, "tbl_df")
   expect_is(bb$id, "integer")
   expect_equal(bb$id, 1)
 })
@@ -196,7 +198,7 @@ test_that("betydb_citation works", {
   check_betydb()
 
   cc <- betydb_citation(id = 1)
-  expect_is(cc, "list")
+  expect_is(cc, "tbl_df")
   expect_is(cc$id, "integer")
   expect_equal(cc$id, 1)
 })
@@ -206,7 +208,7 @@ test_that("betydb_site works", {
   check_betydb()
 
   dd <- betydb_site(id = 795)
-  expect_is(dd, "list")
+  expect_is(dd, "tbl_df")
   expect_is(dd$city, "character")
 })
 

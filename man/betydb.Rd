@@ -11,25 +11,27 @@
 \title{Search for traits from BETYdb}
 \usage{
 betydb_record(id, table, api_version = NULL, betyurl = NULL,
-  fmt = NULL, key = NULL, user = NULL, pwd = NULL, ...)
+  fmt = NULL, key = NULL, user = NULL, pwd = NULL,
+  progress = TRUE, ...)
 
 betydb_trait(id, genus = NULL, species = NULL, api_version = NULL,
   betyurl = NULL, fmt = "json", key = NULL, user = NULL,
-  pwd = NULL, ...)
+  pwd = NULL, progress = TRUE, ...)
 
 betydb_specie(id, genus = NULL, species = NULL, api_version = NULL,
   betyurl = NULL, fmt = "json", key = NULL, user = NULL,
-  pwd = NULL, ...)
+  pwd = NULL, progress = TRUE, ...)
 
 betydb_citation(id, genus = NULL, species = NULL, api_version = NULL,
   betyurl = NULL, fmt = "json", key = NULL, user = NULL,
-  pwd = NULL, ...)
+  pwd = NULL, progress = TRUE, ...)
 
 betydb_site(id, api_version = NULL, betyurl = NULL, fmt = "json",
-  key = NULL, user = NULL, pwd = NULL, ...)
+  key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...)
 
 betydb_experiment(id, api_version = NULL, betyurl = NULL,
-  fmt = "json", key = NULL, user = NULL, pwd = NULL, ...)
+  fmt = "json", key = NULL, user = NULL, pwd = NULL,
+  progress = TRUE, ...)
 }
 \arguments{
 \item{id}{(integer) One or more ids for a species, site, variable, etc.}
@@ -48,6 +50,8 @@ currently supported.}
 
 \item{user, pwd}{(character) A user name and password. Use a user/pwd combo or an API key.
 Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional}
+
+\item{progress}{show progress bar? default: \code{TRUE}}
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
 
