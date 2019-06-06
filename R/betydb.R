@@ -287,7 +287,7 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
     res <- Filter(function(x) !is.null(x), lst[[1]])
     names(res) <- tolower(names(res))
   } else {
-    lst[vapply(lst, class, "") == "NULL"] <- NA_character_
+    lst[vapply(lst, class, "") == "NULL"] <- ""
     res <- stats::setNames(tibble::as_tibble(lst), gsub(sprintf("%s\\.", which), "", tolower(names(lst))))
   }
   if (exists("md") && !is.null(md)) { attr(res, "metadata") <- md }
