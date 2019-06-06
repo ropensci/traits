@@ -8,7 +8,7 @@
 #'  \url{http://www.ncbi.nlm.nih.gov/} - \code{ncbi_}
 #'  \item Encyclopedia of Life Traitbank - \code{traitbank_}
 #'  \item Coral Traits Database \url{http://coraltraits.org/} - \code{coral_}
-#'  \item Birdlife International \url{http://rbg-web2.rbge.org.uk/FE/fe.html} -
+#'  \item Birdlife International \url{https://www.birdlife.org/} -
 #'  \code{birdlife_}
 #'  \item LEDA Traitbase http://www.leda-traitbase.org/LEDAportal/index.jsp -
 #'  \code{leda_}

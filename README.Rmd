@@ -26,7 +26,7 @@ Included in `traits` with the associated function prefix or function name:
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
 * [Encyclopedia of Life Traitbank](http://eol.org/info/516) - `traitbank_`
 * [Coral Traits Database](http://coraltraits.org/) - `coral_`
-* [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
+* [Birdlife International](https://www.birdlife.org/) - `birdlife_`
 * LEDA Traitbase - `leda_`
 * USDA Plants Database - `tr_usda`
 * Zanne et al. plant dataset - `tr_zanne`
