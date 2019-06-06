@@ -32,6 +32,7 @@
 #' # traitbank function
 #' res <- traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 2;")
 #' res
+#' }
 traitbank <- function(query, key = NULL, ...) {
   assert(query, "character")
   assert(key, "character")

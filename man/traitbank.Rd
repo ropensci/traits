@@ -42,6 +42,16 @@ doing that as you risk accidentally committing your key to the
 public web.
 }
 
+\examples{
+\dontrun{
+# traitbank_query function
+traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
+
+# traitbank function
+res <- traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 2;")
+res
+}
+}
 \references{
 https://github.com/EOL/eol_website/blob/master/doc/api.md
 https://github.com/EOL/eol_website/blob/master/doc/query-examples.md
