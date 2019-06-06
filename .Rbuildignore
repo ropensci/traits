@@ -13,7 +13,7 @@ cran-comments.md
 inst/readmecache
 inst/vign/vigncache
 .github
-^CONDUCT\.md$
+^CODE_OF_CONDUCT\.md$
 ^cran-comments\.md$
 revdep
 
