@@ -19,6 +19,7 @@ License: MIT + file LICENSE
 URL: https://github.com/ropensci/traits
 BugReports: https://github.com/ropensci/traits/issues
 LazyData: true
+Encoding: UTF-8
 VignetteBuilder: knitr
 Depends:
     R (>= 2.10)
