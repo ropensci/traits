@@ -22,16 +22,81 @@ What is a trait? A "trait" for the purposes of this package is broadly defined a
 
 Included in `traits` with the associated function prefix or function name:
 
-* [BETYdb](http://www.betydb.org) - `betydb_`
+<!-- * [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
 * [Encyclopedia of Life Traitbank](http://eol.org/info/516) - `traitbank_`
-* [Coral Traits Database](http://coraltraits.org/) - `coral_`
+* [Coral Traits Database](https://coraltraits.org/) - `coral_`
 * [Birdlife International](https://www.birdlife.org/) - `birdlife_`
 * LEDA Traitbase - `leda_`
 * USDA Plants Database - `tr_usda`
 * Zanne et al. plant dataset - `tr_zanne`
-* Amniote life history dataset - `tr_ernest`
-* More to come ...
+* Amniote life history dataset - `tr_ernest` -->
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+  <th style="text-align:left;">Souce</th>
+  <th style="text-align:left;">Function prefix</th>
+  <th style="text-align:left;">Link</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+  <td style="text-align:left;">BETYdb</td>
+  <td style="text-align:left;"><code>betydb_</code></td>
+  <td style="text-align:left;">http://www.betydb.org</td>
+</tr>
+<tr>
+  <td style="text-align:left;">NCBI</td>
+  <td style="text-align:left;"><code>ncbi_</code></td>
+  <td style="text-align:left;">http://www.ncbi.nlm.nih.gov/</td>
+</tr>
+<tr>
+  <td style="text-align:left;">Encylopedia of Life</td>
+  <td style="text-align:left;"><code>traitbank_</code></td>
+  <td style="text-align:left;">https://github.com/EOL/eol_website/blob/master/doc/api.md</td>
+</tr>
+<tr>
+  <td style="text-align:left;">Coral Traits Database</td>
+  <td style="text-align:left;"><code>coral_</code></td>
+  <td style="text-align:left;">https://coraltraits.org/</td>
+</tr>
+<tr>
+  <td style="text-align:left;">Birdlife International</td>
+  <td style="text-align:left;"><code>birdlife_</code></td>
+  <td style="text-align:left;">https://www.birdlife.org/</td>
+</tr>
+<tr>
+  <td style="text-align:left;">LEDA Traitbase</td>
+  <td style="text-align:left;"><code>leda_</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+<tr>
+  <td style="text-align:left;">USDA Plants Database</td>
+  <td style="text-align:left;"><code>tr_usda</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+<tr>
+  <td style="text-align:left;">Zanne et al. plant dataset</td>
+  <td style="text-align:left;"><code>tr_zanne</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+<tr>
+  <td style="text-align:left;">Amniote life history dataset</td>
+  <td style="text-align:left;"><code>tr_ernest</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+</tbody>
+</table>
+
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
@@ -82,13 +147,8 @@ salix %>%
 
 ## EOL's traitbank trait data
 
-Searching for _Balaenoptera musculus_ (blue whale), page id `328574`
-
 ```{r cache=FALSE}
-res <- traitbank(328574)
-res$graph %>%
-  select(`dwc:measurementtype`) %>%
-  filter(!is.na(`dwc:measurementtype`))
+traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 ```
 
 ## Coral

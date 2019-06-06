@@ -3,6 +3,7 @@ traits
 
 
 
+[![cran checks](https://cranchecks.info/badges/worst/traits)](https://cranchecks.info/pkgs/traits)
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
 [![codecov.io](https://codecov.io/github/ropensci/traits/coverage.svg?branch=master)](https://codecov.io/github/ropensci/traits?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/traits)](https://github.com/metacran/cranlogs.app)
@@ -14,16 +15,81 @@ What is a trait? A "trait" for the purposes of this package is broadly defined a
 
 Included in `traits` with the associated function prefix or function name:
 
-* [BETYdb](http://www.betydb.org) - `betydb_`
+<!-- * [BETYdb](http://www.betydb.org) - `betydb_`
 * [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
 * [Encyclopedia of Life Traitbank](http://eol.org/info/516) - `traitbank_`
-* [Coral Traits Database](http://coraltraits.org/) - `coral_`
+* [Coral Traits Database](https://coraltraits.org/) - `coral_`
 * [Birdlife International](https://www.birdlife.org/) - `birdlife_`
 * LEDA Traitbase - `leda_`
 * USDA Plants Database - `tr_usda`
 * Zanne et al. plant dataset - `tr_zanne`
-* Amniote life history dataset - `tr_ernest`
-* More to come ...
+* Amniote life history dataset - `tr_ernest` -->
+
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+  <th style="text-align:left;">Souce</th>
+  <th style="text-align:left;">Function prefix</th>
+  <th style="text-align:left;">Link</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+  <td style="text-align:left;">BETYdb</td>
+  <td style="text-align:left;"><code>betydb_</code></td>
+  <td style="text-align:left;">http://www.betydb.org</td>
+</tr>
+<tr>
+  <td style="text-align:left;">NCBI</td>
+  <td style="text-align:left;"><code>ncbi_</code></td>
+  <td style="text-align:left;">http://www.ncbi.nlm.nih.gov/</td>
+</tr>
+<tr>
+  <td style="text-align:left;">Encylopedia of Life</td>
+  <td style="text-align:left;"><code>traitbank_</code></td>
+  <td style="text-align:left;">https://github.com/EOL/eol_website/blob/master/doc/api.md</td>
+</tr>
+<tr>
+  <td style="text-align:left;">Coral Traits Database</td>
+  <td style="text-align:left;"><code>coral_</code></td>
+  <td style="text-align:left;">https://coraltraits.org/</td>
+</tr>
+<tr>
+  <td style="text-align:left;">Birdlife International</td>
+  <td style="text-align:left;"><code>birdlife_</code></td>
+  <td style="text-align:left;">https://www.birdlife.org/</td>
+</tr>
+<tr>
+  <td style="text-align:left;">LEDA Traitbase</td>
+  <td style="text-align:left;"><code>leda_</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+<tr>
+  <td style="text-align:left;">USDA Plants Database</td>
+  <td style="text-align:left;"><code>tr_usda</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+<tr>
+  <td style="text-align:left;">Zanne et al. plant dataset</td>
+  <td style="text-align:left;"><code>tr_zanne</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+<tr>
+  <td style="text-align:left;">Amniote life history dataset</td>
+  <td style="text-align:left;"><code>tr_ernest</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+</tbody>
+</table>
+
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
@@ -59,30 +125,29 @@ Get trait data for Willow (_Salix_ spp.)
 ```r
 (salix <- betydb_search("Salix Vcmax"))
 #> # A tibble: 14 x 36
-#>    access_level       author checked citation_id citation_year  city
-#>  *        <int>        <chr>   <int>       <int>         <int> <chr>
-#>  1            4 Wullschleger       1          51          1993  <NA>
-#>  2            4         Wang       1         381          2010  <NA>
-#>  3            4       Merilo       1         430          2005 Saare
-#>  4            4       Merilo       1         430          2005 Saare
-#>  5            4       Merilo       1         430          2005 Saare
-#>  6            4       Merilo       1         430          2005 Saare
-#>  7            4       Merilo       1         430          2005 Saare
-#>  8            4       Merilo       1         430          2005 Saare
-#>  9            4       Merilo       1         430          2005 Saare
-#> 10            4       Merilo       1         430          2005 Saare
-#> 11            4       Merilo       1         430          2005 Saare
-#> 12            4       Merilo       1         430          2005 Saare
-#> 13            4       Merilo       1         430          2005 Saare
-#> 14            4       Merilo       1         430          2005 Saare
-#> # ... with 30 more variables: commonname <chr>, cultivar <chr>,
-#> #   cultivar_id <int>, date <chr>, dateloc <chr>, entity <lgl>,
-#> #   genus <chr>, id <int>, lat <dbl>, lon <dbl>, mean <dbl>,
-#> #   method_name <lgl>, month <int>, n <int>, notes <chr>, raw_date <chr>,
-#> #   result_type <chr>, scientificname <chr>, site_id <int>,
-#> #   sitename <chr>, species_id <int>, stat <dbl>, statname <chr>,
-#> #   time <chr>, trait <chr>, trait_description <chr>, treatment <chr>,
-#> #   treatment_id <int>, units <chr>, year <int>
+#>    checked result_type    id citation_id site_id treatment_id sitename
+#>      <int> <chr>       <int>       <int>   <int>        <int> <chr>   
+#>  1       1 traits      39217         430     645         1342 ""      
+#>  2       1 traits      39218         430     645         1343 ""      
+#>  3       1 traits      39219         430     645         1344 ""      
+#>  4       1 traits      39220         430     645         1345 ""      
+#>  5       1 traits      25405          51      NA            1 <NA>    
+#>  6       1 traits      39213         430     645         1342 ""      
+#>  7       1 traits      39214         430     645         1343 ""      
+#>  8       1 traits      39215         430     645         1344 ""      
+#>  9       1 traits      39216         430     645         1345 ""      
+#> 10       1 traits      39221         430     645         1342 ""      
+#> 11       1 traits      39222         430     645         1343 ""      
+#> 12       1 traits      39223         430     645         1344 ""      
+#> 13       1 traits      39224         430     645         1345 ""      
+#> 14       1 traits      37519         381     602         1220 <NA>    
+#> # … with 29 more variables: city <chr>, lat <dbl>, lon <dbl>,
+#> #   scientificname <chr>, commonname <chr>, genus <chr>, species_id <int>,
+#> #   cultivar_id <int>, author <chr>, citation_year <int>, treatment <chr>,
+#> #   date <chr>, time <chr>, raw_date <chr>, month <int>, year <int>,
+#> #   dateloc <chr>, trait <chr>, trait_description <chr>, mean <dbl>,
+#> #   units <chr>, n <int>, statname <chr>, stat <dbl>, notes <chr>,
+#> #   access_level <int>, cultivar <chr>, entity <lgl>, method_name <lgl>
 # equivalent:
 # (out <- betydb_search("willow"))
 ```
@@ -100,39 +165,61 @@ salix %>%
             max = round(max(.mean, na.rm = TRUE), 2),
             n = length(n))
 #> # A tibble: 4 x 6
-#> # Groups:   scientificname [?]
-#>                    scientificname trait  mean   min   max     n
-#>                             <chr> <chr> <dbl> <dbl> <dbl> <int>
-#> 1                           Salix Vcmax 65.00 65.00 65.00     1
-#> 2                Salix dasyclados Vcmax 46.08 34.30 56.68     4
-#> 3 Salix sachalinensis × miyabeana Vcmax 79.28 79.28 79.28     1
-#> 4                 Salix viminalis Vcmax 43.04 19.99 61.29     8
+#> # Groups:   scientificname [4]
+#>   scientificname                  trait  mean   min   max     n
+#>   <chr>                           <chr> <dbl> <dbl> <dbl> <int>
+#> 1 Salix                           Vcmax  65    65    65       1
+#> 2 Salix dasyclados                Vcmax  46.1  34.3  56.7     4
+#> 3 Salix sachalinensis × miyabeana Vcmax  79.3  79.3  79.3     1
+#> 4 Salix viminalis                 Vcmax  43.0  20.0  61.3     8
 ```
 
 ## EOL's traitbank trait data
 
-Searching for _Balaenoptera musculus_ (blue whale), page id `328574`
-
 
 ```r
-res <- traitbank(328574)
-res$graph %>%
-  select(`dwc:measurementtype`) %>%
-  filter(!is.na(`dwc:measurementtype`))
-#> # A tibble: 181 x 1
-#>                                   `dwc:measurementtype`
-#>                                                   <chr>
-#>  1 http://eol.org/schema/terms/MineralCompositionOfMilk
-#>  2 http://eol.org/schema/terms/MineralCompositionOfMilk
-#>  3 http://eol.org/schema/terms/MineralCompositionOfMilk
-#>  4 http://eol.org/schema/terms/MineralCompositionOfMilk
-#>  5 http://eol.org/schema/terms/MineralCompositionOfMilk
-#>  6 http://eol.org/schema/terms/MineralCompositionOfMilk
-#>  7 http://eol.org/schema/terms/MineralCompositionOfMilk
-#>  8 http://eol.org/schema/terms/MineralCompositionOfMilk
-#>  9 http://eol.org/schema/terms/MineralCompositionOfMilk
-#> 10 http://eol.org/schema/terms/MineralCompositionOfMilk
-#> # ... with 171 more rows
+traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
+#> $columns
+#> [1] "n"
+#> 
+#> $data
+#> $data[[1]]
+#>   metadata.id metadata.labels
+#> 1    20280619           Trait
+#>                                                                                     paged_traverse
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/paged/traverse/{returnType}{?pageSize,leaseTime}
+#>                                              outgoing_relationships
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/out
+#>                                                        outgoing_typed_relationships
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/out/{-list|&|types}
+#>                                                   labels
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/labels
+#>                                             create_relationship
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships
+#>                                                                traverse
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/traverse/{returnType}
+#>                                                   all_relationships
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/all
+#>                                                             all_typed_relationships
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/all/{-list|&|types}
+#>                                                           property
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/properties/{key}
+#>                                              self
+#> 1 http://10.252.248.44:7474/db/data/node/20280619
+#>                                             incoming_relationships
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/in
+#>                                                   properties
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/properties
+#>                                                       incoming_typed_relationships
+#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/in/{-list|&|types}
+#>     data.eol_pk data.resource_pk
+#> 1 R74-PK5014587           110690
+#>                                data.scientific_name
+#> 1 <i>Adenopodia floribunda</i> (Kleinhoonte) Brenan
+#>                                data.source
+#> 1 http://www.pnas.org/content/114/40/10695
+#>                                                                   data.literal
+#> 1 http://eol.org/schema/terms/Tropical_and_subtropical_moist_broadleaf_forests
 ```
 
 ## Coral
@@ -143,19 +230,19 @@ Get the species list and their ids
 ```r
 coral_species()
 #> # A tibble: 1,548 x 2
-#>                          name    id
-#>                         <chr> <chr>
-#>  1        Acanthastrea brevis     3
-#>  2      Acanthastrea echinata     4
-#>  3     Acanthastrea hemprichi     6
-#>  4 Acanthastrea ishigakiensis     8
-#>  5     Acanthastrea regularis    12
-#>  6  Acanthastrea rotundoflora    13
-#>  7   Acanthastrea subechinata    14
-#>  8     Acropora abrolhosensis    16
-#>  9      Acropora abrotanoides    17
-#> 10           Acropora aculeus    18
-#> # ... with 1,538 more rows
+#>    name                       id   
+#>    <chr>                      <chr>
+#>  1 Acanthastrea brevis        3    
+#>  2 Acanthastrea echinata      4    
+#>  3 Acanthastrea hemprichi     6    
+#>  4 Acanthastrea ishigakiensis 8    
+#>  5 Acanthastrea regularis     12   
+#>  6 Acanthastrea rotundoflora  13   
+#>  7 Acanthastrea subechinata   14   
+#>  8 Acropora abrolhosensis     16   
+#>  9 Acropora abrotanoides      17   
+#> 10 Acropora aculeus           18   
+#> # … with 1,538 more rows
 ```
 
 Get data by taxon
@@ -164,19 +251,19 @@ Get data by taxon
 ```r
 coral_taxa(80)
 #> # A tibble: 3,540 x 25
-#>    observation_id access user_id specie_id         specie_name location_id
-#>             <int>  <int>   <int>     <int>               <chr>       <int>
-#>  1         157133      1      10        80 Acropora hyacinthus           1
-#>  2         156961      1      14        80 Acropora hyacinthus         409
-#>  3           5781      1       1        80 Acropora hyacinthus           1
-#>  4         156610      1       2        80 Acropora hyacinthus         500
-#>  5         158118      1      10        80 Acropora hyacinthus         409
-#>  6         119211      1      49        80 Acropora hyacinthus           1
-#>  7         158211      1      10        80 Acropora hyacinthus         413
-#>  8          90294      1      15        80 Acropora hyacinthus         341
-#>  9          90294      1      15        80 Acropora hyacinthus         341
-#> 10          90294      1      15        80 Acropora hyacinthus         341
-#> # ... with 3,530 more rows, and 19 more variables: location_name <chr>,
+#>    observation_id access user_id specie_id specie_name location_id
+#>             <int>  <int>   <int>     <int> <chr>             <int>
+#>  1         157133      1      10        80 Acropora h…           1
+#>  2         156961      1      14        80 Acropora h…         409
+#>  3           5781      1       1        80 Acropora h…           1
+#>  4         156610      1       2        80 Acropora h…         500
+#>  5         158118      1      10        80 Acropora h…         409
+#>  6         119211      1      49        80 Acropora h…           1
+#>  7         158211      1      10        80 Acropora h…         413
+#>  8          90294      1      15        80 Acropora h…         341
+#>  9          90294      1      15        80 Acropora h…         341
+#> 10          90294      1      15        80 Acropora h…         341
+#> # … with 3,530 more rows, and 19 more variables: location_name <chr>,
 #> #   latitude <dbl>, longitude <dbl>, resource_id <int>,
 #> #   resource_secondary_id <int>, measurement_id <int>, trait_id <int>,
 #> #   trait_name <chr>, standard_id <int>, standard_unit <chr>,
@@ -193,7 +280,7 @@ Habitat data
 ```r
 birdlife_habitat(22721692)
 #>         id Habitat (level 1)                  Habitat (level 2) Importance
-#> 1 22721692            Forest           Subtropical/Tropical Dry   suitable
+#> 1 22721692            Forest           Subtropical/Tropical Dry      major
 #> 2 22721692            Forest Subtropical/Tropical Moist Montane      major
 #> 3 22721692            Forest                          Temperate   suitable
 #> 4 22721692         Shrubland Subtropical/Tropical High Altitude   suitable

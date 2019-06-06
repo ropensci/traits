@@ -10,7 +10,7 @@
 #' @param contextual logical; Include contextual data. Default: TRUE
 #' @param global logical; Include contextual data. Default: FALSE
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
-#' @references \url{http://coraltraits.org/}
+#' @references https://coraltraits.org/
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
 #' # Get the species and their Ids
