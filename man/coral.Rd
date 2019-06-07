@@ -75,7 +75,7 @@ coral_taxa(8, config=verbose())
 }
 }
 \references{
-\url{http://coraltraits.org/}
+https://coraltraits.org/
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}
