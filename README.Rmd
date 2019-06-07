@@ -90,8 +90,6 @@ Included in `traits` with the associated function prefix or function name:
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
-For an introduction to the package, see [the vignettes](https://CRAN.R-project.org/web/packages/traits/vignettes/)
-
 ## Installation
 
 Stable CRAN version
@@ -165,13 +163,13 @@ birdlife_habitat(22721692)
 
 ## Contributors
 
-* [Scott Chamberlain](https://github.com/ropensci/sckott)
-* [Zachary Foster](https://github.com/ropensci/zachary-foster)
-* [Ignasi Bartomeus](https://github.com/ropensci/ibartomeus)
-* [David LeBauer](https://github.com/ropensci/dlebauer)
-* [David Harris](https://github.com/ropensci/davharris)
-* [Chris Black](https://github.com/ropensci/infotroph)
-* [Rupert Collins](https://github.com/ropensci/boopsboops)
+* [Scott Chamberlain](https://github.com/sckott)
+* [Zachary Foster](https://github.com/zachary-foster)
+* [Ignasi Bartomeus](https://github.com/ibartomeus)
+* [David LeBauer](https://github.com/dlebauer)
+* [David Harris](https://github.com/davharris)
+* [Chris Black](https://github.com/infotroph)
+* [Rupert Collins](https://github.com/boopsboops)
 
 ## Meta
 
