@@ -1,12 +1,12 @@
 ## Test environments
 
-* local OS X install, R 3.4.1 patched
-* ubuntu 12.04 (on travis-ci), R 3.4.1 
+* local OS X install, R 3.6.0 patched
+* ubuntu 14.04 (on travis-ci), R 3.6.0 
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
 ## Reverse dependencies
 
@@ -16,8 +16,7 @@ The one revdep maintainer was notified of the release.
 
 ------
 
-This version fixes a number of bugs and makes a number of changes
-to how some functions behave.
+This version makes changes due to remote data source change; adds a few new authors; improves documentation; and a few bug fixes.
 
 Thanks!
 Scott Chamberlain
