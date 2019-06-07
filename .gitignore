@@ -4,3 +4,6 @@
 plantatt.pdf
 inst/PLANTATT_19_Nov_08/*
 inst/vign/vigncache
+revdep/checks.noindex
+revdep/data.sqlite
+revdep/library.noindex

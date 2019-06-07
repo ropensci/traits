@@ -15,6 +15,5 @@ inst/vign/vigncache
 .github
 ^CODE_OF_CONDUCT\.md$
 ^cran-comments\.md$
-revdep
-
+^revdep$
 ^codemeta\.json$

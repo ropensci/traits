@@ -1,34 +1,22 @@
-# Setup
+# Platform
 
-## Platform
-
-|setting  |value                                       |
+|field    |value                                       |
 |:--------|:-------------------------------------------|
-|version  |R version 3.4.1 Patched (2017-09-11 r73247) |
+|version  |R version 3.6.0 Patched (2019-04-30 r76446) |
+|os       |macOS Mojave 10.14.5                        |
 |system   |x86_64, darwin15.6.0                        |
-|ui       |RStudio (1.1.366)                           |
+|ui       |X11                                         |
 |language |(EN)                                        |
 |collate  |en_US.UTF-8                                 |
-|tz       |America/Los_Angeles                         |
-|date     |2017-09-22                                  |
+|ctype    |en_US.UTF-8                                 |
+|tz       |US/Pacific                                  |
+|date     |2019-06-07                                  |
 
-## Packages
+# Dependencies
 
-|package |*  |version |date       |source                     |
-|:-------|:--|:-------|:----------|:--------------------------|
-|traits  |*  |0.3.0   |2017-09-22 |local (ropensci/traits@NA) |
+|package |old   |new   |Δ  |
+|:-------|:-----|:-----|:--|
+|traits  |0.3.0 |0.4.0 |*  |
 
-# Check results
-
-1 packages
-
-|package   |version | errors| warnings| notes|
-|:---------|:-------|------:|--------:|-----:|
-|metacoder |0.1.3   |      0|        0|     0|
-
-## metacoder (0.1.3)
-Maintainer: Zachary Foster <zacharyfoster1989@gmail.com>  
-Bug reports: https://github.com/grunwaldlab/metacoder/issues
-
-0 errors | 0 warnings | 0 notes
+# Revdeps
 
