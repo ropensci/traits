@@ -15,16 +15,6 @@ What is a trait? A "trait" for the purposes of this package is broadly defined a
 
 Included in `traits` with the associated function prefix or function name:
 
-<!-- * [BETYdb](http://www.betydb.org) - `betydb_`
-* [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
-* [Encyclopedia of Life Traitbank](http://eol.org/info/516) - `traitbank_`
-* [Coral Traits Database](https://coraltraits.org/) - `coral_`
-* [Birdlife International](https://www.birdlife.org/) - `birdlife_`
-* LEDA Traitbase - `leda_`
-* USDA Plants Database - `tr_usda`
-* Zanne et al. plant dataset - `tr_zanne`
-* Amniote life history dataset - `tr_ernest` -->
-
 <table>
 <colgroup>
 <col style="text-align:left;"/>
@@ -93,7 +83,7 @@ Included in `traits` with the associated function prefix or function name:
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
 
-For an introduction to the package, see [the vignette](vignettes/traits_intro.Rmd).
+For an introduction to the package, see [the vignettes](https://CRAN.R-project.org/web/packages/traits/vignettes/)
 
 ## Installation
 
@@ -298,6 +288,7 @@ birdlife_habitat(22721692)
 * [Ignasi Bartomeus](https://github.com/ropensci/ibartomeus)
 * [David LeBauer](https://github.com/ropensci/dlebauer)
 * [David Harris](https://github.com/ropensci/davharris)
+* [Chris Black](https://github.com/ropensci/infotroph)
 * [Rupert Collins](https://github.com/ropensci/boopsboops)
 
 ## Meta
