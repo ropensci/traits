@@ -175,7 +175,7 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
   if(api_version == 'v0'){
     txt <- betydb_http(url, args, key, user, pwd, ...)
     lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
-  } else if (api_version == 'beta'){
+  } else if (api_version %in% c('beta', 'v1')){
 
     if(is.null(args$limit)) {
       args$limit <- 200
