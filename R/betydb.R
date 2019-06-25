@@ -375,13 +375,6 @@ betydb_auth <- function(user,pwd,key){
     if (xor(is.null(user), is.null(pwd))) stop(warn, call. = FALSE)
     auth <- list(user = user, pwd = pwd, key = NULL)
   }
-
-  if (is.null(c(auth$key, auth$user, auth$pwd))) {
-    # If no auth of any kind provided, use the ropensci-traits API key.
-    # TODO: Are there implementations that accept password but not key? If so:
-    # auth <- list(user <- 'ropensci-traits', pwd <- 'ropensci', key = NULL)
-    auth$key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv"
-  }
   auth
 }
 
