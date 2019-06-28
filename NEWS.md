@@ -1,3 +1,11 @@
+traits 0.4.2
+============
+
+### MINOR IMPROVEMENTS
+
+* xxx (#xxx)
+
+
 traits 0.4.0
 ============
 
