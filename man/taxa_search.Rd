@@ -9,7 +9,8 @@ taxa_search(x, db, ...)
 \arguments{
 \item{x}{(character) Taxonomic name(s) to search for}
 
-\item{db}{(character) One of betydb, traitbank, ncbi, coral.}
+\item{db}{(character) only 'ncbi' for now - other options
+maybe in the future}
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}}
 }
@@ -21,7 +22,6 @@ Search for traits by taxa names
 }
 \examples{
 \dontrun{
-taxa_search("Poa annua", db = "traitbank")
 taxa_search("Poa annua", db = "ncbi")
 }
 }

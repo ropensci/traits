@@ -74,7 +74,7 @@ ncbi_searcher <- function(taxa = NULL, id = NULL, seqrange="1:3000",
 
   # Convert 'taxa' to 'id' if 'taxa' is supplied ---------------------------------------------------
   if (is.null(id)) {
-    id <- get_uid(taxa, verbose = verbose)
+    id <- get_uid(taxa, messages = verbose)
     names(id) <- taxa
   } else {
     id <- as.character(id)
@@ -185,12 +185,12 @@ get_parent <- function(id, verbose) {
     ancestry <- classification(id = id, db = "ncbi")[[1]]
     if (nrow(ancestry) > 1) {
       parent_name <- ancestry$name[nrow(ancestry) - 1]
-      return(get_uid(parent_name, verbose = verbose))
+      return(get_uid(parent_name, messages = verbose))
     }
   }
   if (!is.null(names(id)) && grepl(" ", names(id))) { #if a name is given and looks like a species
     parent_name <- strsplit(names(id), " ")[[1]][[1]]
-    return(get_uid(parent_name, verbose = verbose))
+    return(get_uid(parent_name, messages = verbose))
   }
   return(NA)
 }
