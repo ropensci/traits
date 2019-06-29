@@ -10,7 +10,7 @@
   "codeRepository": "https://github.com/ropensci/traits",
   "issueTracker": "https://github.com/ropensci/traits/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -275,8 +275,15 @@
   "contIntegration": "https://travis-ci.org/ropensci/traits",
   "releaseNotes": "https://github.com/ropensci/traits/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/traits/blob/master/README.md",
-  "fileSize": "1723.686KB",
+  "fileSize": "1723.742KB",
   "copyrightHolder": {},
   "funder": {},
-  "keywords": ["traits", "species", "api-client", "r", "rstats", "r-package"]
+  "keywords": [
+    "traits",
+    "species",
+    "api-client",
+    "r",
+    "rstats",
+    "r-package"
+  ]
 }
