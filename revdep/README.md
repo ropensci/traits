@@ -10,13 +10,13 @@
 |collate  |en_US.UTF-8                                 |
 |ctype    |en_US.UTF-8                                 |
 |tz       |US/Pacific                                  |
-|date     |2019-06-07                                  |
+|date     |2019-06-28                                  |
 
 # Dependencies
 
 |package |old   |new   |Δ  |
 |:-------|:-----|:-----|:--|
-|traits  |0.3.0 |0.4.0 |*  |
+|traits  |0.4.0 |0.4.2 |*  |
 
 # Revdeps
 

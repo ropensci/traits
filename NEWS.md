@@ -3,7 +3,11 @@ traits 0.4.2
 
 ### MINOR IMPROVEMENTS
 
-* xxx (#xxx)
+* betydb gains alias for API versions (#114)
+
+### BUG FIXES
+
+* `taxa_search`: removed `traitbank` option because `traits::traitbank()` used internally has completely changed and it's no longer feasible to do a straight-forward taxon search for all traits in EOL's Traitbank  (#115)
 
 
 traits 0.4.0

@@ -12,11 +12,10 @@
 
 * I have run R CMD check on the 1 downstream dependencies
 (<https://github.com/ropensci/traits/blob/master/revdep/README.md>).
-The one revdep maintainer was notified of the release.
 
 ------
 
-This version makes changes due to remote data source change; adds a few new authors; improves documentation; and a few bug fixes.
+This version makes a change to a function, and fixes a bug in another.
 
 Thanks!
 Scott Chamberlain

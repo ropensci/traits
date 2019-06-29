@@ -5,7 +5,7 @@ Description: Species trait data from many different sources, including
     from the USDA plants database, data from 'EOL' 'Traitbank', 
     Coral traits data (<https://coraltraits.org>), 'Birdlife' International, 
     and more.
-Version: 0.4.1.9100
+Version: 0.4.2
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
     person("Zachary", "Foster", role = "aut"),
