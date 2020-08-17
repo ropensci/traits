@@ -21,5 +21,5 @@ test_that("traitbank: fails well", {
   skip_on_cran()
   
   expect_error(traitbank(), "\"query\" is missing", class = "error")
-  expect_error(traitbank("asfasfd"), "Forbidden", class = "error")
+  expect_error(traitbank("asfasfd"), class = "error")
 })
