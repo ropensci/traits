@@ -5,7 +5,7 @@ Description: Species trait data from many different sources, including
     from the USDA plants database, data from 'EOL' 'Traitbank', 
     Coral traits data (<https://coraltraits.org>), 'Birdlife' International, 
     and more.
-Version: 0.4.2.9100
+Version: 0.4.2.93
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
     person("Zachary", "Foster", role = "aut"),
@@ -21,6 +21,7 @@ BugReports: https://github.com/ropensci/traits/issues
 LazyData: true
 Encoding: UTF-8
 VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
 Depends:
     R (>= 2.10)
 Imports:
@@ -35,7 +36,6 @@ Imports:
     rvest  (>= 0.3.1),
     hoardr
 Suggests:
-    roxygen2 (>= 6.0.1),
     knitr,
     testthat,
     dplyr,

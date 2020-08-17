@@ -15,24 +15,24 @@ ncbi_byid(ids, format = NULL, verbose = TRUE)
 printed.}
 }
 \value{
-Data.frame of the form:
+data.frame of the form:
 \itemize{
- \item taxon - taxonomic name (may include some junk, but hard to parse off)
- \item taxonomy - organism lineage
- \item gene_desc - gene description
- \item organelle - if mitochondrial or chloroplast
- \item gi_no - GI number
- \item acc_no - accession number
- \item keyword - if official DNA barcode
- \item specimen_voucher - museum/lab accession number of vouchered material
- \item lat_lon - longitude/latitude of specimen collection event
- \item country - country/location of specimen collection event
- \item paper_title - title of study
- \item journal - journal study published in (if published)
- \item first_author - first author of study
- \item uploaded_date - date sequence was uploaded to GenBank
- \item length - sequence length
- \item sequence - sequence character string
+\item taxon - taxonomic name (may include some junk, but hard to parse off)
+\item taxonomy - organism lineage
+\item gene_desc - gene description
+\item organelle - if mitochondrial or chloroplast
+\item gi_no - GI number
+\item acc_no - accession number
+\item keyword - if official DNA barcode
+\item specimen_voucher - museum/lab accession number of vouchered material
+\item lat_lon - longitude/latitude of specimen collection event
+\item country - country/location of specimen collection event
+\item paper_title - title of study
+\item journal - journal study published in (if published)
+\item first_author - first author of study
+\item uploaded_date - date sequence was uploaded to GenBank
+\item length - sequence length
+\item sequence - sequence character string
 }
 }
 \description{
@@ -52,7 +52,7 @@ ncbi_byid(ids=c("360040093","347448433"))
 }
 }
 \seealso{
-\code{\link{ncbi_searcher}}, \code{\link{ncbi_byname}}
+\code{\link[=ncbi_searcher]{ncbi_searcher()}}, ncbi_byname()]
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}, Rupert Collins

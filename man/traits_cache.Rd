@@ -4,29 +4,29 @@
 \alias{traits_cache}
 \title{Caching}
 \description{
-Manage cached `traits` package files with \pkg{hoardr}
+Manage cached \code{traits} package files with \pkg{hoardr}
 }
 \details{
 The dafault cache directory is
-`paste0(rappdirs::user_cache_dir(), "/R/traits")`, but you can set
-your own path using `cache_path_set()`
+\code{paste0(rappdirs::user_cache_dir(), "/R/traits")}, but you can set
+your own path using \code{cache_path_set()}
 
-`cache_delete` only accepts 1 file name, while
-`cache_delete_all` doesn't accept any names, but deletes all files.
-For deleting many specific files, use `cache_delete` in a [lapply()]
+\code{cache_delete} only accepts 1 file name, while
+\code{cache_delete_all} doesn't accept any names, but deletes all files.
+For deleting many specific files, use \code{cache_delete} in a \code{\link[=lapply]{lapply()}}
 type call
 }
 \section{Useful user functions}{
 
 \itemize{
- \item `traits_cache$cache_path_get()` get cache path
- \item `traits_cache$cache_path_set()` set cache path
- \item `traits_cache$list()` returns a character vector of full
- path file names
- \item `traits_cache$files()` returns file objects with metadata
- \item `traits_cache$details()` returns files with details
- \item `traits_cache$delete()` delete specific files
- \item `traits_cache$delete_all()` delete all files, returns nothing
+\item \code{traits_cache$cache_path_get()} get cache path
+\item \code{traits_cache$cache_path_set()} set cache path
+\item \code{traits_cache$list()} returns a character vector of full
+path file names
+\item \code{traits_cache$files()} returns file objects with metadata
+\item \code{traits_cache$details()} returns files with details
+\item \code{traits_cache$delete()} delete specific files
+\item \code{traits_cache$delete_all()} delete all files, returns nothing
 }
 }
 

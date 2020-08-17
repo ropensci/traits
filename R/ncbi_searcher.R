@@ -24,6 +24,11 @@
 #' @seealso \code{\link{ncbi_byid}}, \code{\link{ncbi_byname}}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}, Zachary Foster
 #'   \email{zacharyfoster1989@@gmail.com}
+#' @section Authentication:
+#' NCBI rate limits requests. If you set an API key you have a higher rate limit. 
+#' Set your API key like `Sys.setenv(ENTREZ_KEY="yourkey")` or you can use 
+#' `?rentrez::set_entrez_key`. set verbose curl output (`crul::set_verbose()`) to
+#' make sure your api key is being sent in the requests
 #' @examples \dontrun{
 #' # A single species
 #' out <- ncbi_searcher(taxa="Umbra limi", seqrange = "1:2000")
@@ -140,12 +145,13 @@ search_for_sequences <- function(id, seqrange, entrez_query, fuzzy, limit, ...) 
     sprintf("txid%s AND %s[SLEN]", id, seqrange)
   }
   if (!is.null(entrez_query)) query_term <- paste(query_term, entrez_query, sep = " AND ")
-  query <- list(db = "nuccore", retmax = limit, term = query_term)
+  query <- list(db = "nuccore", retmax = limit, term = query_term, api_key = ncbi_key())
   # Submit query to NCBI - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  query_init <- GET(url_esearch, query = query, ...)
-  stop_for_status(query_init)
+  con <- crul::HttpClient$new(url_esearch, opts = list(...))
+  res <- con$get(query = traitsc(query))
+  res$raise_for_status()
   # Parse result - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  query_content <- xml2::read_xml(content(query_init, "text", encoding = "UTF-8"))
+  query_content <- xml2::read_xml(res$parse("UTF-8"))
   esearch_result <- xml2::xml_find_all(query_content, "//eSearchResult")[[1]]
   if (as.numeric(xml2::xml_text(xml2::xml_find_all(esearch_result, "//Count")[[1]])) == 0) {
     return(NULL)
@@ -166,16 +172,18 @@ download_summary <- function(seq_id, hypothetical, ...) {
       q$id = paste(seq_id[getstart[i]:(getstart[i] + (getnum[i] - 1))], collapse = " ")
       q$retstart <- getstart[i]
       q$retmax <- getnum[i]
-      query_res <- POST(url_esummary, body = q)
-      stop_for_status(query_res)
-      iterlist[[i]] <- parseres(query_res, hypothetical)
+      con <- crul::HttpClient$new(url_esummary, opts = list(...))
+      res <- con$post(body = traitsc(q))
+      res$raise_for_status()
+      iterlist[[i]] <- parseres(res, hypothetical)
     }
     data.frame(rbindlist(iterlist), stringsAsFactors = FALSE)
   } else {
-    q <- list(db = "nucleotide", id = paste(seq_id, collapse = " "))
-    query_res <- POST(url_esummary, body = q, ...)
-    stop_for_status(query_res)
-    parseres(query_res, hypothetical)
+    body <- list(db = "nucleotide", api_key = ncbi_key(), id = paste(seq_id, collapse = " "))
+    con <- crul::HttpClient$new(url_esummary, opts = list(...))
+    res <- con$post(body = traitsc(body))
+    res$raise_for_status()
+    parseres(res, hypothetical)
   }
 }
 
@@ -197,22 +205,16 @@ get_parent <- function(id, verbose) {
 
 # Function to parse results from http query ------------------------------------------------------
 parseres <- function(x, hypothetical){
-  outsum <- xml2::xml_find_all(xml2::read_xml(content(x, "text", encoding = "UTF-8")), "//eSummaryResult")[[1]]
+  outsum <- xml2::xml_find_all(xml2::read_xml(x$parse("UTF-8")), "//eSummaryResult")[[1]]
   names <- xml2::xml_attr(xml2::xml_find_all(outsum, "//Item"), attr = "Name") # gets names of values in summary
   predicted <- as.character(xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Caption", names)]) #  get access numbers
   has_access_prefix <- grepl("_", predicted)
   access_prefix <- unlist(Map(function(x, y) ifelse(x, strsplit(y, "_")[[1]][[1]], NA),
                               has_access_prefix, predicted))
-#   predicted[has_access_prefix] <- vapply(strsplit(predicted[has_access_prefix], "_"), `[[`, character(1), 2)
-#
   length_ <- as.numeric(xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Length", names)]) # gets seq lengths
   gis <- as.numeric(xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Gi", names)]) # gets GI numbers
-
   spused <- taxonomy(zz = outsum)
   desc <- xml2::xml_text(xml2::xml_find_all(outsum, "//Item"))[grepl("Title", names)] # gets seq lengths # get spp names
-  #   spused <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][1:2], sep = "", collapse = " "))
-
-  # genesavail <- sapply(spnames, function(x) paste(strsplit(x, " ")[[1]][-c(1:2)], sep = "", collapse = " "), USE.NAMES = FALSE)
   df <- data.frame(spused = spused, length = length_, genesavail = desc, access_num = predicted, ids = gis, stringsAsFactors = FALSE)
   if (!hypothetical) df <- df[!(access_prefix %in% c("XM","XR")), ]
   return(df)
@@ -223,9 +225,10 @@ taxonomy <- function(zz) {
   uids <- unique(taxids)
   out <- list()
   for (i in seq_along(uids)) {
-    res <- GET(paste0(url_esummary, "?db=taxonomy&id=", uids[i]))
-    stop_for_status(res)
-    xml <- xml2::read_xml(content(res, "text", encoding = "UTF-8"))
+    con <- crul::HttpClient$new(url_esummary)
+    res <- con$get(query = traitsc(list(db="taxonomy", id=uids[i], api_key=ncbi_key())))
+    res$raise_for_status()
+    xml <- xml2::read_xml(res$parse("UTF-8"))
     out[[ uids[i] ]] <- xml2::xml_text(xml2::xml_find_all(xml, '//Item[@Name="ScientificName"]'))
   }
   for (i in seq_along(out)) {
@@ -237,3 +240,5 @@ taxonomy <- function(zz) {
   }
   return(taxids)
 }
+
+ncbi_key <- function() Sys.getenv("ENTREZ_KEY", "") %||% NULL

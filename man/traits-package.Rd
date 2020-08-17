@@ -9,19 +9,19 @@
 Currently included in \code{traits} with the associated function name or
 function prefix:
 \itemize{
- \item BETYdb http://www.betydb.org - \code{betydb_}
- \item National Center for Biotechnology Information - NCBI
- http://www.ncbi.nlm.nih.gov/ - \code{ncbi_}
- \item Encyclopedia of Life Traitbank - \code{traitbank_}
- \item Coral Traits Database https://coraltraits.org/ - \code{coral_}
- \item Birdlife International https://www.birdlife.org/ -
- \code{birdlife_}
- \item LEDA Traitbase http://www.leda-traitbase.org/LEDAportal/index.jsp -
- \code{leda_}
- \item USDA Plants Database - \code{\link{tr_usda}}
- \item Zanne et al. plant dataset - \code{\link{tr_zanne}}
- \item Amniote life history dataset - \code{\link{tr_ernest}}
- \item More to come ...
+\item BETYdb http://www.betydb.org - \code{betydb_}
+\item National Center for Biotechnology Information - NCBI
+http://www.ncbi.nlm.nih.gov/ - \code{ncbi_}
+\item Encyclopedia of Life Traitbank - \code{traitbank_}
+\item Coral Traits Database https://coraltraits.org/ - \code{coral_}
+\item Birdlife International https://www.birdlife.org/ -
+\code{birdlife_}
+\item LEDA Traitbase http://www.leda-traitbase.org/LEDAportal/index.jsp -
+\code{leda_}
+\item USDA Plants Database - \code{\link{tr_usda}}
+\item Zanne et al. plant dataset - \code{\link{tr_zanne}}
+\item Amniote life history dataset - \code{\link{tr_ernest}}
+\item More to come ...
 }
 }
 \details{

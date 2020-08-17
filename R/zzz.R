@@ -87,3 +87,5 @@ assert <- function (x, y) {
     }
   }
 }
+
+`%||%` <- function (x, y) if (is.null(x) || !nzchar(x)) y else x

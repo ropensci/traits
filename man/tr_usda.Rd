@@ -15,7 +15,7 @@ tr_usda(query = list(), limit = 30, offset = 0, fields = NULL, ...)
 
 \item{fields}{(character) vector of fields to return, case sensitive}
 
-\item{...}{Curl options passed on to [crul::HttpClient()]}
+\item{...}{Curl options passed on to \code{\link[crul:HttpClient]{crul::HttpClient()}}}
 }
 \value{
 list, with metadata fields ("count", "returned", "citation",
