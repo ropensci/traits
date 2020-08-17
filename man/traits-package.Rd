@@ -8,6 +8,8 @@
 \description{
 Currently included in \code{traits} with the associated function name or
 function prefix:
+}
+\details{
 \itemize{
 \item BETYdb http://www.betydb.org - \code{betydb_}
 \item National Center for Biotechnology Information - NCBI
@@ -18,14 +20,11 @@ http://www.ncbi.nlm.nih.gov/ - \code{ncbi_}
 \code{birdlife_}
 \item LEDA Traitbase http://www.leda-traitbase.org/LEDAportal/index.jsp -
 \code{leda_}
-\item USDA Plants Database - \code{\link{tr_usda}}
-\item Zanne et al. plant dataset - \code{\link{tr_zanne}}
-\item Amniote life history dataset - \code{\link{tr_ernest}}
-\item More to come ...
+\item Zanne et al. plant dataset - \code{\link[=tr_zanne]{tr_zanne()}}
+\item Amniote life history dataset - \code{\link[=tr_ernest]{tr_ernest()}}
 }
-}
-\details{
-See also \code{\link{traits-defunct}}
+
+See also \link{traits-defunct}
 }
 \examples{
 \dontrun{

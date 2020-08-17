@@ -5,9 +5,9 @@ traits
 
 [![cran checks](https://cranchecks.info/badges/worst/traits)](https://cranchecks.info/pkgs/traits)
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
-[![codecov.io](https://codecov.io/github/ropensci/traits/coverage.svg?branch=master)](https://codecov.io/github/ropensci/traits?branch=master)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/traits)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/traits)](https://CRAN.R-project.org/package=traits)
+[![codecov](https://codecov.io/gh/ropensci/traits/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/traits)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/traits)](https://github.com/r-hub/cranlogs.app)
+[![cran version](https://www.r-pkg.org/badges/version/traits)](https://CRAN.R-project.org/package=traits)
 
 R client for various sources of species trait data.
 
@@ -63,11 +63,6 @@ Included in `traits` with the associated function prefix or function name:
   <td style="text-align:left;"></td>
 </tr>
 <tr>
-  <td style="text-align:left;">USDA Plants Database</td>
-  <td style="text-align:left;"><code>tr_usda</code></td>
-  <td style="text-align:left;"></td>
-</tr>
-<tr>
   <td style="text-align:left;">Zanne et al. plant dataset</td>
   <td style="text-align:left;"><code>tr_zanne</code></td>
   <td style="text-align:left;"></td>
@@ -96,7 +91,7 @@ Or development version from GitHub
 
 
 ```r
-devtools::install_github("ropensci/traits")
+remotes::install_github("ropensci/traits")
 ```
 
 
@@ -113,29 +108,29 @@ Get trait data for Willow (_Salix_ spp.)
 ```r
 (salix <- betydb_search("Salix Vcmax"))
 #> # A tibble: 14 x 36
-#>    checked result_type    id citation_id site_id treatment_id sitename
-#>      <int> <chr>       <int>       <int>   <int>        <int> <chr>   
-#>  1       1 traits      39217         430     645         1342 ""      
-#>  2       1 traits      39218         430     645         1343 ""      
-#>  3       1 traits      39219         430     645         1344 ""      
-#>  4       1 traits      39220         430     645         1345 ""      
-#>  5       1 traits      25405          51      NA            1 <NA>    
-#>  6       1 traits      39213         430     645         1342 ""      
-#>  7       1 traits      39214         430     645         1343 ""      
-#>  8       1 traits      39215         430     645         1344 ""      
-#>  9       1 traits      39216         430     645         1345 ""      
-#> 10       1 traits      39221         430     645         1342 ""      
-#> 11       1 traits      39222         430     645         1343 ""      
-#> 12       1 traits      39223         430     645         1344 ""      
-#> 13       1 traits      39224         430     645         1345 ""      
-#> 14       1 traits      37519         381     602         1220 <NA>    
-#> # … with 29 more variables: city <chr>, lat <dbl>, lon <dbl>,
-#> #   scientificname <chr>, commonname <chr>, genus <chr>, species_id <int>,
-#> #   cultivar_id <int>, author <chr>, citation_year <int>, treatment <chr>,
-#> #   date <chr>, time <chr>, raw_date <chr>, month <int>, year <int>,
-#> #   dateloc <chr>, trait <chr>, trait_description <chr>, mean <dbl>,
-#> #   units <chr>, n <int>, statname <chr>, stat <dbl>, notes <chr>,
-#> #   access_level <int>, cultivar <chr>, entity <lgl>, method_name <lgl>
+#>    checked result_type    id citation_id site_id treatment_id sitename city 
+#>      <int> <chr>       <int>       <int>   <int>        <int> <chr>    <chr>
+#>  1       1 traits      39217         430     645         1342 ""       Saare
+#>  2       1 traits      39218         430     645         1343 ""       Saare
+#>  3       1 traits      39219         430     645         1344 ""       Saare
+#>  4       1 traits      39220         430     645         1345 ""       Saare
+#>  5       1 traits      25405          51      NA            1  <NA>    <NA> 
+#>  6       1 traits      39213         430     645         1342 ""       Saare
+#>  7       1 traits      39214         430     645         1343 ""       Saare
+#>  8       1 traits      39215         430     645         1344 ""       Saare
+#>  9       1 traits      39216         430     645         1345 ""       Saare
+#> 10       1 traits      39221         430     645         1342 ""       Saare
+#> 11       1 traits      39222         430     645         1343 ""       Saare
+#> 12       1 traits      39223         430     645         1344 ""       Saare
+#> 13       1 traits      39224         430     645         1345 ""       Saare
+#> 14       1 traits      37519         381     602         1220  <NA>    <NA> 
+#> # … with 28 more variables: lat <dbl>, lon <dbl>, scientificname <chr>,
+#> #   commonname <chr>, genus <chr>, species_id <int>, cultivar_id <int>,
+#> #   author <chr>, citation_year <int>, treatment <chr>, date <chr>, time <chr>,
+#> #   raw_date <chr>, month <int>, year <int>, dateloc <chr>, trait <chr>,
+#> #   trait_description <chr>, mean <dbl>, units <chr>, n <int>, statname <chr>,
+#> #   stat <dbl>, notes <chr>, access_level <int>, cultivar <chr>, entity <lgl>,
+#> #   method_name <lgl>
 # equivalent:
 # (out <- betydb_search("willow"))
 ```
@@ -172,42 +167,14 @@ traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 #> 
 #> $data
 #> $data[[1]]
-#>   metadata.id metadata.labels
-#> 1    20280619           Trait
-#>                                                                                     paged_traverse
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/paged/traverse/{returnType}{?pageSize,leaseTime}
-#>                                              outgoing_relationships
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/out
-#>                                                        outgoing_typed_relationships
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/out/{-list|&|types}
-#>                                                   labels
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/labels
-#>                                             create_relationship
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships
-#>                                                                traverse
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/traverse/{returnType}
-#>                                                   all_relationships
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/all
-#>                                                             all_typed_relationships
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/all/{-list|&|types}
-#>                                                           property
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/properties/{key}
-#>                                              self
-#> 1 http://10.252.248.44:7474/db/data/node/20280619
-#>                                             incoming_relationships
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/in
-#>                                                   properties
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/properties
-#>                                                       incoming_typed_relationships
-#> 1 http://10.252.248.44:7474/db/data/node/20280619/relationships/in/{-list|&|types}
-#>     data.eol_pk data.resource_pk
-#> 1 R74-PK5014587           110690
-#>                                data.scientific_name
-#> 1 <i>Adenopodia floribunda</i> (Kleinhoonte) Brenan
-#>                                data.source
-#> 1 http://www.pnas.org/content/114/40/10695
-#>                                                                   data.literal
-#> 1 http://eol.org/schema/terms/Tropical_and_subtropical_moist_broadleaf_forests
+#>   metadata.id metadata.labels    data.eol_pk data.object_page_id
+#> 1    22529388           Trait R20-PK20910350            46581789
+#>                                                    data.resource_pk
+#> 1 ReverseOf_globi:assoc:7296029-FBC:FB:SpecCode:4755-ATE-EOL_V2:281
+#>   data.scientific_name
+#> 1              Plantae
+#>                                                                                                                                                                                                                                                             data.source
+#> 1 Froese, R. and D. Pauly. Editors. 2019. FishBase. World Wide Web electronic publication. www.fishbase.org, version (08/2019). Accessed at <https://github.com/globalbioticinteractions/fishbase/archive/6ebceaacea18c6ff6c247182f9af8ad6fc05cc82.zip> on 25 May 2020.
 ```
 
 ## Coral
@@ -239,24 +206,23 @@ Get data by taxon
 ```r
 coral_taxa(80)
 #> # A tibble: 3,540 x 25
-#>    observation_id access user_id specie_id specie_name location_id
-#>             <int>  <int>   <int>     <int> <chr>             <int>
-#>  1         157133      1      10        80 Acropora h…           1
-#>  2         156961      1      14        80 Acropora h…         409
-#>  3           5781      1       1        80 Acropora h…           1
-#>  4         156610      1       2        80 Acropora h…         500
-#>  5         158118      1      10        80 Acropora h…         409
-#>  6         119211      1      49        80 Acropora h…           1
-#>  7         158211      1      10        80 Acropora h…         413
-#>  8          90294      1      15        80 Acropora h…         341
-#>  9          90294      1      15        80 Acropora h…         341
-#> 10          90294      1      15        80 Acropora h…         341
-#> # … with 3,530 more rows, and 19 more variables: location_name <chr>,
-#> #   latitude <dbl>, longitude <dbl>, resource_id <int>,
-#> #   resource_secondary_id <int>, measurement_id <int>, trait_id <int>,
-#> #   trait_name <chr>, standard_id <int>, standard_unit <chr>,
-#> #   methodology_id <int>, methodology_name <chr>, value <chr>,
-#> #   value_type <chr>, precision <dbl>, precision_type <chr>,
+#>    observation_id access user_id specie_id specie_name location_id location_name
+#>             <int>  <int>   <int>     <int> <chr>             <int> <chr>        
+#>  1         157133      1      10        80 Acropora h…           1 Global estim…
+#>  2         156961      1      14        80 Acropora h…         409 Indo-Pacific…
+#>  3           5781      1       1        80 Acropora h…           1 Global estim…
+#>  4         156610      1       2        80 Acropora h…         500 Tiao-Shi, Na…
+#>  5         158118      1      10        80 Acropora h…         409 Indo-Pacific…
+#>  6         119211      1      49        80 Acropora h…           1 Global estim…
+#>  7         158211      1      10        80 Acropora h…         413 Big Broadhur…
+#>  8          90294      1      15        80 Acropora h…         341 Xiaodonghai,…
+#>  9          90294      1      15        80 Acropora h…         341 Xiaodonghai,…
+#> 10          90294      1      15        80 Acropora h…         341 Xiaodonghai,…
+#> # … with 3,530 more rows, and 18 more variables: latitude <dbl>,
+#> #   longitude <dbl>, resource_id <int>, resource_secondary_id <int>,
+#> #   measurement_id <int>, trait_id <int>, trait_name <chr>, standard_id <int>,
+#> #   standard_unit <chr>, methodology_id <int>, methodology_name <chr>,
+#> #   value <chr>, value_type <chr>, precision <dbl>, precision_type <chr>,
 #> #   precision_upper <dbl>, replicates <int>, notes <chr>
 ```
 
