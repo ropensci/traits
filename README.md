@@ -294,7 +294,6 @@ birdlife_habitat(22721692)
 * Please [report any issues or bugs](https://github.com/ropensci/traits/issues).
 * License: MIT
 * Get citation information for `traits` in R doing `citation(package = 'traits')`
-* Please note that this project is released with a [Contributor Code of Conduct](https://github.com/ropensci/traits/blob/master/CODE_OF_CONDUCT.md).
-By participating in this project you agree to abide by its terms.
+* Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
