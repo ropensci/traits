@@ -13,7 +13,8 @@ ncbi_searcher(
   limit = 500,
   entrez_query = NULL,
   hypothetical = FALSE,
-  verbose = TRUE
+  verbose = TRUE,
+  sleep = 0L
 )
 }
 \arguments{
@@ -50,6 +51,10 @@ accession number prefixs (XM and XR). This can result in less than the
 since this filtering is done after searching NCBI.}
 
 \item{verbose}{(logical) If \code{TRUE} (default), informative messages printed.}
+
+\item{sleep}{(integer) number of seconds to sleep before each HTTP request.
+use if running to 429 Too Many Requests errors from NCBI. default: 0
+(no sleep)}
 }
 \value{
 \code{data.frame} of results if a single input is given. A list of
