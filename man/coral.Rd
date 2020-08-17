@@ -43,13 +43,13 @@ coral_species(...)
 \arguments{
 \item{taxon}{A taxon id}
 
-\item{taxonomy}{logical; Include contextual data. Default: FALSE}
+\item{taxonomy}{logical; Include contextual data. Default: \code{FALSE}}
 
-\item{contextual}{logical; Include contextual data. Default: TRUE}
+\item{contextual}{logical; Include contextual data. Default: \code{TRUE}}
 
-\item{global}{logical; Include contextual data. Default: FALSE}
+\item{global}{logical; Include contextual data. Default: \code{FALSE}}
 
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}}
+\item{...}{Curl options passed on to \link[crul:verb-GET]{crul::verb-GET}}
 
 \item{trait}{A trait id}
 
@@ -83,8 +83,7 @@ coral_locations(132)
 coral_resources(9)
 
 # curl options
-library("httr")
-coral_taxa(8, config=verbose())
+coral_taxa(8, verbose=TRUE)
 }
 }
 \references{

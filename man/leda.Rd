@@ -9,7 +9,7 @@ leda(trait = "age_first_flowering", ...)
 \arguments{
 \item{trait}{(character) Trait to get. See Details.}
 
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}}
+\item{...}{Curl options passed on to \link[crul:verb-GET]{crul::verb-GET}}
 }
 \description{
 Access LEDA trait data
@@ -53,7 +53,4 @@ for (i in seq_along(all)) {
 }
 sapply(out, NROW)
 }
-}
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
 }
