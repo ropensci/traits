@@ -27,7 +27,8 @@ birdlife_habitat(103818789)
 }
 }
 \seealso{
-Other birdlife: \code{\link{birdlife_threats}}
+Other birdlife: 
+\code{\link{birdlife_threats}()}
 }
 \author{
 David J. Harris \email{harry491@gmail.com}

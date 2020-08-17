@@ -10,20 +10,33 @@
 \alias{coral_species}
 \title{Search for coral data on coraltraits.org}
 \usage{
-coral_taxa(taxon, taxonomy = FALSE, contextual = TRUE,
-  global = FALSE, ...)
+coral_taxa(taxon, taxonomy = FALSE, contextual = TRUE, global = FALSE, ...)
 
-coral_traits(trait, taxonomy = FALSE, contextual = TRUE,
-  global = FALSE, ...)
+coral_traits(trait, taxonomy = FALSE, contextual = TRUE, global = FALSE, ...)
 
-coral_locations(location, taxonomy = FALSE, contextual = TRUE,
-  global = FALSE, ...)
+coral_locations(
+  location,
+  taxonomy = FALSE,
+  contextual = TRUE,
+  global = FALSE,
+  ...
+)
 
-coral_methodologies(methodology, taxonomy = FALSE, contextual = TRUE,
-  global = FALSE, ...)
+coral_methodologies(
+  methodology,
+  taxonomy = FALSE,
+  contextual = TRUE,
+  global = FALSE,
+  ...
+)
 
-coral_resources(resource, taxonomy = FALSE, contextual = TRUE,
-  global = FALSE, ...)
+coral_resources(
+  resource,
+  taxonomy = FALSE,
+  contextual = TRUE,
+  global = FALSE,
+  ...
+)
 
 coral_species(...)
 }

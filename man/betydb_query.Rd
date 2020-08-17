@@ -5,11 +5,23 @@
 \alias{betydb_search}
 \title{Query a BETY table}
 \usage{
-betydb_query(..., table = "search", key = NULL, api_version = NULL,
-  betyurl = NULL, user = NULL, pwd = NULL, progress = TRUE)
+betydb_query(
+  ...,
+  table = "search",
+  key = NULL,
+  api_version = NULL,
+  betyurl = NULL,
+  user = NULL,
+  pwd = NULL,
+  progress = TRUE
+)
 
-betydb_search(query = "Maple SLA", ..., include_unchecked = NULL,
-  progress = TRUE)
+betydb_search(
+  query = "Maple SLA",
+  ...,
+  include_unchecked = NULL,
+  progress = TRUE
+)
 }
 \arguments{
 \item{...}{(named character) Columns to query, as key="value" pairs. Note that betydb_query passes these along to BETY with no check whether the requested keys exist in the specified table.}

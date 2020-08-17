@@ -48,7 +48,7 @@ all <- c("age_first_flowering", "branching", "buds_seasonality",
   "snp", "ssd", "tv", "clonal_growth_organs")
 out <- list()
 for (i in seq_along(all)) {
-  cat(all[i], sep="\\n")
+  cat(all[i], sep="\n")
   out[[i]] <- leda(all[i])
 }
 sapply(out, NROW)
