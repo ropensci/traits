@@ -2,31 +2,31 @@
 #'
 #' @export
 #' @param ids (character) GenBank ids to search for. One or more. Required.
-#' @param format (character) Return type, e.g., \code{"fasta"}. NOW IGNORED.
-#' @param verbose (logical) If \code{TRUE} (default), informative messages
+#' @param format (character) Return type, e.g., `"fasta"`. NOW IGNORED.
+#' @param verbose (logical) If `TRUE` (default), informative messages
 #' printed.
-#' @return Data.frame of the form:
-#' \itemize{
-#'  \item taxon - taxonomic name (may include some junk, but hard to parse off)
-#'  \item taxonomy - organism lineage
-#'  \item gene_desc - gene description
-#'  \item organelle - if mitochondrial or chloroplast
-#'  \item gi_no - GI number
-#'  \item acc_no - accession number
-#'  \item keyword - if official DNA barcode
-#'  \item specimen_voucher - museum/lab accession number of vouchered material
-#'  \item lat_lon - longitude/latitude of specimen collection event
-#'  \item country - country/location of specimen collection event
-#'  \item paper_title - title of study
-#'  \item journal - journal study published in (if published)
-#'  \item first_author - first author of study
-#'  \item uploaded_date - date sequence was uploaded to GenBank
-#'  \item length - sequence length
-#'  \item sequence - sequence character string
-#' }
+#' @return data.frame of the form:
+#' 
+#' - taxon - taxonomic name (may include some junk, but hard to parse off)
+#' - taxonomy - organism lineage
+#' - gene_desc - gene description
+#' - organelle - if mitochondrial or chloroplast
+#' - gi_no - GI number
+#' - acc_no - accession number
+#' - keyword - if official DNA barcode
+#' - specimen_voucher - museum/lab accession number of vouchered material
+#' - lat_lon - longitude/latitude of specimen collection event
+#' - country - country/location of specimen collection event
+#' - paper_title - title of study
+#' - journal - journal study published in (if published)
+#' - first_author - first author of study
+#' - uploaded_date - date sequence was uploaded to GenBank
+#' - length - sequence length
+#' - sequence - sequence character string
+#'
 #' @details If bad ids are included with good ones, the bad ones are
 #' silently dropped. If all ids are bad you'll get a stop with error message.
-#' @seealso \code{\link{ncbi_searcher}}, \code{\link{ncbi_byname}}
+#' @seealso [ncbi_searcher()], ncbi_byname()]
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}, Rupert Collins
 #' @examples \dontrun{
 #' # A single gene
@@ -49,11 +49,12 @@ ncbi_byid <- function(ids, format=NULL, verbose=TRUE) {
 
   x <- paste(ids, collapse = ",")
   mssg(verbose, "Retrieving sequence IDs...")
-  tt <- GET("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
-            query = list(db = "sequences", id = x, retmode = "xml"))
-  stop_for_status(tt)
+  args <- list(db = "sequences", id = x, retmode = "xml", api_key = ncbi_key())
+  con <- crul::HttpClient$new("https://eutils.ncbi.nlm.nih.gov")
+  w <- con$get("entrez/eutils/efetch.fcgi", query = traitsc(args))
+  w$raise_for_status()
   mssg(verbose, "Parsing...")
-  xml <- xml2::read_xml(content(tt, "text", encoding = "UTF-8"))
+  xml <- xml2::read_xml(w$parse("UTF-8"))
   tmp <- lapply(xml2::xml_children(xml), function(z) {
     gitmp <- xml2::xml_text(xml2::xml_find_all(z, './GBSeq_other-seqids//GBSeqid'))
     gi <- strsplit(gitmp[length(gitmp)], "\\|")[[1]][2]

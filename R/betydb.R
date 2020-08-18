@@ -13,6 +13,7 @@
 #' \code{.Rprofile} file as \code{options(betydb_key = "your40digitkey")}. Optional
 #' @param user,pwd (character) A user name and password. Use a user/pwd combo or an API key.
 #' Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional
+#' @param progress show progress bar? default: \code{TRUE}
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}. Optional
 #' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
 #' https://www.betydb.org/api/docs
@@ -115,6 +116,7 @@ makepropname <- function(name, api_version){
 #' Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"
 #' @param user,pwd (character) A user name and password. Use a user/pwd combo or an API key.
 #' Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional
+#' @param progress show progress bar? default: \code{TRUE}
 #'
 #' @return A data.frame with attributes containing request metadata, or NULL if the query produced no results
 #'
@@ -146,20 +148,23 @@ makepropname <- function(name, api_version){
 #' # [1] "Miscanthus"
 #' }
 #'
-betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, betyurl = NULL, user = NULL, pwd = NULL){
+betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, betyurl = NULL,
+  user = NULL, pwd = NULL, progress = TRUE) {
 
   url <- makeurl(table = table, fmt = "json", api_version = api_version, betyurl = betyurl)
   propname <- makepropname(table, api_version)
-  betydb_GET(url, args = list(...), key = key, user = NULL, pwd = NULL, which = propname)
+  betydb_GET(url, args = list(...), key = key, user = NULL, pwd = NULL, which = propname, 
+    progress = progress)
 }
 
 #' @export
 #' @rdname betydb_query
-betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL){
+betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL, progress = TRUE){
   betydb_query(search = query, table = "search", include_unchecked = include_unchecked, ...)
 }
 
-betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, which, ...){
+betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
+  which, progress, ...) {
 
   api_version <- getOption('betydb_api_version', default = 'v0')
 
@@ -170,7 +175,7 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, 
   if(api_version == 'v0'){
     txt <- betydb_http(url, args, key, user, pwd, ...)
     lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
-  } else if (api_version == 'beta'){
+  } else if (api_version %in% c('beta', 'v1')){
 
     if(is.null(args$limit)) {
       args$limit <- 200
@@ -227,7 +232,7 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, 
 
       # paging loop
       if(iterations > 2) { # Progress Bar
-        pb   <- txtProgressBar(1, iterations, style=3)
+        if (progress) pb   <- txtProgressBar(1, iterations, style=3)
       }
       if(iterations > 0){
         for(i in 1:iterations){
@@ -239,7 +244,7 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, 
           lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
           lst_data[[i]] <- lst$data
           if(i > 2) {
-            setTxtProgressBar(pb, i)
+            if (progress) setTxtProgressBar(pb, i)
           }
 
         }
@@ -282,6 +287,10 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, 
     res <- Filter(function(x) !is.null(x), lst[[1]])
     names(res) <- tolower(names(res))
   } else {
+    if (!inherits(lst, "data.frame")) {
+      lst[vapply(lst, class, "") == "NULL"] <- NA_character_
+      lst[vapply(lst, function(z) !nzchar(z), logical(1))] <- NA_character_
+    }
     res <- stats::setNames(tibble::as_tibble(lst), gsub(sprintf("%s\\.", which), "", tolower(names(lst))))
   }
   if (exists("md") && !is.null(md)) { attr(res, "metadata") <- md }
@@ -316,47 +325,47 @@ betydb_http <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
 #' @export
 #' @rdname betydb
 #' @param table (character) Name of the database table with which this ID is associated.
-betydb_record <- function(id, table, api_version = NULL, betyurl = NULL, fmt = NULL, key = NULL, user = NULL, pwd = NULL, ...){
+betydb_record <- function(id, table, api_version = NULL, betyurl = NULL, fmt = NULL, key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
   args = list(...)
-  betydb_GET(makeurl(table, id, fmt, api_version, betyurl), args, which = makepropname(table, api_version))
+  betydb_GET(makeurl(table, id, fmt, api_version, betyurl), args, which = makepropname(table, api_version), progress)
 }
 
 #' @export
 #' @rdname betydb
-betydb_trait <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
+betydb_trait <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
   args <- traitsc(list(species.genus = genus, species.species = species))
-  betydb_GET(makeurl("variables", id, fmt, api_version, betyurl), args, key, user, pwd, "variable", ...)
+  betydb_GET(makeurl("variables", id, fmt, api_version, betyurl), args, key, user, pwd, "variable", progress, ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_specie <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
+betydb_specie <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
   args <- traitsc(list(genus = genus, species = species))
-  betydb_GET(makeurl("species", id, fmt, api_version, betyurl), args, key, user, pwd, "specie", ...)
+  betydb_GET(makeurl("species", id, fmt, api_version, betyurl), args, key, user, pwd, "specie", progress, ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_citation <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
+betydb_citation <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
   args <- traitsc(list(genus = genus, species = species))
-  betydb_GET(makeurl("citations", id, fmt, api_version, betyurl), args, key, user, pwd, "citation", ...)
+  betydb_GET(makeurl("citations", id, fmt, api_version, betyurl), args, key, user, pwd, "citation", progress, ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_site <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
-  betydb_GET(makeurl("sites", id, fmt, api_version, betyurl), args = NULL, key, user, pwd, "site", ...)
+betydb_site <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
+  betydb_GET(makeurl("sites", id, fmt, api_version, betyurl), args = NULL, key, user, pwd, "site", progress, ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_experiment <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, ...){
-  betydb_GET(makeurl("experiments", id, fmt, api_version, betyurl), args = NULL, key, user, pwd, "experiment", ...)
+betydb_experiment <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
+  betydb_GET(makeurl("experiments", id, fmt, api_version, betyurl), args = NULL, key, user, pwd, "experiment", progress, ...)
 }
 
 betydb_auth <- function(user,pwd,key){
   if (is.null(key) && is.null(user)) {
-    key <- getOption("betydb_key", NULL)
+    key <- getOption("betydb_key", '9999999999999999999999999999999999999999')
   }
   if (!is.null(key)) {
     auth <- list(key = key)
@@ -365,13 +374,6 @@ betydb_auth <- function(user,pwd,key){
     if (is.null(pwd)) pwd <- getOption("betydb_pwd", NULL)
     if (xor(is.null(user), is.null(pwd))) stop(warn, call. = FALSE)
     auth <- list(user = user, pwd = pwd, key = NULL)
-  }
-
-  if (is.null(c(auth$key, auth$user, auth$pwd))) {
-    # If no auth of any kind provided, use the ropensci-traits API key.
-    # TODO: Are there implementations that accept password but not key? If so:
-    # auth <- list(user <- 'ropensci-traits', pwd <- 'ropensci', key = NULL)
-    auth$key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv"
   }
   auth
 }

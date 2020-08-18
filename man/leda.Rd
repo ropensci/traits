@@ -9,7 +9,7 @@ leda(trait = "age_first_flowering", ...)
 \arguments{
 \item{trait}{(character) Trait to get. See Details.}
 
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}}
+\item{...}{Curl options passed on to \link[crul:verb-GET]{crul::verb-GET}}
 }
 \description{
 Access LEDA trait data
@@ -48,12 +48,9 @@ all <- c("age_first_flowering", "branching", "buds_seasonality",
   "snp", "ssd", "tv", "clonal_growth_organs")
 out <- list()
 for (i in seq_along(all)) {
-  cat(all[i], sep="\\n")
+  cat(all[i], sep="\n")
   out[[i]] <- leda(all[i])
 }
 sapply(out, NROW)
 }
-}
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
 }

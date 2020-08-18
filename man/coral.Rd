@@ -10,33 +10,46 @@
 \alias{coral_species}
 \title{Search for coral data on coraltraits.org}
 \usage{
-coral_taxa(taxon, taxonomy = FALSE, contextual = TRUE, global = FALSE,
-  ...)
+coral_taxa(taxon, taxonomy = FALSE, contextual = TRUE, global = FALSE, ...)
 
-coral_traits(trait, taxonomy = FALSE, contextual = TRUE, global = FALSE,
-  ...)
+coral_traits(trait, taxonomy = FALSE, contextual = TRUE, global = FALSE, ...)
 
-coral_locations(location, taxonomy = FALSE, contextual = TRUE,
-  global = FALSE, ...)
+coral_locations(
+  location,
+  taxonomy = FALSE,
+  contextual = TRUE,
+  global = FALSE,
+  ...
+)
 
-coral_methodologies(methodology, taxonomy = FALSE, contextual = TRUE,
-  global = FALSE, ...)
+coral_methodologies(
+  methodology,
+  taxonomy = FALSE,
+  contextual = TRUE,
+  global = FALSE,
+  ...
+)
 
-coral_resources(resource, taxonomy = FALSE, contextual = TRUE,
-  global = FALSE, ...)
+coral_resources(
+  resource,
+  taxonomy = FALSE,
+  contextual = TRUE,
+  global = FALSE,
+  ...
+)
 
 coral_species(...)
 }
 \arguments{
 \item{taxon}{A taxon id}
 
-\item{taxonomy}{logical; Include contextual data. Default: FALSE}
+\item{taxonomy}{logical; Include contextual data. Default: \code{FALSE}}
 
-\item{contextual}{logical; Include contextual data. Default: TRUE}
+\item{contextual}{logical; Include contextual data. Default: \code{TRUE}}
 
-\item{global}{logical; Include contextual data. Default: FALSE}
+\item{global}{logical; Include contextual data. Default: \code{FALSE}}
 
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}}
+\item{...}{Curl options passed on to \link[crul:verb-GET]{crul::verb-GET}}
 
 \item{trait}{A trait id}
 
@@ -70,12 +83,11 @@ coral_locations(132)
 coral_resources(9)
 
 # curl options
-library("httr")
-coral_taxa(8, config=verbose())
+coral_taxa(8, verbose=TRUE)
 }
 }
 \references{
-\url{http://coraltraits.org/}
+https://coraltraits.org/
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}

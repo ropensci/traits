@@ -62,13 +62,8 @@ head(out)
 
 ## EOL's traitbank trait data
 
-Searching for _Balaenoptera musculus_ (blue whale), page id `328574`
-
 ```{r}
-res <- traitbank(328574)
-res$graph %>%
-  select(`dwc:measurementtype`) %>%
-  filter(!is.na(`dwc:measurementtype`))
+traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 ```
 
 ## Coral

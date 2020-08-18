@@ -2,12 +2,12 @@
 #'
 #' @export
 #' @param x (character) Taxonomic name(s) to search for
-#' @param db (character) One of betydb, traitbank, ncbi, coral.
+#' @param db (character) only 'ncbi' for now - other options
+#' maybe in the future
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @return A \code{data.frame}
 #' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
 #' @examples \dontrun{
-#' taxa_search("Poa annua", db = "traitbank")
 #' taxa_search("Poa annua", db = "ncbi")
 #' }
 taxa_search <- function(x, db, ...) {
@@ -26,8 +26,9 @@ taxa_search.character <- function(x, db, ...) {
   }
   switch(db,
     traitbank = {
-      id <- get_tb(x)
-      traitbank(pageid = id, ...)
+      stop("traitbank not working for now; see ?traits::traitbank")
+      # id <- get_tb(x)
+      # traitbank(pageid = id, ...)
     },
     ncbi = {
       ncbi_searcher(taxa = x, ...)

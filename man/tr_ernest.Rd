@@ -9,7 +9,7 @@ tr_ernest(read = TRUE, ...)
 \arguments{
 \item{read}{(logical) read in csv files. Default: \code{TRUE}}
 
-\item{...}{Curl options passed on to [crul::HttpClient()]}
+\item{...}{Curl options passed on to \code{\link[crul:HttpClient]{crul::HttpClient()}}}
 }
 \value{
 paths to the files (character) if \code{read=FALSE} or

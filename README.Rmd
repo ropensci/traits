@@ -10,29 +10,80 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![cran checks](https://cranchecks.info/badges/worst/traits)](https://cranchecks.info/pkgs/traits)
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
-[![codecov.io](https://codecov.io/github/ropensci/traits/coverage.svg?branch=master)](https://codecov.io/github/ropensci/traits?branch=master)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/traits)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/traits)](https://CRAN.R-project.org/package=traits)
+[![codecov](https://codecov.io/gh/ropensci/traits/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/traits)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/traits)](https://github.com/r-hub/cranlogs.app)
+[![cran version](https://www.r-pkg.org/badges/version/traits)](https://CRAN.R-project.org/package=traits)
 
 R client for various sources of species trait data.
 
+What is a trait? A "trait" for the purposes of this package is broadly defined as an aspect of a species that can be described or measured, such as physical traits (size, length, height, color), behavioral traits (running speed, etc.), and even variables that make up the niche of the species (e.g., habitat).
+
 Included in `traits` with the associated function prefix or function name:
 
-* [BETYdb](http://www.betydb.org) - `betydb_`
-* [National Center for Biotechnology Information - NCBI](http://www.ncbi.nlm.nih.gov/) - `ncbi_`
-* [Encyclopedia of Life Traitbank](http://eol.org/info/516) - `traitbank_`
-* [Coral Traits Database](http://coraltraits.org/) - `coral_`
-* [Birdlife International](http://rbg-web2.rbge.org.uk/FE/fe.html) - `birdlife_`
-* LEDA Traitbase - `leda_`
-* USDA Plants Database - `tr_usda`
-* Zanne et al. plant dataset - `tr_zanne`
-* Amniote life history dataset - `tr_ernest`
-* More to come ...
+<table>
+<colgroup>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+<col style="text-align:left;"/>
+</colgroup>
+
+<thead>
+<tr>
+  <th style="text-align:left;">Souce</th>
+  <th style="text-align:left;">Function prefix</th>
+  <th style="text-align:left;">Link</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+  <td style="text-align:left;">BETYdb</td>
+  <td style="text-align:left;"><code>betydb_</code></td>
+  <td style="text-align:left;">http://www.betydb.org</td>
+</tr>
+<tr>
+  <td style="text-align:left;">NCBI</td>
+  <td style="text-align:left;"><code>ncbi_</code></td>
+  <td style="text-align:left;">http://www.ncbi.nlm.nih.gov/</td>
+</tr>
+<tr>
+  <td style="text-align:left;">Encylopedia of Life</td>
+  <td style="text-align:left;"><code>traitbank_</code></td>
+  <td style="text-align:left;">https://github.com/EOL/eol_website/blob/master/doc/api.md</td>
+</tr>
+<tr>
+  <td style="text-align:left;">Coral Traits Database</td>
+  <td style="text-align:left;"><code>coral_</code></td>
+  <td style="text-align:left;">https://coraltraits.org/</td>
+</tr>
+<tr>
+  <td style="text-align:left;">Birdlife International</td>
+  <td style="text-align:left;"><code>birdlife_</code></td>
+  <td style="text-align:left;">https://www.birdlife.org/</td>
+</tr>
+<tr>
+  <td style="text-align:left;">LEDA Traitbase</td>
+  <td style="text-align:left;"><code>leda_</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+<tr>
+  <td style="text-align:left;">Zanne et al. plant dataset</td>
+  <td style="text-align:left;"><code>tr_zanne</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+<tr>
+  <td style="text-align:left;">Amniote life history dataset</td>
+  <td style="text-align:left;"><code>tr_ernest</code></td>
+  <td style="text-align:left;"></td>
+</tr>
+</tbody>
+</table>
+
 
 Talk to us on the [issues page](https://github.com/ropensci/traits/issues) if you know of a source of traits data with an API, and we'll see about including it.
-
-For an introduction to the package, see [the vignette](vignettes/traits_intro.Rmd).
 
 ## Installation
 
@@ -45,7 +96,7 @@ install.packages("traits")
 Or development version from GitHub
 
 ```{r eval=FALSE}
-devtools::install_github("ropensci/traits")
+remotes::install_github("ropensci/traits")
 ```
 
 ```{r}
@@ -79,13 +130,8 @@ salix %>%
 
 ## EOL's traitbank trait data
 
-Searching for _Balaenoptera musculus_ (blue whale), page id `328574`
-
 ```{r cache=FALSE}
-res <- traitbank(328574)
-res$graph %>%
-  select(`dwc:measurementtype`) %>%
-  filter(!is.na(`dwc:measurementtype`))
+traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 ```
 
 ## Coral
@@ -112,19 +158,19 @@ birdlife_habitat(22721692)
 
 ## Contributors
 
-* [Scott Chamberlain](https://github.com/ropensci/sckott)
-* [Zachary Foster](https://github.com/ropensci/zachary-foster)
-* [Ignasi Bartomeus](https://github.com/ropensci/ibartomeus)
-* [David LeBauer](https://github.com/ropensci/dlebauer)
-* [David Harris](https://github.com/ropensci/davharris)
-* [Rupert Collins](https://github.com/ropensci/boopsboops)
+* [Scott Chamberlain](https://github.com/sckott)
+* [Zachary Foster](https://github.com/zachary-foster)
+* [Ignasi Bartomeus](https://github.com/ibartomeus)
+* [David LeBauer](https://github.com/dlebauer)
+* [David Harris](https://github.com/davharris)
+* [Chris Black](https://github.com/infotroph)
+* [Rupert Collins](https://github.com/boopsboops)
 
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/ropensci/traits/issues).
 * License: MIT
 * Get citation information for `traits` in R doing `citation(package = 'traits')`
-* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
-By participating in this project you agree to abide by its terms.
+* Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
 
 [![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

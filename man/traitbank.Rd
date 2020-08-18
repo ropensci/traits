@@ -2,43 +2,57 @@
 % Please edit documentation in R/traitbank.R
 \name{traitbank}
 \alias{traitbank}
-\title{Search for traits from EOL's Traitbank.}
+\title{Search for traits from EOL's Traitbank}
 \usage{
-traitbank(pageid, cache_ttl = NULL, ...)
+traitbank(query, key = NULL, ...)
 }
 \arguments{
-\item{pageid}{A page id. I know, not ideal. Would be better if this was a trait
-id or trait name. This is the page ID for a taxon, not a trait. Apparently, traits
-don't have pages. Note: this parameter used to be \code{trait}, but badly
-mis-represented what the input actually represents.}
+\item{query}{(character) a query to the EOL Cypher service that holds
+Traitbank data. required. no default query given. see examples}
 
-\item{cache_ttl}{Cache code}
+\item{key}{(character) EOL Cypher query API key. required, either
+passed in or as an environment variable}
 
-\item{...}{Curl options passed on to \code{\link[httr]{GET}}}
+\item{...}{Curl options passed on to \code{\link[crul]{verb-GET}}}
+}
+\value{
+a list
 }
 \description{
-Search for traits from EOL's Traitbank.
+Search for traits from EOL's Traitbank
 }
 \details{
-See http://eol.org/data_glossary for human readable definitions for
-the attribute terms that EOL uses. Go to http://eol.org/data_search for the
-web interface to Traitbank.
+\code{traitbank} is an interface to the EOL Cypher query.
+Note that the previous interface EOL had for Traits has been completely
+replaced - thus, this function is completely different. You no longer
+query by EOL page id, but using the query language for a database
+called Neo4J. See the docs for help. Later we plan to make a more
+user friendly interface to get Traitbank data that doesn't
+require knowing the Neo4J query syntax
 }
+\section{Authentication}{
+
+You'll need an EOL cypher key to use this function. Get one by signing
+in to your EOL account https://eol.org/users/sign_in then head to
+https://eol.org/services/authenticate to get a key. Store your key
+in your .Renviron file or similar under the name "EOL_CYPHER_KEY",
+and we will use that key in this function. Alternatively, you can
+pass in your key to the key parameter, but we do not recommend
+doing that as you risk accidentally committing your key to the
+public web.
+}
+
 \examples{
 \dontrun{
-# Get data for Balaenoptera musculus (http://eol.org/pages/328574/)
-res <- traitbank(328574)
-res$context
-names( res$graph )
-head( res$graph )
+# traitbank_query function
+traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 
-# Get data for Closterocerus formosus (http://eol.org/pages/846827/)
-traitbank(846827)
+# traitbank function
+res <- traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 2;")
+res
 }
 }
 \references{
-http://eol.org/info/516
-}
-\author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
+https://github.com/EOL/eol_website/blob/master/doc/api.md
+https://github.com/EOL/eol_website/blob/master/doc/query-examples.md
 }

@@ -4,9 +4,18 @@
 \alias{ncbi_searcher}
 \title{Search for gene sequences available for taxa from NCBI.}
 \usage{
-ncbi_searcher(taxa = NULL, id = NULL, seqrange = "1:3000",
-  getrelated = FALSE, fuzzy = FALSE, limit = 500, entrez_query = NULL,
-  hypothetical = FALSE, verbose = TRUE)
+ncbi_searcher(
+  taxa = NULL,
+  id = NULL,
+  seqrange = "1:3000",
+  getrelated = FALSE,
+  fuzzy = FALSE,
+  limit = 500,
+  entrez_query = NULL,
+  hypothetical = FALSE,
+  verbose = TRUE,
+  sleep = 0L
+)
 }
 \arguments{
 \item{taxa}{(character) Scientific name to search for.}
@@ -14,12 +23,12 @@ ncbi_searcher(taxa = NULL, id = NULL, seqrange = "1:3000",
 \item{id}{(\code{character}) Taxonomic id to search for. Not compatible with
 argument \code{taxa}.}
 
-\item{seqrange}{(character) Sequence range, as e.g., \code{"1:1000"}. This is the range of 
+\item{seqrange}{(character) Sequence range, as e.g., \code{"1:1000"}. This is the range of
 sequence lengths to search for. So \code{"1:1000"} means search for sequences from 1 to 1000
 characters in length.}
 
 \item{getrelated}{(logical) If \code{TRUE}, gets the longest sequences of a species
-in the same genus as the one searched for. If \code{FALSE}, returns nothing if no match 
+in the same genus as the one searched for. If \code{FALSE}, returns nothing if no match
 found.}
 
 \item{fuzzy}{(logical) Whether to do fuzzy taxonomic ID search or exact
@@ -42,14 +51,26 @@ accession number prefixs (XM and XR). This can result in less than the
 since this filtering is done after searching NCBI.}
 
 \item{verbose}{(logical) If \code{TRUE} (default), informative messages printed.}
+
+\item{sleep}{(integer) number of seconds to sleep before each HTTP request.
+use if running to 429 Too Many Requests errors from NCBI. default: 0
+(no sleep)}
 }
 \value{
 \code{data.frame} of results if a single input is given. A list of
- \code{data.frame}s if multiple inputs are given.
+\code{data.frame}s if multiple inputs are given.
 }
 \description{
 Search for gene sequences available for taxa from NCBI.
 }
+\section{Authentication}{
+
+NCBI rate limits requests. If you set an API key you have a higher rate limit.
+Set your API key like \code{Sys.setenv(ENTREZ_KEY="yourkey")} or you can use
+\code{?rentrez::set_entrez_key}. set verbose curl output (\code{crul::set_verbose()}) to
+make sure your api key is being sent in the requests
+}
+
 \examples{
 \dontrun{
 # A single species
@@ -96,5 +117,5 @@ two <- ncbi_searcher(taxa = "Salmonella enterica")
 }
 \author{
 Scott Chamberlain \email{myrmecocystus@gmail.com}, Zachary Foster
-  \email{zacharyfoster1989@gmail.com}
+\email{zacharyfoster1989@gmail.com}
 }

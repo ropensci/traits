@@ -10,26 +10,84 @@
 \alias{betydb_experiment}
 \title{Search for traits from BETYdb}
 \usage{
-betydb_record(id, table, api_version = NULL, betyurl = NULL, fmt = NULL,
-  key = NULL, user = NULL, pwd = NULL, ...)
+betydb_record(
+  id,
+  table,
+  api_version = NULL,
+  betyurl = NULL,
+  fmt = NULL,
+  key = NULL,
+  user = NULL,
+  pwd = NULL,
+  progress = TRUE,
+  ...
+)
 
-betydb_trait(id, genus = NULL, species = NULL, api_version = NULL,
-  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
-  ...)
+betydb_trait(
+  id,
+  genus = NULL,
+  species = NULL,
+  api_version = NULL,
+  betyurl = NULL,
+  fmt = "json",
+  key = NULL,
+  user = NULL,
+  pwd = NULL,
+  progress = TRUE,
+  ...
+)
 
-betydb_specie(id, genus = NULL, species = NULL, api_version = NULL,
-  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
-  ...)
+betydb_specie(
+  id,
+  genus = NULL,
+  species = NULL,
+  api_version = NULL,
+  betyurl = NULL,
+  fmt = "json",
+  key = NULL,
+  user = NULL,
+  pwd = NULL,
+  progress = TRUE,
+  ...
+)
 
-betydb_citation(id, genus = NULL, species = NULL, api_version = NULL,
-  betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL,
-  ...)
+betydb_citation(
+  id,
+  genus = NULL,
+  species = NULL,
+  api_version = NULL,
+  betyurl = NULL,
+  fmt = "json",
+  key = NULL,
+  user = NULL,
+  pwd = NULL,
+  progress = TRUE,
+  ...
+)
 
-betydb_site(id, api_version = NULL, betyurl = NULL, fmt = "json",
-  key = NULL, user = NULL, pwd = NULL, ...)
+betydb_site(
+  id,
+  api_version = NULL,
+  betyurl = NULL,
+  fmt = "json",
+  key = NULL,
+  user = NULL,
+  pwd = NULL,
+  progress = TRUE,
+  ...
+)
 
-betydb_experiment(id, api_version = NULL, betyurl = NULL, fmt = "json",
-  key = NULL, user = NULL, pwd = NULL, ...)
+betydb_experiment(
+  id,
+  api_version = NULL,
+  betyurl = NULL,
+  fmt = "json",
+  key = NULL,
+  user = NULL,
+  pwd = NULL,
+  progress = TRUE,
+  ...
+)
 }
 \arguments{
 \item{id}{(integer) One or more ids for a species, site, variable, etc.}
@@ -48,6 +106,8 @@ currently supported.}
 
 \item{user, pwd}{(character) A user name and password. Use a user/pwd combo or an API key.
 Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional}
+
+\item{progress}{show progress bar? default: \code{TRUE}}
 
 \item{...}{Curl options passed on to \code{\link[httr]{GET}}. Optional}
 
@@ -73,7 +133,7 @@ It does not currently interface with the workflow and provenance data that suppo
 API documentation: \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html}
 API endpoints are here: \url{https://www.betydb.org/api/docs}
 This package currently uses the original 'v0' API by default.
-To use a newer version, set `api_version`.
+To use a newer version, set \code{api_version}.
 Newer versions of the API will support database inserts.
 }
 \section{Authentication}{
