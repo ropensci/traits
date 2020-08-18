@@ -6,29 +6,13 @@ test_that("Broken Function", {
   expect_error(betydb_traits(genus = "Miscanthus", author = "Arundale", trait = "yield"))
 })
 
-test_that("BETYdb v0 API works", {
-  skip_on_cran()
-  check_betydb()
-
-  ## gh-18
-  betyurl <- "https://www.betydb.org/"
-  priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl)
-  expect_equal(priors_url, paste0(betyurl, "priors.json"))
-
-  # Priors is a small table
-  get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv"))
-  expect_is(get.out, "response")
-  expect_match(httr::headers(get.out)$status, "OK")
-  expect_match(get.out$url, betyurl)
-})
-
-test_that("BETYdb beta API works", {
+test_that("BETYdb v1 API works", {
   skip_on_cran()
   check_betydb()
 
   betyurl <- "https://www.betydb.org/"
-  priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl, api_version = "beta")
-  expect_equal(priors_url, paste0(betyurl, "api/beta/priors.json"))
+  priors_url <- makeurl("priors", fmt = "json", betyurl = betyurl, api_version = "v1")
+  expect_equal(priors_url, paste0(betyurl, "api/v1/priors.json"))
 
   get.out <- GET(paste0(priors_url, "/?key=eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")) # Priors is a small table
   expect_is(get.out, "response")
@@ -42,7 +26,7 @@ test_that("table to property name matching works", {
 
   getprop <- function(name){
     txt <- betydb_http(
-      makeurl(name, fmt = "json", betyurl = "https://www.betydb.org/", api_version = "beta"),
+      makeurl(name, fmt = "json", betyurl = "https://www.betydb.org/", api_version = "v1"),
       args = list(limit = 1),
       key = NULL,
       user = NULL,
@@ -50,7 +34,7 @@ test_that("table to property name matching works", {
     names(jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = FALSE)$data)[[1]]
   }
   tablenames <- c("search", "species", "entities", "citations", "pfts")
-  expected_propnames <- sapply(tablenames, makepropname, api_version = "beta")
+  expected_propnames <- sapply(tablenames, makepropname, api_version = "v1")
   got_propnames <- sapply(tablenames, getprop)
 
   expect_equal(got_propnames, expected_propnames)
@@ -77,10 +61,8 @@ test_that("Credentials work", {
 
   prevkey <- options(betydb_key = "NOTVALID")
   on.exit(options(prevkey))
-  # FIXME - should use v0 API for symmetry w/ other calls,
-  # but v0 skips auth for search table
   options(betydb_key = 'NOT A KEY')
-  expect_error(betydb_search("Acer rubrum", api_version = "beta"), "Unauthorized",
+  expect_error(betydb_search("Acer rubrum", api_version = "v1"), "Unauthorized",
     class = "error")
   options(betydb_key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")
   optkey <- betydb_search('Acer rubrum')
@@ -104,7 +86,7 @@ test_that("URL & version options work", {
     betydb_api_version = "v0")
   opt1 <- betydb_query(author = "Arundale", table = "citations")
 
-  options(betydb_url = "http://example.com/", betydb_api_version = "beta")
+  options(betydb_url = "http://example.com/", betydb_api_version = "v1")
   expect_error(betydb_query(author = "Arundale", table = "citations"),
     "Not Found", class = "error")
   opt2 <- betydb_query(author = "Arundale", table = "citations",
@@ -138,7 +120,7 @@ test_that("paging works with betydb query and search functions",{
   on.exit(reset_opts(opts))
   options(
     betydb_url = "https://www.betydb.org/",
-    betydb_api_version = "beta",
+    betydb_api_version = "v1",
     betydb_key = "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv",
     per_call_limit = 10, # check paging without a 5000-item request
     warn=-1 ## suppress warnings that we did not get all data
