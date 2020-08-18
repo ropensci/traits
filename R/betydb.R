@@ -365,7 +365,7 @@ betydb_experiment <- function(id, api_version = NULL, betyurl = NULL, fmt = "jso
 
 betydb_auth <- function(user,pwd,key){
   if (is.null(key) && is.null(user)) {
-    key <- getOption("betydb_key", '9999999999999999999999999999999999999999')
+    key <- getOption("betydb_key", 'eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv')
   }
   if (!is.null(key)) {
     auth <- list(key = key)
