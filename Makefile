@@ -1,16 +1,15 @@
 PACKAGE := $(shell grep '^Package:' DESCRIPTION | sed -E 's/^Package:[[:space:]]+//')
 RSCRIPT = Rscript --no-init-file
 
-all: move rmd2md
+vign:
+	cd vignettes;\
+	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('traits.Rmd.og', output = 'traits.Rmd')";\
+	cd ..
 
-move:
-		cp inst/vign/betydb.md vignettes;\
-		cp inst/vign/traits.md vignettes
-
-rmd2md:
-		cd vignettes;\
-		mv betydb.md betydb.Rmd;\
-		mv traits.md traits.Rmd
+vign_bety:
+	cd vignettes;\
+	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('betydb.Rmd.og', output = 'betydb.Rmd')";\
+	cd ..
 
 install: doc build
 	R CMD INSTALL . && rm *.tar.gz

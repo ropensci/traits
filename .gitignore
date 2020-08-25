@@ -7,3 +7,4 @@ inst/vign/vigncache
 revdep/checks.noindex
 revdep/data.sqlite
 revdep/library.noindex
+vignettes/cache

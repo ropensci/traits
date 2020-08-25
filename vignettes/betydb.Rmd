@@ -1,8 +1,13 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{BETYdb Tutorial}
-%\VignetteEncoding{UTF-8}
--->
+---
+title: BETYdb Tutorial
+author: Scott Chamberlain
+date: "2020-08-25"
+output: rmarkdown::html_vignette
+vignette: >
+    %\VignetteIndexEntry{BETYdb Tutorial}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
 
 
 
@@ -32,7 +37,7 @@ Summarise data from the output `data.frame`
 
 
 ```r
-library("dplyr")
+suppressPackageStartupMessages(library("dplyr"))
 out %>%
   group_by(id) %>%
   summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%
@@ -40,20 +45,20 @@ out %>%
 ```
 
 ```
-## # A tibble: 449 x 2
-##       id mean_result
-##    <int>       <dbl>
-##  1  1666       27.36
-##  2 16845       27.00
-##  3  1669       26.36
-##  4 16518       26.00
-##  5  1663       25.35
-##  6 16742       25.00
-##  7  1594       24.78
-##  8  1674       22.71
-##  9  1606       22.54
-## 10  1665       22.46
-## # ... with 439 more rows
+#> # A tibble: 449 x 2
+#>       id mean_result
+#>    <int>       <dbl>
+#>  1  1666        27.4
+#>  2 16845        27  
+#>  3  1669        26.4
+#>  4 16518        26  
+#>  5  1663        25.4
+#>  6 16742        25  
+#>  7  1594        24.8
+#>  8  1674        22.7
+#>  9  1606        22.5
+#> 10  1665        22.5
+#> # … with 439 more rows
 ```
 
 Single trait
@@ -64,29 +69,12 @@ betydb_trait(id = 10)
 ```
 
 ```
-## $description
-## [1] "Leaf Percent Nitrogen"
-## 
-## $id
-## [1] 10
-## 
-## $max
-## [1] "10"
-## 
-## $min
-## [1] "0.02"
-## 
-## $name
-## [1] "leafN"
-## 
-## $notes
-## [1] ""
-## 
-## $units
-## [1] "percent"
-## 
-## $updated_at
-## [1] "2011-06-06T09:40:42-05:00"
+#> # A tibble: 1 x 13
+#>      id description units notes created_at updated_at name  max   min  
+#>   <int> <chr>       <chr> <chr> <chr>      <chr>      <chr> <chr> <chr>
+#> 1    10 Leaf Perce… perc… <NA>  <NA>       2011-06-0… leafN 10    0.02 
+#> # … with 4 more variables: standard_name <chr>, standard_units <chr>,
+#> #   label <chr>, type <chr>
 ```
 
 ## Species
@@ -99,29 +87,11 @@ betydb_specie(id = 10)
 ```
 
 ```
-## $acceptedsymbol
-## [1] "ACKA2"
-## 
-## $commonname
-## [1] "karroothorn"
-## 
-## $genus
-## [1] "Acacia"
-## 
-## $id
-## [1] 10
-## 
-## $notes
-## [1] ""
-## 
-## $scientificname
-## [1] "Acacia karroo"
-## 
-## $species
-## [1] "karroo"
-## 
-## $updated_at
-## [1] "2011-03-01T15:02:25-06:00"
+#> # A tibble: 1 x 10
+#>      id spcd  genus species scientificname commonname notes created_at
+#>   <int> <chr> <chr> <chr>   <chr>          <chr>      <chr> <chr>     
+#> 1    10 <NA>  Acac… karroo  Acacia karroo  karrootho… <NA>  <NA>      
+#> # … with 2 more variables: updated_at <chr>, acceptedsymbol <chr>
 ```
 
 ## Citations
@@ -134,35 +104,11 @@ betydb_citation(10)
 ```
 
 ```
-## $author
-## [1] "Casler"
-## 
-## $doi
-## [1] "10.2135/cropsci2003.2226"
-## 
-## $id
-## [1] 10
-## 
-## $journal
-## [1] "Crop Science"
-## 
-## $pdf
-## [1] "http://crop.scijournals.org/cgi/reprint/43/6/2226.pdf"
-## 
-## $pg
-## [1] "2226–2233"
-## 
-## $title
-## [1] "Cultivar X environment interactions in switchgrass"
-## 
-## $url
-## [1] "http://crop.scijournals.org/cgi/content/abstract/43/6/2226"
-## 
-## $vol
-## [1] 43
-## 
-## $year
-## [1] 2003
+#> # A tibble: 1 x 13
+#>      id author  year title journal   vol pg    url   pdf   created_at updated_at
+#>   <int> <chr>  <int> <chr> <chr>   <int> <chr> <chr> <chr> <chr>      <chr>     
+#> 1    10 Casler  2003 Cult… Crop S…    43 2226… http… http… <NA>       <NA>      
+#> # … with 2 more variables: doi <chr>, user_id <chr>
 ```
 
 ## Sites
@@ -175,27 +121,8 @@ betydb_site(id = 1)
 ```
 
 ```
-## $city
-## [1] "Aliartos"
-## 
-## $country
-## [1] "GR"
-## 
-## $geometry
-## [1] "POINT (23.17 38.37 114.0)"
-## 
-## $greenhouse
-## [1] FALSE
-## 
-## $notes
-## [1] ""
-## 
-## $sitename
-## [1] "Aliartos"
-## 
-## $state
-## [1] ""
-## 
-## $time_zone
-## [1] "Europe/Athens"
+#> # A tibble: 1 x 8
+#>   city    state country notes sitename greenhouse geometry           time_zone  
+#>   <chr>   <chr> <chr>   <chr> <chr>    <lgl>      <chr>              <chr>      
+#> 1 Aliart… <NA>  GR      <NA>  Aliartos FALSE      POINT (23.17 38.3… Europe/Ath…
 ```

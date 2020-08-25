@@ -1,21 +1,23 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{traits Intro}
-%\VignetteEncoding{UTF-8}
--->
+---
+title: traits introduction
+author: Scott Chamberlain
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+    %\VignetteIndexEntry{traits introduction}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
   warning = FALSE,
-  message = FALSE,
-  cache.path = "vigncache/"
+  message = FALSE
 )
 ```
 
-`traits` introduction
-=====================
 
 ```{r}
 library("traits")

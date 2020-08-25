@@ -1,12 +1,17 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{BETYdb Tutorial}
-%\VignetteEncoding{UTF-8}
--->
+---
+title: BETYdb Tutorial
+author: Scott Chamberlain
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+    %\VignetteIndexEntry{BETYdb Tutorial}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
 
-```{r echo=FALSE, eval=FALSE}
+```{r echo=FALSE}
 knitr::opts_chunk$set(
-  comment = "#>", 
+  comment = "#>",
   warning = FALSE, 
   message = FALSE,
   cache = TRUE
@@ -36,7 +41,7 @@ out <- betydb_search(query = "Switchgrass Yield")
 Summarise data from the output `data.frame`
 
 ```{r}
-library("dplyr")
+suppressPackageStartupMessages(library("dplyr"))
 out %>%
   group_by(id) %>%
   summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%

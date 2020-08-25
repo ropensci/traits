@@ -11,7 +11,7 @@ inst/stuff/
 README.Rmd
 cran-comments.md
 inst/readmecache
-inst/vign/vigncache
+vignettes/cache
 .github
 ^CODE_OF_CONDUCT\.md$
 ^cran-comments\.md$
