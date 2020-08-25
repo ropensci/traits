@@ -5,9 +5,11 @@ Description: Species trait data from many different sources, including
     from the USDA plants database, data from 'EOL' 'Traitbank', 
     Coral traits data (<https://coraltraits.org>), 'Birdlife' International, 
     and more.
-Version: 0.4.2.95
+Version: 0.4.9.91
 Authors@R: c(
-    person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
+    person("Scott", "Chamberlain", role = c("aut", "cre"),
+        email = "myrmecocystus@gmail.com",
+        comment = c(ORCID = "0000-0003-1444-9135")),
     person("Zachary", "Foster", role = "aut"),
     person("Ignasi", "Bartomeus", role = "aut"),
     person("David", "LeBauer", role = "aut"),
@@ -41,3 +43,6 @@ Suggests:
     dplyr,
     plyr
 RoxygenNote: 7.1.1
+X-schema.org-applicationCategory: Biodiversity
+X-schema.org-keywords: traits, API, web-services, species, taxonomy
+X-schema.org-isPartOf: https://ropensci.org
