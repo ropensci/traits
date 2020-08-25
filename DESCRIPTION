@@ -39,6 +39,7 @@ Imports:
     hoardr
 Suggests:
     knitr,
+    rmarkdown,
     testthat,
     dplyr,
     plyr
