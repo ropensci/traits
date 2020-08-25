@@ -10,14 +10,13 @@
   "codeRepository": "https://github.com/ropensci/traits",
   "issueTracker": "https://github.com/ropensci/traits/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.0",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.0 Patched (2019-04-30 r76446)",
+  "runtimePlatform": "R version 4.0.2 Patched (2020-06-30 r78761)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -29,7 +28,8 @@
       "@type": "Person",
       "givenName": "Scott",
       "familyName": "Chamberlain",
-      "email": "myrmecocystus@gmail.com"
+      "email": "myrmecocystus@gmail.com",
+      "@id": "https://orcid.org/0000-0003-1444-9135"
     },
     {
       "@type": "Person",
@@ -69,23 +69,11 @@
       "@type": "Person",
       "givenName": "Scott",
       "familyName": "Chamberlain",
-      "email": "myrmecocystus@gmail.com"
+      "email": "myrmecocystus@gmail.com",
+      "@id": "https://orcid.org/0000-0003-1444-9135"
     }
   ],
   "softwareSuggestions": [
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "roxygen2",
-      "name": "roxygen2",
-      "version": ">= 6.0.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=roxygen2"
-    },
     {
       "@type": "SoftwareApplication",
       "identifier": "knitr",
@@ -272,18 +260,14 @@
       "sameAs": "https://CRAN.R-project.org/package=hoardr"
     }
   ],
-  "contIntegration": "https://travis-ci.org/ropensci/traits",
+  "contIntegration": ["https://travis-ci.org/ropensci/traits", "https://codecov.io/gh/ropensci/traits"],
   "releaseNotes": "https://github.com/ropensci/traits/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/traits/blob/master/README.md",
-  "fileSize": "1723.742KB",
+  "fileSize": "0KB",
   "copyrightHolder": {},
   "funder": {},
-  "keywords": [
-    "traits",
-    "species",
-    "api-client",
-    "r",
-    "rstats",
-    "r-package"
-  ]
+  "keywords": ["traits", "API", "web-services", "species", "taxonomy", "api-client", "r", "rstats", "r-package"],
+  "relatedLink": "https://docs.ropensci.org/traits/",
+  "applicationCategory": "Biodiversity",
+  "isPartOf": "https://ropensci.org"
 }
