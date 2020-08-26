@@ -11,7 +11,7 @@
 #' picking the longest available for the given gene.
 #' @return data.frame
 #' @seealso [ncbi_searcher()], [ncbi_byid()]
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
+#' @author Scott Chamberlain
 #' @examples \dontrun{
 #' # A single species
 #' ncbi_byname(taxa="Acipenser brevirostrum")

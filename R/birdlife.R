@@ -2,10 +2,10 @@
 #'
 #' @export
 #' @param id A single IUCN species ID
-#' @return a \code{data.frame} with level 1 and level 2 habitat classes, as
+#' @return a `data.frame` with level 1 and level 2 habitat classes, as
 #' well as importance ratings and occurrence type (e.g. breeding or
 #' non-breeding). The habitat classification scheme is described
-#' at \url{http://bit.ly/1e6gKBr}
+#' at https://www.iucnredlist.org/resources/classification-schemes
 #' @author David J. Harris \email{harry491@@gmail.com}
 #' @family birdlife
 #' @examples \dontrun{
@@ -31,7 +31,7 @@ birdlife_habitat <- function(id) {
 #'
 #' @export
 #' @inheritParams birdlife_habitat
-#' @return a \code{data.frame} with the species ID and two levels of threat
+#' @return a `data.frame` with the species ID and two levels of threat
 #' descriptions, plus stresses, timing, scope, severity, and impact associated
 #' with each stressor.
 #' @author David J. Harris \email{harry491@@gmail.com}

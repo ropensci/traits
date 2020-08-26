@@ -4,7 +4,7 @@
 \alias{traits-defunct}
 \title{Defunct functions in traits}
 \description{
-These functions have been removed. See package \code{originr}
+These functions have been removed.
 }
 \details{
 \itemize{
@@ -17,5 +17,11 @@ See \code{originr::gisd}
 \item \code{is_native}: This function has moved to a new package. See
 \code{originr::is_native}
 \item \code{tr_usda}: the API behind this function is down for good
+\item \code{coral_locations}: API down for good, as far as I can tell
+\item \code{coral_methodologies}: API down for good, as far as I can tell
+\item \code{coral_resources}: API down for good, as far as I can tell
+\item \code{coral_species}: API down for good, as far as I can tell
+\item \code{coral_taxa}: API down for good, as far as I can tell
+\item \code{coral_traits}: API down for good, as far as I can tell
 }
 }

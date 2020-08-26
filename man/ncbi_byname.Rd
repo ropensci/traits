@@ -57,5 +57,5 @@ ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
 \code{\link[=ncbi_searcher]{ncbi_searcher()}}, \code{\link[=ncbi_byid]{ncbi_byid()}}
 }
 \author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
+Scott Chamberlain
 }

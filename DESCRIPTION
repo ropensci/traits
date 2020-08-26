@@ -1,10 +1,9 @@
 Package: traits
 Title: Species Trait Data from Around the Web
 Description: Species trait data from many different sources, including
-    sequence data from 'NCBI', plant trait data from 'BETYdb', plant data
-    from the USDA plants database, data from 'EOL' 'Traitbank', 
-    Coral traits data (<https://coraltraits.org>), 'Birdlife' International, 
-    and more.
+    sequence data from 'NCBI' (<https://www.ncbi.nlm.nih.gov/>),
+    plant trait data from 'BETYdb', data from 'EOL' 'Traitbank',
+    'Birdlife' International, and more.
 Version: 0.5.0
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"),

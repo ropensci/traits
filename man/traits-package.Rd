@@ -15,7 +15,6 @@ function prefix:
 \item National Center for Biotechnology Information - NCBI
 http://www.ncbi.nlm.nih.gov/ - \code{ncbi_}
 \item Encyclopedia of Life Traitbank - \code{traitbank_}
-\item Coral Traits Database https://coraltraits.org/ - \code{coral_}
 \item Birdlife International https://www.birdlife.org/ -
 \code{birdlife_}
 \item LEDA Traitbase http://www.leda-traitbase.org/LEDAportal/index.jsp -
@@ -26,21 +25,8 @@ http://www.ncbi.nlm.nih.gov/ - \code{ncbi_}
 
 See also \link{traits-defunct}
 }
-\examples{
-\dontrun{
-library("traits")
-
-## Search the Coral database
-## Get the species list and their ids
-coral_species()
-
-## Get data by taxon
-coral_taxa(80)
-}
-
-}
 \author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
+Scott Chamberlain
 
 Ignasi Bartomeus
 

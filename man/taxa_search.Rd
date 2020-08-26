@@ -26,5 +26,5 @@ taxa_search("Poa annua", db = "ncbi")
 }
 }
 \author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}
+Scott Chamberlain
 }

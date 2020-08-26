@@ -68,26 +68,6 @@ head(out)
 traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 ```
 
-## Coral
-
-Get the species list and their ids
-
-```{r}
-coral_species()
-```
-
-Get data by taxon
-
-```{r}
-coral_taxa(80)
-```
-
-Get data by trait
-
-```{r}
-coral_traits(105)
-```
-
 ## Birdlife International
 
 Habitat data

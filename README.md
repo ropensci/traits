@@ -50,11 +50,6 @@ Included in `traits` with the associated function prefix or function name:
   <td style="text-align:left;">https://github.com/EOL/eol_website/blob/master/doc/api.md</td>
 </tr>
 <tr>
-  <td style="text-align:left;">Coral Traits Database</td>
-  <td style="text-align:left;"><code>coral_</code></td>
-  <td style="text-align:left;">https://coraltraits.org/</td>
-</tr>
-<tr>
   <td style="text-align:left;">Birdlife International</td>
   <td style="text-align:left;"><code>birdlife_</code></td>
   <td style="text-align:left;">https://www.birdlife.org/</td>

@@ -116,6 +116,5 @@ two <- ncbi_searcher(taxa = "Salmonella enterica")
 \code{\link{ncbi_byid}}, \code{\link{ncbi_byname}}
 }
 \author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}, Zachary Foster
-\email{zacharyfoster1989@gmail.com}
+Scott Chamberlain, Zachary Foster \email{zacharyfoster1989@gmail.com}
 }

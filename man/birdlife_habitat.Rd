@@ -13,7 +13,7 @@ birdlife_habitat(id)
 a \code{data.frame} with level 1 and level 2 habitat classes, as
 well as importance ratings and occurrence type (e.g. breeding or
 non-breeding). The habitat classification scheme is described
-at \url{http://bit.ly/1e6gKBr}
+at https://www.iucnredlist.org/resources/classification-schemes
 }
 \description{
 Get bird habitat information from BirdLife/IUCN

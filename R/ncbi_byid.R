@@ -27,7 +27,7 @@
 #' @details If bad ids are included with good ones, the bad ones are
 #' silently dropped. If all ids are bad you'll get a stop with error message.
 #' @seealso [ncbi_searcher()], ncbi_byname()]
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}, Rupert Collins
+#' @author Scott Chamberlain, Rupert Collins
 #' @examples \dontrun{
 #' # A single gene
 #' ncbi_byid(ids="360040093")

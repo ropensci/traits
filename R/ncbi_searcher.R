@@ -25,8 +25,7 @@
 #' @return \code{data.frame} of results if a single input is given. A list of
 #'  \code{data.frame}s if multiple inputs are given.
 #' @seealso \code{\link{ncbi_byid}}, \code{\link{ncbi_byname}}
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}, Zachary Foster
-#'   \email{zacharyfoster1989@@gmail.com}
+#' @author Scott Chamberlain, Zachary Foster \email{zacharyfoster1989@@gmail.com}
 #' @section Authentication:
 #' NCBI rate limits requests. If you set an API key you have a higher rate limit. 
 #' Set your API key like `Sys.setenv(ENTREZ_KEY="yourkey")` or you can use 

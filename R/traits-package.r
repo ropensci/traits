@@ -7,7 +7,6 @@
 #' - National Center for Biotechnology Information - NCBI
 #'  http://www.ncbi.nlm.nih.gov/ - `ncbi_`
 #' - Encyclopedia of Life Traitbank - `traitbank_`
-#' - Coral Traits Database https://coraltraits.org/ - `coral_`
 #' - Birdlife International https://www.birdlife.org/ -
 #'  `birdlife_`
 #' - LEDA Traitbase http://www.leda-traitbase.org/LEDAportal/index.jsp -
@@ -16,17 +15,6 @@
 #' - Amniote life history dataset - [tr_ernest()]
 #'
 #' See also [traits-defunct]
-#'
-#' @examples \dontrun{
-#' library("traits")
-#'
-#' ## Search the Coral database
-#' ## Get the species list and their ids
-#' coral_species()
-#'
-#' ## Get data by taxon
-#' coral_taxa(80)
-#' }
 #'
 #' @importFrom httr GET POST content stop_for_status warn_for_status
 #' authenticate
@@ -42,7 +30,7 @@
 #' @name traits-package
 #' @aliases traits
 #' @docType package
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
+#' @author Scott Chamberlain
 #' @author Ignasi Bartomeus
 #' @author Zachary Foster
 #' @author David LeBauer

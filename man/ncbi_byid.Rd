@@ -55,5 +55,5 @@ ncbi_byid(ids=c("360040093","347448433"))
 \code{\link[=ncbi_searcher]{ncbi_searcher()}}, ncbi_byname()]
 }
 \author{
-Scott Chamberlain \email{myrmecocystus@gmail.com}, Rupert Collins
+Scott Chamberlain, Rupert Collins
 }

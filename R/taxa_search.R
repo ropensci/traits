@@ -6,7 +6,7 @@
 #' maybe in the future
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @return A \code{data.frame}
-#' @author Scott Chamberlain \email{myrmecocystus@@gmail.com}
+#' @author Scott Chamberlain
 #' @examples \dontrun{
 #' taxa_search("Poa annua", db = "ncbi")
 #' }
