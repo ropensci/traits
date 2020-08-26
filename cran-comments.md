@@ -10,7 +10,7 @@
 
 ------
 
-This version makes one function defunct, and fixes some bugs.
+This version makes some functions defunct, and fixes some bugs.
 
 Thanks!
 Scott Chamberlain

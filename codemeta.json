@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "traits",
-  "description": "Species trait data from many different sources, including\n    sequence data from 'NCBI', plant trait data from 'BETYdb', plant data\n    from the USDA plants database, data from 'EOL' 'Traitbank', \n    Coral traits data (<https://coraltraits.org>), 'Birdlife' International, \n    and more.",
+  "description": "Species trait data from many different sources, including\n    sequence data from 'NCBI' (<https://www.ncbi.nlm.nih.gov/>),\n    plant trait data from 'BETYdb', data from 'EOL' 'Traitbank',\n    'Birdlife' International, and more.",
   "name": "traits: Species Trait Data from Around the Web",
   "codeRepository": "https://github.com/ropensci/traits",
   "issueTracker": "https://github.com/ropensci/traits/issues",
@@ -85,6 +85,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
     },
     {
       "@type": "SoftwareApplication",

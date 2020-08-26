@@ -4,6 +4,7 @@ traits 0.5.0
 ### DEFUNCT
 
 * `tr_usda()` is defunct. The API is down for good (#122)
+* all `coral_*` functions are defunct (#124)
 
 ### MINOR IMPROVEMENTS
 
