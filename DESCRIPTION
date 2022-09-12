@@ -4,14 +4,16 @@ Description: Species trait data from many different sources, including
     sequence data from 'NCBI' (<https://www.ncbi.nlm.nih.gov/>),
     plant trait data from 'BETYdb', data from 'EOL' 'Traitbank',
     'Birdlife' International, and more.
-Version: 0.5.0
+Version: 0.5.1
 Authors@R: c(
-    person("Scott", "Chamberlain", role = c("aut", "cre"),
+    person("David", "LeBauer", role = c("aut", "cre"),
+        email = 'dlebauer@gmail.com',
+        comment = c(ORCID = "0000-0001-7228-053X")),
+    person("Scott", "Chamberlain", role = c("aut"),
         email = "myrmecocystus@gmail.com",
         comment = c(ORCID = "0000-0003-1444-9135")),
     person("Zachary", "Foster", role = "aut"),
     person("Ignasi", "Bartomeus", role = "aut"),
-    person("David", "LeBauer", role = "aut"),
     person("Chris", "Black", role = "aut"),
     person("David", "Harris", role = "aut"),
     person("Rupert", "Collins", role = "ctb")
