@@ -1,3 +1,10 @@
+traits 0.5.1
+============
+
+### NEW FEATURES
+
+* David LeBauer (@dlebauer) is now the maintainer of the traits package. Many thanks to previous maintainer Scott Chamberlain!
+
 traits 0.5.0
 ============
 
