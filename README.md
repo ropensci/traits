@@ -3,9 +3,9 @@ traits
 
 
 
-[![cran checks](https://cranchecks.info/badges/worst/traits)](https://cranchecks.info/pkgs/traits)
-[![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)
-[![codecov](https://codecov.io/gh/ropensci/traits/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/traits)
+[![cran checks](https://badges.cranchecks.info/worst/traits)](https://badges.cranchecks.info/pkgs/traits)
+[![Build Status](https://app.travis-ci.com/ropensci/traits.svg?branch=master)](https://app.travis-ci.com/ropensci/traits)
+[![codecov](https://app.codecov.io/gh/ropensci/traits/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ropensci/traits)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/traits)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/traits)](https://CRAN.R-project.org/package=traits)
 
