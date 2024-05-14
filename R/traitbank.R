@@ -16,14 +16,16 @@
 #' user friendly interface to get Traitbank data that doesn't
 #' require knowing the Neo4J query syntax
 #' @section Authentication:
-#' You'll need an EOL cypher key to use this function. Get one by signing
-#' in to your EOL account https://eol.org/users/sign_in then head to
-#' https://eol.org/services/authenticate to get a key. Store your key
-#' in your .Renviron file or similar under the name "EOL_CYPHER_KEY",
-#' and we will use that key in this function. Alternatively, you can
-#' pass in your key to the key parameter, but we do not recommend
-#' doing that as you risk accidentally committing your key to the
-#' public web.
+#' You'll need an EOL cypher key to use this function. Steps:
+#' 1. Sign in to (register if necessary) your EOL account https://eol.org/users/sign_in. 
+#' 2. Send an email to the EOL administrator (hammockj AT si.edu) with your username
+#' and request that they make you a "power user".
+#' 3. Get your key by visiting https://eol.org/services/authenticate
+#' 4. Store your key in your .Renviron file or similar under the name "EOL_CYPHER_KEY"
+#'     Hint: To do this, you can create or edit this file in your home directory, or 
+#' use the shortcut `usethis::edit_r_environ()` and add a line like `EOL_CYPHER_KEY="your_key_here"`
+#' 5. (not recommended alternative): you can pass your key to the key parameter, but we do not recommend
+#' doing that as you risk accidentally committing your key to the public web.
 #' @return a list
 #' @examples \dontrun{
 #' # traitbank_query function
@@ -37,7 +39,11 @@ traitbank <- function(query, key = NULL, ...) {
   assert(query, "character")
   assert(key, "character")
   if (is.null(key)) key <- Sys.getenv("EOL_CYPHER_KEY", "")
-  if (!nzchar(key)) stop("no EOL Cypher key found; see help file")
+  if (!nzchar(key)) stop("
+  no EOL Cypher key found
+    see the traitbank function help under Authentication
+      help('traitbank') 
+    for instructions on obtaining and storing the EOL Cypher Key")
   x = crul::HttpClient$new(
       url = "https://eol.org",
       headers = list(Authorization = paste0("JWT ", key)),
