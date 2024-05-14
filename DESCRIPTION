@@ -44,7 +44,7 @@ Suggests:
     testthat,
     dplyr,
     plyr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.1
 X-schema.org-applicationCategory: Biodiversity
 X-schema.org-keywords: traits, API, web-services, species, taxonomy
 X-schema.org-isPartOf: https://ropensci.org
