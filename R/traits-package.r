@@ -29,7 +29,6 @@
 #' @importFrom tibble as_tibble
 #' @name traits-package
 #' @aliases traits
-#' @docType package
 #' @author Scott Chamberlain
 #' @author Ignasi Bartomeus
 #' @author Zachary Foster
@@ -37,7 +36,8 @@
 #' @author David Harris
 #' @author Rupert Collins
 #' @keywords package
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 #' PLANTATT plant traits dataset
 #' @name plantatt
