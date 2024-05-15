@@ -175,7 +175,7 @@ betydb_site(id = 795)
 }
 \references{
 API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
-https://www.betydb.org/api/docs
+\url{https://www.betydb.org/api/docs}
 }
 \seealso{
 \code{\link{betydb_query}}

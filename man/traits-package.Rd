@@ -2,8 +2,8 @@
 % Please edit documentation in R/traits-package.r
 \docType{package}
 \name{traits-package}
-\alias{traits}
 \alias{traits-package}
+\alias{traits}
 \title{traits - Species trait data from around the web}
 \description{
 Currently included in \code{traits} with the associated function name or

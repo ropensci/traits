@@ -16,7 +16,7 @@
 #' @param progress show progress bar? default: \code{TRUE}
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}. Optional
 #' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
-#' https://www.betydb.org/api/docs
+#' \url{https://www.betydb.org/api/docs}
 #' @details
 #' BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
 #' databases that support and share data among more focused research programs.
