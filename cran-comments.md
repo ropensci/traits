@@ -1,16 +1,30 @@
 ## Test environments
 
-* local OS X install, R 4.0.2 patched
-* ubuntu 14.04 (on travis-ci), R 4.0.2 
+* local OS X install, R 4.4.0
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+❯ checking CRAN incoming feasibility ... [4s/23s] NOTE
+  Maintainer: ‘David LeBauer <dlebauer@gmail.com>’
+  
+  New maintainer:
+    David LeBauer <dlebauer@gmail.com>
+  Old maintainer(s):
+    Scott Chamberlain <myrmecocystus@gmail.com>
+
+0 errors ✔ | 0 warnings ✔ | 1 note ✖
+
+## revdepcheck results
+
+We checked 2 reverse dependencies (0 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
 
 ------
 
-This version makes some functions defunct, and fixes some bugs.
+This version contains just a maintainer change.
 
 Thanks!
-Scott Chamberlain
+David LeBauer
