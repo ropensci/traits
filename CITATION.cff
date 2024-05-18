@@ -1,0 +1,50 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "traits" in publications use:'
+type: software
+license: MIT
+title: 'traits: Species Trait Data from Around the Web'
+version: 0.5.1
+abstract: Species trait data from many different sources, including sequence data
+  from 'NCBI' (<https://www.ncbi.nlm.nih.gov/>), plant trait data from 'BETYdb', data
+  from 'EOL' 'Traitbank', 'Birdlife' International, and more.
+authors:
+- family-names: LeBauer
+  given-names: David
+  email: dlebauer@gmail.com
+  orcid: https://orcid.org/0000-0001-7228-053X
+- family-names: Chamberlain
+  given-names: Scott
+  email: myrmecocystus@gmail.com
+  orcid: https://orcid.org/0000-0003-1444-9135
+- family-names: Foster
+  given-names: Zachary
+- family-names: Bartomeus
+  given-names: Ignasi
+- family-names: Black
+  given-names: Chris
+- family-names: Harris
+  given-names: David
+repository: https://CRAN.R-project.org/package=traits
+repository-code: https://github.com/ropensci/traits
+url: https://docs.ropensci.org/traits/
+contact:
+- family-names: LeBauer
+  given-names: David
+  email: dlebauer@gmail.com
+  orcid: https://orcid.org/0000-0001-7228-053X
+keywords:
+- traits
+- API
+- web-services
+- species
+- taxonomy
+- api-client
+- r
+- r-package
+- rstats
+
