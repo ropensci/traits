@@ -42,6 +42,7 @@ jobs:
           mykeys <- list()
 
           # Create your CITATION.cff file
+
           cff_write(keys = mykeys, dependencies = FALSE)
 
         shell: Rscript {0}
