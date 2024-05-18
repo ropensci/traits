@@ -45,7 +45,6 @@ test_that("ncbi_byname works under subset of conditions from issue #126", {
 
   res <- ncbi_byname(taxa = "Coryphaena hippurus", gene = c("Coi"), seqrange = "1:2000")
   expect_true(is.data.frame(res))
-  res <- ncbi_byname(taxa = "Coryphaena hippurus", gene = c("Coi"), seqrange = "1:2000")
   res2 <- ncbi_byname(taxa = "Coryphaena hippurus", gene = c("Coi"), seqrange = "500:750")
   expect_true(is.data.frame(res2))
   
