@@ -17,3 +17,5 @@ vignettes/cache
 ^cran-comments\.md$
 ^revdep$
 ^codemeta\.json$
+^CITATION\.cff$
+^\.github$
