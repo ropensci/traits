@@ -42,7 +42,6 @@ test_that("ncbi_byname gets seq for single gene", {
 
 test_that("ncbi_byname works under subset of conditions from issue #126", {
   skip_on_cran()
-  # expect function works without error; not expect_silent that also catches messages
 
   res <- ncbi_byname(taxa = "Coryphaena hippurus", gene = c("Coi"), seqrange = "1:2000")
   expect_true(is.data.frame(res))
