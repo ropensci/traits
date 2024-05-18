@@ -1,0 +1,319 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "traits" in publications use:'
+type: software
+license: MIT
+title: 'traits: Species Trait Data from Around the Web'
+version: 0.5.1
+abstract: Species trait data from many different sources, including sequence data
+  from 'NCBI' (<https://www.ncbi.nlm.nih.gov/>), plant trait data from 'BETYdb', data
+  from 'EOL' 'Traitbank', 'Birdlife' International, and more.
+authors:
+- family-names: LeBauer
+  given-names: David
+  email: dlebauer@gmail.com
+  orcid: https://orcid.org/0000-0001-7228-053X
+- family-names: Chamberlain
+  given-names: Scott
+  email: myrmecocystus@gmail.com
+  orcid: https://orcid.org/0000-0003-1444-9135
+- family-names: Foster
+  given-names: Zachary
+- family-names: Bartomeus
+  given-names: Ignasi
+- family-names: Black
+  given-names: Chris
+- family-names: Harris
+  given-names: David
+repository: https://CRAN.R-project.org/package=traits
+repository-code: https://github.com/ropensci/traits
+url: https://docs.ropensci.org/traits/
+contact:
+- family-names: LeBauer
+  given-names: David
+  email: dlebauer@gmail.com
+  orcid: https://orcid.org/0000-0001-7228-053X
+keywords:
+- traits
+- API
+- web-services
+- species
+- taxonomy
+- api-client
+- r
+- r-package
+- rstats
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+  version: '>= 2.10'
+- type: software
+  title: jsonlite
+  abstract: 'jsonlite: A Simple and Robust JSON Parser and Generator for R'
+  notes: Imports
+  url: https://jeroen.r-universe.dev/jsonlite
+  repository: https://CRAN.R-project.org/package=jsonlite
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  year: '2024'
+  version: '>= 0.9.19'
+- type: software
+  title: httr
+  abstract: 'httr: Tools for Working with URLs and HTTP'
+  notes: Imports
+  url: https://httr.r-lib.org/
+  repository: https://CRAN.R-project.org/package=httr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+  version: '>= 1.1.0'
+- type: software
+  title: crul
+  abstract: 'crul: HTTP Client'
+  notes: Imports
+  url: https://docs.ropensci.org/crul/
+  repository: https://CRAN.R-project.org/package=crul
+  authors:
+  - family-names: Chamberlain
+    given-names: Scott
+    email: myrmecocystus@gmail.com
+    orcid: https://orcid.org/0000-0003-1444-9135
+  year: '2024'
+  version: '>= 0.6.0'
+- type: software
+  title: tibble
+  abstract: 'tibble: Simple Data Frames'
+  notes: Imports
+  url: https://tibble.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=tibble
+  authors:
+  - family-names: Müller
+    given-names: Kirill
+    email: kirill@cynkra.com
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2024'
+  version: '>= 1.3.4'
+- type: software
+  title: data.table
+  abstract: 'data.table: Extension of `data.frame`'
+  notes: Imports
+  url: https://r-datatable.com
+  repository: https://CRAN.R-project.org/package=data.table
+  authors:
+  - family-names: Barrett
+    given-names: Tyson
+    email: t.barrett88@gmail.com
+  - family-names: Dowle
+    given-names: Matt
+    email: mattjdowle@gmail.com
+  - family-names: Srinivasan
+    given-names: Arun
+    email: asrini@pm.me
+  - family-names: Gorecki
+    given-names: Jan
+  - family-names: Chirico
+    given-names: Michael
+  - family-names: Hocking
+    given-names: Toby
+    orcid: https://orcid.org/0000-0002-3146-0865
+  year: '2024'
+  version: '>= 1.9.6'
+- type: software
+  title: readr
+  abstract: 'readr: Read Rectangular Text Data'
+  notes: Imports
+  url: https://readr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=readr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@posit.co
+    orcid: https://orcid.org/0000-0002-6983-2759
+  year: '2024'
+  version: '>= 1.1.1'
+- type: software
+  title: taxize
+  abstract: 'taxize: Taxonomic Information from Around the Web'
+  notes: Imports
+  url: https://docs.ropensci.org/taxize/
+  repository: https://CRAN.R-project.org/package=taxize
+  authors:
+  - family-names: Chamberlain
+    given-names: Scott
+    email: myrmecocystus@gmail.com
+    orcid: https://orcid.org/0000-0003-1444-9135
+  - family-names: Szoecs
+    given-names: Eduard
+  - family-names: Foster
+    given-names: Zachary
+    email: zacharyfoster1989@gmail.com
+  - family-names: Arendsee
+    given-names: Zebulun
+  year: '2024'
+  version: '>= 0.7.4'
+- type: software
+  title: xml2
+  abstract: 'xml2: Parse XML'
+  notes: Imports
+  url: https://xml2.r-lib.org/
+  repository: https://CRAN.R-project.org/package=xml2
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Ooms
+    given-names: Jeroen
+  year: '2024'
+  version: '>= 0.1.2'
+- type: software
+  title: rvest
+  abstract: 'rvest: Easily Harvest (Scrape) Web Pages'
+  notes: Imports
+  url: https://rvest.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=rvest
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+  version: '>= 0.3.1'
+- type: software
+  title: hoardr
+  abstract: 'hoardr: Manage Cached Files'
+  notes: Imports
+  url: https://docs.ropensci.org/hoardr/
+  repository: https://CRAN.R-project.org/package=hoardr
+  authors:
+  - family-names: Chamberlain
+    given-names: Scott
+    orcid: https://orcid.org/0000-0003-2542-2202
+  year: '2024'
+- type: software
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2024'
+- type: software
+  title: rmarkdown
+  abstract: 'rmarkdown: Dynamic Documents for R'
+  notes: Suggests
+  url: https://pkgs.rstudio.com/rmarkdown/
+  repository: https://CRAN.R-project.org/package=rmarkdown
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@posit.co
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
+  - family-names: McPherson
+    given-names: Jonathan
+    email: jonathan@posit.co
+  - family-names: Luraschi
+    given-names: Javier
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@posit.co
+  - family-names: Atkins
+    given-names: Aron
+    email: aron@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@posit.co
+  - family-names: Chang
+    given-names: Winston
+    email: winston@posit.co
+  - family-names: Iannone
+    given-names: Richard
+    email: rich@posit.co
+    orcid: https://orcid.org/0000-0003-3925-190X
+  year: '2024'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+- type: software
+  title: dplyr
+  abstract: 'dplyr: A Grammar of Data Manipulation'
+  notes: Suggests
+  url: https://dplyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=dplyr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Müller
+    given-names: Kirill
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+    orcid: https://orcid.org/0000-0003-4777-038X
+  year: '2024'
+- type: software
+  title: plyr
+  abstract: 'plyr: Tools for Splitting, Applying and Combining Data'
+  notes: Suggests
+  url: http://had.co.nz/plyr
+  repository: https://CRAN.R-project.org/package=plyr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2024'
+
