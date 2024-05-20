@@ -1,3 +1,12 @@
+Unreleased
+==========
+
+### Minor Improvements
+
+* Set up automatic archiving of releases on Zenodo
+* Add CITATION.cff file (#133)
+* add doi to README, CITATION.cff (#134)
+
 traits 0.5.1
 ============
 
