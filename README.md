@@ -1,13 +1,13 @@
 traits
 =======
 
-
 <!--
 [![cran checks](https://cranchecks.info/badges/worst/traits)](https://cranchecks.info/pkgs/traits)
 [![Build Status](https://travis-ci.org/ropensci/traits.svg?branch=master)](https://travis-ci.org/ropensci/traits)-->
 [![codecov](https://codecov.io/gh/ropensci/traits/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/traits)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/traits)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/traits)](https://CRAN.R-project.org/package=traits)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11224037.svg)](https://doi.org/10.5281/zenodo.11224037)
 
 R client for various sources of species trait data.
 
