@@ -69,7 +69,7 @@ ncbi_byid <- function(ids, format=NULL, verbose=TRUE) {
     voucher <- xml_helper(z, './/GBQualifier[GBQualifier_name = "specimen_voucher"]/GBQualifier_value')
     organelle <- xml_helper(z, './/GBQualifier[GBQualifier_name = "organelle"]/GBQualifier_value')
     lat.long <- xml_helper(z, './/GBQualifier[GBQualifier_name = "lat_lon"]/GBQualifier_value')
-    country <- xml_helper(z, './/GBQualifier[GBQualifier_name = "country"]/GBQualifier_value')
+    country <- xml_helper(z, './/GBQualifier[GBQualifier_name = "geo_loc_name"]/GBQualifier_value')
     first.author <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_authors/GBAuthor')
     paper.title <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_title')
     journal <- xml_helper(z, './/GBReference[GBReference_reference = "1"]/GBReference_journal')
