@@ -85,15 +85,18 @@ Talk to us on the issues page (https://github.com/ropensci/traits/issues) if you
 
 ## Installation
 
-Stable CRAN version
+Stable R-Universe version
 
 ```{r eval=FALSE}
-install.packages("traits")
+install.packages("traits", repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))
 ```
+
+_Note: traits has been removed from CRAN pending https://github.com/ropensci/taxize/issues/938_
 
 Or development version from GitHub
 
 ```{r eval=FALSE}
+install.packages("traits", repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org')) 
 remotes::install_github("ropensci/traits")
 ```
 
