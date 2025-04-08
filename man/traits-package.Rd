@@ -25,17 +25,31 @@ http://www.ncbi.nlm.nih.gov/ - \code{ncbi_}
 
 See also \link{traits-defunct}
 }
-\author{
-Scott Chamberlain
-
-Ignasi Bartomeus
-
-Zachary Foster
-
-David LeBauer
-
-David Harris
-
-Rupert Collins
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://docs.ropensci.org/traits/}
+  \item \url{https://github.com/ropensci/traits}
+  \item Report bugs at \url{https://github.com/ropensci/traits/issues}
 }
-\keyword{package}
+
+}
+\author{
+\strong{Maintainer}: David LeBauer \email{dlebauer@gmail.com} (\href{https://orcid.org/0000-0001-7228-053X}{ORCID})
+
+Authors:
+\itemize{
+  \item Scott Chamberlain \email{myrmecocystus@gmail.com} (\href{https://orcid.org/0000-0003-1444-9135}{ORCID})
+  \item Zachary Foster
+  \item Ignasi Bartomeus
+  \item Chris Black
+  \item David Harris
+}
+
+Other contributors:
+\itemize{
+  \item Rupert Collins [contributor]
+}
+
+}
+\keyword{internal}

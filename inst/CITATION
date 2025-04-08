@@ -1,0 +1,21 @@
+citHeader("To cite the 'traits' package in publications, please use:")
+
+citation <- bibentry(
+  bibtype = "Manual",
+  title = "traits: Species Trait Data from Around the Web",
+  author = c(
+    person("David", "LeBauer", email = "dlebauer@gmail.com", comment = c(ORCID = "0000-0001-7228-053X")),
+    person("Scott", "Chamberlain", email = "myrmecocystus@gmail.com", comment = c(ORCID = "0000-0003-1444-9135")),
+    person("Zachary", "Foster"),
+    person("Ignasi", "Bartomeus"),
+    person("Chris", "Black"),
+    person("David", "Harris")
+  ),
+  year = "2025",
+  note = "R package version 0.5.2, https://github.com/ropensci/traits, https://doi.org/10.5281/zenodo.11224037",
+  url = "https://docs.ropensci.org/traits/"
+)
+
+citFooter("Please use the DOI to cite this package: https://doi.org/10.5281/zenodo.11224037")
+
+citation
