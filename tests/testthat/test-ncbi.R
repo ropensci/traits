@@ -21,7 +21,7 @@ test_that("ncbi_byname gets seq for multiple species", {
   expect_true(all(!is.na(result$sequence)))
 })
 
-test_that("ncbi_byname handles cases with no results"), {
+test_that("ncbi_byname handles cases with no results", {
   skip_on_cran()
   result <- ncbi_byname("This is not a species")
   expect_equal(ncol(result), 7)
@@ -48,7 +48,7 @@ test_that("ncbi_byname works under subset of conditions from issue #126", {
   res2 <- ncbi_byname(taxa = "Coryphaena hippurus", gene = c("Coi"), seqrange = "500:750")
   expect_true(is.data.frame(res2))
   
-  res3 <- ncbi_byname(taxa = "Sardinops melanostictus", gene = c("12s"), seqrange = "1:2000"))
+  res3 <- ncbi_byname(taxa = "Sardinops melanostictus", gene = c("12s"), seqrange = "1:2000")
   expect_true(is.data.frame(res3))
 
 })

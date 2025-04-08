@@ -19,3 +19,4 @@ vignettes/cache
 ^codemeta\.json$
 ^CITATION\.cff$
 ^\.github$
+^README\.Rmd$

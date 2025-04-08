@@ -29,7 +29,8 @@
 #' @importFrom tibble as_tibble
 #' @name traits-package
 #' @aliases traits
-#' @docType package
+#' @keywords internal
+"_PACKAGE"
 #' @author Scott Chamberlain
 #' @author Ignasi Bartomeus
 #' @author Zachary Foster

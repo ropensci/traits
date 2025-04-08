@@ -8,7 +8,7 @@ message: 'To cite package "traits" in publications use:'
 type: software
 license: MIT
 title: 'traits: Species Trait Data from Around the Web'
-version: 0.5.1
+version: 0.5.2
 abstract: Species trait data from many different sources, including sequence data
   from 'NCBI' (<https://www.ncbi.nlm.nih.gov/>), plant trait data from 'BETYdb', data
   from 'EOL' 'Traitbank', 'Birdlife' International, and more.
@@ -49,8 +49,8 @@ keywords:
 - rstats
 preferred-citation:
   type: software
-  title: 'ropensci/traits: traits 0.5.1'
-  version: 0.5.1
+  title: 'ropensci/traits: traits 0.5.2'
+  version: 0.5.2
   authors:
   - family-names: Chamberlain
     given-names: Scott
@@ -72,4 +72,4 @@ preferred-citation:
     given-names: Rupert A.
   doi: 10.5281/zenodo.11224037
   url: https://doi.org/10.5281/zenodo.11224037
-  date-released: 2024-05-17
+  date-released: 2025-04-10

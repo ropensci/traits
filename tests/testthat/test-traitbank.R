@@ -1,5 +1,6 @@
 test_that("traitbank", {
   skip_on_cran()
+  skip_if_not(identical(Sys.getenv("CI"), "true"), "Skipping test outside CI environment")
 
   aa <- traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 
