@@ -2,7 +2,7 @@
 
 * local macOS install, R 4.3.1
 * Ubuntu 22.04 (via GitHub Actions), R 4.3.1
-* Windows (via GitHub Actions), R 4.3.1
+* Windows (via GitHub Actions), R 4.3.1 
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -16,7 +16,7 @@
 * Fixed syntax error in `test-ncbi.R` causing test failures.
 * Added missing `batch_size` argument to `ncbi_byname` documentation.
 * Update tests.
-* Add `inst/CITATION` file.
+* Add `inst/CITATION` file. 
 
 ------
 
