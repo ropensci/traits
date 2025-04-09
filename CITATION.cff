@@ -29,7 +29,6 @@ authors:
   given-names: Chris
 - family-names: Harris
   given-names: David
-repository: https://CRAN.R-project.org/package=traits
 repository-code: https://github.com/ropensci/traits
 url: https://docs.ropensci.org/traits/
 contact:
@@ -47,29 +46,4 @@ keywords:
 - r
 - r-package
 - rstats
-preferred-citation:
-  type: software
-  title: 'ropensci/traits: traits 0.5.1'
-  version: 0.5.1
-  authors:
-  - family-names: Chamberlain
-    given-names: Scott
-  - family-names: LeBauer
-    given-names: David
-  - family-names: Black
-    given-names: Chris
-  - family-names: Harris
-    given-names: David J.
-  - family-names: Bartomeus
-    given-names: Ignasi
-  - family-names: Foster
-    given-names: Zachary
-  - family-names: Salmon
-    given-names: Maëlle
-  - family-names: Heyek
-    given-names: Nick
-  - family-names: Collins
-    given-names: Rupert A.
-  doi: 10.5281/zenodo.11224037
-  url: https://doi.org/10.5281/zenodo.11224037
-  date-released: 2024-05-17
+
