@@ -1,12 +1,22 @@
 Unreleased
 ==========
 
+traits 0.5.2 (2025-04-10)
+=========================
+
 ### Minor Improvements
 
-* Set up automatic archiving of releases on Zenodo
-* Add CITATION.cff file (#133)
-* add doi to README, CITATION.cff (#134)
+* Set up automatic archiving of releases on Zenodo.
+* Added `CITATION.cff` file (#133).
+* Added DOI to `README` and `CITATION.cff` (#134).
+* Added `inst/CITATION`.
 
+### Bug Fixes
+
+* Fixed syntax error in `test-ncbi.R` causing test failures.
+* Added missing `batch_size` argument to `ncbi_byname` documentation (#132).
+* Changed 'country' to 'geo_loc_name' in `ncbi_byid()` (#136).
+ 
 traits 0.5.1
 ============
 

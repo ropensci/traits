@@ -23,3 +23,24 @@ test_that("traitbank: fails well", {
   expect_error(traitbank(), "\"query\" is missing", class = "error")
   expect_error(traitbank("asfasfd"), class = "error")
 })
+
+test_that("traitbank query works", {
+  testthat::skip_on_cran() # Skip this test on CRAN
+
+  cypher_key <- Sys.getenv("EOL_CYPHER_KEY")
+  expect_true(nzchar(cypher_key), "Cypher key must be set in the environment")
+
+  # Check if the query runs without error
+  expect_error(
+    result <- traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;", key = cypher_key),
+    regexp = NA, # No error expected
+    info = "Skipping test due to error in traitbank query"
+  )
+
+  # If no error occurred, proceed with further checks
+  if (!exists("result") || is.null(result)) {
+    testthat::skip("Result is NULL, skipping further checks")
+  } else {
+    expect_true(is.list(result), "Result should be a list")
+  }
+})

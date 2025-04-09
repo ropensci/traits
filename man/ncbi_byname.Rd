@@ -10,6 +10,7 @@ ncbi_byname(
   seqrange = "1:3000",
   getrelated = FALSE,
   verbose = TRUE,
+  batch_size = 100,
   ...
 )
 }
@@ -28,6 +29,8 @@ in the same genus as the one searched for. If \code{FALSE}, returns nothing if n
 found.}
 
 \item{verbose}{(logical) If \code{TRUE} (default), informative messages printed.}
+
+\item{batch_size}{An integer specifying the number of names to query per batch.}
 
 \item{...}{Curl options passed on to \link[crul:verb-GET]{crul::verb-GET}}
 }

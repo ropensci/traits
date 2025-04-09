@@ -8,10 +8,10 @@ message: 'To cite package "traits" in publications use:'
 type: software
 license: MIT
 title: 'traits: Species Trait Data from Around the Web'
-version: 0.5.1
-abstract: Species trait data from many different sources, including sequence data
-  from 'NCBI' (<https://www.ncbi.nlm.nih.gov/>), plant trait data from 'BETYdb', data
-  from 'EOL' 'Traitbank', 'Birdlife' International, and more.
+version: 0.5.2
+abstract: Species trait data from many sources, including sequence data from 'NCBI'
+  (<https://www.ncbi.nlm.nih.gov/>), plant traits from 'BETYdb', and data from 'EOL
+  Traitbank' and 'Birdlife International'.
 authors:
 - family-names: LeBauer
   given-names: David
@@ -29,8 +29,32 @@ authors:
   given-names: Chris
 - family-names: Harris
   given-names: David
+preferred-citation:
+  type: manual
+  title: 'traits: Species Trait Data from Around the Web'
+  authors:
+  - family-names: LeBauer
+    given-names: David
+    email: dlebauer@gmail.com
+    orcid: https://orcid.org/0000-0001-7228-053X
+  - family-names: Chamberlain
+    given-names: Scott
+    email: myrmecocystus@gmail.com
+    orcid: https://orcid.org/0000-0003-1444-9135
+  - family-names: Foster
+    given-names: Zachary
+  - family-names: Bartomeus
+    given-names: Ignasi
+  - family-names: Black
+    given-names: Chris
+  - family-names: Harris
+    given-names: David
+  year: '2025'
+  notes: R package version 0.5.2, https://github.com/ropensci/traits, https://doi.org/10.5281/zenodo.11224037
+  url: https://docs.ropensci.org/traits/
 repository-code: https://github.com/ropensci/traits
 url: https://docs.ropensci.org/traits/
+date-released: '2025-04-10'
 contact:
 - family-names: LeBauer
   given-names: David
@@ -42,6 +66,10 @@ keywords:
 - web-services
 - species
 - taxonomy
+- biodiversity
+- ecology
+- environmental-data
+- species-traits
 - api-client
 - r
 - r-package
