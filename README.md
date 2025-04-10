@@ -6,7 +6,6 @@ traits: Species Trait Data from Around the Web
 <!--[![cran checks](https://cranchecks.info/badges/worst/traits)](https://cranchecks.info/pkgs/traits)-->
 
 [![R-CMD-check](https://github.com/ropensci/traits/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/traits/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/ropensci/traits/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/traits)
 [![rstudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/traits)](https://github.com/r-hub/cranlogs.app)
 [![cran
@@ -117,7 +116,7 @@ Encylopedia of Life
 
 <td style="text-align:left;">
 
-<https://github.com/EOL/eol_website/blob/master/doc/api.md>
+<https://github.com/EOL/publishing/blob/master/doc/api.md>
 </td>
 
 </tr>

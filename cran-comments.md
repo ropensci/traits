@@ -7,7 +7,9 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 NOTE
+
+* The NOTE is a known benign issue: “checking for future file timestamps ... unable to verify current time”.
 
 ## Changes in this version
 
@@ -18,6 +20,18 @@
 * Update tests.
 * Add `inst/CITATION` file. 
 
+
+## Resubmission Notes
+
+
+- "Archived due to dependency on orphaned package `taxize`"
+  - `taxize` is no longer orphaned and has been restored on CRAN. The dependency is now valid.
+
+- "Invalid URLs (status 301: Moved Permanently) in `README.md`"  
+  - Removed codecov URL:
+  - updated EOL API doc URL to `https://github.com/EOL/publishing/blob/master/doc/api.md`
+  - All URLs were verified with `urlchecker::url_check()`.
+  
 ------
 
 Thanks!
