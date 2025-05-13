@@ -8,7 +8,7 @@
 #' at https://www.iucnredlist.org/resources/classification-schemes
 #' @author David J. Harris \email{harry491@@gmail.com}
 #' @family birdlife
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # Setophaga chrysoparia
 #' birdlife_habitat(22721692)
 #' # Passer domesticus

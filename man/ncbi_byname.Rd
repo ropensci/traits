@@ -47,7 +47,7 @@ Predicted sequences are those with accession numbers that have "XM_" or
 picking the longest available for the given gene.
 }
 \examples{
-\dontrun{
+\donttest{
 # A single species
 ncbi_byname(taxa="Acipenser brevirostrum")
 

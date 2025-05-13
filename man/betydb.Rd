@@ -115,6 +115,11 @@ Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere"
 
 \item{species}{(character) A specific epithet. Optional}
 }
+\value{
+For betydb_trait, betydb_specie, betydb_citation, betydb_site, and betydb_experiment,
+a named list of information about the requested object. For functions that query multiple records,
+a data.frame containing the query results.
+}
 \description{
 Search for traits from BETYdb
 
@@ -154,7 +159,7 @@ ids, and always return a single data.frame.
 }
 
 \examples{
-\dontrun{
+\donttest{
 # General Search
 out <- betydb_search(query = "Switchgrass Yield")
 library("dplyr")

@@ -27,7 +27,7 @@
 #' http://dx.doi.org/10.5061/dryad.63q27.2
 #'
 #' @references http://datadryad.org/resource/doi:10.5061/dryad.63q27
-#' @examples \dontrun{
+#' @examples \donttest{
 #' res <- tr_zanne()
 #' res$tax_lookup
 #' res$woodiness

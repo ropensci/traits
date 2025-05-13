@@ -43,7 +43,7 @@ If bad ids are included with good ones, the bad ones are
 silently dropped. If all ids are bad you'll get a stop with error message.
 }
 \examples{
-\dontrun{
+\donttest{
 # A single gene
 ncbi_byid(ids="360040093")
 

@@ -43,7 +43,7 @@ public web.
 }
 
 \examples{
-\dontrun{
+\donttest{
 # traitbank_query function
 traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 

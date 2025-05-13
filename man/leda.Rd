@@ -11,6 +11,9 @@ leda(trait = "age_first_flowering", ...)
 
 \item{...}{Curl options passed on to \link[crul:verb-GET]{crul::verb-GET}}
 }
+\value{
+A data frame with trait data.
+}
 \description{
 Access LEDA trait data
 }
@@ -26,7 +29,7 @@ The following are not supported as they are too much of a pain to parse:
 buoyancy, seed_bank, sla_geo
 }
 \examples{
-\dontrun{
+\donttest{
 # Age of first flowering
 leda(trait = "age_first_flowering")
 

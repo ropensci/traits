@@ -7,7 +7,7 @@
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @return A \code{data.frame}
 #' @author Scott Chamberlain
-#' @examples \dontrun{
+#' @examples \donttest{
 #' taxa_search("Poa annua", db = "ncbi")
 #' }
 taxa_search <- function(x, db, ...) {

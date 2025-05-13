@@ -19,7 +19,7 @@ at https://www.iucnredlist.org/resources/classification-schemes
 Get bird habitat information from BirdLife/IUCN
 }
 \examples{
-\dontrun{
+\donttest{
 # Setophaga chrysoparia
 birdlife_habitat(22721692)
 # Passer domesticus

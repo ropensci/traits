@@ -26,7 +26,9 @@
 #'  \item `traits_cache$delete_all()` delete all files, returns nothing
 #' }
 #'
-#' @examples \dontrun{
+#' @return A `hoardr` object with methods for managing cached files
+#'
+#' @examples \donttest{
 #' traits_cache
 #'
 #' # list files in cache

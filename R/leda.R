@@ -3,6 +3,7 @@
 #' @export
 #' @param trait (character) Trait to get. See Details.
 #' @param ... Curl options passed on to [crul::verb-GET]
+#' @return A data frame with trait data.
 #' @details For parameter `trait`, one of age_first_flowering, branching,
 #' buds_seasonality, buds_vertical_dist, canopy_height, dispersal_type,
 #' leaf_distribution, ldmc_geo, leaf_mass, leaf_size, morphology_disperal,
@@ -12,7 +13,7 @@
 #'
 #' The following are not supported as they are too much of a pain to parse:
 #' buoyancy, seed_bank, sla_geo
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # Age of first flowering
 #' leda(trait = "age_first_flowering")
 #'

@@ -1,8 +1,21 @@
+# traits 1.0.0
+
 Unreleased
 ==========
 
-- removed `tr_usda()` - has been defunct since v0.5.0 (#122) 
+traits 0.5.3 (unreleased)
+=========================
 
+### REMOVED FUNCTIONS
+* Fully removed previously defunct functions:
+  * `tr_usda()` (defunct since v0.5.0, #122) 
+  * `coral_*` functions (defunct since v0.5.0, #124)
+  * `is_native()`, `g_invasive()`, `eol_invasive()`, `fe_native()` (defunct since v0.3.0, #72)
+
+### MINOR IMPROVEMENTS
+* Updated package documentation and examples to reflect current APIs
+* Changed from \dontrun to \donttest in examples that require internet access.
+* Documented return values.
 
 traits 0.5.2 (2025-04-10)
 =========================

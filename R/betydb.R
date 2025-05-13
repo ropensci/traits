@@ -15,6 +15,9 @@
 #' Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional
 #' @param progress show progress bar? default: \code{TRUE}
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}. Optional
+#' @return For betydb_trait, betydb_specie, betydb_citation, betydb_site, and betydb_experiment,
+#' a named list of information about the requested object. For functions that query multiple records,
+#' a data.frame containing the query results.
 #' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
 #' https://www.betydb.org/api/docs
 #' @details
@@ -48,7 +51,7 @@
 #'
 #' @seealso \code{\link{betydb_query}}
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # General Search
 #' out <- betydb_search(query = "Switchgrass Yield")
 #' library("dplyr")
@@ -394,4 +397,4 @@ warn <- "Supply either api key, or user name/password combo"
 #   args <- traitsc(list(genus = genus, species = species))
 #   betydb_GET2(makeurl("yields", id, fmt), args, key, user, pwd, "yield", ...)
 # }
- 
+

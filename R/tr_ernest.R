@@ -21,7 +21,7 @@
 #'
 #' @references https://doi.org/10.1890/15-0846R.1
 #' https://doi.org/10.6084/m9.figshare.3563457.v1
-#' @examples \dontrun{
+#' @examples \donttest{
 #' res <- tr_ernest()
 #' res$data
 #' res$references
