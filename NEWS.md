@@ -1,6 +1,9 @@
 Unreleased
 ==========
 
+- removed `tr_usda()` - has been defunct since v0.5.0 (#122) 
+
+
 traits 0.5.2 (2025-04-10)
 =========================
 
