@@ -96,7 +96,9 @@ betydb_experiment(
 
 \item{api_version}{(character) Which version of the BETY API should we query? One of "v0" or "beta". Default is \code{options("betydb_api_version")} if set, otherwise  "v0".}
 
-\item{betyurl}{(string) url to target instance of betydb. Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"}
+\item{betyurl}{(string) URL to target BETYdb. Default is \code{"https://www.betydb.org/"}.
+This can be also be set with \code{options("betydb_url")}.
+Note: only \url{https://www.betydb.org/} is officially supported.}
 
 \item{fmt}{(character) Format to return data in, one of json, xml, csv. Only json
 currently supported.}
@@ -126,11 +128,9 @@ Search for traits from BETYdb
 Get details about a single item from a table
 }
 \details{
-BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
-databases that support and share data among more focused research programs.
-
-For a list of publicly accessible instances of BETYdb and the urls that can be queried,
-see \url{https://pecan.gitbooks.io/betydb-documentation/content/distributed_betydb.html}
+BETYdb is focused on bioenergy crops and related ecological data.
+This package officially supports the main public instance at
+\url{https://www.betydb.org/}.
 
 This package queries plant traits, phenotypes, biomass yields, and ecosystem functions.
 It does not currently interface with the workflow and provenance data that support PEcAn Project (pecanproject.org) and TERRA REF (terraref.org) software.
@@ -159,14 +159,14 @@ ids, and always return a single data.frame.
 }
 
 \examples{
-\donttest{
+\dontrun{
 # General Search
 out <- betydb_search(query = "Switchgrass Yield")
 library("dplyr")
 out \%>\%
- group_by(id) \%>\%
- summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) \%>\%
- arrange(desc(mean_result))
+  group_by(id) \%>\%
+  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) \%>\%
+  arrange(desc(mean_result))
 # Get by ID
 ## Traits
 betydb_trait(id = 10)

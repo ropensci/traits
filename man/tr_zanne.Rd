@@ -41,7 +41,7 @@ angiosperms into freezing environments. Dryad Digital Repository.
 http://dx.doi.org/10.5061/dryad.63q27.2
 }
 \examples{
-\donttest{
+\dontrun{
 res <- tr_zanne()
 res$tax_lookup
 res$woodiness

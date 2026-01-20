@@ -33,7 +33,7 @@ Ernest, S. K. Morgan; Baldridge, Elita (2016): Full Archive. figshare.
 https://doi.org/10.6084/m9.figshare.3563457.v1
 }
 \examples{
-\donttest{
+\dontrun{
 res <- tr_ernest()
 res$data
 res$references

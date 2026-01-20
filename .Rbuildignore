@@ -20,4 +20,4 @@ vignettes/cache
 ^CITATION\.cff$
 ^\.github$
 ^README\.Rmd$
-^CRAN-SUBMISSION$
+^submission-checklist\.md$

@@ -1,10 +1,10 @@
 Package: traits
 Title: Species Trait Data from Around the Web
-Version: 0.5.2
+Version: 0.6.0
 Authors@R: c(
     person("David", "LeBauer", , "dlebauer@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7228-053X")),
-    person("Scott", "Chamberlain", , "myrmecocystus@gmail.com", role = "aut",
+    person("Scott", "Chamberlain", , "myrmecocystus@gmail.com", role = c("aut", "cph"),
            comment = c(ORCID = "0000-0003-1444-9135")),
     person("Zachary", "Foster", role = "aut"),
     person("Ignasi", "Bartomeus", role = "aut"),
@@ -39,7 +39,6 @@ Suggests:
     testthat
 VignetteBuilder: 
     knitr
-Date/Publication: 2025-04-10
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

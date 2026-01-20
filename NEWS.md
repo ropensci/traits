@@ -1,9 +1,4 @@
-# traits 1.0.0
-
-Unreleased
-==========
-
-traits 0.5.3 (unreleased)
+traits 0.6.0 (unreleased)
 =========================
 
 ### REMOVED FUNCTIONS

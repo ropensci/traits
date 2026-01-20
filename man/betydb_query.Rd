@@ -61,7 +61,9 @@ If no filters are specified, retrieves the whole table. In API versions that sup
 # literal vs regular expression vs anchored regular expression:
 betydb_query(units = "Mg", table = "variables")
 # NULL
-betydb_query(units = "Mg/ha", table = "variables") \%>\% select(name) \%>\% c()
+betydb_query(units = "Mg/ha", table = "variables") \%>\%
+  select(name) \%>\%
+  c()
 # $name
 # [1] "a_biomass"                  "root_live_biomass"
 # [3] "leaf_dead_biomass_in_Mg_ha" "SDM"
@@ -69,14 +71,14 @@ betydb_query(units = "Mg/ha", table = "variables") \%>\% select(name) \%>\% c()
 betydb_query(genus = "Miscanthus", table = "species") \%>\% nrow()
 # [1] 10
 (betydb_query(genus = "~misc", table = "species", api_version = "beta")
- \%>\% select(genus)
- \%>\% unique() \%>\% c())
+\%>\% select(genus)
+  \%>\% unique() \%>\% c())
 # $genus
 # [1] "Platymiscium" "Miscanthus"   "Dermiscellum"
 
 (betydb_query(genus = "~^misc", table = "species", api_version = "beta")
- \%>\% select(genus)
- \%>\% unique() \%>\% c())
+\%>\% select(genus)
+  \%>\% unique() \%>\% c())
 # $genus
 # [1] "Miscanthus"
 }

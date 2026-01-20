@@ -13,7 +13,7 @@
 #'
 #' The following are not supported as they are too much of a pain to parse:
 #' buoyancy, seed_bank, sla_geo
-#' @examples \donttest{
+#' @examples \dontrun{
 #' # Age of first flowering
 #' leda(trait = "age_first_flowering")
 #'

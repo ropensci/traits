@@ -39,7 +39,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Scott Chamberlain \email{myrmecocystus@gmail.com} (\href{https://orcid.org/0000-0003-1444-9135}{ORCID})
+  \item Scott Chamberlain \email{myrmecocystus@gmail.com} (\href{https://orcid.org/0000-0003-1444-9135}{ORCID}) [copyright holder]
   \item Zachary Foster
   \item Ignasi Bartomeus
   \item Chris Black
