@@ -12,6 +12,8 @@ traits 0.6.0 (unreleased)
 * Changed from \dontrun to \donttest in examples that require internet access.
 * Documented return values.
 
+* Skip traitbank tests on GitHub Actions due to SSL verification issues with eol.org runner environment.
+
 traits 0.5.2 (2025-04-10)
 =========================
 
