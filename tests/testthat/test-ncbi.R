@@ -1,3 +1,8 @@
+# Skip NCBI tests on CI to avoid rate limiting issues (HTTP 429 errors)
+# when multiple test jobs run in parallel. CRAN/local runs still execute
+# these tests.
+testthat::skip_on_ci()
+
 context("NCBI tests")
 
 test_one_species <- "Acer rubrum"

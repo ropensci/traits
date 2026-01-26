@@ -2,6 +2,7 @@ Unreleased
 ==========
 
 * Skip traitbank tests on GitHub Actions due to SSL verification issues with eol.org runner environment.
+* Skip NCBI tests on GitHub Actions to avoid rate limiting errors when multiple test jobs run in parallel.
 
 traits 0.5.2 (2025-04-10)
 =========================
