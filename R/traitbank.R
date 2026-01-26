@@ -25,7 +25,7 @@
 #' doing that as you risk accidentally committing your key to the
 #' public web.
 #' @return a list
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # traitbank_query function
 #' traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 #'

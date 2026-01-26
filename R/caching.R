@@ -26,7 +26,7 @@
 #'  \item `traits_cache$delete_all()` delete all files, returns nothing
 #' }
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' traits_cache
 #'
 #' # list files in cache

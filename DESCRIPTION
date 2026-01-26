@@ -13,8 +13,8 @@ Authors@R: c(
     person("Rupert", "Collins", role = "ctb")
   )
 Description: Species trait data from many sources, including sequence data
-    from 'NCBI' (<https://www.ncbi.nlm.nih.gov/>), plant traits from
-    'BETYdb', and data from 'EOL Traitbank' and 'Birdlife International'.
+    from NCBI (<https://www.ncbi.nlm.nih.gov/>), plant traits from BETYdb,
+    and data from EOL Traitbank and BirdLife International.
 License: MIT + file LICENSE
 URL: https://docs.ropensci.org/traits/, https://github.com/ropensci/traits
 BugReports: https://github.com/ropensci/traits/issues
