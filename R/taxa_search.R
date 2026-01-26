@@ -7,7 +7,7 @@
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}
 #' @return A \code{data.frame}
 #' @author Scott Chamberlain
-#' @examples \dontrun{
+#' @examples \donttest{
 #' taxa_search("Poa annua", db = "ncbi")
 #' }
 taxa_search <- function(x, db, ...) {
@@ -60,6 +60,11 @@ get_blife <- function(z) {
 }
 
 selector <- function(z, name, get_from) {
+  if (!interactive()) {
+    message("More than one result found for '", name, "', but running in non-interactive mode. Returning NA.")
+    return(NA_character_)
+  }
+  
   message("\n\nMore than one result found for '", name, "'!\n
             Enter rownumber of taxon (other inputs will return 'NA'):\n")
   rownames(z) <- 1:nrow(z)

@@ -31,7 +31,7 @@
 #' Set your API key like `Sys.setenv(ENTREZ_KEY="yourkey")` or you can use 
 #' `?rentrez::set_entrez_key`. set verbose curl output (`crul::set_verbose()`) to
 #' make sure your api key is being sent in the requests
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # A single species
 #' out <- ncbi_searcher(taxa="Umbra limi", seqrange = "1:2000")
 #' # Get the same species information using a taxonomy id
@@ -74,7 +74,7 @@ ncbi_searcher <- function(taxa = NULL, id = NULL, seqrange="1:3000",
   getrelated=FALSE, fuzzy=FALSE, limit = 500, entrez_query = NULL,
   hypothetical = FALSE, verbose=TRUE, sleep=0L) {
 
-  cat(paste0("using sleep: ", sleep), sep="\n")
+  mssg(verbose, paste0("using sleep: ", sleep))
 
   # Argument validation ----------------------------------------------------------------------------
   if (sum(c(is.null(taxa), is.null(id))) != 1) {

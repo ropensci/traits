@@ -27,7 +27,7 @@
 #' http://dx.doi.org/10.5061/dryad.63q27.2
 #'
 #' @references http://datadryad.org/resource/doi:10.5061/dryad.63q27
-#' @examples \dontrun{
+#' @examples \donttest{
 #' res <- tr_zanne()
 #' res$tax_lookup
 #' res$woodiness
@@ -35,8 +35,13 @@
 #' res$leaf_phenology
 #' }
 tr_zanne <- function(read = TRUE, ...) {
+  cache <- if (interactive()) {
+    traits_cache$cache_path_get()
+  } else {
+    tempdir()
+  }
   urls <- unname(vapply(zanne_urls, function(z) paste0(zanne_base, z), ""))
-  files <- file.path(traits_cache$cache_path_get(), zanne_paths)
+  files <- file.path(cache, zanne_paths)
   dir.create(dirname(files[1]), showWarnings = FALSE, recursive = TRUE)
   paths <- unlist(unname(Map(function(a, b) {
     if (b %in% traits_cache$list()) {
