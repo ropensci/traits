@@ -21,7 +21,7 @@
 #'
 #' @references https://doi.org/10.1890/15-0846R.1
 #' https://doi.org/10.6084/m9.figshare.3563457.v1
-#' @examples \dontrun{
+#' @examples \donttest{
 #' res <- tr_ernest()
 #' res$data
 #' res$references
@@ -29,12 +29,13 @@
 #' res$range_count
 #' }
 tr_ernest <- function(read = TRUE, ...) {
-  path <- file.path(traits_cache$cache_path_get(), "ernest")
+  cache_dir <- if (interactive()) traits_cache$cache_path_get() else tempdir()
+  path <- file.path(cache_dir, "ernest")
   files <- file.path(path, ernest_paths)
   dir.create(dirname(files[1]), showWarnings = FALSE, recursive = TRUE)
 
   if (
-    file.path(traits_cache$cache_path_get(), "ernest.zip") %in% traits_cache$list() &&
+    file.path(cache_dir, "ernest.zip") %in% traits_cache$list() &&
     all(files %in% traits_cache$list())
   ) {
     message("files in cache already, at: ", path)

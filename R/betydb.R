@@ -51,7 +51,7 @@
 #'
 #' @seealso \code{\link{betydb_query}}
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # General Search
 #' out <- betydb_search(query = "Switchgrass Yield")
 #' library("dplyr")
@@ -134,7 +134,7 @@ makepropname <- function(name, api_version) {
 #' Use betydb_query to retrieve records from a table that match on all the column filters specified in '...'.
 #' If no filters are specified, retrieves the whole table. In API versions that support it (i.e. not in v0), filter strings beginning with "~" are treated as regular expressions.
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # literal vs regular expression vs anchored regular expression:
 #' betydb_query(units = "Mg", table = "variables")
 #' # NULL
