@@ -35,9 +35,8 @@
 #' res$leaf_phenology
 #' }
 tr_zanne <- function(read = TRUE, ...) {
-  cache_dir <- if (interactive()) traits_cache$cache_path_get() else tempdir()
   urls <- unname(vapply(zanne_urls, function(z) paste0(zanne_base, z), ""))
-  files <- file.path(cache_dir, zanne_paths)
+  files <- file.path(traits_cache$cache_path_get(), zanne_paths)
   dir.create(dirname(files[1]), showWarnings = FALSE, recursive = TRUE)
   paths <- unlist(unname(Map(function(a, b) {
     if (b %in% traits_cache$list()) {

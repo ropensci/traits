@@ -46,10 +46,10 @@ taxa_search.character <- function(x, db, ...) {
 # one row for each taxon, ideally
 # taxa_search.data.frame <- function(x, db, ...) { ... }
 
-get_tb <- function(x, ...) {
+get_tb <- function(x, row = NULL, ...) {
   tmp <- taxize::eol_search(terms = x)
   if (NROW(tmp) > 1) {
-    selector(tmp, x, get_from = "pageid")
+    selector(tmp, x, get_from = "pageid", row = row)
   } else {
     tmp$pageid
   }
@@ -59,22 +59,27 @@ get_blife <- function(z) {
   taxize::iucn_id(z)
 }
 
-selector <- function(z, name, get_from) {
+selector <- function(z, name, get_from, row = NULL) {
+  if (!is.null(row)) {
+    # Use specified row for non-interactive or automated use
+    if (!row %in% seq_len(nrow(z))) {
+      message("Row ", row, " not valid. Must be between 1 and ", nrow(z), ".")
+      return(NA_character_)
+    }
+    ids <- unlist(z[get_from], use.names = FALSE)
+    message("Using row ", row, ", id '", as.character(ids[row]), "'.")
+    return(as.character(ids[row]))
+  }
+  
   if (!interactive()) {
-    message("Non-interactive session; multiple matches found; returning NA")
+    message("Non-interactive session; multiple matches found. Use the 'row' parameter to specify which match to use, or return NA.")
     return(NA_character_)
   }
   
   message("\n\nMore than one result found for '", name, "'!\n
             Enter rownumber of taxon (other inputs will return 'NA'):\n")
   rownames(z) <- 1:nrow(z)
-  # Print only first 10 rows for conciseness
-  if (nrow(z) > 10) {
-    print(z[1:10, ])
-    message("... and ", nrow(z) - 10, " more rows")
-  } else {
-    print(z)
-  }
+  print(z)
   take <- scan(n = 1, quiet = TRUE, what = 'raw')
 
   if (length(take) == 0) {

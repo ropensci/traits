@@ -29,13 +29,12 @@
 #' res$range_count
 #' }
 tr_ernest <- function(read = TRUE, ...) {
-  cache_dir <- if (interactive()) traits_cache$cache_path_get() else tempdir()
-  path <- file.path(cache_dir, "ernest")
+  path <- file.path(traits_cache$cache_path_get(), "ernest")
   files <- file.path(path, ernest_paths)
   dir.create(dirname(files[1]), showWarnings = FALSE, recursive = TRUE)
 
   if (
-    file.path(cache_dir, "ernest.zip") %in% traits_cache$list() &&
+    file.path(traits_cache$cache_path_get(), "ernest.zip") %in% traits_cache$list() &&
     all(files %in% traits_cache$list())
   ) {
     message("files in cache already, at: ", path)
