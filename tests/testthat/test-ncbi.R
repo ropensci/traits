@@ -1,6 +1,5 @@
-# Skip NCBI tests on CI to avoid rate limiting issues (HTTP 429 errors)
-# when multiple test jobs run in parallel. CRAN/local runs still execute
-# these tests.
+# Skip NCBI tests on Github actions to avoid rate limiting issues (HTTP 429 errors)
+# when multiple test jobs run in parallel.
 testthat::skip_on_ci()
 
 context("NCBI tests")
