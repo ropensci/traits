@@ -1,7 +1,5 @@
-# Skip traitbank tests on CI because GitHub Actions runners have failed
-# SSL certificate verification for eol.org (SSL certificate problem:
-# unable to get local issuer certificate). CRAN/local runs still execute
-# these tests.
+# Skip traitbank tests on GitHub Actions because runners have failed
+# SSL certificate verification for eol.org 
 testthat::skip_on_ci()
 
 test_that("traitbank", {
