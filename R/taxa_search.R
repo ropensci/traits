@@ -74,7 +74,7 @@ selector <- function(z, name, get_from, row = NULL) {
   }
   
   if (!interactive()) {
-    message("Non-interactive session; multiple matches found. Use the 'row' parameter to specify which match to use, otherwise NA will be returned.")
+    message("Multiple matches were found in a non-interactive session. Use the 'row' parameter to specify which match to return, otherwise NA will be returned.")
     return(NA_character_)
   }
   
