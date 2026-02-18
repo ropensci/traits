@@ -9,10 +9,12 @@
 #' @author David J. Harris \email{harry491@@gmail.com}
 #' @family birdlife
 #' @examples \donttest{
-#' # Setophaga chrysoparia
-#' birdlife_habitat(22721692)
-#' # Passer domesticus
-#' birdlife_habitat(103818789)
+#' if (interactive()) {
+#'   # Setophaga chrysoparia
+#'   birdlife_habitat(22721692)
+#'   # Passer domesticus
+#'   birdlife_habitat(103818789)
+#' }
 #' }
 birdlife_habitat <- function(id) {
   stopifnot(length(id) == 1)
@@ -37,10 +39,12 @@ birdlife_habitat <- function(id) {
 #' @author David J. Harris \email{harry491@@gmail.com}
 #' @family birdlife
 #' @examples \donttest{
-#' # Setophaga chrysoparia
-#' birdlife_threats(22721692)
-#' # Aburria aburri
-#' birdlife_threats(22678440)
+#' if (interactive()) {
+#'   # Setophaga chrysoparia
+#'   birdlife_threats(22721692)
+#'   # Aburria aburri
+#'   birdlife_threats(22678440)
+#' }
 #' }
 birdlife_threats <- function(id) {
   stopifnot(length(id) == 1)

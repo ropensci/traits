@@ -29,11 +29,13 @@
 #' @seealso [ncbi_searcher()], ncbi_byname()]
 #' @author Scott Chamberlain, Rupert Collins
 #' @examples \donttest{
-#' # A single gene
-#' ncbi_byid(ids="360040093")
+#' if (interactive()) {
+#'   # A single gene
+#'   ncbi_byid(ids = "360040093")
 #'
-#' # Many genes (with different accession numbers)
-#' ncbi_byid(ids=c("360040093","347448433"))
+#'   # Many genes (with different accession numbers)
+#'   ncbi_byid(ids = c("360040093", "347448433"))
+#' }
 #' }
 
 ncbi_byid <- function(ids, format=NULL, verbose=TRUE) {

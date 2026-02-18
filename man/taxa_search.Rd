@@ -21,8 +21,10 @@ A \code{data.frame}
 Search for traits by taxa names
 }
 \examples{
-\dontrun{
-taxa_search("Poa annua", db = "ncbi")
+\donttest{
+if (interactive()) {
+  taxa_search("Poa annua", db = "ncbi")
+}
 }
 }
 \author{

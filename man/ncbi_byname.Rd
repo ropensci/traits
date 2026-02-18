@@ -47,13 +47,15 @@ Predicted sequences are those with accession numbers that have "XM_" or
 picking the longest available for the given gene.
 }
 \examples{
-\dontrun{
-# A single species
-ncbi_byname(taxa="Acipenser brevirostrum")
+\donttest{
+if (interactive()) {
+  # A single species
+  ncbi_byname(taxa = "Acipenser brevirostrum")
 
-# Many species
-species <- c("Colletes similis","Halictus ligatus","Perdita californica")
-ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
+  # Many species
+  species <- c("Colletes similis", "Halictus ligatus", "Perdita californica")
+  ncbi_byname(taxa = species, gene = c("coi", "co1"), seqrange = "1:2000")
+}
 }
 }
 \seealso{

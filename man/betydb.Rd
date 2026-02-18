@@ -159,23 +159,24 @@ ids, and always return a single data.frame.
 }
 
 \examples{
-\dontrun{
-# General Search
-out <- betydb_search(query = "Switchgrass Yield")
-library("dplyr")
-out \%>\%
-  group_by(id) \%>\%
-  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) \%>\%
-  arrange(desc(mean_result))
-# Get by ID
-## Traits
-betydb_trait(id = 10)
-## Species
-betydb_specie(id = 1)
-## Citations
-betydb_citation(id = 1)
-## Site information
-betydb_site(id = 795)
+\donttest{
+if (interactive()) {
+  # General Search
+  out <- betydb_search(query = "Switchgrass Yield")
+  if (NROW(out)) {
+    mean_result <- tapply(as.numeric(out$mean), out$id, function(z) mean(z, na.rm = TRUE))
+    sort(mean_result, decreasing = TRUE)
+  }
+  # Get by ID
+  ## Traits
+  betydb_trait(id = 10)
+  ## Species
+  betydb_specie(id = 1)
+  ## Citations
+  betydb_citation(id = 1)
+  ## Site information
+  betydb_site(id = 795)
+}
 }
 }
 \references{

@@ -8,7 +8,9 @@
 #' @return A \code{data.frame}
 #' @author Scott Chamberlain
 #' @examples \donttest{
-#' taxa_search("Poa annua", db = "ncbi")
+#' if (interactive()) {
+#'   taxa_search("Poa annua", db = "ncbi")
+#' }
 #' }
 taxa_search <- function(x, db, ...) {
   UseMethod("taxa_search")

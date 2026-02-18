@@ -21,3 +21,4 @@ vignettes/cache
 ^\.github$
 ^README\.Rmd$
 ^submission-checklist\.md$
+^CRAN-SUBMISSION$

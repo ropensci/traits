@@ -43,13 +43,15 @@ public web.
 }
 
 \examples{
-\dontrun{
-# traitbank_query function
-traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
+\donttest{
+if (interactive()) {
+  # traitbank_query function
+  traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 
-# traitbank function
-res <- traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 2;")
-res
+  # traitbank function
+  res <- traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 2;")
+  res
+}
 }
 }
 \references{

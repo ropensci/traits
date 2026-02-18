@@ -43,12 +43,14 @@ If bad ids are included with good ones, the bad ones are
 silently dropped. If all ids are bad you'll get a stop with error message.
 }
 \examples{
-\dontrun{
-# A single gene
-ncbi_byid(ids="360040093")
+\donttest{
+if (interactive()) {
+  # A single gene
+  ncbi_byid(ids = "360040093")
 
-# Many genes (with different accession numbers)
-ncbi_byid(ids=c("360040093","347448433"))
+  # Many genes (with different accession numbers)
+  ncbi_byid(ids = c("360040093", "347448433"))
+}
 }
 }
 \seealso{

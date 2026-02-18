@@ -52,22 +52,23 @@
 #' @seealso \code{\link{betydb_query}}
 #'
 #' @examples \donttest{
-#' # General Search
-#' out <- betydb_search(query = "Switchgrass Yield")
-#' library("dplyr")
-#' out %>%
-#'   group_by(id) %>%
-#'   summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%
-#'   arrange(desc(mean_result))
-#' # Get by ID
-#' ## Traits
-#' betydb_trait(id = 10)
-#' ## Species
-#' betydb_specie(id = 1)
-#' ## Citations
-#' betydb_citation(id = 1)
-#' ## Site information
-#' betydb_site(id = 795)
+#' if (interactive()) {
+#'   # General Search
+#'   out <- betydb_search(query = "Switchgrass Yield")
+#'   if (NROW(out)) {
+#'     mean_result <- tapply(as.numeric(out$mean), out$id, function(z) mean(z, na.rm = TRUE))
+#'     sort(mean_result, decreasing = TRUE)
+#'   }
+#'   # Get by ID
+#'   ## Traits
+#'   betydb_trait(id = 10)
+#'   ## Species
+#'   betydb_specie(id = 1)
+#'   ## Citations
+#'   betydb_citation(id = 1)
+#'   ## Site information
+#'   betydb_site(id = 795)
+#' }
 #' }
 NULL
 
@@ -135,29 +136,25 @@ makepropname <- function(name, api_version) {
 #' If no filters are specified, retrieves the whole table. In API versions that support it (i.e. not in v0), filter strings beginning with "~" are treated as regular expressions.
 #'
 #' @examples \donttest{
-#' # literal vs regular expression vs anchored regular expression:
-#' betydb_query(units = "Mg", table = "variables")
-#' # NULL
-#' betydb_query(units = "Mg/ha", table = "variables") %>%
-#'   select(name) %>%
-#'   c()
-#' # $name
-#' # [1] "a_biomass"                  "root_live_biomass"
-#' # [3] "leaf_dead_biomass_in_Mg_ha" "SDM"
+#' if (interactive()) {
+#'   # literal vs regular expression vs anchored regular expression:
+#'   betydb_query(units = "Mg", table = "variables")
+#'   # NULL
+#'   betydb_query(units = "Mg/ha", table = "variables")[["name"]]
+#'   # $name
+#'   # [1] "a_biomass"                  "root_live_biomass"
+#'   # [3] "leaf_dead_biomass_in_Mg_ha" "SDM"
 #'
-#' betydb_query(genus = "Miscanthus", table = "species") %>% nrow()
-#' # [1] 10
-#' (betydb_query(genus = "~misc", table = "species", api_version = "beta")
-#' %>% select(genus)
-#'   %>% unique() %>% c())
-#' # $genus
-#' # [1] "Platymiscium" "Miscanthus"   "Dermiscellum"
+#'   nrow(betydb_query(genus = "Miscanthus", table = "species"))
+#'   # [1] 10
+#'   unique(betydb_query(genus = "~misc", table = "species", api_version = "beta")[["genus"]])
+#'   # $genus
+#'   # [1] "Platymiscium" "Miscanthus"   "Dermiscellum"
 #'
-#' (betydb_query(genus = "~^misc", table = "species", api_version = "beta")
-#' %>% select(genus)
-#'   %>% unique() %>% c())
-#' # $genus
-#' # [1] "Miscanthus"
+#'   unique(betydb_query(genus = "~^misc", table = "species", api_version = "beta")[["genus"]])
+#'   # $genus
+#'   # [1] "Miscanthus"
+#' }
 #' }
 #'
 betydb_query <- function(

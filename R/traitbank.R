@@ -26,12 +26,14 @@
 #' public web.
 #' @return a list
 #' @examples \donttest{
-#' # traitbank_query function
-#' traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
+#' if (interactive()) {
+#'   # traitbank_query function
+#'   traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 1;")
 #'
-#' # traitbank function
-#' res <- traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 2;")
-#' res
+#'   # traitbank function
+#'   res <- traitbank(query = "MATCH (n:Trait) RETURN n LIMIT 2;")
+#'   res
+#' }
 #' }
 traitbank <- function(query, key = NULL, ...) {
   assert(query, "character")

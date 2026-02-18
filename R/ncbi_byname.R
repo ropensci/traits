@@ -14,12 +14,14 @@
 #' @seealso [ncbi_searcher()], [ncbi_byid()]
 #' @author Scott Chamberlain
 #' @examples \donttest{
-#' # A single species
-#' ncbi_byname(taxa="Acipenser brevirostrum")
+#' if (interactive()) {
+#'   # A single species
+#'   ncbi_byname(taxa = "Acipenser brevirostrum")
 #'
-#' # Many species
-#' species <- c("Colletes similis","Halictus ligatus","Perdita californica")
-#' ncbi_byname(taxa=species, gene = c("coi", "co1"), seqrange = "1:2000")
+#'   # Many species
+#'   species <- c("Colletes similis", "Halictus ligatus", "Perdita californica")
+#'   ncbi_byname(taxa = species, gene = c("coi", "co1"), seqrange = "1:2000")
+#' }
 #' }
 ncbi_byname <- function(taxa, gene="COI", seqrange="1:3000", getrelated=FALSE, verbose=TRUE, batch_size = 100, ...) {
   foo <- function(xx) {

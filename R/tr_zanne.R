@@ -28,11 +28,13 @@
 #'
 #' @references http://datadryad.org/resource/doi:10.5061/dryad.63q27
 #' @examples \donttest{
-#' res <- tr_zanne()
-#' res$tax_lookup
-#' res$woodiness
-#' res$freezing
-#' res$leaf_phenology
+#' if (interactive()) {
+#'   res <- tr_zanne()
+#'   res$tax_lookup
+#'   res$woodiness
+#'   res$freezing
+#'   res$leaf_phenology
+#' }
 #' }
 tr_zanne <- function(read = TRUE, ...) {
   urls <- unname(vapply(zanne_urls, function(z) paste0(zanne_base, z), ""))
