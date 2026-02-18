@@ -8,10 +8,10 @@ message: 'To cite package "traits" in publications use:'
 type: software
 license: MIT
 title: 'traits: Species Trait Data from Around the Web'
-version: 0.5.2
-abstract: Species trait data from many sources, including sequence data from 'NCBI'
-  (<https://www.ncbi.nlm.nih.gov/>), plant traits from 'BETYdb', and data from 'EOL
-  Traitbank' and 'Birdlife International'.
+version: 0.6.0
+abstract: Species trait data from many sources, including sequence data from NCBI
+  (<https://www.ncbi.nlm.nih.gov/>), plant traits from BETYdb, and data from EOL Traitbank
+  and BirdLife International.
 authors:
 - family-names: LeBauer
   given-names: David
@@ -54,7 +54,6 @@ preferred-citation:
   url: https://docs.ropensci.org/traits/
 repository-code: https://github.com/ropensci/traits
 url: https://docs.ropensci.org/traits/
-date-released: '2025-04-10'
 contact:
 - family-names: LeBauer
   given-names: David
