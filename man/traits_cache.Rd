@@ -3,6 +3,9 @@
 \name{traits_cache}
 \alias{traits_cache}
 \title{Caching}
+\value{
+A \code{hoardr} object with methods for managing cached files
+}
 \description{
 Manage cached \code{traits} package files with \pkg{hoardr}
 }
@@ -31,7 +34,7 @@ path file names
 }
 
 \examples{
-\dontrun{
+\donttest{
 traits_cache
 
 # list files in cache

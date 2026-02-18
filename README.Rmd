@@ -39,7 +39,7 @@ Included in `traits` with the associated function prefix or function name:
 
 <thead>
 <tr>
-  <th style="text-align:left;">Souce</th>
+  <th style="text-align:left;">Source</th>
   <th style="text-align:left;">Function prefix</th>
   <th style="text-align:left;">Link</th>
 </tr>
@@ -57,7 +57,7 @@ Included in `traits` with the associated function prefix or function name:
   <td style="text-align:left;">https://www.ncbi.nlm.nih.gov/</td>
 </tr>
 <tr>
-  <td style="text-align:left;">Encylopedia of Life</td>
+  <td style="text-align:left;">Encyclopedia of Life</td>
   <td style="text-align:left;"><code>traitbank_</code></td>
   <td style="text-align:left;">
 
@@ -92,18 +92,24 @@ Talk to us on the issues page (https://github.com/ropensci/traits/issues) if you
 
 ## Installation
 
-Stable R-Universe version
+CRAN
 
 ```{r eval=FALSE}
-install.packages("traits", repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))
+install.packages("traits")
 ```
 
-_Note: traits has been removed from CRAN pending https://github.com/ropensci/taxize/issues/938_
-
-Or development version from GitHub
+R-Universe (alternative)
 
 ```{r eval=FALSE}
-install.packages("traits", repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org')) 
+install.packages(
+  "traits",
+  repos = c("https://ropensci.r-universe.dev", "https://cloud.r-project.org")
+)
+```
+
+Development version from GitHub
+
+```{r eval=FALSE}
 remotes::install_github("ropensci/traits")
 ```
 

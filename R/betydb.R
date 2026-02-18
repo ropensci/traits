@@ -5,7 +5,9 @@
 #' @param genus (character) A genus name. Optional
 #' @param species (character) A specific epithet. Optional
 #' @param id (integer) One or more ids for a species, site, variable, etc.
-#' @param betyurl (string) url to target instance of betydb. Default is \code{options("betydb_url")} if set, otherwise "https:/www.betydb.org/"
+#' @param betyurl (string) URL to target BETYdb. Default is \code{"https://www.betydb.org/"}.
+#' This can be also be set with \code{options("betydb_url")}.
+#' Note: only \url{https://www.betydb.org/} is officially supported.
 #' @param fmt (character) Format to return data in, one of json, xml, csv. Only json
 #' currently supported.
 #' @param api_version (character) Which version of the BETY API should we query? One of "v0" or "beta". Default is \code{options("betydb_api_version")} if set, otherwise  "v0".
@@ -15,14 +17,15 @@
 #' Save in your \code{.Rprofile} file as \code{options(betydb_user = "yournamehere")} and \code{options(betydb_pwd = "yourpasswordhere")}. Optional
 #' @param progress show progress bar? default: \code{TRUE}
 #' @param ... Curl options passed on to \code{\link[httr]{GET}}. Optional
+#' @return For betydb_trait, betydb_specie, betydb_citation, betydb_site, and betydb_experiment,
+#' a named list of information about the requested object. For functions that query multiple records,
+#' a data.frame containing the query results.
 #' @references API documentation \url{https://pecan.gitbooks.io/betydb-data-access/content/API.html} and
 #' https://www.betydb.org/api/docs
 #' @details
-#' BETYdb includes a primary home page (betydb.org) focused on bioenergy crops as well as a network of harmonized
-#' databases that support and share data among more focused research programs.
-#'
-#' For a list of publicly accessible instances of BETYdb and the urls that can be queried,
-#' see \url{https://pecan.gitbooks.io/betydb-documentation/content/distributed_betydb.html}
+#' BETYdb is focused on bioenergy crops and related ecological data.
+#' This package officially supports the main public instance at
+#' \url{https://www.betydb.org/}.
 #'
 #' This package queries plant traits, phenotypes, biomass yields, and ecosystem functions.
 #' It does not currently interface with the workflow and provenance data that support PEcAn Project (pecanproject.org) and TERRA REF (terraref.org) software.
@@ -48,37 +51,42 @@
 #'
 #' @seealso \code{\link{betydb_query}}
 #'
-#' @examples \dontrun{
-#' # General Search
-#' out <- betydb_search(query = "Switchgrass Yield")
-#' library("dplyr")
-#' out %>%
-#'  group_by(id) %>%
-#'  summarise(mean_result = mean(as.numeric(mean), na.rm = TRUE)) %>%
-#'  arrange(desc(mean_result))
-#' # Get by ID
-#' ## Traits
-#' betydb_trait(id = 10)
-#' ## Species
-#' betydb_specie(id = 1)
-#' ## Citations
-#' betydb_citation(id = 1)
-#' ## Site information
-#' betydb_site(id = 795)
+#' @examples \donttest{
+#' if (interactive()) {
+#'   # General Search
+#'   out <- betydb_search(query = "Switchgrass Yield")
+#'   if (NROW(out)) {
+#'     mean_result <- tapply(as.numeric(out$mean), out$id, function(z) mean(z, na.rm = TRUE))
+#'     sort(mean_result, decreasing = TRUE)
+#'   }
+#'   # Get by ID
+#'   ## Traits
+#'   betydb_trait(id = 10)
+#'   ## Species
+#'   betydb_specie(id = 1)
+#'   ## Citations
+#'   betydb_citation(id = 1)
+#'   ## Site information
+#'   betydb_site(id = 795)
+#' }
 #' }
 NULL
 
-makeurl <- function(table, id = NULL, fmt = "json", api_version = NULL, betyurl = NULL){
+makeurl <- function(table, id = NULL, fmt = "json", api_version = NULL, betyurl = NULL) {
   if (is.null(betyurl)) {
     betyurl <- getOption("betydb_url", default = "https://www.betydb.org/")
   }
   if (is.null(api_version)) {
     api_version <- getOption("betydb_api_version", default = "v0")
   }
-  api_string <- if (api_version == "v0") { "" } else { paste0("api/", api_version, "/")}
-  fmt <- match.arg(fmt, c("json","xml","csv"))
-  betyurl = sub("/*$", "/", betyurl)
-  if (!is.null(id)){
+  api_string <- if (api_version == "v0") {
+    ""
+  } else {
+    paste0("api/", api_version, "/")
+  }
+  fmt <- match.arg(fmt, c("json", "xml", "csv"))
+  betyurl <- sub("/*$", "/", betyurl)
+  if (!is.null(id)) {
     return(paste0(betyurl, api_string, table, "/", id, ".", fmt))
   }
   paste0(betyurl, api_string, paste0(table, "."), fmt)
@@ -88,14 +96,17 @@ makeurl <- function(table, id = NULL, fmt = "json", api_version = NULL, betyurl 
 # from a table name (usually plural)
 # FIXME: not a very future-proof approach.
 # Would be nice if we could query the API itself for these.
-makepropname <- function(name, api_version){
+makepropname <- function(name, api_version) {
   if (is.null(api_version)) {
     api_version <- getOption("betydb_api_version", default = "v0")
   }
-  switch(
-    name,
+  switch(name,
     search = "traits_and_yields_view",
-    species = if (api_version == "v0"){ "specie" }else{ "species" },
+    species = if (api_version == "v0") {
+      "specie"
+    } else {
+      "species"
+    },
     entities = "entity",
     sub("s$", "", name)
   )
@@ -124,105 +135,113 @@ makepropname <- function(name, api_version){
 #' Use betydb_query to retrieve records from a table that match on all the column filters specified in '...'.
 #' If no filters are specified, retrieves the whole table. In API versions that support it (i.e. not in v0), filter strings beginning with "~" are treated as regular expressions.
 #'
-#' @examples \dontrun{
-#' # literal vs regular expression vs anchored regular expression:
-#' betydb_query(units = "Mg", table = "variables")
-#' # NULL
-#' betydb_query(units = "Mg/ha", table = "variables") %>% select(name) %>% c()
-#' # $name
-#' # [1] "a_biomass"                  "root_live_biomass"
-#' # [3] "leaf_dead_biomass_in_Mg_ha" "SDM"
+#' @examples \donttest{
+#' if (interactive()) {
+#'   # literal vs regular expression vs anchored regular expression:
+#'   betydb_query(units = "Mg", table = "variables")
+#'   # NULL
+#'   betydb_query(units = "Mg/ha", table = "variables")[["name"]]
+#'   # $name
+#'   # [1] "a_biomass"                  "root_live_biomass"
+#'   # [3] "leaf_dead_biomass_in_Mg_ha" "SDM"
 #'
-#' betydb_query(genus = "Miscanthus", table = "species") %>% nrow()
-#' # [1] 10
-#' (betydb_query(genus = "~misc", table = "species", api_version = "beta")
-#'  %>% select(genus)
-#'  %>% unique() %>% c())
-#' # $genus
-#' # [1] "Platymiscium" "Miscanthus"   "Dermiscellum"
+#'   nrow(betydb_query(genus = "Miscanthus", table = "species"))
+#'   # [1] 10
+#'   unique(betydb_query(genus = "~misc", table = "species", api_version = "beta")[["genus"]])
+#'   # $genus
+#'   # [1] "Platymiscium" "Miscanthus"   "Dermiscellum"
 #'
-#' (betydb_query(genus = "~^misc", table = "species", api_version = "beta")
-#'  %>% select(genus)
-#'  %>% unique() %>% c())
-#' # $genus
-#' # [1] "Miscanthus"
+#'   unique(betydb_query(genus = "~^misc", table = "species", api_version = "beta")[["genus"]])
+#'   # $genus
+#'   # [1] "Miscanthus"
+#' }
 #' }
 #'
-betydb_query <- function(..., table = "search", key = NULL, api_version = NULL, betyurl = NULL,
-  user = NULL, pwd = NULL, progress = TRUE) {
-
+betydb_query <- function(
+  ..., table = "search", key = NULL, api_version = NULL, betyurl = NULL,
+  user = NULL, pwd = NULL, progress = TRUE
+) {
   url <- makeurl(table = table, fmt = "json", api_version = api_version, betyurl = betyurl)
   propname <- makepropname(table, api_version)
-  betydb_GET(url, args = list(...), key = key, user = NULL, pwd = NULL, which = propname, 
-    progress = progress)
+  betydb_GET(url,
+    args = list(...), key = key, user = NULL, pwd = NULL, which = propname,
+    progress = progress
+  )
 }
 
 #' @export
 #' @rdname betydb_query
-betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL, progress = TRUE){
+betydb_search <- function(query = "Maple SLA", ..., include_unchecked = NULL, progress = TRUE) {
   betydb_query(search = query, table = "search", include_unchecked = include_unchecked, ...)
 }
 
-betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
-  which, progress, ...) {
-
-  api_version <- getOption('betydb_api_version', default = 'v0')
+betydb_GET <- function(
+  url, args = list(), key = NULL, user = NULL, pwd = NULL,
+  which, progress, ...
+) {
+  api_version <- getOption("betydb_api_version", default = "v0")
 
   # Mostly for testing, will probably have default value in ~all normal use
-  per_call_limit <- getOption('per_call_limit', default = 5000)
+  per_call_limit <- getOption("per_call_limit", default = 5000)
 
 
-  if(api_version == 'v0'){
+  if (api_version == "v0") {
     txt <- betydb_http(url, args, key, user, pwd, ...)
     lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
-  } else if (api_version %in% c('beta', 'v1')){
-
-    if(is.null(args$limit)) {
+  } else if (api_version %in% c("beta", "v1")) {
+    if (is.null(args$limit)) {
       args$limit <- 200
-    } else if (args$limit == 'none'){
+    } else if (args$limit == "none") {
       args$limit <- 10^9
-    } else if(!is.na(as.numeric(args$limit))){
+    } else if (!is.na(as.numeric(args$limit))) {
       args$limit <- as.numeric(args$limit)
     } else {
-      stop('invalid value given for limit', ifelse(is.null(args$limit), "NULL", args$limit),
-           "\nlimit must be a positive integer or 'none'")
+      stop(
+        "invalid value given for limit", ifelse(is.null(args$limit), "NULL", args$limit),
+        "\nlimit must be a positive integer or 'none'"
+      )
     }
 
-    if(args$limit <= per_call_limit){
+    if (args$limit <= per_call_limit) {
       txt <- betydb_http(url, args, key, user, pwd, ...)
       lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
-    } else if (args$limit > per_call_limit){ # divide large requests (aka page)
+    } else if (args$limit > per_call_limit) { # divide large requests (aka page)
       # clear limit arg and return total records
       oldlimit <- args$limit
       args$limit <- NULL
       txt <- betydb_http(url, args, key, user, pwd, ...)
       lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
-      if(lst$metadata$count == 0){
-        lst$warnings <- append(lst$warnings, paste("0 records available for query with url\n",
-                             lst$metadata$URI))
+      if (lst$metadata$count == 0) {
+        lst$warnings <- append(lst$warnings, paste(
+          "0 records available for query with url\n",
+          lst$metadata$URI
+        ))
         nrecords <- 0
-      } else if (lst$metadata$count > 0){
-        if(is.null(lst$warnings)){
-          lst$warnings <- ''
+      } else if (lst$metadata$count > 0) {
+        if (is.null(lst$warnings)) {
+          lst$warnings <- ""
           nrecords <- lst$metadata$count
         } else {
-          nrecords <- as.numeric(gsub("The ", "", strsplit(lst$warnings, '-')[[1]][1]))
-          lst$warnings <- gsub("The [1-9][0-9]*-row result set exceeds the default 200 row limit.  Showing the first 200 results only.  Set an explicit limit to show more results.",
-                               "", lst$warnings)
+          nrecords <- as.numeric(gsub("The ", "", strsplit(lst$warnings, "-")[[1]][1]))
+          lst$warnings <- gsub(
+            "The [1-9][0-9]*-row result set exceeds the default 200 row limit.  Showing the first 200 results only.  Set an explicit limit to show more results.",
+            "", lst$warnings
+          )
         }
-
       }
 
       # configure paging args
       newlimit <- ifelse(oldlimit == 1e+09, nrecords, min(oldlimit, nrecords))
-      if(nrecords > oldlimit){
-        lst$warnings <- paste(lst$warnings,
-          paste("returning ", oldlimit, "records out of", nrecords, "total"))
+      if (nrecords > oldlimit) {
+        lst$warnings <- paste(
+          lst$warnings,
+          paste("returning ", oldlimit, "records out of", nrecords, "total")
+        )
       }
 
       lst_notdata <- lst[-which(names(lst) == "data")]
-      lst_notdata[['metadata']][['total']] <- nrecords
-      lst_notdata[['metadata']][['count']] <- newlimit
+      lst_notdata[["metadata"]][["total"]] <- nrecords
+      lst_notdata[["metadata"]][["count"]] <- newlimit
 
       ## tests set per_call_limit globally to save time
       remainder <- newlimit %% per_call_limit
@@ -231,26 +250,25 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
       lst_data <- list()
 
       # paging loop
-      if(iterations > 2) { # Progress Bar
-        if (progress) pb   <- txtProgressBar(1, iterations, style=3)
+      if (iterations > 2) { # Progress Bar
+        if (progress) pb <- txtProgressBar(1, iterations, style = 3)
       }
-      if(iterations > 0){
-        for(i in 1:iterations){
-          if(i > 1){
+      if (iterations > 0) {
+        for (i in 1:iterations) {
+          if (i > 1) {
             args$offset <- (i - 1) * per_call_limit
           }
 
           txt <- betydb_http(url, args, key, user, pwd, ...)
           lst <- jsonlite::fromJSON(txt, simplifyVector = TRUE, flatten = TRUE)
           lst_data[[i]] <- lst$data
-          if(i > 2) {
+          if (i > 2) {
             if (progress) setTxtProgressBar(pb, i)
           }
-
         }
       }
-      if(remainder > 0){
-        if(iterations > 0){
+      if (remainder > 0) {
+        if (iterations > 0) {
           args$offset <- iterations * per_call_limit
         }
 
@@ -260,11 +278,12 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
         lst_data[[iterations + 1]] <- lst$data
       }
 
-      lst <- append(list(data = dplyr::bind_rows(lst_data)),
-                    lst_notdata)
-
+      lst <- append(
+        list(data = dplyr::bind_rows(lst_data)),
+        lst_notdata
+      )
     } else {
-      lst <- list(warnings = paste('\n limit argument', args$limit, "not recognized; please use integer value to specify maximum number of records to return, 'none' to specify no limit and return all records, or NULL (default) to return the first 200 records"), metadata = list(url = url, args = args))
+      lst <- list(warnings = paste("\n limit argument", args$limit, "not recognized; please use integer value to specify maximum number of records to return, 'none' to specify no limit and return all records, or NULL (default) to return the first 200 records"), metadata = list(url = url, args = args))
     } # end api beta paging conditionals
   }
 
@@ -281,7 +300,7 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
     lst <- lst$data
   }
   if (length(lst) == 0) { # no results
-      return(NULL)
+    return(NULL)
   }
   if (length(lst) == 1 && names(lst) == which) { # detail view; return a list not a df
     res <- Filter(function(x) !is.null(x), lst[[1]])
@@ -293,19 +312,23 @@ betydb_GET <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
     }
     res <- stats::setNames(tibble::as_tibble(lst), gsub(sprintf("%s\\.", which), "", tolower(names(lst))))
   }
-  if (exists("md") && !is.null(md)) { attr(res, "metadata") <- md }
+  if (exists("md") && !is.null(md)) {
+    attr(res, "metadata") <- md
+  }
   res
 }
 
-betydb_http <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, ...){
+betydb_http <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL, ...) {
   auth <- betydb_auth(user, pwd, key)
 
   if (!grepl("/api/", url, fixed = TRUE)) {
     # no API string means we're using the v0 API and must insert cross-table joins to allow searching.
     # TODO: Remove this block when expiring v0 support.
-    includes <- list(`include[]=` = ifelse(any(grepl('species', names(args))), "specie", ''),
-         `include[]=` = ifelse(any(grepl('variables', names(args))), 'variable', ''),
-         `include[]=` = ifelse(any(grepl('authors', names(args))), 'author', ''))
+    includes <- list(
+      `include[]=` = ifelse(any(grepl("species", names(args))), "specie", ""),
+      `include[]=` = ifelse(any(grepl("variables", names(args))), "variable", ""),
+      `include[]=` = ifelse(any(grepl("authors", names(args))), "author", "")
+    )
     includes[which(includes == "")] <- NULL
     args <- append(args, includes)
   }
@@ -325,47 +348,47 @@ betydb_http <- function(url, args = list(), key = NULL, user = NULL, pwd = NULL,
 #' @export
 #' @rdname betydb
 #' @param table (character) Name of the database table with which this ID is associated.
-betydb_record <- function(id, table, api_version = NULL, betyurl = NULL, fmt = NULL, key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
-  args = list(...)
+betydb_record <- function(id, table, api_version = NULL, betyurl = NULL, fmt = NULL, key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...) {
+  args <- list(...)
   betydb_GET(makeurl(table, id, fmt, api_version, betyurl), args, which = makepropname(table, api_version), progress)
 }
 
 #' @export
 #' @rdname betydb
-betydb_trait <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
+betydb_trait <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...) {
   args <- traitsc(list(species.genus = genus, species.species = species))
   betydb_GET(makeurl("variables", id, fmt, api_version, betyurl), args, key, user, pwd, "variable", progress, ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_specie <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
+betydb_specie <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...) {
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(makeurl("species", id, fmt, api_version, betyurl), args, key, user, pwd, "specie", progress, ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_citation <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
+betydb_citation <- function(id, genus = NULL, species = NULL, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...) {
   args <- traitsc(list(genus = genus, species = species))
   betydb_GET(makeurl("citations", id, fmt, api_version, betyurl), args, key, user, pwd, "citation", progress, ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_site <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
+betydb_site <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...) {
   betydb_GET(makeurl("sites", id, fmt, api_version, betyurl), args = NULL, key, user, pwd, "site", progress, ...)
 }
 
 #' @export
 #' @rdname betydb
-betydb_experiment <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...){
+betydb_experiment <- function(id, api_version = NULL, betyurl = NULL, fmt = "json", key = NULL, user = NULL, pwd = NULL, progress = TRUE, ...) {
   betydb_GET(makeurl("experiments", id, fmt, api_version, betyurl), args = NULL, key, user, pwd, "experiment", progress, ...)
 }
 
-betydb_auth <- function(user,pwd,key){
+betydb_auth <- function(user, pwd, key) {
   if (is.null(key) && is.null(user)) {
-    key <- getOption("betydb_key", 'eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv')
+    key <- getOption("betydb_key", "eI6TMmBl3IAb7v4ToWYzR0nZYY07shLiCikvT6Lv")
   }
   if (!is.null(key)) {
     auth <- list(key = key)
@@ -394,4 +417,3 @@ warn <- "Supply either api key, or user name/password combo"
 #   args <- traitsc(list(genus = genus, species = species))
 #   betydb_GET2(makeurl("yields", id, fmt), args, key, user, pwd, "yield", ...)
 # }
- 

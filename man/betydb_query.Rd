@@ -57,28 +57,26 @@ Use betydb_query to retrieve records from a table that match on all the column f
 If no filters are specified, retrieves the whole table. In API versions that support it (i.e. not in v0), filter strings beginning with "~" are treated as regular expressions.
 }
 \examples{
-\dontrun{
-# literal vs regular expression vs anchored regular expression:
-betydb_query(units = "Mg", table = "variables")
-# NULL
-betydb_query(units = "Mg/ha", table = "variables") \%>\% select(name) \%>\% c()
-# $name
-# [1] "a_biomass"                  "root_live_biomass"
-# [3] "leaf_dead_biomass_in_Mg_ha" "SDM"
+\donttest{
+if (interactive()) {
+  # literal vs regular expression vs anchored regular expression:
+  betydb_query(units = "Mg", table = "variables")
+  # NULL
+  betydb_query(units = "Mg/ha", table = "variables")[["name"]]
+  # $name
+  # [1] "a_biomass"                  "root_live_biomass"
+  # [3] "leaf_dead_biomass_in_Mg_ha" "SDM"
 
-betydb_query(genus = "Miscanthus", table = "species") \%>\% nrow()
-# [1] 10
-(betydb_query(genus = "~misc", table = "species", api_version = "beta")
- \%>\% select(genus)
- \%>\% unique() \%>\% c())
-# $genus
-# [1] "Platymiscium" "Miscanthus"   "Dermiscellum"
+  nrow(betydb_query(genus = "Miscanthus", table = "species"))
+  # [1] 10
+  unique(betydb_query(genus = "~misc", table = "species", api_version = "beta")[["genus"]])
+  # $genus
+  # [1] "Platymiscium" "Miscanthus"   "Dermiscellum"
 
-(betydb_query(genus = "~^misc", table = "species", api_version = "beta")
- \%>\% select(genus)
- \%>\% unique() \%>\% c())
-# $genus
-# [1] "Miscanthus"
+  unique(betydb_query(genus = "~^misc", table = "species", api_version = "beta")[["genus"]])
+  # $genus
+  # [1] "Miscanthus"
+}
 }
 
 }

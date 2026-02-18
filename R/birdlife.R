@@ -8,11 +8,13 @@
 #' at https://www.iucnredlist.org/resources/classification-schemes
 #' @author David J. Harris \email{harry491@@gmail.com}
 #' @family birdlife
-#' @examples \dontrun{
-#' # Setophaga chrysoparia
-#' birdlife_habitat(22721692)
-#' # Passer domesticus
-#' birdlife_habitat(103818789)
+#' @examples \donttest{
+#' if (interactive()) {
+#'   # Setophaga chrysoparia
+#'   birdlife_habitat(22721692)
+#'   # Passer domesticus
+#'   birdlife_habitat(103818789)
+#' }
 #' }
 birdlife_habitat <- function(id) {
   stopifnot(length(id) == 1)
@@ -36,11 +38,13 @@ birdlife_habitat <- function(id) {
 #' with each stressor.
 #' @author David J. Harris \email{harry491@@gmail.com}
 #' @family birdlife
-#' @examples \dontrun{
-#' # Setophaga chrysoparia
-#' birdlife_threats(22721692)
-#' # Aburria aburri
-#' birdlife_threats(22678440)
+#' @examples \donttest{
+#' if (interactive()) {
+#'   # Setophaga chrysoparia
+#'   birdlife_threats(22721692)
+#'   # Aburria aburri
+#'   birdlife_threats(22678440)
+#' }
 #' }
 birdlife_threats <- function(id) {
   stopifnot(length(id) == 1)

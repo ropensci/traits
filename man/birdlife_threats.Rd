@@ -18,11 +18,13 @@ with each stressor.
 Get bird threat information from BirdLife/IUCN
 }
 \examples{
-\dontrun{
-# Setophaga chrysoparia
-birdlife_threats(22721692)
-# Aburria aburri
-birdlife_threats(22678440)
+\donttest{
+if (interactive()) {
+  # Setophaga chrysoparia
+  birdlife_threats(22721692)
+  # Aburria aburri
+  birdlife_threats(22678440)
+}
 }
 }
 \seealso{

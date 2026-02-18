@@ -1,10 +1,10 @@
 Package: traits
 Title: Species Trait Data from Around the Web
-Version: 0.5.2
+Version: 0.6.0
 Authors@R: c(
     person("David", "LeBauer", , "dlebauer@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7228-053X")),
-    person("Scott", "Chamberlain", , "myrmecocystus@gmail.com", role = "aut",
+    person("Scott", "Chamberlain", , "myrmecocystus@gmail.com", role = c("aut", "cph"),
            comment = c(ORCID = "0000-0003-1444-9135")),
     person("Zachary", "Foster", role = "aut"),
     person("Ignasi", "Bartomeus", role = "aut"),
@@ -13,8 +13,8 @@ Authors@R: c(
     person("Rupert", "Collins", role = "ctb")
   )
 Description: Species trait data from many sources, including sequence data
-    from 'NCBI' (<https://www.ncbi.nlm.nih.gov/>), plant traits from
-    'BETYdb', and data from 'EOL Traitbank' and 'Birdlife International'.
+    from NCBI (<https://www.ncbi.nlm.nih.gov/>), plant traits from BETYdb,
+    and data from EOL Traitbank and BirdLife International.
 License: MIT + file LICENSE
 URL: https://docs.ropensci.org/traits/, https://github.com/ropensci/traits
 BugReports: https://github.com/ropensci/traits/issues
@@ -39,11 +39,10 @@ Suggests:
     testthat
 VignetteBuilder: 
     knitr
-Date/Publication: 2025-04-10
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 X-schema.org-applicationCategory: Biodiversity
 X-schema.org-isPartOf: https://ropensci.org,
     https://doi.org/10.5281/zenodo.11224037

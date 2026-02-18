@@ -31,50 +31,52 @@
 #' Set your API key like `Sys.setenv(ENTREZ_KEY="yourkey")` or you can use 
 #' `?rentrez::set_entrez_key`. set verbose curl output (`crul::set_verbose()`) to
 #' make sure your api key is being sent in the requests
-#' @examples \dontrun{
-#' # A single species
-#' out <- ncbi_searcher(taxa="Umbra limi", seqrange = "1:2000")
-#' # Get the same species information using a taxonomy id
-#' out <- ncbi_searcher(id = "75935", seqrange = "1:2000")
-#' # If the taxon name is unique, using the taxon name and id are equivalent
-#' all(ncbi_searcher(id = "75935") ==  ncbi_searcher(taxa="Umbra limi"))
-#' # If the taxon name is not unique, use taxon id
-#' #  "266948" is the uid for the butterfly genus, but there is also a genus
-#' #  of orchids with the
-#' #  same name
-#' nrow(ncbi_searcher(id = "266948")) ==  nrow(ncbi_searcher(taxa="Satyrium"))
-#' # get list of genes available, removing non-unique
-#' unique(out$gene_desc)
-#' # does the string 'RAG1' exist in any of the gene names
-#' out[grep("RAG1", out$gene_desc, ignore.case=TRUE),]
+#' @examples \donttest{
+#' if (interactive()) {
+#'   # A single species
+#'   out <- ncbi_searcher(taxa = "Umbra limi", seqrange = "1:2000")
+#'   # Get the same species information using a taxonomy id
+#'   out <- ncbi_searcher(id = "75935", seqrange = "1:2000")
+#'   # If the taxon name is unique, using the taxon name and id are equivalent
+#'   all(ncbi_searcher(id = "75935") == ncbi_searcher(taxa = "Umbra limi"))
+#'   # If the taxon name is not unique, use taxon id
+#'   #  "266948" is the uid for the butterfly genus, but there is also a genus
+#'   #  of orchids with the
+#'   #  same name
+#'   nrow(ncbi_searcher(id = "266948")) == nrow(ncbi_searcher(taxa = "Satyrium"))
+#'   # get list of genes available, removing non-unique
+#'   unique(out$gene_desc)
+#'   # does the string 'RAG1' exist in any of the gene names
+#'   out[grep("RAG1", out$gene_desc, ignore.case = TRUE), ]
 #'
-#' # A single species without records in NCBI
-#' out <- ncbi_searcher(taxa="Sequoia wellingtonia", seqrange="1:2000",
-#'   getrelated=TRUE)
+#'   # A single species without records in NCBI
+#'   out <- ncbi_searcher(taxa = "Sequoia wellingtonia", seqrange = "1:2000",
+#'     getrelated = TRUE)
 #'
-#' # Many species, can run in parallel or not using plyr
-#' species <- c("Salvelinus alpinus","Ictalurus nebulosus","Carassius auratus")
-#' out2 <- ncbi_searcher(taxa=species, seqrange = "1:2000")
-#' lapply(out2, head)
-#' library("plyr")
-#' out2df <- ldply(out2) # make data.frame of all
-#' unique(out2df$gene_desc) # get list of genes available, removing non-unique
-#' out2df[grep("12S", out2df$gene_desc, ignore.case=TRUE), ]
+#'   # Many species, can run in parallel or not using plyr
+#'   species <- c("Salvelinus alpinus", "Ictalurus nebulosus", "Carassius auratus")
+#'   out2 <- ncbi_searcher(taxa = species, seqrange = "1:2000")
+#'   lapply(out2, head)
+#'   library("plyr")
+#'   out2df <- ldply(out2) # make data.frame of all
+#'   unique(out2df$gene_desc) # get list of genes available, removing non-unique
+#'   out2df[grep("12S", out2df$gene_desc, ignore.case = TRUE), ]
 #'
-#' # Using the getrelated and entrez_query options
-#' ncbi_searcher(taxa = "Olpidiopsidales", limit = 5, getrelated = TRUE,
-#'             entrez_query = "18S[title] AND 28S[title]")
+#'   # Using the getrelated and entrez_query options
+#'   ncbi_searcher(taxa = "Olpidiopsidales", limit = 5, getrelated = TRUE,
+#'               entrez_query = "18S[title] AND 28S[title]")
 #'
-#' # get refseqs
-#' one <- ncbi_searcher(taxa = "Salmonella enterica",
-#'   entrez_query="srcdb_refseq[PROP]")
-#' two <- ncbi_searcher(taxa = "Salmonella enterica")
+#'   # get refseqs
+#'   one <- ncbi_searcher(taxa = "Salmonella enterica",
+#'     entrez_query = "srcdb_refseq[PROP]")
+#'   two <- ncbi_searcher(taxa = "Salmonella enterica")
+#' }
 #' }
 ncbi_searcher <- function(taxa = NULL, id = NULL, seqrange="1:3000",
   getrelated=FALSE, fuzzy=FALSE, limit = 500, entrez_query = NULL,
   hypothetical = FALSE, verbose=TRUE, sleep=0L) {
 
-  cat(paste0("using sleep: ", sleep), sep="\n")
+  mssg(verbose, paste0("using sleep: ", sleep))
 
   # Argument validation ----------------------------------------------------------------------------
   if (sum(c(is.null(taxa), is.null(id))) != 1) {

@@ -11,6 +11,9 @@ leda(trait = "age_first_flowering", ...)
 
 \item{...}{Curl options passed on to \link[crul:verb-GET]{crul::verb-GET}}
 }
+\value{
+A data frame with trait data.
+}
 \description{
 Access LEDA trait data
 }
@@ -26,31 +29,33 @@ The following are not supported as they are too much of a pain to parse:
 buoyancy, seed_bank, sla_geo
 }
 \examples{
-\dontrun{
-# Age of first flowering
-leda(trait = "age_first_flowering")
+\donttest{
+if (interactive()) {
+  # Age of first flowering
+  leda(trait = "age_first_flowering")
 
-# Seed number
-leda("seed_number")
+  # Seed number
+  leda("seed_number")
 
-# Releasing height
-leda(trait = "releasing_height")
+  # Releasing height
+  leda(trait = "releasing_height")
 
-# Clonal growth organs
-leda(trait = "clonal_growth_organs")
+  # Clonal growth organs
+  leda(trait = "clonal_growth_organs")
 
-all <- c("age_first_flowering", "branching", "buds_seasonality",
-  "buds_vertical_dist", "canopy_height",
-  "dispersal_type", "leaf_distribution", "ldmc_geo", "leaf_mass",
-  "leaf_size", "morphology_disperal", "growth_form", "life_span",
-  "releasing_height", "seed_longevity", "seed_mass",
-  "seed_number", "seed_shape", "shoot_growth_form",
-  "snp", "ssd", "tv", "clonal_growth_organs")
-out <- list()
-for (i in seq_along(all)) {
-  cat(all[i], sep="\n")
-  out[[i]] <- leda(all[i])
+  all <- c("age_first_flowering", "branching", "buds_seasonality",
+    "buds_vertical_dist", "canopy_height",
+    "dispersal_type", "leaf_distribution", "ldmc_geo", "leaf_mass",
+    "leaf_size", "morphology_disperal", "growth_form", "life_span",
+    "releasing_height", "seed_longevity", "seed_mass",
+    "seed_number", "seed_shape", "shoot_growth_form",
+    "snp", "ssd", "tv", "clonal_growth_organs")
+  out <- list()
+  for (i in seq_along(all)) {
+    cat(all[i], sep = "\n")
+    out[[i]] <- leda(all[i])
+  }
+  sapply(out, NROW)
 }
-sapply(out, NROW)
 }
 }

@@ -21,12 +21,14 @@
 #'
 #' @references https://doi.org/10.1890/15-0846R.1
 #' https://doi.org/10.6084/m9.figshare.3563457.v1
-#' @examples \dontrun{
-#' res <- tr_ernest()
-#' res$data
-#' res$references
-#' res$sparse
-#' res$range_count
+#' @examples \donttest{
+#' if (interactive()) {
+#'   res <- tr_ernest()
+#'   res$data
+#'   res$references
+#'   res$sparse
+#'   res$range_count
+#' }
 #' }
 tr_ernest <- function(read = TRUE, ...) {
   path <- file.path(traits_cache$cache_path_get(), "ernest")

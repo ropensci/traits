@@ -45,7 +45,7 @@ name:
 
 <th style="text-align:left;">
 
-Souce
+Source
 </th>
 
 <th style="text-align:left;">
@@ -106,7 +106,7 @@ NCBI
 
 <td style="text-align:left;">
 
-Encylopedia of Life
+Encyclopedia of Life
 </td>
 
 <td style="text-align:left;">
@@ -204,19 +204,24 @@ traits data with an API, and we’ll see about including it.
 
 ## Installation
 
-Stable R-Universe version
+CRAN
 
 ``` r
-install.packages("traits", repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org'))
+install.packages("traits")
 ```
 
-\_Note: traits has been removed from CRAN pending
-<https://github.com/ropensci/taxize/issues/938_>
-
-Or development version from GitHub
+R-Universe (alternative)
 
 ``` r
-install.packages("traits", repos = c('https://ropensci.r-universe.dev', 'https://cloud.r-project.org')) 
+install.packages(
+  "traits",
+  repos = c("https://ropensci.r-universe.dev", "https://cloud.r-project.org")
+)
+```
+
+Development version from GitHub
+
+``` r
 remotes::install_github("ropensci/traits")
 ```
 
