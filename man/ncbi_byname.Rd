@@ -47,6 +47,9 @@ Predicted sequences are those with accession numbers that have "XM_" or
 picking the longest available for the given gene.
 }
 \examples{
+# Empty input returns immediately (no HTTP request)
+ncbi_byname(taxa = character())
+
 \donttest{
 if (interactive()) {
   # A single species

@@ -21,7 +21,12 @@
 #'
 #' @references https://doi.org/10.1890/15-0846R.1
 #' https://doi.org/10.6084/m9.figshare.3563457.v1
-#' @examples \donttest{
+#' @examples
+#' # Show the default cache location used by tr_ernest()
+#' cache_dir <- traits_cache$cache_path_get()
+#' file.path(cache_dir, "ernest")
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   res <- tr_ernest()
 #'   res$data

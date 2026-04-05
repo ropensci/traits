@@ -31,7 +31,11 @@
 #' Set your API key like `Sys.setenv(ENTREZ_KEY="yourkey")` or you can use 
 #' `?rentrez::set_entrez_key`. set verbose curl output (`crul::set_verbose()`) to
 #' make sure your api key is being sent in the requests
-#' @examples \donttest{
+#' @examples
+#' # Must supply exactly one of taxa or id; this errors before any HTTP request
+#' try(ncbi_searcher())
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   # A single species
 #'   out <- ncbi_searcher(taxa = "Umbra limi", seqrange = "1:2000")

@@ -41,6 +41,10 @@ angiosperms into freezing environments. Dryad Digital Repository.
 http://dx.doi.org/10.5061/dryad.63q27.2
 }
 \examples{
+# Show one cache path used by tr_zanne()
+cache_dir <- traits_cache$cache_path_get()
+file.path(cache_dir, "GlobalWoodinessDatabase.csv")
+
 \donttest{
 if (interactive()) {
   res <- tr_zanne()

@@ -51,7 +51,11 @@
 #'
 #' @seealso \code{\link{betydb_query}}
 #'
-#' @examples \donttest{
+#' @examples
+#' # fmt is validated locally before any HTTP request
+#' try(betydb_record(id = 1, table = "species", fmt = "txt"))
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   # General Search
 #'   out <- betydb_search(query = "Switchgrass Yield")
@@ -135,7 +139,11 @@ makepropname <- function(name, api_version) {
 #' Use betydb_query to retrieve records from a table that match on all the column filters specified in '...'.
 #' If no filters are specified, retrieves the whole table. In API versions that support it (i.e. not in v0), filter strings beginning with "~" are treated as regular expressions.
 #'
-#' @examples \donttest{
+#' @examples
+#' # Inspect arguments without making any HTTP requests
+#' args(betydb_query)
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   # literal vs regular expression vs anchored regular expression:
 #'   betydb_query(units = "Mg", table = "variables")

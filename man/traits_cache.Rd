@@ -34,7 +34,6 @@ path file names
 }
 
 \examples{
-\donttest{
 traits_cache
 
 # list files in cache
@@ -49,5 +48,4 @@ traits_cache$list()
 # traits_cache$list()
 
 # set a different cache path from the default
-}
 }

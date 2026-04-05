@@ -28,7 +28,11 @@
 #' silently dropped. If all ids are bad you'll get a stop with error message.
 #' @seealso [ncbi_searcher()], ncbi_byname()]
 #' @author Scott Chamberlain, Rupert Collins
-#' @examples \donttest{
+#' @examples
+#' # format is intentionally unsupported and errors before any HTTP request
+#' try(ncbi_byid(ids = "360040093", format = "fasta"))
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   # A single gene
 #'   ncbi_byid(ids = "360040093")

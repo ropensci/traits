@@ -159,6 +159,9 @@ ids, and always return a single data.frame.
 }
 
 \examples{
+# fmt is validated locally before any HTTP request
+try(betydb_record(id = 1, table = "species", fmt = "txt"))
+
 \donttest{
 if (interactive()) {
   # General Search

@@ -27,7 +27,12 @@
 #' http://dx.doi.org/10.5061/dryad.63q27.2
 #'
 #' @references http://datadryad.org/resource/doi:10.5061/dryad.63q27
-#' @examples \donttest{
+#' @examples
+#' # Show one cache path used by tr_zanne()
+#' cache_dir <- traits_cache$cache_path_get()
+#' file.path(cache_dir, "GlobalWoodinessDatabase.csv")
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   res <- tr_zanne()
 #'   res$tax_lookup

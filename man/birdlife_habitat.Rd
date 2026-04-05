@@ -19,6 +19,9 @@ at https://www.iucnredlist.org/resources/classification-schemes
 Get bird habitat information from BirdLife/IUCN
 }
 \examples{
+# Input validation runs before any HTTP request
+try(birdlife_habitat(c(22721692, 103818789)))
+
 \donttest{
 if (interactive()) {
   # Setophaga chrysoparia

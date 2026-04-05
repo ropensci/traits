@@ -13,7 +13,11 @@
 #'
 #' The following are not supported as they are too much of a pain to parse:
 #' buoyancy, seed_bank, sla_geo
-#' @examples \donttest{
+#' @examples
+#' # Invalid trait names fail before any HTTP request
+#' try(leda("not_a_trait"))
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   # Age of first flowering
 #'   leda(trait = "age_first_flowering")

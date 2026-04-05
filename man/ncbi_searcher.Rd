@@ -72,6 +72,9 @@ make sure your api key is being sent in the requests
 }
 
 \examples{
+# Must supply exactly one of taxa or id; this errors before any HTTP request
+try(ncbi_searcher())
+
 \donttest{
 if (interactive()) {
   # A single species

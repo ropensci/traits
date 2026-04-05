@@ -21,6 +21,9 @@ A \code{data.frame}
 Search for traits by taxa names
 }
 \examples{
+# Fails fast on unsupported databases (no HTTP request)
+try(taxa_search("Poa annua", db = "invalid_db"))
+
 \donttest{
 if (interactive()) {
   taxa_search("Poa annua", db = "ncbi")

@@ -18,6 +18,9 @@ with each stressor.
 Get bird threat information from BirdLife/IUCN
 }
 \examples{
+# Input validation runs before any HTTP request
+try(birdlife_threats(c(22721692, 22678440)))
+
 \donttest{
 if (interactive()) {
   # Setophaga chrysoparia

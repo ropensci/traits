@@ -43,6 +43,9 @@ If bad ids are included with good ones, the bad ones are
 silently dropped. If all ids are bad you'll get a stop with error message.
 }
 \examples{
+# format is intentionally unsupported and errors before any HTTP request
+try(ncbi_byid(ids = "360040093", format = "fasta"))
+
 \donttest{
 if (interactive()) {
   # A single gene

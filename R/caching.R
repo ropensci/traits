@@ -28,7 +28,7 @@
 #'
 #' @return A `hoardr` object with methods for managing cached files
 #'
-#' @examples \donttest{
+#' @examples
 #' traits_cache
 #'
 #' # list files in cache
@@ -43,5 +43,4 @@
 #' # traits_cache$list()
 #'
 #' # set a different cache path from the default
-#' }
 NULL

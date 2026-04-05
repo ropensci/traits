@@ -13,7 +13,11 @@
 #' @return data.frame
 #' @seealso [ncbi_searcher()], [ncbi_byid()]
 #' @author Scott Chamberlain
-#' @examples \donttest{
+#' @examples
+#' # Empty input returns immediately (no HTTP request)
+#' ncbi_byname(taxa = character())
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   # A single species
 #'   ncbi_byname(taxa = "Acipenser brevirostrum")

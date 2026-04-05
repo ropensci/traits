@@ -8,7 +8,11 @@
 #' at https://www.iucnredlist.org/resources/classification-schemes
 #' @author David J. Harris \email{harry491@@gmail.com}
 #' @family birdlife
-#' @examples \donttest{
+#' @examples
+#' # Input validation runs before any HTTP request
+#' try(birdlife_habitat(c(22721692, 103818789)))
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   # Setophaga chrysoparia
 #'   birdlife_habitat(22721692)
@@ -38,7 +42,11 @@ birdlife_habitat <- function(id) {
 #' with each stressor.
 #' @author David J. Harris \email{harry491@@gmail.com}
 #' @family birdlife
-#' @examples \donttest{
+#' @examples
+#' # Input validation runs before any HTTP request
+#' try(birdlife_threats(c(22721692, 22678440)))
+#'
+#' \donttest{
 #' if (interactive()) {
 #'   # Setophaga chrysoparia
 #'   birdlife_threats(22721692)

@@ -43,6 +43,9 @@ public web.
 }
 
 \examples{
+# Type checking runs before any HTTP request
+try(traitbank(query = 1))
+
 \donttest{
 if (interactive()) {
   # traitbank_query function
